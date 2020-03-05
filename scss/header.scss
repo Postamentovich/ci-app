@@ -1,0 +1,10 @@
+.header {
+  padding: var(--space-xs) var(--space-xxxxl);
+  display: flex;
+  justify-content: space-between;
+  &__title {
+    color: var(--main-text-color);
+    font-size: var(--font-size-xxxl);
+    margin: 0;
+  }
+}

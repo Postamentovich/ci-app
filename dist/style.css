@@ -1,0 +1,40 @@
+
+:root {
+  --blue-grey-50: #f0f2f3;
+  --space-xxs: 8px;
+  --space-xs: 10px;
+  --space-xxxxl: 100px;
+  --font-size-xxxl: 24px;
+  --main-text-color: #7f8285;
+  --footer-background-color: var(--blue-grey-50);
+}
+.footer {
+  padding: var(--space-xxs) var(--space-xxxxl);
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--footer-background-color);
+}
+.header {
+  padding: var(--space-xs) var(--space-xxxxl);
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__title {
+  color: var(--main-text-color);
+  font-size: var(--font-size-xxxl);
+  margin: 0;
+}
+.layout {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.layout__container {
+  max-width: 1024px;
+  width: 100%;
+}
+body {
+  margin: 0;
+}

@@ -1,0 +1,9 @@
+.footer {
+  padding: var(--space-xxs) var(--space-xxxxl);
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--footer-background-color);
+
+  &__links {
+  }
+}

@@ -1,0 +1,9 @@
+.layout {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &__container {
+        max-width: 1024px;
+        width: 100%;
+    }
+}

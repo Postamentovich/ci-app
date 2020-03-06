@@ -1,3 +1,29 @@
-.button {
-    
+.Button {
+  border: none;
+  height: 28px;
+  border-radius: var(--radius-l);
+  &-Label {
+  }
+  &_view {
+    &_control {
+      background-color: var(--color-bg-control);
+    }
+    &_action {
+      background-color: var(--color-bg-action);
+    }
+  }
+  &_width {
+    &_full {
+
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .Button {
+    padding: var(--space-xxs);
+    &-Label {
+      display: none;
+    }
+  }
 }

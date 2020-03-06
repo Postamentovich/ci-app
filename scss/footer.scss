@@ -1,9 +1,16 @@
-.footer {
+.Footer {
   padding: var(--space-xxs) var(--space-xxxxl);
   display: flex;
   justify-content: space-between;
   background-color: var(--footer-background-color);
 
-  &__links {
+  &-Links {
+  }
+}
+
+@media (max-width: 320px) {
+  .Footer {
+    flex-direction: column;
+    padding: var(--space-s) var(--space-l);
   }
 }

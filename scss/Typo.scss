@@ -1,3 +1,35 @@
 .Typo {
-    
+  font-family: "YS Text";
+  font-style: normal;
+  margin: 0;
+
+  &_type {
+    &_h1 {
+      font-weight: 500;
+      font-size: var(--text-size-xl);
+      line-height: 28px;
+      letter-spacing: 0.25px;
+    }
+    &_p
+  }
+  
+  &_view {
+    &_default {
+      color: var(--color-text-default);
+    }
+    &_primary {
+      color: var(--color-text-primary);
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .Typo {
+    &_type {
+      &_h1 {
+        font-size: var(--text-size-l);
+        line-height: 28px;
+      }
+    }
+  }
 }

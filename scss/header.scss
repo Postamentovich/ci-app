@@ -1,10 +1,11 @@
-.header {
+.Header {
   padding: var(--space-xs) var(--space-xxxxl);
   display: flex;
   justify-content: space-between;
-  &__title {
-    color: var(--main-text-color);
-    font-size: var(--font-size-xxxl);
-    margin: 0;
+}
+
+@media (max-width: 320px) {
+  .Header {
+    padding: var(--space-m) var(--space-l);
   }
 }

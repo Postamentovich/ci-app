@@ -1,0 +1,20 @@
+.TextInput {
+  display: flex;
+  flex-direction: column;
+
+  &-Label {
+  }
+  &-Input {
+    border: 2px solid var(--color-border-main);
+    border-radius: var(--radius-l);
+    padding-top: var(--space-temp-5);
+    padding-right: var(--space-temp-6);
+    padding-left: var(--space-temp-6);
+    padding-bottom: var(--space-xs);
+    margin-top: var(--space-temp-7);
+
+    &::-webkit-input-placeholder {
+      font-size: var(--color-text-second);
+    }
+  }
+}

@@ -1,44 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-    <header>
-        <h1>School CI server</h1>
+  <body>
+    <header class="Header">
+      <h1 class="Typo Typo_type_h1 Typo_view_primary">School CI server</h1>
     </header>
-    <main>
-        <h2>
-            Settings
-        </h2>
-        <p>
-            Configure repository connection and synchronization settings.
-        </p>
-        <label for="">GitHub repository</label>
-        <input type="text" placeholder="user-name/repo-name">
-        <label for="">Build command</label>
-        <input type="text" placeholder="user-name/repo-name" value="npm ci && npm run build">
-        <label for="">Main branch</label>
-        <input type="text" placeholder="user-name/repo-name" value="Main branch">
-        <span>Synchronize every</span>
-        <input type="number">
-        <button>
-            Save
-        </button>
-        <button>
-            Cancel
-        </button>
+    <main class="SettingsPage Layout">
+      <h2 class="SettingsPage-Title Typo Typo_view_default Typo_type_h2">
+        Settings
+      </h2>
+      <p class="SettingsPage-Description Typo Typo_view_primary Typo_type_p">
+        Configure repository connection and synchronization settings.
+      </p>
+      <div class="SettingsPage-Input TextInput">
+        <label
+          for="repository"
+          class="TextInput-Label Typo Typo_type_p Typo_view_default"
+        >
+          GitHub repository
+        </label>
+        <input
+          class="TextInput-Input"
+          type="text"
+          id="repository"
+          placeholder="user-name/repo-name"
+        />
+      </div>
+      <div class="SettingsPage-Input TextInput">
+        <label
+          for="build"
+          class="TextInput-Label Typo Typo_type_p Typo_view_default"
+          >Build command</label
+        >
+        <input
+          class="TextInput-Input"
+          id="build"
+          type="text"
+          placeholder="user-name/repo-name"
+          value="npm ci && npm run build"
+        />
+      </div>
+      <div class="SettingsPage-Input TextInput">
+        <label
+          for="branch"
+          class="TextInput-Label Typo Typo_type_p Typo_view_default"
+          >Main branch</label
+        >
+        <input
+          class="TextInput-Input"
+          id="branch"
+          type="text"
+          placeholder="user-name/repo-name"
+          value="Main branch"
+        />
+      </div>
+      <span>Synchronize every</span>
+      <input type="number" />
+      <button class="Button Button_view_action">
+        Save
+      </button>
+      <button class="Button Button_view_control">
+        Cancel
+      </button>
     </main>
-    <footer>
-        <a href="/support">Support</a>
-        <a href="/learning">Learning</a>
-        <span>© 2020 Your Name</span>
+    <footer class="Footer">
+      <div class="Footer-Links">
+        <span class="Typo Typo_type_p Typo_view_primary">Support</span>
+        <span class="Typo Typo_type_p Typo_view_primary">Learning</span>
+      </div>
+      <span class="Footer-Copyright Typo Typo_type_p Typo_view_primary"
+        >© 2020 Your Name</span
+      >
     </footer>
-</body>
-
+  </body>
 </html>

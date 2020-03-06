@@ -2,9 +2,16 @@
   padding: var(--space-xxs) var(--space-xxxxl);
   display: flex;
   justify-content: space-between;
-  background-color: var(--footer-background-color);
+  background-color: var(--color-bg-footer);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
 
   &-Links {
+  }
+  
+  &-Copyright {
   }
 }
 
@@ -12,5 +19,8 @@
   .Footer {
     flex-direction: column;
     padding: var(--space-s) var(--space-l);
+    &-Copyright {
+      margin-top: var(--space-xxs);
+    }
   }
 }

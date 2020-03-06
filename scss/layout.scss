@@ -1,10 +1,30 @@
 .Layout {
   display: flex;
   flex-direction: column;
-  align-items: center;
   max-width: 1024px;
   width: 100%;
+  min-height: calc(100vh - 100px);
+  padding: var(--space-xxs) var(--space-xxxxl);
+
+  &_distribution {
+    &_center {
+      align-items: center;
+      margin: 0 auto;
+    }
+  }
+
+  &_vertical-align {
+    &_center {
+      justify-content: center;
+    }
+  }
 }
 
 @media (max-width: 320px) {
+  .Layout {
+    padding-top: var(--space-temp-3);
+    padding-right: var(--space-l);
+    padding-left: var(--space-l);
+    padding-bottom: var(--space-xxl);
+  }
 }

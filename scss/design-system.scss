@@ -1,13 +1,57 @@
 :root {
+  /** 
+   * Colors
+   */
   --blue-grey-50: #f0f2f3;
+  --blue-grey-500: #7f8285;
+  --blue-grey-600: #434445;
+  --red-500: #ff3333;
+  --red-600: #e00000;
+  --black-500: #000000;
+  --green-500: #00b341;
+  --orange-500: #ff9a00;
 
   --space-xxs: 8px;
   --space-xs: 10px;
   --space-xxxxl: 100px;
 
-  --font-size-xxxl: 24px;
+  --font-size-xs: 10px
+  ;
+  --font-size-s: 13px;
+  --font-size-m: 15px;
+  --font-size-l: 18px;
+  --font-size-xl: 24px;
 
-  --main-text-color: #7f8285;
+  --color-icon-primary: #111111;
+  --color-icon-second: #cecece;
 
-  --footer-background-color: var(--blue-grey-50);
+  --color-text-default: var(--black-500);
+  --color-text-primary: var(--blue-grey-500);
+  --color-text-second: #ccc;
+  --color-text-tertiary: var(--blue-grey-600);
+  --color-text-success: var(--green-500);
+  --color-text-error: var(--red-500);
+  --color-text-waiting: var(--orange-500);
+  --color-text-another: #595959;
+  --color-text-disabled: #bcbcbc;
+
+  --color-border-main: #d9d9d9;
+  --color-border-action-focused: #b38f00;
+  --color-border-focused: #b3b3b3;
+
+  --color-shadow-primary: #c7c7c7;
+
+  --color-separator: var(--blue-grey-50);
+
+  --color-bg-action: #ffcc00;
+  --color-bg-action-hovered: #f2c200;
+  --color-bg-control: #e6e6e6;
+  --color-bg-control-hovered: #dbdbdb;
+  --color-bg-footer: var(--blue-grey-50);
+  --color-bg-base: #ffffff;
+  --color-bg-second: #f2f2f2;
+  --color-bg-scrollbar: #a9a9a9;
+  --color-bg-disabled: #f2f2f2;
+
+  --color-link-hover: var(--red-600);
 }

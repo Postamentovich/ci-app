@@ -1,30 +1,142 @@
 .Button {
-  border: none;
-  height: 28px;
-  border-radius: var(--radius-l);
-  padding-right: var(--space-xxl);
-  padding-left: var(--space-xxl);
+  border-radius: var(--border-radius-l);
+  border-width: var(--border-width-l);
+  border-style: solid;
+  border-color: transparent;
+  width: fit-content;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.Button-Label {
+  margin-left: var(--space-temp-8);
+  margin-right: var(--space-temp-8);
 }
 
 .Button_view_control {
   background-color: var(--color-bg-control);
 }
 
+.Button_view_control:hover {
+  background-color: var(--color-bg-control-hovered);
+}
+
+.Button_view_control:focus {
+  border-color: var(--color-border-control-focused);
+}
+
 .Button_view_action {
   background-color: var(--color-bg-action);
 }
 
-@media (max-width: 320px) {
-  .Button {
-    padding: var(--space-xxs);
-  }
+.Button_view_action:hover {
+  background-color: var(--color-bg-action-hovered);
+}
 
+.Button_view_action:focus {
+  border-color: var(--color-border-action-focused);
+}
+
+.Button_size_m {
+  line-height: var(--text-line-height-m);
+  padding: 0 var(--space-temp-7);
+}
+
+.Button_size_l {
+  line-height: var(--text-line-height-l);
+  padding: 0 var(--space-xl);
+}
+
+@media (max-width: 320px) {
   .Button-Label {
     display: none;
   }
+
+  .Button_type_help {
+    width: 100%;
+  }
 }
-.Card {
+.Commit {
   padding: var(--space-l) var(--space-s);
+  box-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+  border-radius: 6px;
+  display: flex;
+}
+
+.Commit-DateTime {
+  display: flex;
+  flex-direction: column;
+}
+
+.Commit-Content {
+  margin-left: var(--space-xs);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.Commit-Row {
+  display: flex;
+  align-items: center;
+}
+
+.Commit-Row:not(:first-child) {
+  margin-top: var(--space-xxs);
+}
+
+.Commit-Message {
+  margin-left: var(--space-temp-4);
+}
+
+.Commit-Author {
+  margin-left: var(--space-xs);
+}
+
+.Commit-Separator {
+  border-bottom: 1px solid var(--color-separator);
+}
+
+@media (max-width: 320px) {
+  .Commit-Content {
+    flex-direction: column;
+  }
+
+  .Commit-Row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .Commit-Message {
+    margin-left: 0;
+    margin-top: var(--space-xxs);
+  }
+
+  .Commit-Branch {
+    margin-top: var(--space-xxs);
+  }
+
+  .Commit-Author {
+    margin-left: 0;
+    margin-top: var(--space-xxs);
+  }
+
+  .Commit-Separator {
+    display: block;
+    border-bottom: 1px solid var(--color-separator);
+    margin-top: var(--space-xxs);
+    margin-bottom: var(--space-xxs);
+  }
+
+  .Commit-DateTime {
+    flex-direction: row;
+  }
+
+  .Commit-Time {
+    margin-left: var(--space-xs);
+  }
 }
 @font-face {
   font-family: "YS Text";
@@ -62,6 +174,7 @@
   --white-500: #ffffff;
   --yellow-500: #ffcc00;
   --space-temp-4: 4px;
+  --space-temp-8: 5px;
   --space-temp-7: 6px;
   --space-xxs: 8px;
   --space-xs: 10px;
@@ -82,7 +195,12 @@
   --text-size-m: 15px;
   --text-size-l: 18px;
   --text-size-xl: 24px;
+  --text-line-height-m: 24px;
+  --text-line-height-l: 32px;
   --radius-l: 4px;
+  --radius-xs: 6px;
+  --border-radius-l: 4px;
+  --border-width-l: 2px;
   --color-icon-primary: #111111;
   --color-icon-second: #cecece;
   --color-text-default: var(--black-500);
@@ -96,7 +214,7 @@
   --color-text-disabled: #bcbcbc;
   --color-border-main: #d9d9d9;
   --color-border-action-focused: #b38f00;
-  --color-border-focused: #b3b3b3;
+  --color-border-control-focused: #b3b3b3;
   --color-shadow-primary: #c7c7c7;
   --color-separator: var(--blue-grey-50);
   --color-bg-action: var(--yellow-500);
@@ -110,15 +228,18 @@
   --color-bg-disabled: #f2f2f2;
   --color-link-hover: var(--red-600);
 }
+.DetailsPage-Card {
+  margin-top: var(--space-xxs);
+}
+
+.DetailsPage-Log {
+  margin-top: var(--space-s);
+}
 .Footer {
   padding: var(--space-xxs) var(--space-xxxxl);
   display: flex;
   justify-content: space-between;
   background-color: var(--color-bg-footer);
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
 }
 
 @media (max-width: 320px) {
@@ -150,6 +271,13 @@
     padding: var(--space-m) var(--space-l);
   }
 }
+.HistoryPage-Card {
+  margin-top: var(--space-xxs);
+}
+
+.HistoryPage-Button {
+  margin-top: var(--space-xxs);
+}
 .IndexPage-Description {
   margin-top: var(--space-temp-2);
 }
@@ -162,7 +290,7 @@
   flex-direction: column;
   max-width: 1024px;
   width: 100%;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 82px);
   padding: var(--space-xxs) var(--space-xxxxl);
 }
 
@@ -181,18 +309,30 @@
     padding-right: var(--space-l);
     padding-left: var(--space-l);
     padding-bottom: var(--space-xxl);
+    min-height: calc(100vh - 124px);
   }
+}
+.Log {
+  border-radius: var(--radius-xs);
+  background-color: var(--color-bg-second);
+  padding: var(--space-xxs) var(--space-s);
+}
+
+.Log-Container {
+  overflow-y: auto;
 }
 p,
 h1,
 h2,
-body {
+h3 {
   margin: 0;
 }
 
-p *,
-h1 *,
-h2 *,
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
 body * {
   box-sizing: border-box;
 }
@@ -294,6 +434,11 @@ body * {
   line-height: 125%;
 }
 
+.Typo_type-label {
+  font-weight: normal;
+  font-size: var(--text-size-s);
+}
+
 .Typo_align_center {
   text-align: center;
 }
@@ -304,6 +449,10 @@ body * {
 
 .Typo_view_primary {
   color: var(--color-text-primary);
+}
+
+.Typo_view_success {
+  color: var(--color-text-success);
 }
 
 @media (max-width: 320px) {

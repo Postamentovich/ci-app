@@ -1,31 +1,75 @@
 .Button {
-  border: none;
-  height: 28px;
-  border-radius: var(--radius-l);
-  padding-right: var(--space-xxl);
-  padding-left: var(--space-xxl);
+  border-radius: var(--border-radius-l);
+  border-width: var(--border-width-l);
+  border-style: solid;
+  border-color: transparent;
+
+  width: fit-content;
+
+  outline: none;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
   &-Label {
+    margin-left: var(--space-temp-8);
+    margin-right: var(--space-temp-8);
   }
+
   &_view {
     &_control {
       background-color: var(--color-bg-control);
+
+      &:hover {
+        background-color: var(--color-bg-control-hovered);
+      }
+
+      &:focus {
+        border-color: var(--color-border-control-focused);
+      }
     }
+
     &_action {
       background-color: var(--color-bg-action);
+
+      &:hover {
+        background-color: var(--color-bg-action-hovered);
+      }
+
+      &:focus {
+        border-color: var(--color-border-action-focused);
+      }
     }
   }
-  &_width {
-    &_full {
 
+  &_size {
+    &_m {
+      line-height: var(--text-line-height-m);
+      padding: 0 var(--space-temp-7);
+    }
+
+    &_l {
+      line-height: var(--text-line-height-l);
+      padding: 0 var(--space-xl);
     }
   }
 }
 
 @media (max-width: 320px) {
   .Button {
-    padding: var(--space-xxs);
     &-Label {
       display: none;
+    }
+
+    &_type {
+      &_help {
+        width: 100%;
+      }
     }
   }
 }

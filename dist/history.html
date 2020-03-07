@@ -13,7 +13,7 @@
         philip1967/my-awesome-repo
       </h1>
       <div class="Header-Buttons">
-        <button class="Header-Button Button Button_view_control">
+        <button class="Header-Button Button Button_view_control Button_size_m">
           <svg
             width="9"
             height="10"
@@ -26,9 +26,9 @@
               fill="#111111"
             />
           </svg>
-          <span class="Button-Label">Run build</span>
+          <span class="Button-Label Typo Typo_type-label">Run build</span>
         </button>
-        <button class="Header-Button Button Button_view_control">
+        <button class="Header-Button Button Button_view_control Button_size_m">
           <svg
             width="12"
             height="12"
@@ -41,73 +41,78 @@
               fill="#111111"
             />
           </svg>
-          <span class="Button-Label">Settings</span>
         </button>
       </div>
     </header>
-    <main class="layout">
-        <div>
-          <div>
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 22 22"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M21.6562 11C21.6562 16.8853 16.8853 21.6562 11 21.6562C5.1147 21.6562 0.34375 16.8853 0.34375 11C0.34375 5.1147 5.1147 0.34375 11 0.34375C16.8853 0.34375 21.6562 5.1147 21.6562 11ZM9.7674 16.6424L17.6736 8.73615C17.9421 8.46768 17.9421 8.03236 17.6736 7.76389L16.7014 6.79164C16.4329 6.52313 15.9976 6.52313 15.7291 6.79164L9.28125 13.2394L6.2709 10.2291C6.00243 9.96063 5.56712 9.96063 5.29861 10.2291L4.32635 11.2014C4.05788 11.4698 4.05788 11.9051 4.32635 12.1736L8.7951 16.6424C9.06361 16.9109 9.49889 16.9109 9.7674 16.6424Z"
-                fill="#00B341"
-              />
-            </svg>
+    <main class="Layout HistoryPage">
+      <div class="Commit HistoryPage-Card">
+        <div class="Commit-Status">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21.6562 11C21.6562 16.8853 16.8853 21.6562 11 21.6562C5.1147 21.6562 0.34375 16.8853 0.34375 11C0.34375 5.1147 5.1147 0.34375 11 0.34375C16.8853 0.34375 21.6562 5.1147 21.6562 11ZM9.7674 16.6424L17.6736 8.73615C17.9421 8.46768 17.9421 8.03236 17.6736 7.76389L16.7014 6.79164C16.4329 6.52313 15.9976 6.52313 15.7291 6.79164L9.28125 13.2394L6.2709 10.2291C6.00243 9.96063 5.56712 9.96063 5.29861 10.2291L4.32635 11.2014C4.05788 11.4698 4.05788 11.9051 4.32635 12.1736L8.7951 16.6424C9.06361 16.9109 9.49889 16.9109 9.7674 16.6424Z"
+              fill="#00B341"
+            />
+          </svg>
+        </div>
+        <div class="Commit-Content">
+          <div class="Commit-Info">
+            <div class="Commit-Row">
+              <h3 class="Commit-TaskId Typo Typo_type_h2 Typo_view_success">
+                #1368
+              </h3>
+              <p class="Commit-Message Typo Typo_type_p">
+                add documentation for postgres scaler
+              </p>
+            </div>
+            <div class="Commit-Row">
+              <div class="Commit-Branch">
+                <svg
+                  width="16"
+                  height="8"
+                  viewBox="0 0 16 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.2 4C3.2 4.27 3.2225 4.5375 3.265 4.8H0.3C0.135 4.8 0 4.665 0 4.5V3.5C0 3.335 0.135 3.2 0.3 3.2H3.265C3.2225 3.4625 3.2 3.73 3.2 4ZM15.7 3.2H12.735C12.78 3.4625 12.8 3.73 12.8 4C12.8 4.27 12.7775 4.5375 12.735 4.8H15.7C15.865 4.8 16 4.665 16 4.5V3.5C16 3.335 15.865 3.2 15.7 3.2ZM8 1.2C7.2525 1.2 6.55 1.4925 6.02 2.02C5.49 2.55 5.2 3.2525 5.2 4C5.2 4.7475 5.49 5.45 6.02 5.98C6.55 6.5075 7.2525 6.8 8 6.8C8.7475 6.8 9.45 6.5075 9.98 5.98C10.51 5.45 10.8 4.7475 10.8 4C10.8 3.2525 10.51 2.55 9.98 2.02C9.45 1.4925 8.7475 1.2 8 1.2ZM8 0C10.21 0 12 1.79 12 4C12 6.21 10.21 8 8 8C5.79 8 4 6.21 4 4C4 1.79 5.79 0 8 0Z"
+                    fill="black"
+                  />
+                </svg>
+                <span>
+                  master
+                </span>
+                <span>
+                  9c9f0b9
+                </span>
+              </div>
+              <div class="Commit-Author">
+                <svg
+                  width="13"
+                  height="14"
+                  viewBox="0 0 13 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.125 7C8.0582 7 9.625 5.4332 9.625 3.5C9.625 1.5668 8.0582 0 6.125 0C4.1918 0 2.625 1.5668 2.625 3.5C2.625 5.4332 4.1918 7 6.125 7ZM8.575 7.875H8.11836C7.51133 8.15391 6.83594 8.3125 6.125 8.3125C5.41406 8.3125 4.74141 8.15391 4.13164 7.875H3.675C1.64609 7.875 0 9.52109 0 11.55V12.6875C0 13.4121 0.587891 14 1.3125 14H10.9375C11.6621 14 12.25 13.4121 12.25 12.6875V11.55C12.25 9.52109 10.6039 7.875 8.575 7.875Z"
+                    fill="black"
+                  />
+                </svg>
+                <span>
+                  Philip Kirkorov
+                </span>
+              </div>
+            </div>
           </div>
-          <div>
-            <span>
-              #1368
-            </span>
-            <span>
-              add documentation for postgres scaler
-            </span>
-            <span>
-              <svg
-                width="16"
-                height="8"
-                viewBox="0 0 16 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3.2 4C3.2 4.27 3.2225 4.5375 3.265 4.8H0.3C0.135 4.8 0 4.665 0 4.5V3.5C0 3.335 0.135 3.2 0.3 3.2H3.265C3.2225 3.4625 3.2 3.73 3.2 4ZM15.7 3.2H12.735C12.78 3.4625 12.8 3.73 12.8 4C12.8 4.27 12.7775 4.5375 12.735 4.8H15.7C15.865 4.8 16 4.665 16 4.5V3.5C16 3.335 15.865 3.2 15.7 3.2ZM8 1.2C7.2525 1.2 6.55 1.4925 6.02 2.02C5.49 2.55 5.2 3.2525 5.2 4C5.2 4.7475 5.49 5.45 6.02 5.98C6.55 6.5075 7.2525 6.8 8 6.8C8.7475 6.8 9.45 6.5075 9.98 5.98C10.51 5.45 10.8 4.7475 10.8 4C10.8 3.2525 10.51 2.55 9.98 2.02C9.45 1.4925 8.7475 1.2 8 1.2ZM8 0C10.21 0 12 1.79 12 4C12 6.21 10.21 8 8 8C5.79 8 4 6.21 4 4C4 1.79 5.79 0 8 0Z"
-                  fill="black"
-                />
-              </svg>
-            </span>
-            <span>
-              master
-            </span>
-            <span>
-              9c9f0b9
-            </span>
-            <span>
-              <svg
-                width="13"
-                height="14"
-                viewBox="0 0 13 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6.125 7C8.0582 7 9.625 5.4332 9.625 3.5C9.625 1.5668 8.0582 0 6.125 0C4.1918 0 2.625 1.5668 2.625 3.5C2.625 5.4332 4.1918 7 6.125 7ZM8.575 7.875H8.11836C7.51133 8.15391 6.83594 8.3125 6.125 8.3125C5.41406 8.3125 4.74141 8.15391 4.13164 7.875H3.675C1.64609 7.875 0 9.52109 0 11.55V12.6875C0 13.4121 0.587891 14 1.3125 14H10.9375C11.6621 14 12.25 13.4121 12.25 12.6875V11.55C12.25 9.52109 10.6039 7.875 8.575 7.875Z"
-                  fill="black"
-                />
-              </svg>
-            </span>
-            <span>
-              Philip Kirkorov
-            </span>
-          </div>
-          <div>
-            <span>
+          <span class="Commit-Separator"></span>
+          <div class="Commit-DateTime">
+            <div class="Commit-Date">
               <svg
                 width="14"
                 height="16"
@@ -120,11 +125,11 @@
                   fill="black"
                 />
               </svg>
-            </span>
-            <span>
-              21 янв, 03:06
-            </span>
-            <span>
+              <span>
+                21 янв, 03:06
+              </span>
+            </div>
+            <div class="Commit-Time">
               <svg
                 width="14"
                 height="16"
@@ -137,25 +142,27 @@
                   fill="black"
                 />
               </svg>
-            </span>
-            <span>
-              1 ч 20 мин
-            </span>
+              <span>
+                1 ч 20 мин
+              </span>
+            </div>
           </div>
         </div>
-        <button>
-          Show more
-        </button>
       </div>
+      <button
+        class="HistoryPage-Button Button Button_view_control Button_width_content"
+      >
+        Show more
+      </button>
     </main>
-      <footer class="Footer">
-        <div class="Footer-Links">
-          <span class="Typo Typo_type_p Typo_view_primary">Support</span>
-          <span class="Typo Typo_type_p Typo_view_primary">Learning</span>
-        </div>
-        <span class="Footer-Copyright Typo Typo_type_p Typo_view_primary"
-          >© 2020 Your Name</span
-        >
-      </footer>
+    <footer class="Footer">
+      <div class="Footer-Links">
+        <span class="Typo Typo_type_p Typo_view_primary">Support</span>
+        <span class="Typo Typo_type_p Typo_view_primary">Learning</span>
+      </div>
+      <span class="Footer-Copyright Typo Typo_type_p Typo_view_primary"
+        >© 2020 Your Name</span
+      >
+    </footer>
   </body>
 </html>

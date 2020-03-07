@@ -44,6 +44,7 @@
   --yellow-500: #ffcc00;
 
   --space-temp-4: 4px;
+  --space-temp-8: 5px;
   --space-temp-7: 6px;
   --space-xxs: 8px;
   --space-xs: 10px;
@@ -66,7 +67,15 @@
   --text-size-l: 18px;
   --text-size-xl: 24px;
 
+  --text-line-height-m: 24px;
+  --text-line-height-l: 32px;
+
   --radius-l: 4px;
+  --radius-xs: 6px;
+
+  --border-radius-l: 4px;
+
+  --border-width-l: 2px;
 
   --color-icon-primary: #111111;
   --color-icon-second: #cecece;
@@ -83,7 +92,7 @@
 
   --color-border-main: #d9d9d9;
   --color-border-action-focused: #b38f00;
-  --color-border-focused: #b3b3b3;
+  --color-border-control-focused: #b3b3b3;
 
   --color-shadow-primary: #c7c7c7;
 

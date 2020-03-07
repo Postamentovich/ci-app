@@ -1,0 +1,88 @@
+.Commit {
+  padding: var(--space-l) var(--space-s);
+  box-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3),
+    0px 0px 1px rgba(67, 68, 69, 0.3);
+  border-radius: 6px;
+  display: flex;
+
+  &-Status {
+  }
+
+  &-DateTime {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-Content {
+    margin-left: var(--space-xs);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &-Row {
+    display: flex;
+    align-items: center;
+
+    &:not(:first-child) {
+      margin-top: var(--space-xxs);
+    }
+  }
+
+  &-TaskId {
+  }
+
+  &-Message {
+    margin-left: var(--space-temp-4);
+  }
+
+  &-Branch {
+  }
+
+  &-Hash {
+  }
+
+  &-Author {
+    margin-left: var(--space-xs);
+  }
+
+  &-Separator {
+    border-bottom: 1px solid var(--color-separator);
+  }
+}
+
+@media (max-width: 320px) {
+  .Commit {
+    &-Content {
+      flex-direction: column;
+    }
+    &-Row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    &-Message {
+      margin-left: 0;
+      margin-top: var(--space-xxs);
+    }
+    &-Branch {
+      margin-top: var(--space-xxs);
+    }
+    &-Author {
+      margin-left: 0;
+      margin-top: var(--space-xxs);
+    }
+    &-Separator {
+      display: block;
+      border-bottom: 1px solid var(--color-separator);
+      margin-top: var(--space-xxs);
+      margin-bottom: var(--space-xxs);
+    }
+    &-DateTime {
+      flex-direction: row;
+    }
+
+    &-Time {
+      margin-left: var(--space-xs);
+    }
+  }
+}

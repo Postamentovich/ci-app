@@ -3,7 +3,7 @@
   flex-direction: column;
   max-width: 1024px;
   width: 100%;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 82px);
   padding: var(--space-xxs) var(--space-xxxxl);
 
   &_distribution {
@@ -26,5 +26,6 @@
     padding-right: var(--space-l);
     padding-left: var(--space-l);
     padding-bottom: var(--space-xxl);
+    min-height: calc(100vh - 124px);
   }
 }

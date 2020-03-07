@@ -1,0 +1,9 @@
+.Log {
+  border-radius: var(--radius-xs);
+  background-color: var(--color-bg-second);
+  padding: var(--space-xxs) var(--space-s);
+
+  &-Container {
+      overflow-y: auto;
+  }
+}

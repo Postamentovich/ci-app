@@ -1,9 +1,28 @@
 .TextInput {
   display: flex;
   flex-direction: column;
+  position: relative;
+  max-width: 474px;
+
+
+  &_label-position {
+    &_left {
+      flex-direction: row;
+      align-items: center;
+
+      .TextInput-Label {
+        margin-right: var(--space-xxs);
+      }
+    }
+  }
 
   &-Label {
   }
+
+  &-Mark {
+    margin-left: var(--space-xxs);
+  }
+
   &-Input {
     border: 2px solid var(--color-border-main);
     border-radius: var(--radius-l);
@@ -13,8 +32,26 @@
     padding-bottom: var(--space-xs);
     margin-top: var(--space-temp-7);
 
+    &_width {
+      &_full {
+      }
+
+      &_s {
+        width: 52px;
+      }
+    }
+
     &::-webkit-input-placeholder {
       font-size: var(--color-text-second);
     }
+  }
+
+  &-ClearButton {
+    border: none;
+    padding: 0;
+    position: absolute;
+    bottom: var(--space-xs);
+    right: var(--space-xs);
+    background: transparent;
   }
 }

@@ -7,4 +7,25 @@
     margin-top: var(--space-temp-3);
     margin-bottom: var(--space-temp-4);
   }
+
+  &-Buttons {
+    display: flex;
+  }
+
+  &-Button {
+    margin-right: var(--space-s);
+    margin-top: var(--space-s);
+  }
+}
+
+@media (max-width: 320px) {
+  .SettingsPage {
+    &-Buttons {
+      flex-direction: column;
+    }
+    &-Button {
+      margin-top: var(--space-s);
+      margin-right: 0;
+    }
+  }
 }

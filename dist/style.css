@@ -2,6 +2,8 @@
   border: none;
   height: 28px;
   border-radius: var(--radius-l);
+  padding-right: var(--space-xxl);
+  padding-left: var(--space-xxl);
 }
 
 .Button_view_control {
@@ -20,6 +22,9 @@
   .Button-Label {
     display: none;
   }
+}
+.Card {
+  padding: var(--space-l) var(--space-s);
 }
 @font-face {
   font-family: "YS Text";
@@ -132,6 +137,14 @@
   justify-content: space-between;
 }
 
+.Header-Buttons {
+  display: flex;
+}
+
+.Header-Button {
+  margin-left: var(--space-xxs);
+}
+
 @media (max-width: 320px) {
   .Header {
     padding: var(--space-m) var(--space-l);
@@ -191,9 +204,44 @@ body * {
   margin-top: var(--space-temp-3);
   margin-bottom: var(--space-temp-4);
 }
+
+.SettingsPage-Buttons {
+  display: flex;
+}
+
+.SettingsPage-Button {
+  margin-right: var(--space-s);
+  margin-top: var(--space-s);
+}
+
+@media (max-width: 320px) {
+  .SettingsPage-Buttons {
+    flex-direction: column;
+  }
+
+  .SettingsPage-Button {
+    margin-top: var(--space-s);
+    margin-right: 0;
+  }
+}
 .TextInput {
   display: flex;
   flex-direction: column;
+  position: relative;
+  max-width: 474px;
+}
+
+.TextInput_label-position_left {
+  flex-direction: row;
+  align-items: center;
+}
+
+.TextInput_label-position_left .TextInput-Label {
+  margin-right: var(--space-xxs);
+}
+
+.TextInput-Mark {
+  margin-left: var(--space-xxs);
 }
 
 .TextInput-Input {
@@ -206,8 +254,21 @@ body * {
   margin-top: var(--space-temp-7);
 }
 
+.TextInput-Input_width_s {
+  width: 52px;
+}
+
 .TextInput-Input::-webkit-input-placeholder {
   font-size: var(--color-text-second);
+}
+
+.TextInput-ClearButton {
+  border: none;
+  padding: 0;
+  position: absolute;
+  bottom: var(--space-xs);
+  right: var(--space-xs);
+  background: transparent;
 }
 .Typo {
   font-family: "YS Text";
@@ -249,5 +310,9 @@ body * {
   .Typo_type_h1 {
     font-size: var(--text-size-l);
     line-height: 28px;
+  }
+
+  .Typo_view_default {
+    line-height: 22px;
   }
 }

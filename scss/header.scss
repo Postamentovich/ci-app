@@ -2,6 +2,14 @@
   padding: var(--space-xs) var(--space-xxxxl);
   display: flex;
   justify-content: space-between;
+
+  &-Buttons {
+    display: flex;
+  }
+
+  &-Button {
+    margin-left: var(--space-xxs);
+  }
 }
 
 @media (max-width: 320px) {

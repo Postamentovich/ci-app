@@ -6,6 +6,8 @@
 
   width: fit-content;
 
+  height: fit-content;
+
   outline: none;
 
   display: flex;
@@ -15,11 +17,6 @@
   justify-content: center;
 
   cursor: pointer;
-
-  &-Label {
-    margin-left: var(--space-temp-8);
-    margin-right: var(--space-temp-8);
-  }
 
   &_view {
     &_control {
@@ -47,28 +44,66 @@
     }
   }
 
+  &_type {
+    &_icon-left {
+      .Button-Label {
+        margin-left: var(--space-temp-7);
+      }
+
+      &.Button_size_m {
+        padding-left: var(--space-temp-7);
+      }
+    }
+
+    &_icon {
+      &.Button_size_m {
+        padding: 0 var(--space-temp-7);
+      }
+    }
+  }
+
   &_size {
     &_m {
+      min-height: 28px;
+      min-width: 28px;
       line-height: var(--text-line-height-m);
-      padding: 0 var(--space-temp-7);
+      padding: 0 var(--space-temp-5);
     }
 
     &_l {
+      min-height: 36px;
+      min-width: 36px;
       line-height: var(--text-line-height-l);
       padding: 0 var(--space-xl);
     }
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 470px) {
   .Button {
     &-Label {
       display: none;
     }
 
     &_type {
-      &_help {
+      &_icon-left {
+        &.Button_size_m {
+          padding: 0 var(--space-temp-7);
+        }
+      }
+    }
+
+    &_width {
+      &_mobile-full {
         width: 100%;
+        &.Button {
+          &_size {
+            &_m {
+              line-height: var(--text-line-height-l);
+              padding: 0 var(--space-xl);
+            }
+          }
+        }
       }
     }
   }

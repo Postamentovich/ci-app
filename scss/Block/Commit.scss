@@ -1,16 +1,52 @@
 .Commit {
-  padding: var(--space-l) var(--space-s);
-  box-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3),
-    0px 0px 1px rgba(67, 68, 69, 0.3);
-  border-radius: 6px;
+  padding: var(--space-s) var(--space-xxxl);
+
+  box-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+
+  border-radius: var(--radius-xs);
+
   display: flex;
 
-  &-Status {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+  }
+
+  &_type {
+    &_detail {
+      .Commit-Content {
+        flex-direction: column;
+      }
+      .Commit-DateTime {
+        flex-direction: row;
+      }
+      .Commit-Time {
+        margin-top: 0;
+        margin-left: var(--space-xxs);
+      }
+    }
   }
 
   &-DateTime {
     display: flex;
     flex-direction: column;
+    align-items: baseline;
+  }
+
+  &-Time {
+    display: flex;
+    align-items: center;
+    margin-top: var(--space-s);
+  }
+
+  &-Date {
+    display: flex;
+    align-items: center;
+  }
+
+  &-DateTimeItem {
+    margin-left: var(--space-temp-8);
   }
 
   &-Content {
@@ -29,17 +65,8 @@
     }
   }
 
-  &-TaskId {
-  }
-
   &-Message {
     margin-left: var(--space-temp-4);
-  }
-
-  &-Branch {
-  }
-
-  &-Hash {
   }
 
   &-Author {
@@ -48,11 +75,15 @@
 
   &-Separator {
     border-bottom: 1px solid var(--color-separator);
+    margin-top: var(--space-xxs);
+    margin-bottom: var(--space-xxs);
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 700px) {
   .Commit {
+    padding: var(--space-l) var(--space-s);
+
     &-Content {
       flex-direction: column;
     }
@@ -64,9 +95,6 @@
       margin-left: 0;
       margin-top: var(--space-xxs);
     }
-    &-Branch {
-      margin-top: var(--space-xxs);
-    }
     &-Author {
       margin-left: 0;
       margin-top: var(--space-xxs);
@@ -74,14 +102,13 @@
     &-Separator {
       display: block;
       border-bottom: 1px solid var(--color-separator);
-      margin-top: var(--space-xxs);
-      margin-bottom: var(--space-xxs);
     }
     &-DateTime {
       flex-direction: row;
     }
 
     &-Time {
+      margin-top: 0;
       margin-left: var(--space-xs);
     }
   }

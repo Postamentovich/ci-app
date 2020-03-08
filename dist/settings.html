@@ -18,10 +18,10 @@
       <p class="SettingsPage-Description Typo Typo_view_primary Typo_type_p">
         Configure repository connection and synchronization settings.
       </p>
-      <div class="SettingsPage-Input TextInput">
+      <div class="SettingsPage-Input TextInput TextInput_label-position_top">
         <label
           for="repository"
-          class="TextInput-Label Typo Typo_type_p Typo_view_default"
+          class="TextInput-Label TextInput-Label_required Typo Typo_type_p Typo_view_default"
         >
           GitHub repository
         </label>
@@ -32,7 +32,7 @@
           placeholder="user-name/repo-name"
         />
       </div>
-      <div class="SettingsPage-Input TextInput">
+      <div class="SettingsPage-Input TextInput TextInput_label-position_top">
         <label
           for="build"
           class="TextInput-Label Typo Typo_type_p Typo_view_default"
@@ -60,7 +60,7 @@
           </svg>
         </button>
       </div>
-      <div class="SettingsPage-Input TextInput">
+      <div class="SettingsPage-Input TextInput TextInput_label-position_top">
         <label
           for="branch"
           class="TextInput-Label Typo Typo_type_p Typo_view_default"
@@ -88,26 +88,26 @@
           </svg>
         </button>
       </div>
-      <div class="SettingsPage-Input TextInput TextInput_label-position_left">
+      <div class="SettingsPage-Input TextInput TextInput_label-position_both">
         <label
           for="synchronize"
           class="TextInput-Label Typo Typo_type_p Typo_view_default"
           >Synchronize every</label
         >
         <input
-          class="TextInput-Input TextInput-Input_width_s"
-          type="number"
+          class="TextInput-Input TextInput-Input_width_s TextInput-Input_distribution_right"
+          type="text"
           value="10"
           id="synchronize"
         />
-        <span class="TextInput-Mark Typo Typo_type_p">
+        <span class="TextInput-Label Typo Typo_type_p">
           minutes
         </span>
       </div>
 
       <div class="SettingsPage-Buttons">
         <button
-          class="SettingsPage-Button Button Button_view_action Button_type_help Button_size_l"
+          class="SettingsPage-Button Button Button_view_action Button_width_mobile-full Button_size_l"
         >
           <span class="Typo Typo_type-label">
             Save
@@ -115,7 +115,7 @@
         </button>
 
         <button
-          class="SettingsPage-Button Button Button_view_control Button_type_help Button_size_l"
+          class="SettingsPage-Button Button Button_view_control Button_width_mobile-full Button_size_l"
         >
           <span class="Typo Typo_type-label">
             Cancel

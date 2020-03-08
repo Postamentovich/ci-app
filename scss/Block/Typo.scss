@@ -62,6 +62,12 @@
     &_hash {
       color: var(--color-text-hash);
     }
+    &_link {
+      color: var(--color-text-primary);
+      &:hover {
+        color: var(--color-link-hover);
+      }
+    }
     &_success {
       color: var(--color-text-success);
     }

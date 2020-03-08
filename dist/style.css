@@ -110,55 +110,6 @@ body {
 body * {
   box-sizing: border-box;
 }
-.DetailsPage-Card {
-  margin-top: var(--space-xxs);
-}
-
-.DetailsPage-Log {
-  margin-top: var(--space-s);
-}
-.HistoryPage-Card {
-  margin-top: var(--space-xxs);
-}
-
-.HistoryPage-Button {
-  margin-top: var(--space-xxs);
-}
-.IndexPage-Description {
-  margin-top: var(--space-temp-2);
-}
-
-.IndexPage-Button {
-  margin-top: var(--space-xxxl);
-}
-.SettingsPage-Description {
-  margin-top: var(--space-xxs);
-}
-
-.SettingsPage-Input {
-  margin-top: var(--space-temp-3);
-  margin-bottom: var(--space-temp-4);
-}
-
-.SettingsPage-Buttons {
-  display: flex;
-}
-
-.SettingsPage-Button {
-  margin-right: var(--space-s);
-  margin-top: var(--space-s);
-}
-
-@media (max-width: 470px) {
-  .SettingsPage-Buttons {
-    flex-direction: column;
-  }
-
-  .SettingsPage-Button {
-    margin-top: var(--space-s);
-    margin-right: 0;
-  }
-}
 .Button {
   border-radius: var(--border-radius-l);
   border-width: var(--border-width-l);
@@ -363,6 +314,10 @@ body * {
   align-items: center;
 }
 
+.Footer-Link:not(:first-child) {
+  margin-left: var(--space-s);
+}
+
 @media (max-width: 470px) {
   .Footer {
     flex-direction: column;
@@ -426,7 +381,10 @@ body * {
     min-height: calc(100vh - 124px);
   }
 }
-
+.Link {
+  text-decoration: none;
+  cursor: pointer;
+}
 .Log {
   border-radius: var(--radius-xs);
   background-color: var(--color-bg-second);
@@ -567,6 +525,14 @@ body * {
   color: var(--color-text-hash);
 }
 
+.Typo_view_link {
+  color: var(--color-text-primary);
+}
+
+.Typo_view_link:hover {
+  color: var(--color-link-hover);
+}
+
 .Typo_view_success {
   color: var(--color-text-success);
 }
@@ -579,5 +545,54 @@ body * {
 
   .Typo_view_default {
     line-height: 22px;
+  }
+}
+.DetailsPage-Card {
+  margin-top: var(--space-xxs);
+}
+
+.DetailsPage-Log {
+  margin-top: var(--space-s);
+}
+.HistoryPage-Card {
+  margin-top: var(--space-xxs);
+}
+
+.HistoryPage-Button {
+  margin-top: var(--space-xxs);
+}
+.IndexPage-Description {
+  margin-top: var(--space-temp-2);
+}
+
+.IndexPage-Button {
+  margin-top: var(--space-xxxl);
+}
+.SettingsPage-Description {
+  margin-top: var(--space-xxs);
+}
+
+.SettingsPage-Input {
+  margin-top: var(--space-temp-3);
+  margin-bottom: var(--space-temp-4);
+}
+
+.SettingsPage-Buttons {
+  display: flex;
+}
+
+.SettingsPage-Button {
+  margin-right: var(--space-s);
+  margin-top: var(--space-s);
+}
+
+@media (max-width: 470px) {
+  .SettingsPage-Buttons {
+    flex-direction: column;
+  }
+
+  .SettingsPage-Button {
+    margin-top: var(--space-s);
+    margin-right: 0;
   }
 }

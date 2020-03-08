@@ -4,6 +4,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &-Link {
+    &:not(:first-child) {
+      margin-left: var(--space-s);
+    }
+  }
 }
 
 @media (max-width: 470px) {

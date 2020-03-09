@@ -15,8 +15,13 @@
 
     &_vertical-align {
       &_center {
-        min-height: calc(100vh - 82px);
+        min-height: calc(100vh - 78px);
         justify-content: center;
+      }
+
+      &_start {
+        min-height: calc(100vh - 78px);
+        justify-content: flex-start;
       }
     }
 
@@ -27,6 +32,10 @@
     &_indent-h_l {
       margin-right: var(--space-xxxxl);
       margin-left: var(--space-xxxxl);
+    }
+
+    &_direction_row {
+      flex-direction: row;
     }
   }
 
@@ -52,12 +61,27 @@
         margin-right: var(--space-l);
         margin-left: var(--space-l);
       }
+
+      &_vertical-align {
+        &_center {
+          min-height: calc(100vh - 118px);
+          justify-content: center;
+        }
+        &_start {
+          min-height: calc(100vh - 118px);
+          justify-content: flex-start;
+        }
+      }
+      &_direction_row {
+        flex-direction: column;
+      }
     }
 
     &_mobile-indent_none {
       margin-left: 0;
       margin-right: 0;
     }
+
     // padding-top: var(--space-temp-3);
     // padding: var(--space-l);
     // padding-left: var(--space-l);

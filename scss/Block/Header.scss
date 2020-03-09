@@ -10,13 +10,13 @@
 
   &-Button {
     &:not(:first-child) {
-      margin-left: var(--space-xxs);
+      margin-left: var(--space-xxxxs);
     }
   }
 
   &_space-v_l {
-    padding-top: var(--space-xxs);
-    padding-bottom: var(--space-xxs);
+    padding-top: var(--space-xxxxs);
+    padding-bottom: var(--space-xxxxs);
   }
 }
 

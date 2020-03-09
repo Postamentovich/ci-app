@@ -1,8 +1,18 @@
 .DetailsPage {
+  padding-top: var(--space-xxxxs);
+  padding-bottom: var(--space-xxl);
+
   &-Card {
-    // margin-top: var(--sp ace-xxs);
+    margin-top: var(--space-xxxxxxxs);
   }
   &-Log {
-    // margin-top: var(--space-s);
+    margin-top: var(--space-s);
+  }
+}
+
+@media (max-width: 470px) {
+  .DetailsPage {
+    padding-top: var(--space-xxxxxxxs);
+    padding-bottom: var(--space-l);
   }
 }

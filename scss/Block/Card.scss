@@ -23,7 +23,7 @@
       }
       .Card-Time {
         margin-top: 0;
-        margin-left: var(--space-xxs);
+        margin-left: var(--space-xxxxs);
       }
     }
   }
@@ -46,11 +46,11 @@
   }
 
   &-DateTimeItem {
-    margin-left: var(--space-temp-8);
+    margin-left: var(--space-xxxxxxs);
   }
 
   &-Content {
-    margin-left: var(--space-xs);
+    margin-left: var(--space-xxs);
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -61,22 +61,22 @@
     align-items: center;
 
     &:not(:first-child) {
-      margin-top: var(--space-xxs);
+      margin-top: var(--space-xxxxs);
     }
   }
 
   &-Message {
-    margin-left: var(--space-temp-4);
+    margin-left: var(--space-xxxxxxxs);
   }
 
   &-Author {
-    margin-left: var(--space-xs);
+    margin-left: var(--space-xxs);
   }
 
   &-Separator {
     border-bottom: 1px solid var(--color-separator);
-    margin-top: var(--space-xxs);
-    margin-bottom: var(--space-xxs);
+    margin-top: var(--space-xxxxs);
+    margin-bottom: var(--space-xxxxs);
   }
 }
 
@@ -93,11 +93,11 @@
     }
     &-Message {
       margin-left: 0;
-      margin-top: var(--space-xxs);
+      margin-top: var(--space-xxxxs);
     }
     &-Author {
       margin-left: 0;
-      margin-top: var(--space-xxs);
+      margin-top: var(--space-xxxxs);
     }
     &-Separator {
       display: block;
@@ -109,7 +109,7 @@
 
     &-Time {
       margin-top: 0;
-      margin-left: var(--space-xs);
+      margin-left: var(--space-xxs);
     }
   }
 }

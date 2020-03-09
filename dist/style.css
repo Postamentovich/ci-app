@@ -20,37 +20,31 @@
 }
 
 :root {
-  /** 
-   * Colors
-   */
   --blue-grey-50: #f0f2f3;
   --blue-grey-500: #7f8285;
   --blue-grey-600: #434445;
   --red-500: #ff3333;
   --red-600: #e00000;
   --black-500: #000000;
-  --green-500: #00b341;
+  --black-500: #00b341;
   --orange-500: #ff9a00;
   --white-500: #ffffff;
   --yellow-500: #ffcc00;
-  --space-temp-4: 4px;
-  --space-temp-8: 5px;
-  --space-temp-7: 6px;
-  --space-xxs: 8px;
-  --space-temp-9: 9px;
-  --space-xs: 10px;
-  --space-temp-5: 11px;
+  --space-xxxxxxxs: 4px;
+  --space-xxxxxxs: 5px;
+  --space-xxxxxs: 6px;
+  --space-xxxxs: 8px;
+  --space-xxxs: 9px;
+  --space-xxs: 10px;
+  --space-xs: 11px;
   --space-s: 12px;
-  --space-temp-6: 13px;
-  --space-temp-3: 14px;
-  --space-m: 15px;
+  --space-m: 14px;
   --space-l: 16px;
   --space-xl: 18px;
   --space-xxl: 20px;
   --space-xxxl: 24px;
-  --space-temp-2: 32px;
-  --space-temp-1: 94px;
-  --space-xxxxl: 100px;
+  --space-xxxxl: 32px;
+  --space-xxxxxl: 100px;
   --text-size-xs: 10px;
   --text-size-s: 13px;
   --text-size-m: 15px;
@@ -62,8 +56,6 @@
   --text-line-height-l: 32px;
   --radius-l: 4px;
   --radius-xs: 6px;
-  --spacing-1: 0.06px;
-  --border-radius-l: 4px;
   --border-width-l: 2px;
   --color-icon-primary: #111111;
   --color-icon-second: #cecece;
@@ -152,22 +144,22 @@ body * {
 }
 
 .Button_type_icon-left .Button-Label {
-  margin-left: var(--space-temp-7);
+  margin-left: var(--space-xxxxxs);
 }
 
 .Button_type_icon-left.Button_size_m {
-  padding-left: var(--space-temp-7);
+  padding-left: var(--space-xxxxxs);
 }
 
 .Button_type_icon.Button_size_m {
-  padding: 0 var(--space-temp-7);
+  padding: 0 var(--space-xxxxxs);
 }
 
 .Button_size_m {
   min-height: 28px;
   min-width: 28px;
   line-height: var(--text-line-height-m);
-  padding: 0 var(--space-temp-5);
+  padding: 0 var(--space-xs);
 }
 
 .Button_size_l {
@@ -183,7 +175,7 @@ body * {
   }
 
   .Button_type_icon-left.Button_size_m {
-    padding: 0 var(--space-temp-7);
+    padding: 0 var(--space-xxxxxs);
   }
 
   .Button_width_mobile-full {
@@ -217,7 +209,7 @@ body * {
 
 .Card_type_detail .Card-Time {
   margin-top: 0;
-  margin-left: var(--space-xxs);
+  margin-left: var(--space-xxxxs);
 }
 
 .Card-DateTime {
@@ -238,11 +230,11 @@ body * {
 }
 
 .Card-DateTimeItem {
-  margin-left: var(--space-temp-8);
+  margin-left: var(--space-xxxxxxs);
 }
 
 .Card-Content {
-  margin-left: var(--space-xs);
+  margin-left: var(--space-xxs);
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -254,21 +246,21 @@ body * {
 }
 
 .Card-Row:not(:first-child) {
-  margin-top: var(--space-xxs);
+  margin-top: var(--space-xxxxs);
 }
 
 .Card-Message {
-  margin-left: var(--space-temp-4);
+  margin-left: var(--space-xxxxxxxs);
 }
 
 .Card-Author {
-  margin-left: var(--space-xs);
+  margin-left: var(--space-xxs);
 }
 
 .Card-Separator {
   border-bottom: 1px solid var(--color-separator);
-  margin-top: var(--space-xxs);
-  margin-bottom: var(--space-xxs);
+  margin-top: var(--space-xxxxs);
+  margin-bottom: var(--space-xxxxs);
 }
 
 @media (max-width: 700px) {
@@ -287,12 +279,12 @@ body * {
 
   .Card-Message {
     margin-left: 0;
-    margin-top: var(--space-xxs);
+    margin-top: var(--space-xxxxs);
   }
 
   .Card-Author {
     margin-left: 0;
-    margin-top: var(--space-xxs);
+    margin-top: var(--space-xxxxs);
   }
 
   .Card-Separator {
@@ -306,7 +298,7 @@ body * {
 
   .Card-Time {
     margin-top: 0;
-    margin-left: var(--space-xs);
+    margin-left: var(--space-xxs);
   }
 }
 .Footer {
@@ -314,8 +306,8 @@ body * {
 }
 
 .Footer-Container {
-  padding-top: var(--space-xxs);
-  padding-bottom: var(--space-xxs);
+  padding-top: var(--space-xxxxs);
+  padding-bottom: var(--space-xxxxs);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -334,7 +326,7 @@ body * {
   }
 
   .Footer-Copyright {
-    margin-top: var(--space-xxs);
+    margin-top: var(--space-xxxxs);
   }
 }
 .Header-Container {
@@ -347,12 +339,12 @@ body * {
 }
 
 .Header-Button:not(:first-child) {
-  margin-left: var(--space-xxs);
+  margin-left: var(--space-xxxxs);
 }
 
 .Header_space-v_l {
-  padding-top: var(--space-xxs);
-  padding-bottom: var(--space-xxs);
+  padding-top: var(--space-xxxxs);
+  padding-bottom: var(--space-xxxxs);
 }
 
 @media (max-width: 470px) {
@@ -381,8 +373,8 @@ body * {
 }
 
 .Layout-Container_indent-h_l {
-  margin-right: var(--space-xxxxl);
-  margin-left: var(--space-xxxxl);
+  margin-right: var(--space-xxxxxl);
+  margin-left: var(--space-xxxxxl);
 }
 
 .Layout-Container_direction_row {
@@ -409,7 +401,7 @@ body * {
     flex-direction: column;
   }
 
-  .Layout_mobile-indent_none {
+  .Layout-Container_mobile-indent_none {
     margin-left: 0;
     margin-right: 0;
   }
@@ -421,12 +413,18 @@ body * {
 .Log {
   border-radius: var(--radius-xs);
   background-color: var(--color-bg-second);
-  padding: var(--space-xxs) var(--space-s);
+  padding: var(--space-xxxxs) var(--space-s);
 }
 
 .Log-Container {
   margin: 0;
   overflow-y: auto;
+}
+
+@media (max-width: 470px) {
+  .Log {
+    border-radius: 0;
+  }
 }
 .TextInput {
   display: flex;
@@ -441,12 +439,12 @@ body * {
 }
 
 .TextInput_label-position_both .TextInput-Input {
-  margin-right: var(--space-xxs);
-  margin-left: var(--space-xxs);
+  margin-right: var(--space-xxxxs);
+  margin-left: var(--space-xxxxs);
 }
 
 .TextInput_label-position_top .TextInput-Input {
-  margin-top: var(--space-temp-7);
+  margin-top: var(--space-xxxxxs);
 }
 
 .TextInput-Label_required:after {
@@ -459,10 +457,10 @@ body * {
   border-style: solid;
   border-color: var(--color-border-main);
   border-radius: var(--radius-l);
-  padding-top: var(--space-temp-9);
-  padding-right: var(--space-temp-5);
-  padding-left: var(--space-temp-5);
-  padding-bottom: var(--space-xxs);
+  padding-top: var(--space-xxxs);
+  padding-right: var(--space-xs);
+  padding-left: var(--space-xs);
+  padding-bottom: var(--space-xxxxs);
 }
 
 .TextInput-Input_width_s {
@@ -490,8 +488,8 @@ body * {
   border: none;
   padding: 0;
   position: absolute;
-  bottom: var(--space-xs);
-  right: var(--space-xs);
+  bottom: var(--space-xxs);
+  right: var(--space-xxs);
   background: transparent;
   display: flex;
   cursor: pointer;
@@ -511,7 +509,7 @@ body * {
 .Typo_type_h2 {
   font-weight: bold;
   font-size: var(--text-size-m);
-  line-height: 20px;
+  line-height: var(----text-line-height-s);
 }
 
 .Typo_type_Card-id {
@@ -535,7 +533,7 @@ body * {
   font-weight: normal;
   font-size: var(--text-size-s);
   line-height: var(--text-line-height-xs);
-  letter-spacing: var(--spacing-1);
+  letter-spacing: 0.06;
 }
 
 .Typo_type-label {
@@ -546,10 +544,6 @@ body * {
 
 .Typo_align_center {
   text-align: center;
-}
-
-.Typo_spacing_1 {
-  letter-spacing: var(--spacing-1);
 }
 
 .Typo_view_default {
@@ -594,18 +588,36 @@ body * {
     line-height: 22px;
   }
 }
+.DetailsPage {
+  padding-top: var(--space-xxxxs);
+  padding-bottom: var(--space-xxl);
+}
 
+.DetailsPage-Card {
+  margin-top: var(--space-xxxxxxxs);
+}
+
+.DetailsPage-Log {
+  margin-top: var(--space-s);
+}
+
+@media (max-width: 470px) {
+  .DetailsPage {
+    padding-top: var(--space-xxxxxxxs);
+    padding-bottom: var(--space-l);
+  }
+}
 .HistoryPage {
-  padding-top: var(--space-xxs);
+  padding-top: var(--space-xxxxs);
   padding-bottom: var(--space-xxl);
 }
 
 .HistoryPage-Card {
-  margin-top: var(--space-xxs);
+  margin-top: var(--space-xxxxs);
 }
 
 .HistoryPage-Button {
-  margin-top: var(--space-xxs);
+  margin-top: var(--space-xxxxs);
 }
 
 @media (max-width: 470px) {
@@ -614,19 +626,24 @@ body * {
   }
 }
 .IndexPage-Description {
-  margin-top: var(--space-temp-2);
+  margin-top: var(--space-xxxxl);
 }
 
 .IndexPage-Button {
   margin-top: var(--space-xxxl);
 }
 .SettingsPage-Description {
-  margin-top: var(--space-xxs);
+  margin-top: var(--space-xxxxs);
+  margin-bottom: var(--space-xxxxs);
 }
 
 .SettingsPage-Input {
-  margin-top: var(--space-temp-3);
-  margin-bottom: var(--space-temp-4);
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-xxxxxxxs);
+}
+
+.SettingsPage-Title {
+  margin-top: var(--space-xxxxs);
 }
 
 .SettingsPage-Buttons {

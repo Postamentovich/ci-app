@@ -1,11 +1,16 @@
 .SettingsPage {
   &-Description {
-    margin-top: var(--space-xxs);
+    margin-top: var(--space-xxxxs);
+    margin-bottom: var(--space-xxxxs);
   }
 
   &-Input {
-    margin-top: var(--space-temp-3);
-    margin-bottom: var(--space-temp-4);
+    margin-top: var(--space-m);
+    margin-bottom: var(--space-xxxxxxxs);
+  }
+
+  &-Title {
+    margin-top: var(--space-xxxxs);
   }
 
   &-Buttons {

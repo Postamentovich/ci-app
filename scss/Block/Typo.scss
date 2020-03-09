@@ -12,7 +12,7 @@
     &_h2 {
       font-weight: bold;
       font-size: var(--text-size-m);
-      line-height: 20px;
+      line-height: var(----text-line-height-s);
     }
     &_Card-id {
       font-weight: 500;
@@ -33,7 +33,7 @@
       font-weight: normal;
       font-size: var(--text-size-s);
       line-height: var(--text-line-height-xs);
-      letter-spacing: var(--spacing-1);
+      letter-spacing: 0.06
     }
     &-label {
       font-weight: normal;
@@ -48,11 +48,6 @@
     }
   }
 
-  &_spacing {
-    &_1 {
-      letter-spacing: var(--spacing-1);
-    }
-  }
 
   &_view {
     &_default {

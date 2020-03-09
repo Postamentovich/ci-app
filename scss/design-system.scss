@@ -23,45 +23,38 @@
 }
 
 :root {
-  /** 
-   * Colors
-   */
   --blue-grey-50: #f0f2f3;
   --blue-grey-500: #7f8285;
   --blue-grey-600: #434445;
   --red-500: #ff3333;
   --red-600: #e00000;
   --black-500: #000000;
-  --green-500: #00b341;
+  --black-500: #00b341;
   --orange-500: #ff9a00;
   --white-500: #ffffff;
   --yellow-500: #ffcc00;
 
-  --space-temp-4: 4px;
-  --space-temp-8: 5px;
-  --space-temp-7: 6px;
-  --space-xxs: 8px;
-  --space-temp-9: 9px;
-  --space-xs: 10px;
-  --space-temp-5: 11px;
+  --space-xxxxxxxs: 4px;
+  --space-xxxxxxs: 5px;
+  --space-xxxxxs: 6px;
+  --space-xxxxs: 8px;
+  --space-xxxs: 9px;
+  --space-xxs: 10px;
+  --space-xs: 11px;
   --space-s: 12px;
-  --space-temp-6: 13px;
-  --space-temp-3: 14px;
-  --space-m: 15px;
+  --space-m: 14px;
   --space-l: 16px;
   --space-xl: 18px;
   --space-xxl: 20px;
   --space-xxxl: 24px;
-  --space-temp-2: 32px;
-  --space-temp-1: 94px;
-  --space-xxxxl: 100px;
+  --space-xxxxl: 32px;
+  --space-xxxxxl: 100px;
 
   --text-size-xs: 10px;
   --text-size-s: 13px;
   --text-size-m: 15px;
   --text-size-l: 18px;
   --text-size-xl: 24px;
-
   --text-line-height-xs: 16px;
   --text-line-height-s: 20px;
   --text-line-height-m: 24px;
@@ -69,10 +62,6 @@
 
   --radius-l: 4px;
   --radius-xs: 6px;
-
-  --spacing-1: 0.06px;
-
-  --border-radius-l: 4px;
 
   --border-width-l: 2px;
 

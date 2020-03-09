@@ -2,8 +2,8 @@
   background-color: var(--color-bg-footer);
 
   &-Container {
-    padding-top: var(--space-xxs);
-    padding-bottom: var(--space-xxs);
+    padding-top: var(--space-xxxxs);
+    padding-bottom: var(--space-xxxxs);
 
     display: flex;
 
@@ -29,7 +29,7 @@
     }
 
     &-Copyright {
-      margin-top: var(--space-xxs);
+      margin-top: var(--space-xxxxs);
     }
   }
 }

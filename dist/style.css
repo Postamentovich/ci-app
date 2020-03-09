@@ -26,7 +26,7 @@
   --red-500: #ff3333;
   --red-600: #e00000;
   --black-500: #000000;
-  --black-500: #00b341;
+  --green-500: #00b341;
   --orange-500: #ff9a00;
   --white-500: #ffffff;
   --yellow-500: #ffcc00;
@@ -98,7 +98,7 @@ body * {
   box-sizing: border-box;
 }
 .Button {
-  border-radius: var(--border-radius-l);
+  border-radius: var(--radius-xl);
   border-width: var(--border-width-l);
   border-style: solid;
   border-color: transparent;
@@ -640,6 +640,7 @@ body * {
 
 .SettingsPage-Buttons {
   display: flex;
+  margin-bottom: var(--space-xxl);
 }
 
 .SettingsPage-Button {

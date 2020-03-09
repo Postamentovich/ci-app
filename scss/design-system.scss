@@ -61,31 +61,24 @@
   --text-line-height-l: 32px;
 
   --radius-l: 4px;
-  --radius-xs: 6px;
+  --radius-xl: 6px;
 
   --border-width-l: 2px;
-
-  --color-icon-primary: #111111;
-  --color-icon-second: #cecece;
 
   --color-text-default: var(--black-500);
   --color-text-primary: var(--blue-grey-500);
   --color-text-second: #ccc;
-  --color-text-tertiary: var(--blue-grey-600);
   --color-text-success: var(--green-500);
   --color-text-error: var(--red-500);
   --color-text-required: var(--red-500);
   --color-text-waiting: var(--orange-500);
   --color-text-hash: #595959;
-  --color-text-disabled: #bcbcbc;
 
   --color-border-main: #d9d9d9;
   --color-border-input-focused: #b3b3b3;
   --color-border-input-hovered: #cecece;
   --color-border-action-focused: #b38f00;
   --color-border-control-focused: #b3b3b3;
-
-  --color-shadow-primary: #c7c7c7;
 
   --color-separator: var(--blue-grey-50);
 
@@ -94,10 +87,7 @@
   --color-bg-control: #e6e6e6;
   --color-bg-control-hovered: #dbdbdb;
   --color-bg-footer: var(--blue-grey-50);
-  --color-bg-base: var(--white-500);
   --color-bg-second: #f2f2f2;
-  --color-bg-scrollbar: #a9a9a9;
-  --color-bg-disabled: #f2f2f2;
 
   --color-link-hover: var(--red-600);
 }

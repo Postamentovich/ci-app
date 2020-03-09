@@ -10,27 +10,30 @@
 
 <body class="Page Theme_color_default Theme_size_default Theme_space_default">
   <header class="Header Header_space-v_l">
-    <div class="Header-Container Layout-Container_indent-h_l">
+    <div class="Header-Container Layout-Container Layout-Container_type_header Layout-Container_indent-h_l">
       <h1 class="Typo Typo_type_h1 Typo_view_primary">School CI server</h1>
     </div>
   </header>
   <div class="SettingsPage Layout">
-    <div class="Layout-Container Layout-Container_vertical-align_start Layout-Container_indent-h_l">
+    <div
+      class="SettingsPage-Container Layout-Container Layout-Container_vertical-align_start Layout-Container_indent-h_l">
       <h2 class="SettingsPage-Title Typo Typo_view_default Typo_type_h2">
         Settings
       </h2>
-      <p class="SettingsPage-Description Typo Typo_view_primary Typo_type_p">
+      <p class="SettingsPage-Description Typo Typo_line-height_xxs Typo_view_primary Typo_type_p">
         Configure repository connection and synchronization settings.
       </p>
       <div class="SettingsPage-Input TextInput TextInput_label-position_top">
-        <label for="repository" class="TextInput-Label TextInput-Label_required Typo Typo_type_p Typo_view_default">
+        <label for="repository"
+          class="TextInput-Label TextInput-Label_required Typo Typo_line-height_xxs Typo_type_p Typo_view_default">
           GitHub repository
         </label>
-        <input class="TextInput-Input" type="text" id="repository" placeholder="user-name/repo-name" />
+        <input class="TextInput-Input Typo Typo_type_p Typo_view_default Typo_line-height_xxxs" type="text" id="repository" placeholder="user-name/repo-name" />
       </div>
       <div class="SettingsPage-Input TextInput TextInput_label-position_top">
-        <label for="build" class="TextInput-Label Typo Typo_type_p Typo_view_default">Build command</label>
-        <input class="TextInput-Input" id="build" type="text" placeholder="user-name/repo-name"
+        <label for="build" class="TextInput-Label Typo Typo_line-height_xxs Typo_type_p Typo_view_default">Build
+          command</label>
+        <input class="TextInput-Input Typo Typo_type_p Typo_view_default Typo_line-height_xxxs" id="build" type="text" placeholder="user-name/repo-name"
           value="npm ci && npm run build" />
         <button class="TextInput-ClearButton">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,9 +44,9 @@
         </button>
       </div>
       <div class="SettingsPage-Input TextInput TextInput_label-position_top">
-        <label for="branch" class="TextInput-Label Typo Typo_type_p Typo_view_default">Main branch
+        <label for="branch" class="TextInput-Label Typo Typo_line-height_xxs Typo_type_p Typo_view_default">Main branch
         </label>
-        <input class="TextInput-Input" id="branch" type="text" placeholder="user-name/repo-name" value="Main branch" />
+        <input class="TextInput-Input Typo Typo_type_p Typo_view_default Typo_line-height_xxxs" id="branch" type="text" placeholder="user-name/repo-name" value="Master" />
         <button class="TextInput-ClearButton">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -53,10 +56,11 @@
         </button>
       </div>
       <div class="SettingsPage-Input TextInput TextInput_label-position_both">
-        <label for="synchronize" class="TextInput-Label Typo Typo_type_p Typo_view_default">Synchronize every</label>
-        <input class="TextInput-Input TextInput-Input_width_s TextInput-Input_distribution_right" type="text" value="10"
+        <label for="synchronize"
+          class="TextInput-Label Typo Typo_line-height_xxs Typo_type_p Typo_view_default">Synchronize every</label>
+        <input class="Typo Typo_type_p Typo_view_default Typo_line-height_xxxs TextInput-Input TextInput-Input_width_s TextInput-Input_distribution_right" type="text" value="10"
           id="synchronize" />
-        <span class="TextInput-Label Typo Typo_type_p">
+        <span class="TextInput-Label Typo Typo_line-height_xxs Typo_type_p Typo_view_input-label">
           minutes
         </span>
       </div>
@@ -77,12 +81,12 @@
     </div>
   </div>
   <footer class="Footer Layout">
-    <div class="Layout-Container Layout-Container_direction_row Layout-Container_indent-h_l Footer-Container">
+    <div class="Layout-Container Layout-Container_type_footer Layout-Container_indent-h_l Footer-Container">
       <div class="Footer-Links">
-        <a href="/" class="Link Footer-Link" title="Support">
+        <a href="/support" class="Link Footer-Link" title="Support">
           <span class="Typo Typo_type_p Typo_view_link">Support</span>
         </a>
-        <a href="/" class="Link Footer-Link" title="Support">
+        <a href="/learning" class="Link Footer-Link" title="Learning">
           <span class="Typo Typo_type_p Typo_view_link">Learning</span>
         </a>
       </div>

@@ -5,4 +5,17 @@
   &-Button {
     margin-top: var(--space-xxxl);
   }
+  &-Container {
+    margin-top: var(--space-l);
+    margin-bottom: var(--space-l);
+    min-height: calc(100vh - 110px);
+  }
+}
+
+@media (max-width: 470px) {
+  .IndexPage {
+    &-Container {
+      min-height: calc(100vh - 150px);
+    }
+  }
 }

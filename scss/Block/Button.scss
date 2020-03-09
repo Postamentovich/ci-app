@@ -18,6 +18,12 @@
 
   cursor: pointer;
 
+  text-decoration: none;
+
+  &:visited {
+    color: inherit;
+  }
+
   &_view {
     &_control {
       background-color: var(--color-bg-control);
@@ -64,16 +70,14 @@
 
   &_size {
     &_m {
-      min-height: 28px;
-      min-width: 28px;
-      line-height: var(--text-line-height-m);
+      min-height: var(--button-size-m);
+      min-width: var(--button-size-m);
       padding: 0 var(--space-xs);
     }
 
     &_l {
-      min-height: 36px;
-      min-width: 36px;
-      line-height: var(--text-line-height-l);
+      min-height: var(--button-size-l);
+      min-width: var(--button-size-l);
       padding: 0 var(--space-xl);
     }
   }
@@ -81,28 +85,23 @@
 
 @media (max-width: 470px) {
   .Button {
-    &-Label {
-      display: none;
-    }
-
-    &_type {
-      &_icon-left {
-        &.Button_size_m {
-          padding: 0 var(--space-xxxxxs);
-        }
+    &_type_icon-left {
+      &.Button_size_m {
+        padding: 0 var(--space-xxxxxs);
       }
     }
-
     &_width {
       &_mobile-full {
         width: 100%;
-        &.Button {
-          &_size {
-            &_m {
-              line-height: var(--text-line-height-l);
-              padding: 0 var(--space-xl);
-            }
-          }
+
+        &.Button_size_m {
+          line-height: var(--text-line-height-xl);
+          padding: 0 var(--space-xl);
+        }
+      }
+      &_mobile-shrink {
+        .Button-Label {
+          display: none;
         }
       }
     }

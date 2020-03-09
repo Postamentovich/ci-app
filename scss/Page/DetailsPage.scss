@@ -8,11 +8,17 @@
   &-Log {
     margin-top: var(--space-s);
   }
+  &-Container {
+    min-height: calc(100vh - 106px);
+  }
 }
 
 @media (max-width: 470px) {
   .DetailsPage {
     padding-top: var(--space-xxxxxxxs);
     padding-bottom: var(--space-l);
+    &-Container {
+      min-height: calc(100vh - 146px);
+    }
   }
 }

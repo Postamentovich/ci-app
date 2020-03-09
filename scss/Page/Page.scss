@@ -13,11 +13,17 @@ body {
 }
 
 .Page {
+  min-width: 320px;
+  --card-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+  --card-shadow-hover: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+  --button-size-m: 28px;
+  --button-size-l: 36px;
   --radius-l: 4px;
   --radius-xl: 6px;
   --border-width-l: 2px;
   --color-text-default: var(--black-500);
   --color-text-primary: var(--blue-grey-500);
+  --color-text-input-label: var(--blue-grey-600);
   --color-text-second: #ccc;
   --color-text-success: var(--green-500);
   --color-text-error: var(--red-500);

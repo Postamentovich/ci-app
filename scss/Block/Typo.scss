@@ -5,35 +5,36 @@
   &_type {
     &_h1 {
       font-weight: 500;
-      font-size: var(--text-size-xl);
-      line-height: 28px;
+      font-size: var(--text-size-xxl);
+      line-height: var(--text-line-height-l);
       letter-spacing: 0.25px;
     }
     &_h2 {
       font-weight: bold;
       font-size: var(--text-size-m);
-      line-height: var(----text-line-height-s);
+      line-height: var(----text-line-height-xs);
     }
     &_Card-id {
       font-weight: 500;
-      font-size: var(--text-size-l);
-      line-height: var(--text-line-height-s);
+      font-size: var(--text-size-xl);
+      line-height: var(--text-line-height-xs);
     }
 
     &_Card-message {
       font-weight: normal;
       font-size: var(--text-size-m);
-      line-height: var(--text-line-height-s);
+      line-height: var(--text-line-height-xs);
     }
     &_log {
+      font-weight: normal;
       font-size: var(--text-size-xs);
-      line-height: var(--text-line-height-s);
+      line-height: var(--text-line-height-xs);
     }
     &_p {
       font-weight: normal;
       font-size: var(--text-size-s);
-      line-height: var(--text-line-height-xs);
-      letter-spacing: 0.06
+      line-height: var(--text-line-height-xxxs);
+      letter-spacing: 0.06;
     }
     &-label {
       font-weight: normal;
@@ -42,12 +43,18 @@
     }
   }
 
-  &_align {
-    &_center {
-      text-align: center;
-    }
+  &_align_center {
+    text-align: center;
   }
 
+  &_line-height {
+    &_xxs {
+      line-height: var(--text-line-height-xxs);
+    }
+    &_xxxs {
+      line-height: var(--text-line-height-xxxs);
+    }
+  }
 
   &_view {
     &_default {
@@ -74,6 +81,9 @@
     &_waiting {
       color: var(--color-text-waiting);
     }
+    &_input-label {
+      color: var(--color-text-input-label);
+    }
   }
 }
 
@@ -81,13 +91,13 @@
   .Typo {
     &_type {
       &_h1 {
-        font-size: var(--text-size-l);
-        line-height: 28px;
+        font-size: var(--text-size-xl);
+        line-height: var(--text-line-height-s);
       }
-    }
-    &_view {
-      &_default {
-        line-height: 22px;
+      &_Card-id {
+        font-weight: 500;
+        font-size: var(--text-size-l);
+        line-height: var(--text-line-height-xxxs);
       }
     }
   }

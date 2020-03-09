@@ -1,7 +1,7 @@
 .Card {
   padding: var(--space-s) var(--space-xxxl);
 
-  box-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+  box-shadow: var(--card-shadow);
 
   border-radius: var(--radius-xl);
 
@@ -10,11 +10,16 @@
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+    box-shadow: var(--card-shadow-hover);
   }
 
   &_type {
     &_detail {
+      &:hover {
+        box-shadow: var(--card-shadow);
+        cursor: default;
+      }
+
       .Card-Content {
         flex-direction: column;
       }
@@ -47,13 +52,14 @@
 
   &-DateTimeItem {
     margin-left: var(--space-xxxxxxs);
+    white-space: nowrap;
   }
 
   &-Content {
     margin-left: var(--space-xxs);
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: calc(100% - 32px);
   }
 
   &-Row {
@@ -67,10 +73,27 @@
 
   &-Message {
     margin-left: var(--space-xxxxxxxs);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   &-Author {
     margin-left: var(--space-xxs);
+  }
+
+  &-Status {
+    height: 22px;
+    width: 22px;
+    min-width: 22px;
+  }
+
+  &-BranchName {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &-Separator {
@@ -78,11 +101,20 @@
     margin-top: var(--space-xxxxs);
     margin-bottom: var(--space-xxxxs);
   }
+
+  &-Info {
+    max-width: calc(100% - 132px);
+  }
 }
 
 @media (max-width: 700px) {
   .Card {
     padding: var(--space-l) var(--space-s);
+
+    &-Status {
+      height: 14px;
+      width: 14px;
+    }
 
     &-Content {
       flex-direction: column;
@@ -110,6 +142,10 @@
     &-Time {
       margin-top: 0;
       margin-left: var(--space-xxs);
+    }
+
+    &-Info {
+      max-width: calc(100% - 10px);
     }
   }
 }

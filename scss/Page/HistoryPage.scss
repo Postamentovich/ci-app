@@ -9,10 +9,18 @@
   &-Button {
     margin-top: var(--space-xxxxs);
   }
+
+  &-Container {
+    min-height: calc(100vh - 106px);
+  }
 }
 
 @media (max-width: 470px) {
   .HistoryPage {
     padding-bottom: var(--space-l);
+
+    &-Container {
+      min-height: calc(100vh - 146px);
+    }
   }
 }

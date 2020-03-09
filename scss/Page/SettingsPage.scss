@@ -22,6 +22,10 @@
     margin-right: var(--space-s);
     margin-top: var(--space-s);
   }
+
+  &-Container {
+    min-height: calc(100vh - 78px);
+  }
 }
 
 @media (max-width: 470px) {
@@ -32,6 +36,9 @@
     &-Button {
       margin-top: var(--space-s);
       margin-right: 0;
+    }
+    &-Container {
+      min-height: calc(100vh - 112px);
     }
   }
 }

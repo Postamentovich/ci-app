@@ -1,9 +1,14 @@
 .Footer {
   background-color: var(--color-bg-footer);
-  // padding: var(--space-xxs) var(--space-xxxxl);
+  padding-top: var(--space-xxs);
+  padding-bottom: var(--space-xxs);
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
+  // &_
 
   &-Link {
     &:not(:first-child) {
@@ -16,6 +21,8 @@
   .Footer {
     flex-direction: column;
     align-items: flex-start;
+    padding-top: var(--space-s);
+    padding-bottom: var(--space-s);
     // padding: var(--space-s) var(--space-l);
     &-Copyright {
       margin-top: var(--space-xxs);

@@ -9,6 +9,20 @@
     //   &-h {
     //   }
     // }
+    display: flex;
+
+    flex-direction: column;
+
+    &_vertical-align {
+      &_center {
+        min-height: calc(100vh - 82px);
+        justify-content: center;
+      }
+    }
+
+    &_distribution_center {
+      align-items: center;
+    }
 
     &_indent-h_l {
       margin-right: var(--space-xxxxl);
@@ -20,13 +34,6 @@
   //   &_center {
   //     align-items: center;
   //     margin: 0 auto;
-  //   }
-  // }
-
-  // &_vertical-align {
-  //   &_center {
-  //     min-height: calc(100vh - 82px);
-  //     justify-content: center;
   //   }
   // }
 }

@@ -576,6 +576,14 @@ body * {
   color: var(--color-text-success);
 }
 
+.Typo_view_error {
+  color: var(--color-text-error);
+}
+
+.Typo_view_waiting {
+  color: var(--color-text-waiting);
+}
+
 @media (max-width: 470px) {
   .Typo_type_h1 {
     font-size: var(--text-size-l);
@@ -587,12 +595,23 @@ body * {
   }
 }
 
+.HistoryPage {
+  padding-top: var(--space-xxs);
+  padding-bottom: var(--space-xxl);
+}
+
 .HistoryPage-Card {
   margin-top: var(--space-xxs);
 }
 
 .HistoryPage-Button {
   margin-top: var(--space-xxs);
+}
+
+@media (max-width: 470px) {
+  .HistoryPage {
+    padding-bottom: var(--space-l);
+  }
 }
 .IndexPage-Description {
   margin-top: var(--space-temp-2);

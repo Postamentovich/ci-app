@@ -73,6 +73,12 @@
     &_success {
       color: var(--color-text-success);
     }
+    &_error {
+      color: var(--color-text-error);
+    }
+    &_waiting {
+      color: var(--color-text-waiting);
+    }
   }
 }
 

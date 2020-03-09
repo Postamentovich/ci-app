@@ -1,9 +1,18 @@
 .HistoryPage {
+  padding-top: var(--space-xxs);
+  padding-bottom: var(--space-xxl);
+
   &-Card {
     margin-top: var(--space-xxs);
   }
 
   &-Button {
     margin-top: var(--space-xxs);
+  }
+}
+
+@media (max-width: 470px) {
+  .HistoryPage {
+    padding-bottom: var(--space-l);
   }
 }

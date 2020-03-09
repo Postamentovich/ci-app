@@ -1,9 +1,8 @@
 .Layout {
   display: flex;
   flex-direction: column;
-  // max-width: 1024px;
   width: 100%;
-  min-height: calc(100vh - 82px);
+  // min-height: calc(100vh - 82px);
   padding: var(--space-xxs) var(--space-xxxxl);
 
   &_distribution {
@@ -29,12 +28,17 @@
 
 @media (max-width: 470px) {
   .Layout {
-    padding-top: var(--space-temp-3);
-    padding-right: var(--space-l);
-    padding-left: var(--space-l);
-    padding-bottom: var(--space-xxl);
-    min-height: calc(100vh - 124px);
+    // padding-top: var(--space-temp-3);
+    padding: var(--space-l);
+    // padding-left: var(--space-l);
+    // padding-bottom: var(--space-xxl);
+    // min-height: calc(100vh - 124px);
+
+    &_padding {
+      &_mobile-none {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
   }
 }
-
-

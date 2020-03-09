@@ -352,7 +352,6 @@ body * {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: calc(100vh - 82px);
   padding: var(--space-xxs) var(--space-xxxxl);
 }
 
@@ -374,11 +373,12 @@ body * {
 
 @media (max-width: 470px) {
   .Layout {
-    padding-top: var(--space-temp-3);
-    padding-right: var(--space-l);
-    padding-left: var(--space-l);
-    padding-bottom: var(--space-xxl);
-    min-height: calc(100vh - 124px);
+    padding: var(--space-l);
+  }
+
+  .Layout_padding_mobile-none {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 .Link {
@@ -392,6 +392,7 @@ body * {
 }
 
 .Log-Container {
+  margin: 0;
   overflow-y: auto;
 }
 .TextInput {
@@ -492,6 +493,11 @@ body * {
   line-height: var(--text-line-height-s);
 }
 
+.Typo_type_log {
+  font-size: var(--text-size-xs);
+  line-height: var(--text-line-height-s);
+}
+
 .Typo_type_p {
   font-weight: normal;
   font-size: var(--text-size-s);
@@ -547,13 +553,7 @@ body * {
     line-height: 22px;
   }
 }
-.DetailsPage-Card {
-  margin-top: var(--space-xxs);
-}
 
-.DetailsPage-Log {
-  margin-top: var(--space-s);
-}
 .HistoryPage-Card {
   margin-top: var(--space-xxs);
 }

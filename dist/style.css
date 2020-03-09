@@ -110,6 +110,9 @@ body {
 body * {
   box-sizing: border-box;
 }
+.Theme * {
+  box-sizing: border-box;
+}
 .Button {
   border-radius: var(--border-radius-l);
   border-width: var(--border-width-l);
@@ -192,7 +195,7 @@ body * {
     padding: 0 var(--space-xl);
   }
 }
-.Commit {
+.Card {
   padding: var(--space-s) var(--space-xxxl);
   box-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
   border-radius: var(--radius-xs);
@@ -200,115 +203,114 @@ body * {
   cursor: pointer;
 }
 
-.Commit:hover {
+.Card:hover {
   box-shadow: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
 }
 
-.Commit_type_detail .Commit-Content {
+.Card_type_detail .Card-Content {
   flex-direction: column;
 }
 
-.Commit_type_detail .Commit-DateTime {
+.Card_type_detail .Card-DateTime {
   flex-direction: row;
 }
 
-.Commit_type_detail .Commit-Time {
+.Card_type_detail .Card-Time {
   margin-top: 0;
   margin-left: var(--space-xxs);
 }
 
-.Commit-DateTime {
+.Card-DateTime {
   display: flex;
   flex-direction: column;
   align-items: baseline;
 }
 
-.Commit-Time {
+.Card-Time {
   display: flex;
   align-items: center;
   margin-top: var(--space-s);
 }
 
-.Commit-Date {
+.Card-Date {
   display: flex;
   align-items: center;
 }
 
-.Commit-DateTimeItem {
+.Card-DateTimeItem {
   margin-left: var(--space-temp-8);
 }
 
-.Commit-Content {
+.Card-Content {
   margin-left: var(--space-xs);
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.Commit-Row {
+.Card-Row {
   display: flex;
   align-items: center;
 }
 
-.Commit-Row:not(:first-child) {
+.Card-Row:not(:first-child) {
   margin-top: var(--space-xxs);
 }
 
-.Commit-Message {
+.Card-Message {
   margin-left: var(--space-temp-4);
 }
 
-.Commit-Author {
+.Card-Author {
   margin-left: var(--space-xs);
 }
 
-.Commit-Separator {
+.Card-Separator {
   border-bottom: 1px solid var(--color-separator);
   margin-top: var(--space-xxs);
   margin-bottom: var(--space-xxs);
 }
 
 @media (max-width: 700px) {
-  .Commit {
+  .Card {
     padding: var(--space-l) var(--space-s);
   }
 
-  .Commit-Content {
+  .Card-Content {
     flex-direction: column;
   }
 
-  .Commit-Row {
+  .Card-Row {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .Commit-Message {
+  .Card-Message {
     margin-left: 0;
     margin-top: var(--space-xxs);
   }
 
-  .Commit-Author {
+  .Card-Author {
     margin-left: 0;
     margin-top: var(--space-xxs);
   }
 
-  .Commit-Separator {
+  .Card-Separator {
     display: block;
     border-bottom: 1px solid var(--color-separator);
   }
 
-  .Commit-DateTime {
+  .Card-DateTime {
     flex-direction: row;
   }
 
-  .Commit-Time {
+  .Card-Time {
     margin-top: 0;
     margin-left: var(--space-xs);
   }
 }
 .Footer {
   background-color: var(--color-bg-footer);
-  padding: var(--space-xxs) var(--space-xxxxl);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -322,15 +324,13 @@ body * {
   .Footer {
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--space-s) var(--space-l);
   }
 
   .Footer-Copyright {
     margin-top: var(--space-xxs);
   }
 }
-.Header {
-  padding: var(--space-xs) var(--space-xxxxl);
+.Header-Container {
   display: flex;
   justify-content: space-between;
 }
@@ -339,46 +339,35 @@ body * {
   display: flex;
 }
 
-.Header-Button {
+.Header-Button:not(:first-child) {
   margin-left: var(--space-xxs);
 }
 
-@media (max-width: 470px) {
-  .Header {
-    padding: var(--space-m) var(--space-l);
-  }
-}
-.Layout {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: var(--space-xxs) var(--space-xxxxl);
-}
-
-.Layout_distribution_center {
-  align-items: center;
-  margin: 0 auto;
-}
-
-.Layout_vertical-align_center {
-  justify-content: center;
-}
-
-@media (max-width: 700px) {
-  .Layout {
-    padding-right: 50px;
-    padding-left: 50px;
-  }
+.Header_space-v_l {
+  padding-top: var(--space-xxs);
+  padding-bottom: var(--space-xxs);
 }
 
 @media (max-width: 470px) {
-  .Layout {
-    padding: var(--space-l);
+  .Header_space-v_l {
+    padding-top: var(--space-s);
+    padding-bottom: var(--space-s);
+  }
+}
+.Layout-Container_indent-h_l {
+  margin-right: var(--space-xxxxl);
+  margin-left: var(--space-xxxxl);
+}
+
+@media (max-width: 470px) {
+  .Layout-Container_indent-h_l {
+    margin-right: var(--space-l);
+    margin-left: var(--space-l);
   }
 
-  .Layout_padding_mobile-none {
-    padding-right: 0;
-    padding-left: 0;
+  .Layout_mobile-indent_none {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 .Link {
@@ -481,13 +470,13 @@ body * {
   line-height: 20px;
 }
 
-.Typo_type_commit-id {
+.Typo_type_Card-id {
   font-weight: 500;
   font-size: var(--text-size-l);
   line-height: var(--text-line-height-s);
 }
 
-.Typo_type_commit-message {
+.Typo_type_Card-message {
   font-weight: normal;
   font-size: var(--text-size-m);
   line-height: var(--text-line-height-s);

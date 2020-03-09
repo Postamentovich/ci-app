@@ -1,19 +1,30 @@
 .Header {
-  padding: var(--space-xs) var(--space-xxxxl);
-  display: flex;
-  justify-content: space-between;
+  &-Container {
+    display: flex;
+    justify-content: space-between;
+  }
 
   &-Buttons {
     display: flex;
   }
 
   &-Button {
-    margin-left: var(--space-xxs);
+    &:not(:first-child) {
+      margin-left: var(--space-xxs);
+    }
+  }
+
+  &_space-v_l {
+    padding-top: var(--space-xxs);
+    padding-bottom: var(--space-xxs);
   }
 }
 
 @media (max-width: 470px) {
   .Header {
-    padding: var(--space-m) var(--space-l);
+    &_space-v_l {
+      padding-top: var(--space-s);
+      padding-bottom: var(--space-s);
+    }
   }
 }

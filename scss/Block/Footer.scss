@@ -1,6 +1,6 @@
 .Footer {
   background-color: var(--color-bg-footer);
-  padding: var(--space-xxs) var(--space-xxxxl);
+  // padding: var(--space-xxs) var(--space-xxxxl);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@
   .Footer {
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--space-s) var(--space-l);
+    // padding: var(--space-s) var(--space-l);
     &-Copyright {
       margin-top: var(--space-xxs);
     }

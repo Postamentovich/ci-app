@@ -6,7 +6,7 @@ const browserSync = require('browser-sync')
 function browser() {
   browserSync({
     server: {
-      baseDir: 'dist',
+      baseDir: 'client/dist',
       serveStaticOptions: {
         extensions: ['html'],
       },
@@ -17,15 +17,15 @@ function browser() {
 
 function scss() {
   return gulp
-    .src('./scss/**/*.scss')
+    .src('.client/scss/**/*.scss')
     .pipe(sass())
-    .pipe(concatCss('dist/style.css'))
+    .pipe(concatCss('client/dist/style.css'))
     .pipe(gulp.dest('./'))
     .pipe(browserSync.stream())
 }
 
 exports.default = () => {
   browser()
-  gulp.watch('./scss/**/*.scss', scss)
-  gulp.watch('dist/*.html').on('change', browserSync.reload)
+  gulp.watch('.client/scss/**/*.scss', scss)
+  gulp.watch('client/dist/*.html').on('change', browserSync.reload)
 }

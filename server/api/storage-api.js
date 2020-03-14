@@ -29,19 +29,19 @@ const storageAPI = {
     return api.get('build/log', params)
   },
 
-  setBuildRequest: async model => api.post('build/request', model),
+  setBuildRequest: model => api.post('build/request', model),
 
-  setBuildStart: async model => api.post('build/start', model),
+  setBuildStart: model => api.post('build/start', model),
 
-  setBuildFinish: async model => api.post('build/finish', model),
+  setBuildFinish: model => api.post('build/finish', model),
 
-  setBuildCancel: async model => api.post('build/cancel', model),
+  setBuildCancel: model => api.post('build/cancel', model),
 
-  setConfig: async model => api.post('conf', model),
+  setConfig: model => api.post('conf', model),
 
-  getConfig: async () => api.get('conf'),
+  getConfig: () => api.get('conf'),
 
-  deleteConfig: async () => api.delete('conf'),
+  deleteConfig: () => api.delete('conf'),
 }
 
 module.exports = storageAPI

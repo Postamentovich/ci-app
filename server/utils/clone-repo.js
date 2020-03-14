@@ -1,6 +1,7 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const storageAPI = require('../api/storage-api');
+const buildAgent = require('./build-agent');
 
 let currentSettings;
 
@@ -20,6 +21,8 @@ async function cloneRepo({ repoName, buildCommand, mainBranch, period }) {
   } else if (currentSettings.mainBranch !== mainBranch) {
     await exec(`cd repo && git checkout ${mainBranch}`);
   }
+
+  buildAgent.updateSettings({ buildCommand, period });
 
   currentSettings = { repoName, buildCommand, mainBranch, period };
 }

@@ -1,7 +1,7 @@
-const gulp = require('gulp')
-const sass = require('gulp-sass')
-const concatCss = require('gulp-concat-css')
-const browserSync = require('browser-sync')
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const concatCss = require('gulp-concat-css');
+const browserSync = require('browser-sync');
 
 function browser() {
   browserSync({
@@ -12,7 +12,7 @@ function browser() {
       },
     },
     notify: false,
-  })
+  });
 }
 
 function scss() {
@@ -21,11 +21,11 @@ function scss() {
     .pipe(sass())
     .pipe(concatCss('client/dist/style.css'))
     .pipe(gulp.dest('./'))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.stream());
 }
 
 exports.default = () => {
-  browser()
-  gulp.watch('.client/scss/**/*.scss', scss)
-  gulp.watch('client/dist/*.html').on('change', browserSync.reload)
-}
+  browser();
+  gulp.watch('.client/scss/**/*.scss', scss);
+  gulp.watch('client/dist/*.html').on('change', browserSync.reload);
+};

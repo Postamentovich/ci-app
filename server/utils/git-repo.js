@@ -60,12 +60,37 @@ class GitRepo {
     return this.run(command);
   }
 
-  checkIsRepo() {
-    // function handler(err, isRepo) {
-    //   then && then(err, String(isRepo).trim() === 'true');
-    // }
-    // const command = [];
-    // return this.run(['rev-parse', '--is-inside-work-tree'], handler);
+  async getLastCommits() {
+    const stdOut = [];
+    const stdErr = [];
+    const spawned = spawn('git', [
+      'log',
+      ['--pretty=format:', '%H', '%ai', '%s', '%D', '%b', '%aN', '%ae'],
+    ]);
+
+    spawned.stdout.on('data', buffer => {
+      stdOut.push(buffer);
+    });
+
+    spawned.stderr.on('data', buffer => {
+      stdErr.push(buffer);
+    });
+
+    spawned.on('error', err => {
+      stdErr.push(Buffer.from(err.stack, 'ascii'));
+    });
+
+    return new Promise((res, rej) => {
+      const attemptClose = () => {
+        const stdOutput = Buffer.concat(stdOut);
+
+        const result = stdOutput.toString('utf-8');
+
+        res(result);
+      };
+      spawned.on('close', attemptClose);
+      spawned.on('exit', attemptClose);
+    });
   }
 }
 

@@ -1,5 +1,3 @@
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
 const storageAPI = require('../api/storage-api');
 const buildAgent = require('./build-agent');
 const git = require('./git-repo');

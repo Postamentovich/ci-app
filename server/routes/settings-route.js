@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const storageAPI = require('../api/storage-api');
+const githubAPI = require('../api/github-api');
 const cloneRepo = require('../utils/clone-repo');
 
 const router = Router();
@@ -24,6 +25,8 @@ router.get('/', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   try {
+    await githubAPI.checkRepo(req.body.repoName);
+
     cloneRepo(req.body);
 
     await storageAPI.setConfig(req.body);

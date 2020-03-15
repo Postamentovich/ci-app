@@ -6,6 +6,8 @@ class BuildAgent {
 
     this.command = null;
 
+    this.timeoutId = null;
+
     this.getInitialSettings();
   }
 
@@ -15,6 +17,12 @@ class BuildAgent {
 
   cancel() {}
 
+  getLastCommits() {
+    if (this.timeoutId) clearTimeout(this.timeoutId);
+
+    
+  }
+
   async getInitialSettings() {
     const {
       data: { buildCommand, period },
@@ -23,9 +31,10 @@ class BuildAgent {
     this.updateSettings({ buildCommand, period });
   }
 
-  updateSettings({ buildCommand, period }) {
-    this.timer = period;
+  updateSettings({ buildCommand = 'npm run build', period = 10 }) {
+    this.timer = period * 60 * 1000;
     this.command = buildCommand;
+    this.getLastCommits();
   }
 }
 

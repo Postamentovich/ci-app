@@ -1,5 +1,5 @@
-const axios = require('axios').default
-const https = require('https')
+const axios = require('axios').default;
+const https = require('https');
 
 const api = axios.create({
   baseURL: 'https://hw.shri.yandex/api/',
@@ -7,26 +7,26 @@ const api = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
-})
+});
 
 const storageAPI = {
   getBuildList: (offset = 0, limit = 25) => {
-    const params = new URLSearchParams()
-    params.set('offset', offset)
-    params.set('limit', limit)
-    return api.get('build/list', params)
+    const params = new URLSearchParams();
+    params.set('offset', offset);
+    params.set('limit', limit);
+    return api.get('build/list', params);
   },
 
   getBuildLog: buildId => {
-    const params = new URLSearchParams()
-    if (buildId) params.set('buildId', buildId)
-    return api.get('build/log', params)
+    const params = new URLSearchParams();
+    if (buildId) params.set('buildId', buildId);
+    return api.get('build/log', params);
   },
 
   getBuildDetails: buildId => {
-    const params = new URLSearchParams()
-    if (buildId) params.set('buildId', buildId)
-    return api.get('build/log', params)
+    const params = new URLSearchParams();
+    if (buildId) params.set('buildId', buildId);
+    return api.get('build/log', params);
   },
 
   setBuildRequest: model => api.post('build/request', model),
@@ -42,6 +42,6 @@ const storageAPI = {
   getConfig: () => api.get('conf'),
 
   deleteConfig: () => api.delete('conf'),
-}
+};
 
-module.exports = storageAPI
+module.exports = storageAPI;

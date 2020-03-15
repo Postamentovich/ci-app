@@ -17,8 +17,8 @@ module.exports = {
     },
     "rules": {
         "linebreak-style": ["error", "windows"],
-        "semi": "off",
         "no-console": "off",
-        "arrow-parens": "off"
+        "arrow-parens": "off",
+        "object-curly-newline": "off"
     }
 };

@@ -1,47 +1,39 @@
-const { Router } = require('express')
-const child = require('child_process')
-const storageAPI = require('../api/storage-api')
+const { Router } = require('express');
+const storageAPI = require('../api/storage-api');
+const cloneRepo = require('../utils/clone-repo');
 
-const router = Router()
+const router = Router();
 
 /**
  * Получение сохраненных настроек
  */
 router.get('/', async (req, res) => {
   try {
-    const { data } = await storageAPI.getConfig()
+    const { data } = await storageAPI.getConfig();
 
-    res.json(data)
+    res.json(data);
   } catch (error) {
-    console.error(error)
+    console.error(error);
 
-    res.sendStatus(500)
+    res.sendStatus(500);
   }
-})
+});
 
 /**
  * Сохранение настроек
  */
 router.post('/', async (req, res) => {
   try {
-    const {
-      body: { repoName },
-    } = req
+    cloneRepo(req.body);
 
-    const args = ['clone', `https://github.com/${repoName}`]
+    await storageAPI.setConfig(req.body);
 
-    child.spawn('git', args)
-
-    console.log(`${child.stderr}`)
-
-    const { data } = await storageAPI.setConfig(req.body)
-
-    res.json(data)
+    res.sendStatus(200);
   } catch (error) {
-    console.error(error)
+    console.error(error);
 
-    res.sendStatus(500)
+    res.sendStatus(500);
   }
-})
+});
 
-module.exports = router
+module.exports = router;

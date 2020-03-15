@@ -1,7 +1,6 @@
 // const parseGitLog = require('parse-git-log');
 const storageAPI = require('../api/storage-api');
 const git = require('./git-repo');
-const CommitSummary = require('./commit-branches');
 
 class BuildAgent {
   constructor() {
@@ -15,18 +14,46 @@ class BuildAgent {
 
     this.queue = [];
 
+    this.processQueue();
+
     this.getInitialSettings();
   }
 
-  start() {}
-
-  end() {}
-
   cancel() {}
 
-  processQueue() {
-    while (this.queue[0]) {
-      const {} = this.queue.shift();
+  async build({ id }) {
+    const startBuilding = new Date().valueOf();
+
+    await storageAPI.setBuildStart({
+      buildId: id,
+      dateTime: new Date().toISOString(),
+    });
+
+    return new Promise((res, rej) => {
+      setTimeout(async () => {
+        const endBuilding = new Date().valueOf();
+        console.log(`build ${id}`);
+        await storageAPI.setBuildFinish({
+          buildId: id,
+          duration: endBuilding - startBuilding,
+          success: true,
+          buildLog: `string ${Date.now().toString()}`,
+        });
+
+        res();
+      }, 3000);
+    });
+  }
+
+  async processQueue() {
+    if (this.queue[0]) {
+      const item = this.queue[0];
+      await this.build(item);
+      this.processQueue();
+    } else {
+      setTimeout(() => {
+        this.processQueue();
+      }, 1000);
     }
   }
 
@@ -34,6 +61,15 @@ class BuildAgent {
     const {
       data: { data },
     } = await storageAPI.getBuildList();
+
+    data.forEach(el => {
+      if (
+        el.status === 'Waiting' &&
+        !this.queue.find(item => item.commitHash === el.commitHash)
+      ) {
+        this.queue.push(el);
+      }
+    });
   }
 
   async getLastCommits() {
@@ -63,7 +99,9 @@ class BuildAgent {
       console.error(error);
     }
 
-    this.timeoutId = setTimeout(this.getLastCommits, this.period);
+    this.timeoutId = setTimeout(() => {
+      this.getLastCommits();
+    }, this.period);
   }
 
   async getInitialSettings() {

@@ -14,19 +14,19 @@ const storageAPI = {
     const params = new URLSearchParams();
     params.set('offset', offset);
     params.set('limit', limit);
-    return api.get('build/list', params);
+    return api.get('build/list', { params });
   },
 
   getBuildLog: buildId => {
     const params = new URLSearchParams();
     if (buildId) params.set('buildId', buildId);
-    return api.get('build/log', params);
+    return api.get('build/log', { params });
   },
 
   getBuildDetails: buildId => {
     const params = new URLSearchParams();
     if (buildId) params.set('buildId', buildId);
-    return api.get('build/log', params);
+    return api.get('build/details', { params });
   },
 
   setBuildRequest: model => api.post('build/request', model),

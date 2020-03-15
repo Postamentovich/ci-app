@@ -23,26 +23,29 @@ class BuildAgent {
 
   async build({ id }) {
     const startBuilding = new Date().valueOf();
+    try {
+      await storageAPI.setBuildStart({
+        buildId: id,
+        dateTime: new Date().toISOString(),
+      });
 
-    await storageAPI.setBuildStart({
-      buildId: id,
-      dateTime: new Date().toISOString(),
-    });
+      return new Promise((res, rej) => {
+        setTimeout(async () => {
+          const endBuilding = new Date().valueOf();
+          console.log(`build ${id}`);
+          await storageAPI.setBuildFinish({
+            buildId: id,
+            duration: endBuilding - startBuilding,
+            success: true,
+            buildLog: `string ${Date.now().toString()}`,
+          });
 
-    return new Promise((res, rej) => {
-      setTimeout(async () => {
-        const endBuilding = new Date().valueOf();
-        console.log(`build ${id}`);
-        await storageAPI.setBuildFinish({
-          buildId: id,
-          duration: endBuilding - startBuilding,
-          success: true,
-          buildLog: `string ${Date.now().toString()}`,
-        });
-
-        res();
-      }, 3000);
-    });
+          res();
+        }, 3000);
+      });
+    } catch (error) {
+      return Promise.reject();
+    }
   }
 
   async processQueue() {
@@ -55,6 +58,22 @@ class BuildAgent {
         this.processQueue();
       }, 1000);
     }
+  }
+
+  async addToQueue(commitHash) {
+    const {
+      data: { data },
+    } = await storageAPI.getBuildList();
+
+    const item = data.find(el => el.commitHash === commitHash);
+
+    if (item && !this.queue.find(el => el.commitHash === commitHash)) {
+      this.queue.push(item);
+
+      return Promise.resolve();
+    }
+
+    return Promise.reject();
   }
 
   async updateQueue() {
@@ -75,11 +94,9 @@ class BuildAgent {
   async getLastCommits() {
     if (this.timeoutId) clearTimeout(this.timeoutId);
     try {
-      const {
-        commitHash,
-        commitMessage,
-        authorName,
-      } = await git.getLastCommit();
+      const commit = await git.getLastCommit();
+
+      const { commitHash, commitMessage, authorName } = commit;
 
       const {
         data: { data },

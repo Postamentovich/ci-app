@@ -1,12 +1,9 @@
 const util = require('util');
 const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
-const { spawn } = require('child_process');
 
 class GitRepo {
   constructor() {
-    this.runQueue = [];
-
     this.localName = 'repo';
   }
 
@@ -60,54 +57,29 @@ class GitRepo {
     return this.run(command);
   }
 
+  /**
+   * Возвращает последний коммит
+   */
   async getLastCommit() {
-    await this.run(`cd ${this.localName} && git pull`);
+    if (this.localRepoIsExist) {
+      await this.run(`cd ${this.localName} && git pull`);
 
-    const commitHash = await this.run(
-      `cd ${this.localName} && git log -1 --pretty=format:"%H"`
-    );
-    const commitMessage = await this.run(
-      `cd ${this.localName} && git log -1 --pretty=format:"%s"`
-    );
-    const authorName = await this.run(
-      `cd ${this.localName} && git log -1 --pretty=format:"%an"`
-    );
-    return {
-      commitHash: commitHash.stdout,
-      commitMessage: commitMessage.stdout,
-      authorName: authorName.stdout,
-    };
+      const { stdout } = await this.run(
+        `cd ${this.localName} && git log -1 --pretty=format:"%H %s %an"`
+      );
 
-    // const stdOut = [];
-    // const stdErr = [];
-    // const spawned = spawn('git', [
-    //   'log',
-    //   ['--pretty=format:', '%H', '%ai', '%s', '%D', '%b', '%aN', '%ae'],
-    // ]);
+      const commit = stdout.split(' ');
 
-    // spawned.stdout.on('data', buffer => {
-    //   stdOut.push(buffer);
-    // });
+      const [commitHash, commitMessage, authorName] = commit;
 
-    // spawned.stderr.on('data', buffer => {
-    //   stdErr.push(buffer);
-    // });
+      return {
+        commitHash,
+        commitMessage,
+        authorName,
+      };
+    }
 
-    // spawned.on('error', err => {
-    //   stdErr.push(Buffer.from(err.stack, 'ascii'));
-    // });
-
-    // return new Promise((res, rej) => {
-    //   const attemptClose = () => {
-    //     const stdOutput = Buffer.concat(stdOut);
-
-    //     const result = stdOutput.toString('utf-8');
-
-    //     res(result);
-    //   };
-    //   spawned.on('close', attemptClose);
-    //   spawned.on('exit', attemptClose);
-    // });
+    return Promise.reject();
   }
 }
 

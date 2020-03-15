@@ -17,7 +17,7 @@ function browser() {
 
 function scss() {
   return gulp
-    .src('.client/scss/**/*.scss')
+    .src('client/scss/**/*.scss')
     .pipe(sass())
     .pipe(concatCss('client/dist/style.css'))
     .pipe(gulp.dest('./'))
@@ -26,6 +26,6 @@ function scss() {
 
 exports.default = () => {
   browser();
-  gulp.watch('.client/scss/**/*.scss', scss);
+  gulp.watch('client/scss/**/*.scss', scss);
   gulp.watch('client/dist/*.html').on('change', browserSync.reload);
 };

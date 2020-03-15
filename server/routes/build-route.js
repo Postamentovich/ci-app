@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const storageAPI = require('../api/storage-api');
+const buildAgent = require('../utils/build-agent');
 
 const router = Router();
 
@@ -21,40 +22,51 @@ router.get('/', async (req, res) => {
 /**
  * Добавление сборки в очередь
  */
-router.post('/:commitHash', (req, res) => {
+router.post('/:commitHash', async (req, res) => {
   const {
     params: { commitHash },
   } = req;
 
-  console.log(commitHash);
-
-  res.sendStatus(200);
+  try {
+    await buildAgent.addToQueue(commitHash);
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(415);
+  }
 });
 
 /**
  * Получение информации о конкретной сборке
  */
-router.get('/:buildId', (req, res) => {
+router.get('/:buildId', async (req, res) => {
   const {
     params: { buildId },
   } = req;
 
-  console.log(buildId);
-
-  res.sendStatus(200);
+  try {
+    const { data } = await storageAPI.getBuildDetails(buildId);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(415);
+  }
 });
 
 /**
  * Получение логов билда (сплошной текст)
  */
-router.get('/:buildId/logs', (req, res) => {
+router.get('/:buildId/logs', async (req, res) => {
   const {
     params: { buildId },
   } = req;
 
-  console.log(buildId);
-
-  res.sendStatus(200);
+  try {
+    const { data } = await storageAPI.getBuildLog(buildId);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(415);
+  }
 });
 
 module.exports = router;

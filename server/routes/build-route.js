@@ -1,6 +1,12 @@
 const { Router } = require('express');
+const pino = require('pino');
 const storageAPI = require('../api/storage-api');
 const buildAgent = require('../utils/build-agent');
+
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  prettyPrint: true,
+});
 
 const router = Router();
 
@@ -10,7 +16,6 @@ const router = Router();
 router.get('/', async (req, res) => {
   try {
     const { data } = await storageAPI.getBuildList();
-
     res.send(data);
   } catch (error) {
     console.error(error);

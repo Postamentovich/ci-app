@@ -2,6 +2,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const storageAPI = require('../api/storage-api');
 const buildAgent = require('./build-agent');
+const git = require('./git-repo');
 
 let currentSettings;
 
@@ -12,14 +13,12 @@ async function cloneRepo({ repoName, buildCommand, mainBranch, period }) {
     currentSettings = data;
   }
 
-  if (currentSettings.repoName !== repoName) {
-    await exec('rm -rf repo');
+  if (currentSettings.repoName !== repoName || !git.localRepoIsExist) {
+    await git.clone(repoName);
 
-    await exec(`git clone https://github.com/${repoName} repo`);
-
-    await exec(`cd repo && git checkout ${mainBranch}`);
+    await git.checkout(mainBranch);
   } else if (currentSettings.mainBranch !== mainBranch) {
-    await exec(`cd repo && git checkout ${mainBranch}`);
+    await git.checkout(mainBranch);
   }
 
   buildAgent.updateSettings({ buildCommand, period });

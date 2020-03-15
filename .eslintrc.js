@@ -19,6 +19,7 @@ module.exports = {
         "linebreak-style": ["error", "windows"],
         "no-console": "off",
         "arrow-parens": "off",
-        "object-curly-newline": "off"
+        "object-curly-newline": "off",
+        "class-methods-use-this": "off"
     }
 };

@@ -19,7 +19,7 @@ async function cloneRepo({ repoName, buildCommand, mainBranch, period }) {
     await git.checkout(mainBranch);
   }
 
-  buildAgent.updateSettings({ buildCommand, period });
+  buildAgent.updateSettings({ buildCommand, period, mainBranch });
 
   currentSettings = { repoName, buildCommand, mainBranch, period };
 }

@@ -60,37 +60,52 @@ class GitRepo {
     return this.run(command);
   }
 
-  async getLastCommits() {
-    const stdOut = [];
-    const stdErr = [];
-    const spawned = spawn('git', [
-      'log',
-      ['--pretty=format:', '%H', '%ai', '%s', '%D', '%b', '%aN', '%ae'],
-    ]);
+  async getLastCommit() {
+    const commitHash = await this.run(
+      `cd ${this.localName} && git log -1 --pretty=format:"%H"`
+    );
+    const commitMessage = await this.run(
+      `cd ${this.localName} && git log -1 --pretty=format:"%s"`
+    );
+    const authorName = await this.run(
+      `cd ${this.localName} && git log -1 --pretty=format:"%an"`
+    );
+    return {
+      commitHash: commitHash.stdout,
+      commitMessage: commitMessage.stdout,
+      authorName: authorName.stdout,
+    };
 
-    spawned.stdout.on('data', buffer => {
-      stdOut.push(buffer);
-    });
+    // const stdOut = [];
+    // const stdErr = [];
+    // const spawned = spawn('git', [
+    //   'log',
+    //   ['--pretty=format:', '%H', '%ai', '%s', '%D', '%b', '%aN', '%ae'],
+    // ]);
 
-    spawned.stderr.on('data', buffer => {
-      stdErr.push(buffer);
-    });
+    // spawned.stdout.on('data', buffer => {
+    //   stdOut.push(buffer);
+    // });
 
-    spawned.on('error', err => {
-      stdErr.push(Buffer.from(err.stack, 'ascii'));
-    });
+    // spawned.stderr.on('data', buffer => {
+    //   stdErr.push(buffer);
+    // });
 
-    return new Promise((res, rej) => {
-      const attemptClose = () => {
-        const stdOutput = Buffer.concat(stdOut);
+    // spawned.on('error', err => {
+    //   stdErr.push(Buffer.from(err.stack, 'ascii'));
+    // });
 
-        const result = stdOutput.toString('utf-8');
+    // return new Promise((res, rej) => {
+    //   const attemptClose = () => {
+    //     const stdOutput = Buffer.concat(stdOut);
 
-        res(result);
-      };
-      spawned.on('close', attemptClose);
-      spawned.on('exit', attemptClose);
-    });
+    //     const result = stdOutput.toString('utf-8');
+
+    //     res(result);
+    //   };
+    //   spawned.on('close', attemptClose);
+    //   spawned.on('exit', attemptClose);
+    // });
   }
 }
 

@@ -9,7 +9,11 @@ class BuildAgent {
 
     this.buildCommand = null;
 
+    this.mainBranch = null;
+
     this.timeoutId = null;
+
+    this.queue = [];
 
     this.getInitialSettings();
   }
@@ -20,18 +24,41 @@ class BuildAgent {
 
   cancel() {}
 
+  processQueue() {
+    while (this.queue[0]) {
+      const {} = this.queue.shift();
+    }
+  }
+
+  async updateQueue() {
+    const {
+      data: { data },
+    } = await storageAPI.getBuildList();
+  }
+
   async getLastCommits() {
     if (this.timeoutId) clearTimeout(this.timeoutId);
     try {
-      const commits = await git.getLastCommits();
-      const summary = CommitSummary.parse(commits);
-      // const json = JSON.parse(summary);
-      // parseGitLog()
-      //   .once('error', err => console.error('err:', err))
-      //   .on('commit', commit => console.log('commit:', commit))
-      //   .once('finish', () => console.log('done'));
+      const {
+        commitHash,
+        commitMessage,
+        authorName,
+      } = await git.getLastCommit();
 
-      console.log('commits', summary);
+      const {
+        data: { data },
+      } = await storageAPI.getBuildList();
+
+      if (!data.find(el => el.commitHash === commitHash)) {
+        await storageAPI.setBuildRequest({
+          commitMessage,
+          commitHash,
+          branchName: this.mainBranch,
+          authorName,
+        });
+
+        this.updateQueue();
+      }
     } catch (error) {
       console.error(error);
     }
@@ -41,15 +68,20 @@ class BuildAgent {
 
   async getInitialSettings() {
     const {
-      data: { buildCommand, period },
+      data: { buildCommand, period, mainBranch },
     } = await storageAPI.getConfig();
 
-    this.updateSettings({ buildCommand, period });
+    this.updateSettings({ buildCommand, period, mainBranch });
   }
 
-  updateSettings({ buildCommand = 'npm run build', period = 10 }) {
+  updateSettings({
+    buildCommand = 'npm run build',
+    period = 10,
+    mainBranch = 'master',
+  }) {
     this.period = period * 60 * 1000;
     this.buildCommand = buildCommand;
+    this.mainBranch = mainBranch;
     this.getLastCommits();
   }
 }

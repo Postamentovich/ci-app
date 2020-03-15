@@ -8,7 +8,7 @@ async function cloneRepo({ repoName, buildCommand, mainBranch, period }) {
   if (!currentSettings) {
     const { data } = await storageAPI.getConfig();
 
-    currentSettings = data;
+    currentSettings = data.data;
   }
 
   if (currentSettings.repoName !== repoName || !git.localRepoIsExist) {

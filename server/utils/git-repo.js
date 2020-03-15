@@ -61,6 +61,8 @@ class GitRepo {
   }
 
   async getLastCommit() {
+    await this.run(`cd ${this.localName} && git pull`);
+
     const commitHash = await this.run(
       `cd ${this.localName} && git log -1 --pretty=format:"%H"`
     );

@@ -4,6 +4,7 @@ const createError = require('http-errors');
 const storageAPI = require('../api/storage-api');
 const githubAPI = require('../api/github-api');
 const gitRepo = require('../utils/git-repo');
+const { hashObj } = require('../utils/hash');
 
 const router = Router();
 
@@ -38,8 +39,13 @@ router.post(
     /** Проверка существует репозиторий или нет */
     await githubAPI.checkRepo(repoName);
 
+    /** Обнвление значений в базе */
     await storageAPI.setConfig(req.body);
 
+    /** Очистка закэшированных значений */
+    hashObj.clear();
+
+    /** Обновление локального репозитория */
     gitRepo.addSettingsToQueue(req.body);
 
     res.sendStatus(200);

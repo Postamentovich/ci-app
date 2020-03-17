@@ -22,6 +22,7 @@ module.exports = {
         "object-curly-newline": "off",
         "class-methods-use-this": "off",
         "no-await-in-loop": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "max-len": 0
     }
 };

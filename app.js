@@ -7,7 +7,7 @@ const createError = require('http-errors');
 const errorHandler = require('./server/routes/erorr-handler');
 
 const logger = pino({
-  level: process.env.LOG_LEVEL || 'info',
+  level: process.env.LOG_LEVEL || 'debug',
   prettyPrint: true,
 });
 

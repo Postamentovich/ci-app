@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const pino = require('pino');
 const storageAPI = require('../api/storage-api');
 
@@ -6,10 +5,17 @@ const logger = pino({
   level: process.env.LOG_LEVEL || 'debug',
   prettyPrint: true,
 });
+
+/**
+ * Обработка очереди билдов
+ */
 class BuildAgent {
   constructor() {
-    this.processQueue = this.processQueue.bind(this);
+    /** Очередь выполнения билдов */
     this.queue = [];
+
+    this.processQueue = this.processQueue.bind(this);
+
     this.processQueue();
   }
 
@@ -30,6 +36,10 @@ class BuildAgent {
     }
   }
 
+  /**
+   * Выполнение билда
+   * Пока используется SetTimeout вместо реального билда
+   */
   async build({ id }) {
     const startBuilding = new Date().valueOf();
 
@@ -62,9 +72,10 @@ class BuildAgent {
     }
   }
 
+  /**
+   * Добавление билда в очередь
+   */
   async addToQueue({ commitMessage, commitHash, branchName, authorName }) {
-    logger.debug(`BuildAgent - add to queue ${commitMessage} ${commitHash} ${authorName}`);
-
     const {
       data: { data },
     } = await storageAPI.getBuildList();
@@ -72,6 +83,8 @@ class BuildAgent {
     const item = data.find(el => el.commitHash === commitHash);
 
     if (!item) {
+      logger.debug(`BuildAgent - add to queue ${commitMessage} ${commitHash} ${authorName}`);
+
       try {
         await storageAPI.setBuildRequest({
           commitMessage,

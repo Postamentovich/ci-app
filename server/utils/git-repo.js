@@ -15,13 +15,26 @@ const logger = pino({
  */
 class GitRepo {
   constructor() {
+    /** Имя локальной папки для репозитория */
     this.localFolderName = 'repo';
+
+    /** Настройки пользователя */
     this.settings = {};
+
+    /** Время последний проверки коммитов */
+    this.lastCheckingCommitTime = null;
+
+    /** Timeout для проверки коммитов */
+    this.periodTimeout = null;
+
     this.updateSettings = this.updateSettings.bind(this);
     this.getInitialSettings = this.getInitialSettings.bind(this);
     this.getRecentCommits = this.getRecentCommits.bind(this);
     this.checkCommits = this.checkCommits.bind(this);
+
+    /** Очередь выполнения задач */
     this.queue = [this.getInitialSettings];
+
     this.processQueue();
   }
 
@@ -96,6 +109,11 @@ class GitRepo {
     await this.checkCommits(true);
   }
 
+  /**
+   * Проверка новых коммитов
+   *
+   * @param {boolean} onlyLast - Флаг, брать только последний коммит или все коммиты за период
+   */
   async checkCommits(onlyLast) {
     const commits = await this.getRecentCommits(onlyLast);
 
@@ -127,8 +145,8 @@ class GitRepo {
   }
 
   /**
-   * Запускает выполнение комманды
-   * @param {*} command
+   * Выполнение комманды
+   * @param {string} command
    */
   async run(command) {
     return exec(command);
@@ -136,7 +154,7 @@ class GitRepo {
 
   /**
    * Клонирует репозиторий
-   * @param {*} repoName
+   * @param {string} repoName
    */
   async clone(repoName) {
     await this.removeLocalRepo();
@@ -164,7 +182,7 @@ class GitRepo {
 
   /**
    * Переключает на нужную ветку
-   * @param {*} mainBranch
+   * @param {string} mainBranch
    */
   checkout(mainBranch) {
     logger.debug(`GitRepo - checkout to branch ${mainBranch}`);
@@ -174,6 +192,11 @@ class GitRepo {
     return this.run(command);
   }
 
+  /**
+   * Получение информации о коммите по хэшу
+   *
+   * @param {string} commitHash
+   */
   async getInfoByHash(commitHash) {
     const { stdout } = await this.run(
       `cd ${this.localFolderName} && git show ${commitHash} --pretty=format:"%s{SPLIT}%an{END}"`,
@@ -192,15 +215,19 @@ class GitRepo {
 
   /**
    * Добавление обновления настроек в очередь задач
-   * Сделано для того, что-бы работа с репозиторием происходила последовательно,
-   * И одна задача не мешала другой
+   * Сделано для того, что бы работа с репозиторием происходила последовательно,
    *
-   * @param {Object}} settings
+   * @param {Object} settings
    */
   addSettingsToQueue(settings) {
     this.queue.push(async () => this.updateSettings(settings));
   }
 
+  /**
+   * Получение последних коммитов
+   *
+   * @param {boolean} onlyLast - Флаг, брать только последний коммит или все коммиты за период
+   */
   async getRecentCommits(onlyLast) {
     await this.run(`cd ${this.localFolderName} && git pull`);
 

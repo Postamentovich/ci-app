@@ -20,6 +20,6 @@ module.exports = {
         "no-console": "off",
         "arrow-parens": "off",
         "object-curly-newline": "off",
-        "class-methods-use-this": "off"
+        "class-methods-use-this": "off",
     }
 };

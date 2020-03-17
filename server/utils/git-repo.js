@@ -3,6 +3,7 @@ const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
 const pino = require('pino');
 const storageAPI = require('../api/storage-api');
+const buildAgent = require('./build-agent');
 
 const logger = pino({
   level: process.env.LOG_LEVEL || 'info',
@@ -18,6 +19,7 @@ class GitRepo {
     this.settings = {};
     this.updateSettings = this.updateSettings.bind(this);
     this.getInitialSettings = this.getInitialSettings.bind(this);
+    this.getRecentCommits = this.getRecentCommits.bind(this);
     this.queue = [this.getInitialSettings];
     this.processQueue();
   }
@@ -58,6 +60,16 @@ class GitRepo {
 
           await this.checkout(data.mainBranch);
         }
+
+        const commit = await this.getLastCommit();
+
+        // buildAgent.addToQueue(commit.commitHash);
+
+        // buildAgent.addToQueue(commit);
+
+        clearTimeout(this.periodTimeout);
+
+        this.periodTimeout = setTimeout(() => this.queue.push(this.getRecentCommits), data.period * 60 * 1000);
       }
     } catch (error) {
       throw new Error(error);
@@ -121,6 +133,26 @@ class GitRepo {
     return this.run(command);
   }
 
+  async getInfoByHash(commitHash) {
+    if (this.localRepoIsExist) {
+      const { stdout } = await this.run(
+        `cd ${this.localFolderName} && git show ${commitHash} --pretty=format:"%s{SPLIT}%an{END}"`,
+      );
+      const [commitMessage, authorName] = stdout.split('{END}')[0].split('{SPLIT}');
+
+      await buildAgent.addToQueue({
+        commitHash,
+        commitMessage,
+        branchName: this.settings.mainBranch,
+        authorName,
+      });
+
+      logger.debug(`GitRepo - get info by hash ${commitHash}`);
+    }
+
+    return null;
+  }
+
   /**
    * Возвращает последний коммит
    */
@@ -128,9 +160,15 @@ class GitRepo {
     if (this.localRepoIsExist) {
       await this.run(`cd ${this.localFolderName} && git pull`);
 
-      const { stdout } = await this.run(`cd ${this.localFolderName} && git log -1 --pretty=format:"%H %s %an"`);
+      const { stdout } = await this.run(
+        `cd ${this.localFolderName} && git log -1 --pretty=format:"%H{SPLIT}%s{SPLIT}%an{SPLIT}"`,
+      );
 
-      const commit = stdout.split(' ');
+      this.lastCheckingCommitTime = new Date();
+
+      const commit = stdout.split('{SPLIT}');
+
+      logger.debug(`GitRepo - get last commit: ${commit}`);
 
       const [commitHash, commitMessage, authorName] = commit;
 
@@ -155,6 +193,39 @@ class GitRepo {
     this.queue.push(async () => this.updateSettings(settings));
   }
 
+  async getRecentCommits() {
+    if (this.localRepoIsExist) {
+      await this.run(`cd ${this.localFolderName} && git pull`);
+
+      const { stdout } = await this.run(
+        `cd ${
+          this.localFolderName
+        } && git log --since="${this.lastCheckingCommitTime.toISOString()}" --pretty=format:"%H{SPLIT}%s{SPLIT}%an{END}"`,
+      );
+
+      const listCommits = stdout.split('{END}').map(commit => {
+        const [commitHash, commitMessage, authorName] = commit.split('{SPLIT}');
+
+        return {
+          commitHash,
+          commitMessage,
+          authorName,
+        };
+      });
+
+      logger.debug(
+        '%O',
+        `GitRepo - get recent commit since ${this.lastCheckingCommitTime.toISOString()} : ${listCommits}`,
+      );
+
+      this.lastCheckingCommitTime = new Date();
+    }
+
+    this.periodTimeout = setTimeout(() => this.queue.push(this.getRecentCommits), this.settings.period * 60 * 1000);
+
+    return null;
+  }
+
   /**
    * Обновление настроек пользователя
    *
@@ -163,7 +234,7 @@ class GitRepo {
   async updateSettings(settings) {
     logger.debug('GitRepo - update settings');
 
-    const { repoName, mainBranch } = settings;
+    const { repoName, mainBranch, period } = settings;
 
     if (repoName !== this.settings.repoName) {
       await this.clone(repoName);
@@ -173,10 +244,18 @@ class GitRepo {
       await this.checkout(mainBranch);
     }
 
+    const commit = await this.getLastCommit();
+
+    await this.getInfoByHash(commit.commitHash);
+
+    clearTimeout(this.periodTimeout);
+
+    this.periodTimeout = setTimeout(() => this.queue.push(this.getRecentCommits), period * 60 * 1000);
+
     this.settings = settings;
   }
 }
 
-const git = new GitRepo();
+const gitRepo = new GitRepo();
 
-module.exports = git;
+module.exports = gitRepo;

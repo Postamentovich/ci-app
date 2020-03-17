@@ -9,23 +9,18 @@ const logger = pino({
 });
 class BuildAgent {
   constructor() {
-    this.period = null;
-
-    this.buildCommand = null;
-
-    this.mainBranch = null;
-
-    this.timeoutId = null;
-
-    // this.queue = [];
-
-    // this.processQueue();
-
-    // this.getInitialSettings();
-    this.settings = {};
-    this.updateSettings = this.updateSettings.bind(this);
-    this.getInitialSettings = this.getInitialSettings.bind(this);
-    this.queue = [this.getInitialSettings];
+    // this.period = null;
+    // this.buildCommand = null;
+    // this.mainBranch = null;
+    // this.timeoutId = null;
+    // // this.queue = [];
+    // // this.processQueue();
+    // // this.getInitialSettings();
+    // this.settings = {};
+    // this.updateSettings = this.updateSettings.bind(this);
+    // this.getInitialSettings = this.getInitialSettings.bind(this);
+    this.processQueue = this.processQueue.bind(this);
+    this.queue = [];
     this.processQueue();
   }
 
@@ -34,9 +29,9 @@ class BuildAgent {
    */
   async processQueue() {
     if (this.queue[0]) {
-      const action = this.queue.shift();
+      const item = this.queue.shift();
 
-      await action();
+      await this.build(item);
 
       this.processQueue();
     } else {
@@ -46,29 +41,31 @@ class BuildAgent {
     }
   }
 
-  /**
-   * Получение начальных настроек
-   */
-  async getInitialSettings() {
-    try {
-      const {
-        data: { data },
-      } = await storageAPI.getConfig();
+  // /**
+  //  * Получение начальных настроек
+  //  */
+  // async getInitialSettings() {
+  //   try {
+  //     const {
+  //       data: { data },
+  //     } = await storageAPI.getConfig();
 
-      logger.debug('BuildAgent - get user settings');
+  //     logger.debug('BuildAgent - get user settings');
 
-      if (data && data.repoName) {
-        this.settings = data;
-      }
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
+  //     if (data && data.repoName) {
+  //       this.settings = data;
+  //     }
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // }
 
-  cancel() {}
+  // cancel() {}
 
   async build({ id }) {
     const startBuilding = new Date().valueOf();
+
+    logger.debug(`BuildAgent -build ${id}`);
     try {
       await storageAPI.setBuildStart({
         buildId: id,
@@ -94,7 +91,16 @@ class BuildAgent {
     }
   }
 
-  async addToQueue(commitHash) {
+  async addToQueue({ commitMessage, commitHash, branchName, authorName }) {
+    logger.debug(`BuildAgent - add to queue ${commitMessage} ${commitHash} ${authorName}`);
+
+    await storageAPI.setBuildRequest({
+      commitMessage,
+      commitHash,
+      branchName,
+      authorName,
+    });
+
     const {
       data: { data },
     } = await storageAPI.getBuildList();
@@ -103,61 +109,48 @@ class BuildAgent {
 
     if (item && !this.queue.find(el => el.commitHash === commitHash)) {
       this.queue.push(item);
-
-      throw createError(400, `Error`);
     }
-
-    throw createError(400, `Error`);
   }
 
-  async updateQueue() {
-    const {
-      data: { data },
-    } = await storageAPI.getBuildList();
+  // async updateQueue() {
 
-    data.forEach(el => {
-      if (el.status === 'Waiting' && !this.queue.find(item => item.commitHash === el.commitHash)) {
-        this.queue.push(el);
-      }
-    });
-  }
+  //   data.forEach(el => {
+  //     if (el.status === 'Waiting' && !this.queue.find(item => item.commitHash === el.commitHash)) {
+  //       this.queue.push(el);
+  //     }
+  //   });
+  // }
 
-  async getLastCommits() {
-    if (this.timeoutId) clearTimeout(this.timeoutId);
-    try {
-      const commit = await gitRepo.getLastCommit();
+  // async getLastCommits() {
+  //   if (this.timeoutId) clearTimeout(this.timeoutId);
+  //   try {
+  //     const commit = await gitRepo.getLastCommit();
 
-      const { commitHash, commitMessage, authorName } = commit;
+  //     const { commitHash, commitMessage, authorName } = commit;
 
-      const {
-        data: { data },
-      } = await storageAPI.getBuildList();
+  //     const {
+  //       data: { data },
+  //     } = await storageAPI.getBuildList();
 
-      if (!data.find(el => el.commitHash === commitHash)) {
-        await storageAPI.setBuildRequest({
-          commitMessage,
-          commitHash,
-          branchName: this.mainBranch,
-          authorName,
-        });
+  //     if (!data.find(el => el.commitHash === commitHash)) {
 
-        this.updateQueue();
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  //       this.updateQueue();
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
 
-    this.timeoutId = setTimeout(() => {
-      this.getLastCommits();
-    }, this.period);
-  }
+  //   this.timeoutId = setTimeout(() => {
+  //     this.getLastCommits();
+  //   }, this.period);
+  // }
 
-  updateSettings({ buildCommand = 'npm run build', period = 10, mainBranch = 'master' }) {
-    this.period = period * 60 * 1000;
-    this.buildCommand = buildCommand;
-    this.mainBranch = mainBranch;
-    this.getLastCommits();
-  }
+  // updateSettings({ buildCommand = 'npm run build', period = 10, mainBranch = 'master' }) {
+  //   this.period = period * 60 * 1000;
+  //   this.buildCommand = buildCommand;
+  //   this.mainBranch = mainBranch;
+  //   this.getLastCommits();
+  // }
 }
 
 const buildAgent = new BuildAgent();

@@ -38,9 +38,9 @@ router.post(
     /** Проверка существует репозиторий или нет */
     await githubAPI.checkRepo(repoName);
 
-    gitRepo.addSettingsToQueue(req.body);
-
     await storageAPI.setConfig(req.body);
+
+    gitRepo.addSettingsToQueue(req.body);
 
     res.sendStatus(200);
   }),

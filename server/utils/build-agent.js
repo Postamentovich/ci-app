@@ -51,7 +51,7 @@ class BuildAgent {
         dateTime: new Date().toISOString(),
       });
 
-      return new Promise((res, rej) => {
+      return new Promise(res => {
         setTimeout(async () => {
           const endBuilding = new Date().valueOf();
 

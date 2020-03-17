@@ -1,15 +1,15 @@
-# Домашнее задание - nodejs
+# Домашнее задание - Node.js
 
-Запуск
+### Запуск проекта
 
-> npm i
-
-> npm run start
+```shell
+$ npm i
+$ npm run start
+```
 
 ### Переменные окружения
 
-PORT - выбранный порт <br>
-LOG_LEVEL - debug | info <br>
-API_TOKEN - токен <br>
+PORT - выбранный порт (по умолчанию - 3000)<br>
+LOG_LEVEL - уровень логов в консоли: debug | info <br>
+API_TOKEN - токен https://hw.shri.yandex/ <br>
 
-buildAgent ддо конца не доделал

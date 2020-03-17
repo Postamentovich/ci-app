@@ -34,7 +34,9 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "express-pino-logger": "^4.0.0",
+    "http-errors": "^1.7.3",
     "pino": "^5.17.0",
     "pino-pretty": "^3.6.1"
   }

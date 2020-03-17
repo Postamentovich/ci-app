@@ -1,42 +1,49 @@
 const { Router } = require('express');
+const asyncHandler = require('express-async-handler');
+const createError = require('http-errors');
 const storageAPI = require('../api/storage-api');
 const githubAPI = require('../api/github-api');
-const cloneRepo = require('../utils/clone-repo');
+const gitRepo = require('../utils/git-repo');
 
 const router = Router();
 
 /**
  * Получение сохраненных настроек
  */
-router.get('/', async (req, res) => {
-  try {
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
     const { data } = await storageAPI.getConfig();
 
     res.json(data);
-  } catch (error) {
-    console.error(error);
-
-    res.sendStatus(500);
-  }
-});
+  }),
+);
 
 /**
  * Сохранение настроек
  */
-router.post('/', async (req, res) => {
-  try {
-    await githubAPI.checkRepo(req.body.repoName);
+router.post(
+  '/',
+  asyncHandler(async (req, res) => {
+    const { repoName, buildCommand, mainBranch, period } = req.body;
 
-    cloneRepo(req.body);
+    if (typeof repoName !== 'string') throw createError(400, 'Error in repoName');
+
+    if (typeof buildCommand !== 'string') throw createError(400, 'Error in buildCommand');
+
+    if (typeof mainBranch !== 'string') throw createError(400, 'Error in mainBranch');
+
+    if (typeof period !== 'number') throw createError(400, 'Error in period');
+
+    /** Проверка существует репозиторий или нет */
+    await githubAPI.checkRepo(repoName);
+
+    gitRepo.addSettingsToQueue(req.body);
 
     await storageAPI.setConfig(req.body);
 
     res.sendStatus(200);
-  } catch (error) {
-    console.error(error);
-
-    res.sendStatus(500);
-  }
-});
+  }),
+);
 
 module.exports = router;

@@ -1,77 +1,75 @@
 const { Router } = require('express');
-const pino = require('pino');
+const asyncHandler = require('express-async-handler');
+const createError = require('http-errors');
 const storageAPI = require('../api/storage-api');
 const buildAgent = require('../utils/build-agent');
-
-const logger = pino({
-  level: process.env.LOG_LEVEL || 'info',
-  prettyPrint: true,
-});
 
 const router = Router();
 
 /**
  * Получение списка сборок
  */
-router.get('/', async (req, res) => {
-  try {
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
     const { data } = await storageAPI.getBuildList();
-    res.send(data);
-  } catch (error) {
-    console.error(error);
 
-    res.sendStatus(500);
-  }
-});
+    res.send(data);
+  }),
+);
 
 /**
  * Добавление сборки в очередь
  */
-router.post('/:commitHash', async (req, res) => {
-  const {
-    params: { commitHash },
-  } = req;
+router.post(
+  '/:commitHash',
+  asyncHandler(async (req, res) => {
+    const {
+      params: { commitHash },
+    } = req;
 
-  try {
+    if (typeof commitHash !== 'string') throw createError(400, 'Error in commitHash');
+
     await buildAgent.addToQueue(commitHash);
+
     res.sendStatus(200);
-  } catch (error) {
-    res.sendStatus(415);
-  }
-});
+  }),
+);
 
 /**
  * Получение информации о конкретной сборке
  */
-router.get('/:buildId', async (req, res) => {
-  const {
-    params: { buildId },
-  } = req;
+router.get(
+  '/:buildId',
+  asyncHandler(async (req, res) => {
+    const {
+      params: { buildId },
+    } = req;
 
-  try {
+    if (typeof buildId !== 'string') throw createError(400, 'Error in buildId');
+
     const { data } = await storageAPI.getBuildDetails(buildId);
+
     res.json(data);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(415);
-  }
-});
+  }),
+);
 
 /**
  * Получение логов билда (сплошной текст)
  */
-router.get('/:buildId/logs', async (req, res) => {
-  const {
-    params: { buildId },
-  } = req;
+router.get(
+  '/:buildId/logs',
+  asyncHandler(async (req, res) => {
+    const {
+      params: { buildId },
+    } = req;
 
-  try {
+    if (typeof buildId !== 'string') throw createError(400, 'Error in buildId');
+
     const { data } = await storageAPI.getBuildLog(buildId);
+
     res.json(data);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(415);
-  }
-});
+  }),
+);
 
 module.exports = router;

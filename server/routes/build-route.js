@@ -2,7 +2,7 @@ const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 const createError = require('http-errors');
 const storageAPI = require('../api/storage-api');
-const buildAgent = require('../utils/build-agent');
+const gitRepo = require('../utils/git-repo');
 
 const router = Router();
 
@@ -30,7 +30,7 @@ router.post(
 
     if (typeof commitHash !== 'string') throw createError(400, 'Error in commitHash');
 
-    await buildAgent.addToQueue(commitHash);
+    await gitRepo.getInfoByHash(commitHash);
 
     res.sendStatus(200);
   }),

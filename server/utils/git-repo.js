@@ -6,7 +6,7 @@ const storageAPI = require('../api/storage-api');
 const buildAgent = require('./build-agent');
 
 const logger = pino({
-  level: process.env.LOG_LEVEL || 'info',
+  level: process.env.LOG_LEVEL || 'debug',
   prettyPrint: true,
 });
 
@@ -20,6 +20,7 @@ class GitRepo {
     this.updateSettings = this.updateSettings.bind(this);
     this.getInitialSettings = this.getInitialSettings.bind(this);
     this.getRecentCommits = this.getRecentCommits.bind(this);
+    this.checkCommits = this.checkCommits.bind(this);
     this.queue = [this.getInitialSettings];
     this.processQueue();
   }
@@ -42,17 +43,19 @@ class GitRepo {
   }
 
   /**
-   * Получение начальных настроек
+   * Получение начальных настроек пользователя
    */
   async getInitialSettings() {
     try {
+      logger.debug('GitRepo - get user settings');
+
       const {
         data: { data },
       } = await storageAPI.getConfig();
 
-      logger.debug('GitRepo - get user settings');
-
       if (data && data.repoName) {
+        logger.debug('GitRepo - user settings found');
+
         this.settings = data;
 
         if (!this.localRepoIsExist) {
@@ -61,15 +64,9 @@ class GitRepo {
           await this.checkout(data.mainBranch);
         }
 
-        const commit = await this.getLastCommit();
-
-        // buildAgent.addToQueue(commit.commitHash);
-
-        // buildAgent.addToQueue(commit);
-
-        clearTimeout(this.periodTimeout);
-
-        this.periodTimeout = setTimeout(() => this.queue.push(this.getRecentCommits), data.period * 60 * 1000);
+        await this.checkCommits(true);
+      } else {
+        logger.debug('GitRepo - user settings not found');
       }
     } catch (error) {
       throw new Error(error);
@@ -77,14 +74,54 @@ class GitRepo {
   }
 
   /**
+   * Обновление настроек пользователя
+   *
+   * @param {Object} settings
+   */
+  async updateSettings(settings) {
+    logger.debug('GitRepo - update settings');
+
+    const { repoName, mainBranch } = settings;
+
+    if (repoName !== this.settings.repoName) {
+      await this.clone(repoName);
+
+      await this.checkout(mainBranch);
+    } else if (mainBranch !== this.settings.mainBranch) {
+      await this.checkout(mainBranch);
+    }
+
+    this.settings = settings;
+
+    await this.checkCommits(true);
+  }
+
+  async checkCommits(onlyLast) {
+    const commits = await this.getRecentCommits(onlyLast);
+
+    for (let i = 0; i < commits.length; i++) {
+      const commitHash = commits[i];
+
+      if (commitHash) await this.getInfoByHash(commitHash);
+    }
+
+    clearTimeout(this.periodTimeout);
+
+    this.periodTimeout = setTimeout(() => this.queue.push(this.checkCommits), this.settings.period * 60 * 1000);
+  }
+
+  /**
    * Проверка существует репозиторий локально или нет
    */
   get localRepoIsExist() {
-    logger.debug('GitRepo - check local repo is exist');
     try {
       const stat = fs.statSync(`${this.localFolderName}`);
+
+      logger.debug('GitRepo - local repo found');
+
       return stat.isDirectory();
     } catch (error) {
+      logger.debug('GitRepo - local repo not found');
       return false;
     }
   }
@@ -117,7 +154,9 @@ class GitRepo {
   async removeLocalRepo() {
     if (this.localRepoIsExist) {
       logger.debug('GitRepo - remove local repo');
+
       const command = `rm -rf ${this.localFolderName}`;
+
       return this.run(command);
     }
     return null;
@@ -129,57 +168,26 @@ class GitRepo {
    */
   checkout(mainBranch) {
     logger.debug(`GitRepo - checkout to branch ${mainBranch}`);
+
     const command = `cd ${this.localFolderName} && git checkout ${mainBranch}`;
+
     return this.run(command);
   }
 
   async getInfoByHash(commitHash) {
-    if (this.localRepoIsExist) {
-      const { stdout } = await this.run(
-        `cd ${this.localFolderName} && git show ${commitHash} --pretty=format:"%s{SPLIT}%an{END}"`,
-      );
-      const [commitMessage, authorName] = stdout.split('{END}')[0].split('{SPLIT}');
+    const { stdout } = await this.run(
+      `cd ${this.localFolderName} && git show ${commitHash} --pretty=format:"%s{SPLIT}%an{END}"`,
+    );
+    const [commitMessage, authorName] = stdout.split('{END}')[0].split('{SPLIT}');
 
-      await buildAgent.addToQueue({
-        commitHash,
-        commitMessage,
-        branchName: this.settings.mainBranch,
-        authorName,
-      });
+    logger.debug(`GitRepo - get info by hash ${commitHash}`);
 
-      logger.debug(`GitRepo - get info by hash ${commitHash}`);
-    }
-
-    return null;
-  }
-
-  /**
-   * Возвращает последний коммит
-   */
-  async getLastCommit() {
-    if (this.localRepoIsExist) {
-      await this.run(`cd ${this.localFolderName} && git pull`);
-
-      const { stdout } = await this.run(
-        `cd ${this.localFolderName} && git log -1 --pretty=format:"%H{SPLIT}%s{SPLIT}%an{SPLIT}"`,
-      );
-
-      this.lastCheckingCommitTime = new Date();
-
-      const commit = stdout.split('{SPLIT}');
-
-      logger.debug(`GitRepo - get last commit: ${commit}`);
-
-      const [commitHash, commitMessage, authorName] = commit;
-
-      return {
-        commitHash,
-        commitMessage,
-        authorName,
-      };
-    }
-
-    return null;
+    await buildAgent.addToQueue({
+      commitHash,
+      commitMessage,
+      branchName: this.settings.mainBranch,
+      authorName,
+    });
   }
 
   /**
@@ -193,66 +201,22 @@ class GitRepo {
     this.queue.push(async () => this.updateSettings(settings));
   }
 
-  async getRecentCommits() {
-    if (this.localRepoIsExist) {
-      await this.run(`cd ${this.localFolderName} && git pull`);
+  async getRecentCommits(onlyLast) {
+    await this.run(`cd ${this.localFolderName} && git pull`);
 
-      const { stdout } = await this.run(
-        `cd ${
-          this.localFolderName
-        } && git log --since="${this.lastCheckingCommitTime.toISOString()}" --pretty=format:"%H{SPLIT}%s{SPLIT}%an{END}"`,
-      );
+    logger.debug('GitRepo - get recent commits');
 
-      const listCommits = stdout.split('{END}').map(commit => {
-        const [commitHash, commitMessage, authorName] = commit.split('{SPLIT}');
+    const command = onlyLast
+      ? 'git log -1 --pretty=format:"%H{SPLIT}"'
+      : `git log --since="${this.lastCheckingCommitTime.toISOString()}" --pretty=format:"%H{SPLIT}"`;
 
-        return {
-          commitHash,
-          commitMessage,
-          authorName,
-        };
-      });
+    const { stdout } = await this.run(`cd ${this.localFolderName} && ${command}`);
 
-      logger.debug(
-        '%O',
-        `GitRepo - get recent commit since ${this.lastCheckingCommitTime.toISOString()} : ${listCommits}`,
-      );
+    const listCommits = stdout.split('{SPLIT}');
 
-      this.lastCheckingCommitTime = new Date();
-    }
+    this.lastCheckingCommitTime = new Date();
 
-    this.periodTimeout = setTimeout(() => this.queue.push(this.getRecentCommits), this.settings.period * 60 * 1000);
-
-    return null;
-  }
-
-  /**
-   * Обновление настроек пользователя
-   *
-   * @param {Object} settings
-   */
-  async updateSettings(settings) {
-    logger.debug('GitRepo - update settings');
-
-    const { repoName, mainBranch, period } = settings;
-
-    if (repoName !== this.settings.repoName) {
-      await this.clone(repoName);
-
-      await this.checkout(mainBranch);
-    } else if (mainBranch !== this.settings.mainBranch) {
-      await this.checkout(mainBranch);
-    }
-
-    const commit = await this.getLastCommit();
-
-    await this.getInfoByHash(commit.commitHash);
-
-    clearTimeout(this.periodTimeout);
-
-    this.periodTimeout = setTimeout(() => this.queue.push(this.getRecentCommits), period * 60 * 1000);
-
-    this.settings = settings;
+    return listCommits;
   }
 }
 

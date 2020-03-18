@@ -9,18 +9,7 @@ const { hashObj } = require('../utils/hash');
 const router = Router();
 
 /**
- * @swagger
- * /settings:
- *  get:
- *    tags:
- *      - Settings
- *    name: Получение сохраненных настроек
- *    summary: Получение сохраненных настроек пользователя
- *    consumes:
- *      - application/json
- *    responses:
- *      200:
- *        description: ok
+ * Получение настроек пользователя
  */
 router.get(
   '/',
@@ -31,6 +20,9 @@ router.get(
   }),
 );
 
+/**
+ * Сохранение настроек пользователя
+ */
 router.post(
   '/',
   asyncHandler(async (req, res) => {

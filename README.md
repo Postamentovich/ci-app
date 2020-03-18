@@ -13,4 +13,10 @@ PORT - выбранный порт (по умолчанию - 3000)<br>
 LOG_LEVEL - уровень логов в консоли: debug | info <br>
 API_TOKEN - токен https://hw.shri.yandex/ <br>
 
-Версия node js - 13.5
+### Swagger
+
+Swagger доступен по ссылке /swagger
+
+### Node.js
+
+Версия Node.js - 13.5

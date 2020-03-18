@@ -15,10 +15,11 @@ const logger = pino({
 
 const options = {
   swaggerDefinition: {
+    openapi: '3.0.0',
     info: { title: 'School CI server' },
     basePath: '/api/',
   },
-  apis: ['./server/routes/build-route.js', './server/routes/settings-route.js'],
+  apis: ['./server/swagger/swagger.yaml', './server/routes/build-route.js', './server/routes/settings-route.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);

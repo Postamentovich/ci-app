@@ -9,7 +9,18 @@ const { hashObj } = require('../utils/hash');
 const router = Router();
 
 /**
- * Получение сохраненных настроек
+ * @swagger
+ * /settings:
+ *  get:
+ *    tags:
+ *      - Settings
+ *    name: Получение сохраненных настроек
+ *    summary: Получение сохраненных настроек пользователя
+ *    consumes:
+ *      - application/json
+ *    responses:
+ *      200:
+ *        description: ok
  */
 router.get(
   '/',
@@ -20,9 +31,6 @@ router.get(
   }),
 );
 
-/**
- * Сохранение настроек
- */
 router.post(
   '/',
   asyncHandler(async (req, res) => {
@@ -39,7 +47,7 @@ router.post(
     /** Проверка существует репозиторий или нет */
     await githubAPI.checkRepo(repoName);
 
-    /** Обнвление значений в базе */
+    /** Обновление значений в базе */
     await storageAPI.setConfig(req.body);
 
     /** Очистка закэшированных значений */

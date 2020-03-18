@@ -4,12 +4,24 @@ const path = require('path');
 const pino = require('pino');
 const expressPino = require('express-pino-logger');
 const createError = require('http-errors');
-const errorHandler = require('./server/routes/erorr-handler');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
+const errorHandler = require('./server/middlewares/erorr-handler');
 
 const logger = pino({
   level: process.env.LOG_LEVEL || 'debug',
   prettyPrint: true,
 });
+
+const options = {
+  swaggerDefinition: {
+    info: { title: 'School CI server' },
+    basePath: '/api/',
+  },
+  apis: ['./server/routes/build-route.js', './server/routes/settings-route.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
 
 const expressLogger = expressPino({ logger });
 
@@ -20,6 +32,8 @@ const app = express();
 app.use(express.json());
 
 app.use(expressLogger);
+
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/settings', require('./server/routes/settings-route'));
 

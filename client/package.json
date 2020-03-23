@@ -6,6 +6,7 @@
     "@bem-react/classname": "^1.5.8",
     "@bem-react/core": "^2.0.8",
     "@bem-react/eslint-plugin": "^1.1.2",
+    "@reduxjs/toolkit": "^1.2.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -13,8 +14,10 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.7",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.4.0",
     "typescript": "~3.7.2"
   },
@@ -35,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/webpack-env": "^1.15.1"
   }
 }

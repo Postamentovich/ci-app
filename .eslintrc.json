@@ -1,0 +1,46 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": ["airbnb"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "@bem-react", "lodash-to-native"],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", "ts", "tsx"]
+      }
+    ],
+    "lodash-to-native/map": [1],
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "linebreak-style": "off",
+    "@bem-react/no-classname-runtime": "warn",
+    "@bem-react/whitelist-levels-imports": [
+      "error",
+      {
+        "defaultLevel": "common",
+        "whiteList": {
+          "common": ["common"],
+          "desktop": ["common", "desktop"],
+          "mobile": ["common", "mobile"]
+        }
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "react/prop-types": "off"
+  }
+}

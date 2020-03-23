@@ -5,6 +5,7 @@
   "dependencies": {
     "@bem-react/classname": "^1.5.8",
     "@bem-react/core": "^2.0.8",
+    "@bem-react/eslint-plugin": "^1.1.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -22,9 +23,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [

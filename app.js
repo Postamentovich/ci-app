@@ -26,7 +26,7 @@ const swaggerSpec = swaggerJSDoc(options);
 
 const expressLogger = expressPino({ logger });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 
@@ -40,7 +40,12 @@ app.use('/api/settings', require('./server/routes/settings-route'));
 
 app.use('/api/builds', require('./server/routes/build-route'));
 
-app.use('/', express.static(path.join(__dirname, '../client', 'dist')));
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')));
+  app.get('*', (req, res) => {
+    res.send(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.use((req, res, next) => next(createError(404)));
 

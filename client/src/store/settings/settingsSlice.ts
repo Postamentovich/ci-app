@@ -1,56 +1,38 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface CurrentDisplay {
-  displayType: 'issues' | 'comments';
-  issueId: number | null;
-  test: boolean;
-}
+type SettingsState = {
+  repoName: string | null;
+  buildCommand: string | null;
+  mainBranch: string | null;
+  period: number | null;
+};
 
-interface CurrentDisplayPayload {
-  displayType: 'issues' | 'comments';
-  issueId?: number;
-}
-
-interface CurrentRepo {
-  org: string;
-  repo: string;
-}
-
-type CurrentDisplayState = {
-  page: number;
-} & CurrentDisplay &
-  CurrentRepo;
-
-const initialState: CurrentDisplayState = {
-  org: 'rails',
-  repo: 'rails',
-  test: true,
-  page: 1,
-  displayType: 'issues',
-  issueId: null,
+const initialState: SettingsState = {
+  repoName: null,
+  buildCommand: null,
+  mainBranch: null,
+  period: null,
 };
 
 const settingsSlice = createSlice({
-  name: 'issuesDisplay',
+  name: 'settings',
   initialState,
   reducers: {
-    displayRepo(state, action: PayloadAction<CurrentRepo>) {
-      const { org, repo } = action.payload;
-      state.org = org;
-      state.repo = repo;
+    changeRepoName(state, action: PayloadAction<string>) {
+      state.repoName = action.payload;
     },
-    add: () => {},
-    setCurrentPage(state, action: PayloadAction<number>) {
-      state.page = action.payload;
+    changeBuildCommand(state, action: PayloadAction<string>) {
+      state.buildCommand = action.payload;
     },
-    setCurrentDisplayType(state, action: PayloadAction<CurrentDisplayPayload>) {
-      const { displayType, issueId = null } = action.payload;
-      state.displayType = displayType;
-      state.issueId = issueId;
+    changeMainBranch(state, action: PayloadAction<string>) {
+      state.mainBranch = action.payload;
+    },
+    changePeriod(state, action: PayloadAction<string>) {
+      state.mainBranch = action.payload;
     },
   },
 });
 
-export const { displayRepo, setCurrentDisplayType, setCurrentPage } = settingsSlice.actions;
+export const { changeRepoName, changeBuildCommand, changeMainBranch, changePeriod } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

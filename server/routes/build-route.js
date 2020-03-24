@@ -79,12 +79,12 @@ router.get(
     const hashKey = hashString(buildId, commitHash);
 
     /** Проверка есть ли в кэше значение */
-    if (hashObj.has(hashKey)) return res.json(hashObj.get(hashKey));
+    if (hashObj.has(hashKey)) return res.json(hashObj.get(hashKey).data);
 
     const log = await storageAPI.getBuildLog(buildId);
 
     /** Сохранение в кэше значения */
-    hashObj.set(hashKey, log.data);
+    hashObj.set(hashKey, { data: log.data, time: Date.now().valueOf() });
 
     res.json(log.data);
   }),

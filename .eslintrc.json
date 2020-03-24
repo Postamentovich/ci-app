@@ -27,7 +27,6 @@
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "linebreak-style": "off",
-    "@bem-react/no-classname-runtime": "warn",
     "@bem-react/whitelist-levels-imports": [
       "error",
       {
@@ -45,6 +44,7 @@
     "no-unused-vars": "off",
     "max-len": "off",
     "arrow-parens": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

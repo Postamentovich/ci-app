@@ -20,4 +20,21 @@ function hashString(s1, s2) {
  */
 const hashObj = new Map();
 
+const minute5 = 5 * 60 * 1000;
+
+function clearCache() {
+  const now = Date.now().valueOf();
+  hashObj.forEach((value, key) => {
+    if (now - value.time > minute5) hashObj.delete(key);
+  });
+  console.log(hashObj.values(values => console.log(values)));
+}
+
+/**
+ * Хранилище очищается каждые пять минут
+ */
+setInterval(() => {
+  clearCache();
+}, minute5);
+
 module.exports = { hashObj, hashString };

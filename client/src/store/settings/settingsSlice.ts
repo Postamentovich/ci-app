@@ -27,8 +27,8 @@ const settingsSlice = createSlice({
     changeMainBranch(state, action: PayloadAction<string>) {
       state.mainBranch = action.payload;
     },
-    changePeriod(state, action: PayloadAction<string>) {
-      state.mainBranch = action.payload;
+    changePeriod(state, action: PayloadAction<number>) {
+      state.period = action.payload;
     },
   },
 });

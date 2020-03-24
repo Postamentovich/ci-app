@@ -2,9 +2,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import rootReducer from './rootReducer';
+import settingsMiddleware from './settings/settingsMiddleware';
 
 const store = configureStore({
   reducer: rootReducer,
+  middleware: [settingsMiddleware],
 });
 
 if (process.env.NODE_ENV === 'development' && module.hot) {

@@ -1,22 +1,28 @@
-import React, { FC } from 'react';
-import { compose, composeU } from '@bem-react/core';
-import { Route, BrowserRouter as Router, Link } from 'react-router-dom';
-import { Button as ButtonPresenter } from './components/Button/Button';
-import { withButtonTypeLink } from './components/Button/_type/Button_type_link';
-import { withButtonThemeAction } from './components/Button/_theme/Button_theme_action';
-import Home from './pages/Home/Home';
-import Settings from './pages/Settings/Settings';
-import BuildDetails from './pages/BuildDetails/BuildDetails';
-import BuildHistory from './pages/BuildHistory/BuildHistory';
+import React, { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from 'pages/AppRouter';
+import { RootState } from 'store/rootReducer';
+import Loader from 'components/Loader/Loader';
+import { getSettings } from './store/settings/settingsActions';
 
 const App: FC = () => {
-  const isSettings = false;
+  const dispatch = useDispatch();
+
+  const { isLoading } = useSelector((state: RootState) => ({
+    isLoading: state.globalSlice.isLoading,
+  }));
+
+  useEffect(() => {
+    dispatch(getSettings());
+  }, [dispatch]);
+
+  if (isLoading) return <Loader />;
+
   return (
     <Router>
       <div className="App">
-        <Route path="/settings" component={Settings} />
-        <Route path="/build/:id" component={BuildDetails} />
-        <Route exact path="/" component={!isSettings ? Home : BuildHistory} />
+        <AppRoutes />
       </div>
     </Router>
   );

@@ -1,0 +1,15 @@
+.Link {
+  text-decoration: none;
+  outline: 0;
+  cursor: pointer;
+
+  &_view_default {
+    color: var(--color-link-default);
+
+    transition: color 0.15s linear;
+
+    &:hover {
+      color: var(--color-link-hover);
+    }
+  }
+}

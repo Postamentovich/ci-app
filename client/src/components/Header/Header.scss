@@ -1,8 +1,8 @@
 .Header {
-  &-Container {
-    display: flex;
-    justify-content: space-between;
-  }
+  display: flex;
+  flex-grow: 1;
+
+  justify-content: space-between;
 
   &-Link {
     color: inherit;
@@ -23,10 +23,9 @@
     }
   }
 
-  &_space-v_l {
-    padding-top: var(--space-xxxxs);
-    padding-bottom: var(--space-xxxxs);
-  }
+  padding-top: var(--space-xxxxs);
+
+  padding-bottom: var(--space-xxxxs);
 }
 
 @media (max-width: 470px) {

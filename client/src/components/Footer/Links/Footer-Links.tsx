@@ -6,17 +6,15 @@ import { cnFooter } from '../index';
 
 const Link = compose(withLinkViewDefault)(LinkPresenter);
 
-const FooterLinks = () => {
-  return (
-    <div className={cnFooter('Links')}>
-      <Link href="/support" view="default" className={cnFooter('Link')}>
-        Support
-      </Link>
-      <Link href="/learning" view="default" className={cnFooter('Link')}>
-        Learning
-      </Link>
-    </div>
-  );
-};
+const FooterLinks = () => (
+  <div className={cnFooter('Links')}>
+    <Link href="/support" view="default" className={cnFooter('Link')}>
+      Support
+    </Link>
+    <Link href="/learning" view="default" className={cnFooter('Link')}>
+      Learning
+    </Link>
+  </div>
+);
 
 export default FooterLinks;

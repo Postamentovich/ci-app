@@ -5,6 +5,8 @@ import './Header.scss';
 
 export interface IHeaderProps extends IClassNameProps {
   as?: ReactType;
+  buttons?: JSX.Element;
+  title?: string;
 }
 
 export const cnHeader = cn('Header');

@@ -12,7 +12,7 @@ import { withButtonSizeS } from 'components/Button/_size/Button_size_s';
 import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
-import './Home.scss';
+import './HomePage.scss';
 
 const cnHome = cn('HomePage');
 

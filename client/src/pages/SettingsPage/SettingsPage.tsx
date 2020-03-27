@@ -12,7 +12,7 @@ import { withButtonViewDefault } from 'components/Button/_view/Button_view_defau
 import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
-import './Settings.scss';
+import './SettingsPage.scss';
 import { saveSettings } from 'store/settings/settingsActions';
 
 const cnSettings = cn('SettingsPage');

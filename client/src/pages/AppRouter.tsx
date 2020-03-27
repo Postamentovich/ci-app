@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/rootReducer';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import Home from './Home/Home';
-import Settings from './Settings/Settings';
-import BuildHistory from './BuildHistory/BuildHistory';
-import BuildDetails from './BuildDetails/BuildDetails';
+import Home from './HomePage/HomePage';
+import Settings from './SettingsPage/SettingsPage';
+import BuildHistory from './HistoryPage/HistoryPage';
+import BuildDetails from './DetailsPage/DetailsPage';
 
 const AppRoutes = () => {
   const { repoName } = useSelector((state: RootState) => ({

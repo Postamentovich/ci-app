@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BuildModelArrayHomeworkApiResponse } from 'api/models/models';
+import { BuildModel } from 'api/models/models';
 
 type BuildState = {
-  list: BuildModelArrayHomeworkApiResponse | [];
+  list: Array<BuildModel>;
   isLoading: boolean;
 };
 
@@ -15,7 +15,7 @@ export const bulidsSlice = createSlice({
   name: 'builds',
   initialState,
   reducers: {
-    setList(state, action: PayloadAction<BuildModelArrayHomeworkApiResponse>) {
+    setList(state, action: PayloadAction<Array<BuildModel>>) {
       state.list = action.payload;
     },
     setIsLoading(state, action: PayloadAction<boolean>) {

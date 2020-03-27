@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { BuildModelArrayHomeworkApiResponse, BuildModelHomeworkApiResponse } from './models/models';
+import { BuildModelHomeworkApiResponse, BuildModel } from './models/models';
 
 const buildApi = {
   /** Get builds list */
-  getList: async (): Promise<BuildModelArrayHomeworkApiResponse> => {
+  getList: async (): Promise<Array<BuildModel>> => {
     const { data } = await axios.get('/api/builds');
     return data.data;
   },

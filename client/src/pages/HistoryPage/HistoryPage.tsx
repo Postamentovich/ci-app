@@ -12,11 +12,12 @@ import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
 import './HistoryPage.scss';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from 'store/rootReducer';
 import { cnHeader } from 'components/Header';
 import { withIconTypePlay } from 'components/Icon/_type/Icon_type_play';
 import { getBuildList } from 'store/builds/buildsActions';
+import { Card } from 'components/Card/Card';
 
 const cnHistory = cn('HistoryPage');
 
@@ -27,12 +28,17 @@ const Button = compose(
   composeU(withButtonSizeS, withButtonSizeM),
   withButtonTypeLink,
 )(ButtonPresenter);
+
 const BuildHistory = () => {
   const dispatch = useDispatch();
 
-  const { repoName } = useSelector((state: RootState) => ({
-    repoName: state.settingsSlice.repoName,
-  }));
+  const { repoName, list } = useSelector(
+    (state: RootState) => ({
+      repoName: state.settingsSlice.repoName,
+      list: state.bulidsSlice.list,
+    }),
+    shallowEqual,
+  );
 
   useEffect(() => {
     dispatch(getBuildList());
@@ -60,7 +66,11 @@ const BuildHistory = () => {
           iconLeft={<Icon type="gear" />}
         />
       </Header>
-      <div className={cnHistory('Content', ['Layout'])}>ы</div>
+      <div className={cnHistory('Content', ['Layout'])}>
+        {list.map(build => {
+          return <Card />;
+        })}
+      </div>
       <Footer className="Layout" />
     </div>
   );

@@ -12,6 +12,7 @@ import './Home.scss';
 import { withButtonSizeS } from 'components/Button/_size/Button_size_s';
 import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
+import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
 
 const cnHome = cn('HomePage');
 
@@ -20,12 +21,13 @@ const Icon = compose(composeU(withIconTypeLogo, withIconTypeGear))(IconPresenter
 const Button = compose(
   composeU(withButtonViewDefault, withButtonViewAction),
   composeU(withButtonSizeS, withButtonSizeM),
+  withButtonTypeLink,
 )(ButtonPresenter);
 
 const Home = () => (
   <div className={cnHome()}>
     <Header className="Layout" title="School CI Server">
-      <Button view="default" size="s" iconLeft={<Icon type="gear" />}>
+      <Button view="default" type="link" to="/settings" size="s" iconLeft={<Icon type="gear" />}>
         Settings
       </Button>
     </Header>
@@ -36,7 +38,7 @@ const Home = () => (
         <br />
         and synchronization settings
       </p>
-      <Button view="action" className={cnHome('Button')} size="m">
+      <Button view="action" type="link" to="/settings" className={cnHome('Button')} size="m">
         Open settings
       </Button>
     </div>

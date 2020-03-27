@@ -1,0 +1,84 @@
+.TextInput {
+  display: flex;
+
+  flex-direction: column;
+
+  position: relative;
+
+  max-width: 474px;
+
+  &_label-position {
+    &_both {
+      flex-direction: row;
+      align-items: center;
+
+      .TextInput-Input {
+        margin-right: var(--space-xxxxs);
+        margin-left: var(--space-xxxxs);
+      }
+    }
+
+    &_top {
+      .TextInput-Input {
+        margin-top: var(--space-xxxxxs);
+      }
+    }
+  }
+
+  &-Label {
+    &_required {
+      &:after {
+        content: " *";
+        color: var(--color-text-required);
+      }
+    }
+  }
+
+  &-Input {
+    border-width: var(--border-width-l);
+    border-style: solid;
+    border-color: var(--color-border-main);
+    border-radius: var(--radius-l);
+
+    padding-top: var(--space-xxxs);
+    padding-right: var(--space-xs);
+    padding-left: var(--space-xs);
+    padding-bottom: var(--space-xxxxs);
+
+    &_width {
+      &_s {
+        width: 52px;
+      }
+    }
+
+    &_distribution {
+      &_right {
+        text-align: end;
+      }
+    }
+
+    &:hover {
+      border-color: var(--color-border-input-hovered);
+    }
+
+    &:focus {
+      border-color: var(--color-border-input-focused);
+      outline: none;
+    }
+
+    &::-webkit-input-placeholder {
+      font-size: var(--color-text-second);
+    }
+  }
+
+  &-ClearButton {
+    border: none;
+    padding: 0;
+    position: absolute;
+    bottom: var(--space-xxs);
+    right: var(--space-xxs);
+    background: transparent;
+    display: flex;
+    cursor: pointer;
+  }
+}

@@ -68,7 +68,7 @@ const Settings = () => {
           placeholder="10"
           value={period || 10}
           onChange={e => dispatch(changePeriod(Number(e.target.value)))}
-          id="mainBranch"
+          id="period"
           className={cnSettings('Input')}
         />
         <div className={cnSettings('Buttons')}>

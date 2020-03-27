@@ -5,7 +5,7 @@ const buildApi = {
   /** Get builds list */
   getList: async (): Promise<BuildModelArrayHomeworkApiResponse> => {
     const { data } = await axios.get('/api/builds');
-    return data;
+    return data.data;
   },
   /** Get build log */
   getLog: async (buildId: string): Promise<string> => {

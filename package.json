@@ -44,7 +44,6 @@
     "cross-env": "^7.0.2",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
-    "eslint-plugin-lodash-to-native": "git+https://github.com/Postamentovich/eslint-plugin-lodash-to-native.git",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-pino-logger": "^4.0.0",

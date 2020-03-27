@@ -2,8 +2,9 @@ import { Middleware } from '@reduxjs/toolkit';
 import { RootState } from 'store/rootReducer';
 import settingsApi from 'api/settingsApi';
 import { setIsLoading } from 'store/global/globalSlice';
-import { getSettings } from './settingsActions';
-import { changeRepoName, changeBuildCommand, changePeriod, changeMainBranch } from './settingsSlice';
+import { ConfigurationInput } from 'api/models/models';
+import { getSettings, saveSettings } from './settingsActions';
+import { changeRepoName, changeBuildCommand, changePeriod, changeMainBranch, setIsSaving } from './settingsSlice';
 
 const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
   next(action);
@@ -24,7 +25,28 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => ne
 
       if (data?.mainBranch) dispatch(changeMainBranch(data.mainBranch));
     } catch (error) {
-      dispatch(setIsLoading(false));
+      dispatch(setIsSaving(false));
+    }
+  }
+
+  if (saveSettings.match(action)) {
+    try {
+      dispatch(setIsSaving(true));
+
+      const state: RootState = getState();
+
+      const model: ConfigurationInput = {
+        repoName: state.settingsSlice.repoName || '',
+        buildCommand: state.settingsSlice.buildCommand || '',
+        mainBranch: state.settingsSlice.mainBranch || '',
+        period: state.settingsSlice.period || 10,
+      };
+
+      await settingsApi.saveSettings(model);
+
+      dispatch(setIsSaving(false));
+    } catch (error) {
+      dispatch(setIsSaving(false));
     }
   }
 };

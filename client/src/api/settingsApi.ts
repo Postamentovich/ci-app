@@ -8,7 +8,7 @@ const settingsApi = {
     return data;
   },
   /** Set user settings */
-  setSettings: async (model: ConfigurationInput) => {
+  saveSettings: async (model: ConfigurationInput) => {
     await axios.post('/api/settings', model);
   },
 };

@@ -5,6 +5,7 @@ type SettingsState = {
   buildCommand: string | null;
   mainBranch: string | null;
   period: number | null;
+  isSaving: boolean;
 };
 
 const initialState: SettingsState = {
@@ -12,6 +13,7 @@ const initialState: SettingsState = {
   buildCommand: null,
   mainBranch: null,
   period: null,
+  isSaving: false,
 };
 
 const settingsSlice = createSlice({
@@ -30,9 +32,18 @@ const settingsSlice = createSlice({
     changePeriod(state, action: PayloadAction<number>) {
       state.period = action.payload;
     },
+    setIsSaving(state, action: PayloadAction<boolean>) {
+      state.isSaving = action.payload;
+    },
   },
 });
 
-export const { changeRepoName, changeBuildCommand, changeMainBranch, changePeriod } = settingsSlice.actions;
+export const {
+  changeRepoName,
+  changeBuildCommand,
+  changeMainBranch,
+  changePeriod,
+  setIsSaving,
+} = settingsSlice.actions;
 
 export default settingsSlice.reducer;

@@ -4,15 +4,16 @@ import { Header } from 'components/Header/Header';
 import { Footer } from 'components/Footer/Footer';
 import { RootState } from 'store/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
+import { composeU, compose } from '@bem-react/core';
 import { TextInput } from 'components/TextInput/TextInput';
 import { changeRepoName, changeBuildCommand, changeMainBranch, changePeriod } from 'store/settings/settingsSlice';
-import './Settings.scss';
 import { Button as ButtonPresenter } from 'components/Button/Button';
 import { withButtonViewDefault } from 'components/Button/_view/Button_view_default';
 import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
-import { composeU, compose } from '@bem-react/core';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
+import './Settings.scss';
+import { saveSettings } from 'store/settings/settingsActions';
 
 const cnSettings = cn('SettingsPage');
 
@@ -71,7 +72,7 @@ const Settings = () => {
           className={cnSettings('Input')}
         />
         <div className={cnSettings('Buttons')}>
-          <Button size="m" view="action" className={cnSettings('Button')} onClick={e => console.log(e)}>
+          <Button size="m" view="action" className={cnSettings('Button')} onClick={() => dispatch(saveSettings())}>
             Save
           </Button>
           <Button size="m" view="default" className={cnSettings('Button')} type="link" to="/">

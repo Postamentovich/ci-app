@@ -27,17 +27,6 @@
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "linebreak-style": "off",
-    "@bem-react/whitelist-levels-imports": [
-      "error",
-      {
-        "defaultLevel": "common",
-        "whiteList": {
-          "common": ["common"],
-          "desktop": ["common", "desktop"],
-          "mobile": ["common", "mobile"]
-        }
-      }
-    ],
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "no-param-reassign": "off",

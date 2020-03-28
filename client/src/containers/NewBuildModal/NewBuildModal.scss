@@ -1,0 +1,19 @@
+.NewBuildModal {
+  width: 485px;
+
+  &-Description {
+    margin-top: var(--space-s);
+    margin-bottom: var(--space-s);
+  }
+
+  &-Buttons {
+    display: flex;
+    margin-top: var(--space-s);
+  }
+
+  &-Button {
+    &:not(:first-child) {
+      margin-left: var(--space-xxs);
+    }
+  }
+}

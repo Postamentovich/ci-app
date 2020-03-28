@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
 import { Header } from 'components/Header/Header';
@@ -21,13 +21,15 @@ import { Card as CardPresenter } from 'components/Card/Card';
 import { withCardTypeLink } from 'components/Card/_type/Card_type_link';
 import { Modal } from 'components/Modal/Modal';
 import { TextInput } from 'components/TextInput/TextInput';
+import { withButtonViewPseudo } from 'components/Button/_view/Button_view_pseudo';
+import { NewBuildModal } from 'containers/NewBuildModal/NewBuildModal';
 
 const cnHistory = cn('HistoryPage');
 
 const Icon = compose(composeU(withIconTypePlay, withIconTypeGear))(IconPresenter);
 
 const Button = compose(
-  composeU(withButtonViewDefault, withButtonViewAction),
+  composeU(withButtonViewDefault, withButtonViewAction, withButtonViewPseudo),
   composeU(withButtonSizeS, withButtonSizeM),
   withButtonTypeLink,
 )(ButtonPresenter);
@@ -36,6 +38,8 @@ const Card = compose(withCardTypeLink)(CardPresenter);
 
 const BuildHistory = () => {
   const dispatch = useDispatch();
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const { repoName, list } = useSelector(
     (state: RootState) => ({
@@ -49,16 +53,27 @@ const BuildHistory = () => {
     dispatch(getBuildList());
   }, [dispatch]);
 
+  const handleClickRunBuild = (e: React.MouseEventHandler<HTMLButtonElement>) => {
+    setModalIsOpen(true);
+  };
+
+  const handleClickModalConfirm = (value: string) => {
+    setModalIsOpen(false);
+  };
+
+  const handleClickModalCancel = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <div className={cnHistory()}>
       <Header className="Layout" title={repoName || ''}>
         <Button
           className={cnHeader('Button')}
           view="default"
-          type="link"
-          to="/settings"
           size="s"
           iconLeft={<Icon type="play" />}
+          onClick={handleClickRunBuild}
         >
           Run build
         </Button>
@@ -88,15 +103,7 @@ const BuildHistory = () => {
         ))}
       </div>
       <Footer className="Layout" />
-      <Modal>
-        <h3>New build</h3>
-        <p>Enter the commit hash which you want to buid</p>
-        <TextInput id="commitHash" placeholder="Commit hash" />
-        <Button view="action" size="m">
-          Run build
-        </Button>
-        <Button size="m"> Cancel</Button>
-      </Modal>
+      {modalIsOpen && <NewBuildModal onCancel={handleClickModalCancel} onConfirm={handleClickModalConfirm} />}
     </div>
   );
 };

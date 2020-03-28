@@ -71,7 +71,20 @@
       }
 
       &:focus {
-        border-color: var(--color-border-action-focused);
+        border-color: var(--color-border-control-focused);
+      }
+    }
+
+    &_pseudo {
+      background-color: transparent;
+      border:1px solid rgb(204, 204, 204);
+
+      &:hover {
+        background-color: rgb(247, 247, 247);
+      }
+
+      &:focus {
+        border-color: var(--color-border-control-focused);
       }
     }
   }

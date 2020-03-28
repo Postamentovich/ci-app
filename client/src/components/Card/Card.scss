@@ -7,15 +7,14 @@
 
   display: flex;
 
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: var(--card-shadow-hover);
-  }
-
   &_type {
     &_link {
       text-decoration: none;
+
+      &:hover {
+        box-shadow: var(--card-shadow-hover);
+        cursor: pointer;
+      }
     }
   }
 }

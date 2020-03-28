@@ -77,7 +77,7 @@
 
     &_pseudo {
       background-color: transparent;
-      border:1px solid rgb(204, 204, 204);
+      border: 1px solid rgb(204, 204, 204);
 
       &:hover {
         background-color: rgb(247, 247, 247);
@@ -89,37 +89,13 @@
     }
   }
 
-  // &_type {
-  //   &_icon-left {
-  //     .Button-Label {
-  //       margin-left: var(--space-xxxxxs);
-  //     }
+  &[aria-disabled="true"] {
+    background-color: var(--color-bg-disabled);
 
-  //     &.Button_size_m {
-  //       padding-left: var(--space-xxxxxs);
-  //     }
-  //   }
-
-  //   &_icon {
-  //     &.Button_size_m {
-  //       padding: 0 var(--space-xxxxxs);
-  //     }
-  //   }
-  // }
-
-  // &_size {
-  //   &_m {
-  //     min-height: var(--button-size-m);
-  //     min-width: var(--button-size-m);
-  //     padding: 0 var(--space-xs);
-  //   }
-
-  //   &_l {
-  //     min-height: var(--button-size-l);
-  //     min-width: var(--button-size-l);
-  //     padding: 0 var(--space-xl);
-  //   }
-  // }
+    .Button-Text {
+      color: var(--color-button-disable);
+    }
+  }
 }
 
 @media (max-width: 470px) {

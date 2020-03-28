@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
 import { Button as ButtonPresenter } from 'components/Button/Button';

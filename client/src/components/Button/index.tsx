@@ -1,4 +1,4 @@
-import { ReactType, MouseEventHandler } from 'react';
+import { ReactType, MouseEventHandler, ReactNode } from 'react';
 import { IClassNameProps } from '@bem-react/core';
 import { cn } from '@bem-react/classname';
 
@@ -10,9 +10,17 @@ export interface IButtonProps extends IClassNameProps {
    */
   as?: ReactType;
   /**
+   * Текст кнопки.
+   */
+  children?: ReactNode;
+  /**
    * Иконка слева от текста кнопки
    */
   iconLeft?: JSX.Element;
+  /**
+   * Неактивное состояние кнопки
+   */
+  disabled?: boolean;
   /**
    * Обработчик клика на кнопку
    */

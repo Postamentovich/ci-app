@@ -1,4 +1,4 @@
-import React, { FC, Children } from 'react';
+import React, { FC } from 'react';
 import './BuildCard.scss';
 import { Icon as IconPresenter } from 'components/Icon/Icon';
 import { compose, composeU } from '@bem-react/core';

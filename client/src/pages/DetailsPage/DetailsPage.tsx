@@ -16,7 +16,7 @@ import { cnHeader } from 'containers/Header';
 import { buildSelector } from 'store/builds/buildsSlice';
 import { useParams } from 'react-router-dom';
 import { getBuildLog } from 'store/builds/buildsActions';
-import Loader from 'components/Spin/Spin';
+import { Spin } from 'components/Spin/Spin';
 import { Log } from 'components/Log/Log';
 import './DetailsPage.scss';
 import { withIconTypeRepeat } from 'components/Icon/_type/Icon_type_repeat';
@@ -81,7 +81,7 @@ const BuildDetails = () => {
           // to={`/build/${build?.id}`}
         />
         <div className={cnDetails('Log')}>
-          {isLogLoading && <Loader />}
+          {isLogLoading && <Spin />}
           <Log>{log[id!]}</Log>
         </div>
       </div>

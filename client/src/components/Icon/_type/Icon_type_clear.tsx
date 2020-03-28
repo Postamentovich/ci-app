@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { withBemMod } from '@bem-react/core';
-import { ReactComponent as IconSvg } from '../assets/success.svg';
+import { ReactComponent as IconSvg } from '../assets/clear.svg';
 import { IIconProps, cnIcon } from '../index';
 
-export interface IIconTypeSuccessProps {
+export interface IIconTypeClearProps {
   /**
    * Тип иконки
    */
-  type?: 'success';
+  type?: 'clear';
 }
 
 /**
  * Модификатор, отвечающий за тип иконки
  */
-export const withIconTypeSuccess = withBemMod<IIconTypeSuccessProps, IIconProps>(
+export const withIconTypeClear = withBemMod<IIconTypeClearProps, IIconProps>(
   cnIcon(),
-  { type: 'success' },
+  { type: 'clear' },
   Icon => props => <IconSvg />,
 );

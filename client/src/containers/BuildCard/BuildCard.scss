@@ -1,0 +1,136 @@
+.BuildCard {
+  width: 100%;
+  &_type {
+    &_detail {
+      &:hover {
+        box-shadow: var(--card-shadow);
+        cursor: default;
+      }
+
+      .Card-Content {
+        flex-direction: column;
+      }
+      .Card-DateTime {
+        flex-direction: row;
+      }
+      .Card-Time {
+        margin-top: 0;
+        margin-left: var(--space-xxxxs);
+      }
+    }
+  }
+
+  &-DateTime {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+  }
+
+  &-Time {
+    display: flex;
+    align-items: center;
+    margin-top: var(--space-s);
+  }
+
+  &-Date {
+    display: flex;
+    align-items: center;
+  }
+
+  &-DateTimeItem {
+    margin-left: var(--space-xxxxxxs);
+    white-space: nowrap;
+  }
+
+  &-Content {
+    margin-left: var(--space-xxs);
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 32px);
+  }
+
+  &-Row {
+    display: flex;
+    align-items: center;
+
+    &:not(:first-child) {
+      margin-top: var(--space-xxxxs);
+    }
+  }
+
+  &-Message {
+    margin-left: var(--space-xxxxxxxs);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  &-Author {
+    margin-left: var(--space-xxs);
+  }
+
+  &-Status {
+    height: 22px;
+    width: 22px;
+    min-width: 22px;
+  }
+
+  &-BranchName {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-Separator {
+    border-bottom: 1px solid var(--color-separator);
+    margin-top: var(--space-xxxxs);
+    margin-bottom: var(--space-xxxxs);
+  }
+
+  &-Info {
+    max-width: calc(100% - 132px);
+  }
+}
+
+@media (max-width: 700px) {
+  .BuildCard {
+    &-Status {
+      height: 14px;
+      width: 14px;
+    }
+
+    &-Content {
+      flex-direction: column;
+    }
+    &-Row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    &-Message {
+      margin-left: 0;
+      margin-top: var(--space-xxxxs);
+    }
+    &-Author {
+      margin-left: 0;
+      margin-top: var(--space-xxxxs);
+    }
+    &-Separator {
+      display: block;
+      border-bottom: 1px solid var(--color-separator);
+    }
+    &-DateTime {
+      flex-direction: row;
+    }
+
+    &-Time {
+      margin-top: 0;
+      margin-left: var(--space-xxs);
+    }
+
+    &-Info {
+      max-width: calc(100% - 10px);
+    }
+  }
+}

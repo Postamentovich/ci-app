@@ -5,7 +5,7 @@ import { compose, composeU } from '@bem-react/core';
 import { withIconTypeSuccess } from 'components/Icon/_type/Icon_type_success';
 import { withIconTypeError } from 'components/Icon/_type/Icon_type_error';
 import { withIconTypeWaiting } from 'components/Icon/_type/Icon_type_waiting';
-import { cnCard } from '../index';
+import { cnCard } from '../../../components/Card/index';
 
 const Icon = compose(composeU(withIconTypeSuccess, withIconTypeError, withIconTypeWaiting))(IconPresenter);
 
@@ -13,7 +13,7 @@ export interface ButtonStatusProps {
   status: BuildStatus;
 }
 
-const ButtonStatus: React.SFC<ButtonStatusProps> = ({ status }) => {
+export const BuildCardStatus: React.SFC<ButtonStatusProps> = ({ status }) => {
   const getIcon = () => {
     switch (status) {
       case BuildStatus.Waiting:
@@ -29,5 +29,3 @@ const ButtonStatus: React.SFC<ButtonStatusProps> = ({ status }) => {
 
   return <div className={cnCard('Status')}>{getIcon()}</div>;
 };
-
-export default ButtonStatus;

@@ -13,8 +13,6 @@ import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { RootState } from 'store/rootReducer';
 import { cnHeader } from 'components/Header';
-import { Card as CardPresenter } from 'components/Card/Card';
-import { withCardTypeLink } from 'components/Card/_type/Card_type_link';
 import { buildSelector } from 'store/builds/buildsSlice';
 import { useParams } from 'react-router-dom';
 import { getBuildLog } from 'store/builds/buildsActions';
@@ -22,6 +20,7 @@ import Loader from 'components/Loader/Loader';
 import { Log } from 'components/Log/Log';
 import './DetailsPage.scss';
 import { withIconTypeRepeat } from 'components/Icon/_type/Icon_type_repeat';
+import { BuildCard } from 'containers/BuildCard/BuildCard';
 
 const cnDetails = cn('DetailsPage');
 
@@ -32,8 +31,6 @@ const Button = compose(
   withButtonSizeS,
   withButtonTypeLink,
 )(ButtonPresenter);
-
-const Card = compose(withCardTypeLink)(CardPresenter);
 
 const BuildDetails = () => {
   const { id } = useParams();
@@ -70,7 +67,7 @@ const BuildDetails = () => {
         />
       </Header>
       <div className={cnDetails('Content', ['Layout'])}>
-        <Card
+        <BuildCard
           taskId={`#${build?.buildNumber}`}
           message={build?.commitMessage}
           branchName={build?.branchName}
@@ -79,8 +76,9 @@ const BuildDetails = () => {
           status={build?.status}
           key={build?.id}
           className={cnDetails('Card')}
-          type="link"
-          to={`/build/${build?.id}`}
+          duration={build?.duration}
+          // type="link"
+          // to={`/build/${build?.id}`}
         />
         <div className={cnDetails('Log')}>
           {isLogLoading && <Loader />}

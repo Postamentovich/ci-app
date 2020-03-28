@@ -17,12 +17,9 @@ import { RootState } from 'store/rootReducer';
 import { cnHeader } from 'components/Header';
 import { withIconTypePlay } from 'components/Icon/_type/Icon_type_play';
 import { getBuildList } from 'store/builds/buildsActions';
-import { Card as CardPresenter } from 'components/Card/Card';
-import { withCardTypeLink } from 'components/Card/_type/Card_type_link';
-import { Modal } from 'components/Modal/Modal';
-import { TextInput } from 'components/TextInput/TextInput';
 import { withButtonViewPseudo } from 'components/Button/_view/Button_view_pseudo';
 import { NewBuildModal } from 'containers/NewBuildModal/NewBuildModal';
+import { BuildCard } from 'containers/BuildCard/BuildCard';
 
 const cnHistory = cn('HistoryPage');
 
@@ -33,8 +30,6 @@ const Button = compose(
   composeU(withButtonSizeS, withButtonSizeM),
   withButtonTypeLink,
 )(ButtonPresenter);
-
-const Card = compose(withCardTypeLink)(CardPresenter);
 
 const BuildHistory = () => {
   const dispatch = useDispatch();
@@ -87,13 +82,14 @@ const BuildHistory = () => {
         />
       </Header>
       <div className={cnHistory('Content', ['Layout'])}>
-        {list.map(({ buildNumber, commitMessage, branchName, authorName, start, id, status }) => (
-          <Card
+        {list.map(({ buildNumber, commitMessage, branchName, authorName, start, id, status, duration }) => (
+          <BuildCard
             taskId={`#${buildNumber}`}
             message={commitMessage}
             branchName={branchName}
             authorName={authorName}
             date={String(start)}
+            duration={duration}
             status={status}
             key={id}
             className={cnHistory('Card')}

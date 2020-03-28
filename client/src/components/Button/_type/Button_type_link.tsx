@@ -4,10 +4,19 @@ import { Link } from 'react-router-dom';
 import { IButtonProps, cnButton } from '../index';
 
 export interface IButtonTypeLinkProps {
+  /**
+   * Тип кнопки
+   */
   type?: 'link';
+  /**
+   * Адрес
+   */
   to?: string;
 }
 
+/**
+ * Модификатор, отвечающий за тип кнопки
+ */
 export const withButtonTypeLink = withBemMod<IButtonTypeLinkProps, IButtonProps>(
   cnButton(),
   { type: 'link' },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
-import { Header } from 'components/Header/Header';
-import { Footer } from 'components/Footer/Footer';
+import { Header } from 'containers/Header/Header';
+import { Footer } from 'containers/Footer/Footer';
 import { RootState } from 'store/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { composeU, compose } from '@bem-react/core';

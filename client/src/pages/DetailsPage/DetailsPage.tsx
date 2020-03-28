@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
-import { Header } from 'components/Header/Header';
-import { Footer } from 'components/Footer/Footer';
+import { Header } from 'containers/Header/Header';
+import { Footer } from 'containers/Footer/Footer';
 import { Button as ButtonPresenter } from 'components/Button/Button';
 import { withButtonViewDefault } from 'components/Button/_view/Button_view_default';
 import { Icon as IconPresenter } from 'components/Icon/Icon';
@@ -12,11 +12,11 @@ import { withButtonViewAction } from 'components/Button/_view/Button_view_action
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { RootState } from 'store/rootReducer';
-import { cnHeader } from 'components/Header';
+import { cnHeader } from 'containers/Header';
 import { buildSelector } from 'store/builds/buildsSlice';
 import { useParams } from 'react-router-dom';
 import { getBuildLog } from 'store/builds/buildsActions';
-import Loader from 'components/Loader/Loader';
+import Loader from 'components/Spin/Spin';
 import { Log } from 'components/Log/Log';
 import './DetailsPage.scss';
 import { withIconTypeRepeat } from 'components/Icon/_type/Icon_type_repeat';

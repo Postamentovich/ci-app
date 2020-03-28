@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from 'pages/AppRouter';
 import { RootState } from 'store/rootReducer';
-import Loader from 'components/Loader/Loader';
+import Loader from 'components/Spin/Spin';
 import { getSettings } from './store/settings/settingsActions';
 
 const App: FC = () => {

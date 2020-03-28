@@ -1,8 +1,8 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
-import { Header } from 'components/Header/Header';
-import { Footer } from 'components/Footer/Footer';
+import { Header } from 'containers/Header/Header';
+import { Footer } from 'containers/Footer/Footer';
 import { Button as ButtonPresenter } from 'components/Button/Button';
 import { withButtonViewDefault } from 'components/Button/_view/Button_view_default';
 import { withIconTypeLogo } from 'components/Icon/_type/Icon_type_logo';

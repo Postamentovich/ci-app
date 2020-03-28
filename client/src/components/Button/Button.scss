@@ -100,6 +100,15 @@
 
 @media (max-width: 470px) {
   .Button {
+    &_size {
+      &_s {
+        padding: 6px;
+        .Button-Text {
+          display: none;
+        }
+      }
+    }
+
     &_type_icon-left {
       &.Button_size_m {
         padding: 0 var(--space-xxxxxs);

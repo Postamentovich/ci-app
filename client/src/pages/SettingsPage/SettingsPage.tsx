@@ -15,6 +15,8 @@ import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
 import './SettingsPage.scss';
 import { saveSettings } from 'store/settings/settingsActions';
 import { withTextInputHasClear } from 'components/TextInput/_hasClear/TextInput_hasClear';
+import { Title as TitlePresenter } from 'components/Title/Title';
+import { withTitleTypeH4 } from 'components/Title/_type/Title_type_h4';
 
 const cnSettings = cn('SettingsPage');
 
@@ -25,6 +27,8 @@ const Button = compose(
 )(ButtonPresenter);
 
 const TextInput = compose(withTextInputHasClear)(TextInputPresenter);
+
+const Title = compose(withTitleTypeH4)(TitlePresenter);
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -40,7 +44,9 @@ const Settings = () => {
     <div className={cnSettings()}>
       <Header className="Layout" title="School CI Server" />
       <div className={cnSettings('Content', ['Layout'])}>
-        <h2 className={cnSettings('Title')}>Settings</h2>
+        <Title type="h4" className={cnSettings('Title')}>
+          Settings
+        </Title>
         <p className={cnSettings('Description')}>Configure repository connection and synchronization settings.</p>
         <TextInput
           label="GitHub repository"

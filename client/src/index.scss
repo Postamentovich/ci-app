@@ -43,7 +43,7 @@
   --button-size-m-lineHeight: 32px;
 
   --color-button-disable: #b8b8b8;
-  --color-bg-disabled: #F2F2F2;
+  --color-bg-disabled: #f2f2f2;
 
   --space-xxxxxxxs: 4px;
   --space-xxxxxxs: 5px;
@@ -132,9 +132,24 @@ body {
   * {
     box-sizing: border-box;
   }
+  min-width: 320px;
 }
 
 .Layout {
   padding-left: 100px;
   padding-right: 100px;
+}
+
+@media (max-width: 768px) {
+  .Layout {
+    padding-right: var(--space-xxxxl);
+    padding-left: var(--space-xxxxl);
+  }
+}
+
+@media (max-width: 470px) {
+  .Layout {
+    padding-right: var(--space-l);
+    padding-left: var(--space-l);
+  }
 }

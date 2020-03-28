@@ -2,6 +2,7 @@
   background-color: var(--color-bg-footer);
 
   padding-top: var(--space-xxxxs);
+
   padding-bottom: var(--space-xxxxs);
 
   display: flex;
@@ -16,6 +17,14 @@
     &:not(:first-child) {
       margin-left: var(--space-s);
     }
+  }
+
+  &-Copyright {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.06px;
+    color: #7f8285;
   }
 }
 

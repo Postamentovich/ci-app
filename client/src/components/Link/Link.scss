@@ -8,6 +8,12 @@
 
     transition: color 0.15s linear;
 
+    font-size: 13px;
+
+    line-height: 16px;
+
+    letter-spacing: 0.06px;
+
     &:hover {
       color: var(--color-link-hover);
     }

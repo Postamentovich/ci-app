@@ -1,0 +1,27 @@
+.Title {
+  &_type {
+    &_h1 {
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.25px;
+    }
+  }
+  &_view {
+    &_default {
+      color: #7f8285;
+      font-style: normal;
+      font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: 470px) {
+  .Title {
+    &_type {
+      &_h1 {
+        font-size: var(--text-size-xl);
+        line-height: var(--text-line-height-s);
+      }
+    }
+  }
+}

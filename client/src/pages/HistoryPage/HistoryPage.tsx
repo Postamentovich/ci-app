@@ -17,7 +17,8 @@ import { RootState } from 'store/rootReducer';
 import { cnHeader } from 'components/Header';
 import { withIconTypePlay } from 'components/Icon/_type/Icon_type_play';
 import { getBuildList } from 'store/builds/buildsActions';
-import { Card } from 'components/Card/Card';
+import { Card as CardPresenter } from 'components/Card/Card';
+import { withCardTypeLink } from 'components/Card/_type/Card_type_link';
 
 const cnHistory = cn('HistoryPage');
 
@@ -28,6 +29,8 @@ const Button = compose(
   composeU(withButtonSizeS, withButtonSizeM),
   withButtonTypeLink,
 )(ButtonPresenter);
+
+const Card = compose(withCardTypeLink)(CardPresenter);
 
 const BuildHistory = () => {
   const dispatch = useDispatch();
@@ -67,9 +70,20 @@ const BuildHistory = () => {
         />
       </Header>
       <div className={cnHistory('Content', ['Layout'])}>
-        {list.map(build => {
-          return <Card />;
-        })}
+        {list.map(({ buildNumber, commitMessage, branchName, authorName, start, id, status }) => (
+          <Card
+            taskId={`#${buildNumber}`}
+            message={commitMessage}
+            branchName={branchName}
+            authorName={authorName}
+            date={String(start)}
+            status={status}
+            key={id}
+            className={cnHistory('Card')}
+            type="link"
+            to={`/build/${id}`}
+          />
+        ))}
       </div>
       <Footer className="Layout" />
     </div>

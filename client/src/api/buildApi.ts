@@ -9,7 +9,7 @@ const buildApi = {
   },
   /** Get build log */
   getLog: async (buildId: string): Promise<string> => {
-    const { data } = await axios.get(`/api/builds/${buildId}/log`);
+    const { data } = await axios.get(`/api/builds/${buildId}/logs`);
     return data;
   },
   /** Get build details */

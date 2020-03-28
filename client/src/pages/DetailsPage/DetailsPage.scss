@@ -1,0 +1,31 @@
+.DetailsPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &-Card {
+    margin-top: var(--space-xxxxxxxs);
+  }
+
+  &-Log {
+    margin-top: var(--space-s);
+  }
+  
+  &-Content {
+    display: flex;
+    flex-grow: 999;
+    flex-direction: column;
+    margin-top: var(--space-l);
+    margin-bottom: var(--space-l);
+  }
+}
+
+@media (max-width: 470px) {
+  .DetailsPage {
+    padding-top: var(--space-xxxxxxxs);
+    padding-bottom: var(--space-l);
+    &-Container {
+      min-height: calc(100vh - 146px);
+    }
+  }
+}

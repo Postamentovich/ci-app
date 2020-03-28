@@ -7,6 +7,7 @@ import { ICardProps, cnCard } from './index';
 import { withIconTypeUser } from 'components/Icon/_type/Icon_type_user';
 import { withIconTypeCalendar } from 'components/Icon/_type/Icon_type_calendar';
 import { withIconTypeTime } from 'components/Icon/_type/Icon_type_time';
+import ButtonStatus from './Status/Button-Status';
 
 const Icon = compose(composeU(withIconTypeBranch, withIconTypeTime, withIconTypeUser, withIconTypeCalendar))(
   IconPresenter,
@@ -19,14 +20,14 @@ export const Card: FC<ICardProps> = ({
   message,
   className,
   date,
+  status,
   authorName,
   duration,
-  statusIcon,
   as: Component = 'div',
   ...props
 }) => (
   <Component {...props} className={cnCard({}, [className])}>
-    <div className={cnCard('Status')}>{statusIcon}</div>
+    <ButtonStatus status={status!} />
     <div className={cnCard('Content')}>
       <div className={cnCard('Info')}>
         <div className={cnCard('Row')}>

@@ -19,6 +19,8 @@ import { withIconTypePlay } from 'components/Icon/_type/Icon_type_play';
 import { getBuildList } from 'store/builds/buildsActions';
 import { Card as CardPresenter } from 'components/Card/Card';
 import { withCardTypeLink } from 'components/Card/_type/Card_type_link';
+import { Modal } from 'components/Modal/Modal';
+import { TextInput } from 'components/TextInput/TextInput';
 
 const cnHistory = cn('HistoryPage');
 
@@ -86,6 +88,15 @@ const BuildHistory = () => {
         ))}
       </div>
       <Footer className="Layout" />
+      <Modal>
+        <h3>New build</h3>
+        <p>Enter the commit hash which you want to buid</p>
+        <TextInput id="commitHash" placeholder="Commit hash" />
+        <Button view="action" size="m">
+          Run build
+        </Button>
+        <Button size="m"> Cancel</Button>
+      </Modal>
     </div>
   );
 };

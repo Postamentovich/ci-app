@@ -18,7 +18,7 @@
   }
 }
 
-.loading-component {
+.Spin {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -38,7 +38,7 @@
     stroke-dasharray: 1 200;
     stroke-dashoffset: 0;
     stroke-width: 2px;
-    stroke: #8ec94a;
+    stroke: #FFCC00;
     animation: dash 3.5s ease-out infinite;
   }
 }

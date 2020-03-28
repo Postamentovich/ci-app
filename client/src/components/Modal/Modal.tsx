@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { IModalProps, cnModal } from './index';
 import './Modal.scss';
 
+/**
+ * Компонент для создания модальных окон
+ */
 export const Modal: FC<IModalProps> = ({ children, className, as: Component = 'div', ...props }) => {
   return ReactDOM.createPortal(
     <div className={cnModal()}>

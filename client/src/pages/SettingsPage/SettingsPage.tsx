@@ -5,7 +5,7 @@ import { Footer } from 'containers/Footer/Footer';
 import { RootState } from 'store/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { composeU, compose } from '@bem-react/core';
-import { TextInput } from 'components/TextInput/TextInput';
+import { TextInput as TextInputPresenter } from 'components/TextInput/TextInput';
 import { changeRepoName, changeBuildCommand, changeMainBranch, changePeriod } from 'store/settings/settingsSlice';
 import { Button as ButtonPresenter } from 'components/Button/Button';
 import { withButtonViewDefault } from 'components/Button/_view/Button_view_default';
@@ -14,6 +14,7 @@ import { withButtonViewAction } from 'components/Button/_view/Button_view_action
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
 import './SettingsPage.scss';
 import { saveSettings } from 'store/settings/settingsActions';
+import { withTextInputHasClear } from 'components/TextInput/_hasClear/TextInput_hasClear';
 
 const cnSettings = cn('SettingsPage');
 
@@ -22,6 +23,8 @@ const Button = compose(
   withButtonSizeM,
   withButtonTypeLink,
 )(ButtonPresenter);
+
+const TextInput = compose(withTextInputHasClear)(TextInputPresenter);
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -46,6 +49,8 @@ const Settings = () => {
           onChange={e => dispatch(changeRepoName(e.target.value))}
           id="repoName"
           className={cnSettings('Input')}
+          hasClear={!!repoName?.length}
+          onClearClick={e => dispatch(changeRepoName(''))}
         />
         <TextInput
           label="Build command"
@@ -54,6 +59,8 @@ const Settings = () => {
           onChange={e => dispatch(changeBuildCommand(e.target.value))}
           id="buildComand"
           className={cnSettings('Input')}
+          hasClear={!!buildComand?.length}
+          onClearClick={e => dispatch(changeBuildCommand(''))}
         />
         <TextInput
           label="Main branch"
@@ -62,6 +69,8 @@ const Settings = () => {
           onChange={e => dispatch(changeMainBranch(e.target.value))}
           id="mainBranch"
           className={cnSettings('Input')}
+          hasClear={!!mainBranch?.length}
+          onClearClick={e => dispatch(changeMainBranch(''))}
         />
         <TextInput
           label="Synchronize every"

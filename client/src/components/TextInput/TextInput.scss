@@ -71,7 +71,7 @@
     }
   }
 
-  &-ClearButton {
+  &-Clear {
     border: none;
     padding: 0;
     position: absolute;
@@ -80,5 +80,6 @@
     background: transparent;
     display: flex;
     cursor: pointer;
+    // outline: 0; 
   }
 }

@@ -4,8 +4,8 @@ import { cn } from '@bem-react/classname';
 
 export interface ICardProps extends IClassNameProps {
   /**
-   * HTML-атрибут для рендера кнопки
-   * @default 'button'
+   * HTML-атрибут для рендера
+   * @default 'div'
    */
   as?: ReactType;
 }

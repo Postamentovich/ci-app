@@ -5,7 +5,7 @@ import { cn } from '@bem-react/classname';
 export declare type ContainerElement = HTMLButtonElement | HTMLAnchorElement;
 export interface IButtonProps extends IClassNameProps {
   /**
-   * HTML-атрибут для рендера кнопки
+   * HTML-атрибут для рендера
    * @default 'button'
    */
   as?: ReactType;

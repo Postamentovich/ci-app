@@ -8,10 +8,10 @@ const Link = compose(withLinkViewDefault)(LinkPresenter);
 
 const FooterLinks = () => (
   <div className={cnFooter('Links')}>
-    <Link href="/support" view="default" className={cnFooter('Link')}>
+    <Link href="/support" title="Support" view="default" className={cnFooter('Link')}>
       Support
     </Link>
-    <Link href="/learning" view="default" className={cnFooter('Link')}>
+    <Link href="/learning" title="Learning" view="default" className={cnFooter('Link')}>
       Learning
     </Link>
   </div>

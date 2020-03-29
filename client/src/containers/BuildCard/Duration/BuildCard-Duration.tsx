@@ -24,7 +24,7 @@ export const BuildCardDuration: React.FC<BuildCardDurationProps> = ({ duration }
   return (
     <span className={cnBuildCard('Duration')}>
       <Icon type="time" />
-      {formatedDuration}
+      <span className={cnBuildCard('DateTimeItem')}>{formatedDuration}</span>
     </span>
   );
 };

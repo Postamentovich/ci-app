@@ -23,7 +23,7 @@ export const BuildCardDate: React.FC<BuildCardDateProps> = ({ date }) => {
   return (
     <span className={cnBuildCard('Date')}>
       <Icon type="calendar" />
-      {formatedDate}
+      <span className={cnBuildCard('DateTimeItem')}>{formatedDate}</span>
     </span>
   );
 };

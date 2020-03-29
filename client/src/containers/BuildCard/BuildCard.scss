@@ -51,7 +51,7 @@
     align-items: baseline;
   }
 
-  &-Time {
+  &-Duration {
     display: flex;
     align-items: center;
     margin-top: var(--space-s);
@@ -60,11 +60,16 @@
   &-Date {
     display: flex;
     align-items: center;
+    white-space: nowrap;
   }
 
   &-DateTimeItem {
     margin-left: var(--space-xxxxxxs);
     white-space: nowrap;
+    color: #595959;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.06px;
   }
 
   &-Content {
@@ -109,6 +114,29 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-left: 4px;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.06px;
+    color: #000000;
+  }
+
+  &-AuthorName {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.06px;
+    color: #000000;
+    margin-left: 4px;
+  }
+
+  &-CommitHash {
+    margin-left: 4px;
+    color: #595959;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.06px;
   }
 
   &-Separator {
@@ -152,7 +180,7 @@
       flex-direction: row;
     }
 
-    &-Time {
+    &-Duration {
       margin-top: 0;
       margin-left: var(--space-xxs);
     }

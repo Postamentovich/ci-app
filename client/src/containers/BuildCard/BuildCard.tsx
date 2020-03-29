@@ -1,21 +1,14 @@
 import React, { FC } from 'react';
-import './BuildCard.scss';
-import { Icon as IconPresenter } from 'components/Icon/Icon';
-import { compose, composeU } from '@bem-react/core';
-import { withIconTypeBranch } from 'components/Icon/_type/Icon_type_branch';
-import { withIconTypeUser } from 'components/Icon/_type/Icon_type_user';
-import { withIconTypeCalendar } from 'components/Icon/_type/Icon_type_calendar';
-import { withIconTypeTime } from 'components/Icon/_type/Icon_type_time';
+import { compose } from '@bem-react/core';
+import { withCardTypeLink } from 'components/Card/_type/Card_type_link';
 import { Card as CardPresenter } from 'components/Card/Card';
 import { IBuildCardProps, cnBuildCard } from './index';
 import { BuildCardStatus } from './Status/BuildCard-Status';
-import { withCardTypeLink } from 'components/Card/_type/Card_type_link';
 import { BuildCardDate } from './Date/BuildCard-Date';
 import { BuildCardDuration } from './Duration/BuildCard-Duration';
-
-const Icon = compose(composeU(withIconTypeBranch, withIconTypeTime, withIconTypeUser, withIconTypeCalendar))(
-  IconPresenter,
-);
+import { BuildCardCommit } from './Commit/BuildCard-Commit';
+import { BuildCardAuthor } from './Author/BuildCard-Author';
+import './BuildCard.scss';
 
 const Card = compose(withCardTypeLink)(CardPresenter);
 
@@ -41,15 +34,8 @@ export const BuildCard: FC<IBuildCardProps> = ({
           <span className={cnBuildCard('Message')}>{message}</span>
         </div>
         <div className={cnBuildCard('Row')}>
-          <div className={cnBuildCard('Branch')}>
-            <Icon type="branch" />
-            <span className={cnBuildCard('BranchName')}>{branchName}</span>
-            <span className={cnBuildCard('CommitHash')}>{commitHash}</span>
-          </div>
-          <div className={cnBuildCard('Author')}>
-            <Icon type="user" />
-            <span className={cnBuildCard('AuthorName')}>{authorName}</span>
-          </div>
+          <BuildCardCommit branchName={branchName!} commitHash={commitHash!} />
+          <BuildCardAuthor authorName={authorName!} />
         </div>
       </div>
       <span className={cnBuildCard('Separator')} />

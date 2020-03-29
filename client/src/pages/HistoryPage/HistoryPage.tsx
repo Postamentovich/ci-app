@@ -82,10 +82,11 @@ const BuildHistory = () => {
         />
       </Header>
       <div className={cnHistory('Content', ['Layout'])}>
-        {list.map(({ buildNumber, commitMessage, branchName, authorName, start, id, status, duration }) => (
+        {list.map(({ buildNumber, commitHash, commitMessage, branchName, authorName, start, id, status, duration }) => (
           <BuildCard
             taskId={`#${buildNumber}`}
             message={commitMessage}
+            commitHash={commitHash}
             branchName={branchName}
             authorName={authorName}
             date={String(start)}

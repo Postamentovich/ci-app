@@ -20,7 +20,8 @@ import { Spin } from 'components/Spin/Spin';
 import { Log } from 'components/Log/Log';
 import './DetailsPage.scss';
 import { withIconTypeRepeat } from 'components/Icon/_type/Icon_type_repeat';
-import { BuildCard } from 'containers/BuildCard/BuildCard';
+import { BuildCard as BuildCardPresenter } from 'containers/BuildCard/BuildCard';
+import { withBuildCardViewDetail } from 'containers/BuildCard/_view/BuildCard_view_detail';
 
 const cnDetails = cn('DetailsPage');
 
@@ -31,6 +32,8 @@ const Button = compose(
   withButtonSizeS,
   withButtonTypeLink,
 )(ButtonPresenter);
+
+const BuildCard = compose(withBuildCardViewDetail)(BuildCardPresenter);
 
 const BuildDetails = () => {
   const { id } = useParams();
@@ -53,7 +56,7 @@ const BuildDetails = () => {
 
   return (
     <div className={cnDetails()}>
-      <Header className="Layout" title={repoName || ''}>
+      <Header className="Layout" title={repoName || ''} type="link" to="/">
         <Button className={cnHeader('Button')} view="default" size="s" iconLeft={<Icon type="repeat" />}>
           Rebuild
         </Button>
@@ -77,8 +80,8 @@ const BuildDetails = () => {
           key={build?.id}
           className={cnDetails('Card')}
           duration={build?.duration}
-          // type="link"
-          // to={`/build/${build?.id}`}
+          commitHash={build?.commitHash}
+          view="detail"
         />
         <div className={cnDetails('Log')}>
           {isLogLoading && <Spin />}

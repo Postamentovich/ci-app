@@ -42,7 +42,16 @@ export const NewBuildModal: React.SFC<NewBuildModalProps> = ({ onConfirm, onCanc
     <Modal className={cnNewBuildModal()}>
       <h3 className={cnNewBuildModal('Title')}>New build</h3>
       <p className={cnNewBuildModal('Description')}>Enter the commit hash which you want to buid</p>
-      <TextInput id="commitHash" placeholder="Commit hash" value={value} onChange={handleChangeInput} />
+      <TextInput
+        id="commitHash"
+        placeholder="Commit hash"
+        value={value}
+        onChange={handleChangeInput}
+        hasClear={value.length > 0}
+        onClearClick={() => {
+          setValue('');
+        }}
+      />
       <div className={cnNewBuildModal('Buttons')}>
         <Button view="action" size="m" className={cnNewBuildModal('Button')} onClick={handleClickConfirm}>
           Run build

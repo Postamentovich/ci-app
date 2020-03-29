@@ -4,6 +4,17 @@
   &-Description {
     margin-top: var(--space-s);
     margin-bottom: var(--space-s);
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.06px;
+    color: #000000;
+  }
+
+  &-Title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
   }
 
   &-Buttons {

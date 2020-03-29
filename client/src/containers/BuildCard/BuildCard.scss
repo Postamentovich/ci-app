@@ -1,5 +1,6 @@
 .BuildCard {
   width: 100%;
+
   &_type {
     &_detail {
       &:hover {
@@ -18,6 +19,30 @@
         margin-left: var(--space-xxxxs);
       }
     }
+  }
+
+  &_status {
+    &_Success {
+      .BuildCard-TaskId {
+        color: #00b341;
+      }
+    }
+    &_Waiting {
+      .BuildCard-TaskId {
+        color: #ff9a00;
+      }
+    }
+    &_Error {
+      .BuildCard-TaskId {
+        color: #ff3333;
+      }
+    }
+  }
+
+  &-TaskId {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
   }
 
   &-DateTime {
@@ -64,6 +89,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+    font-size: 15px;
+    line-height: 20px;
+    color: #000000;
   }
 
   &-Author {

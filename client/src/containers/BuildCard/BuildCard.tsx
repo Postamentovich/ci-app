@@ -32,7 +32,7 @@ export const BuildCard: FC<IBuildCardProps> = ({
   as: Component = 'div',
   ...props
 }) => (
-  <Card {...props} className={cnBuildCard({}, [className])}>
+  <Card {...props} className={cnBuildCard({ status }, [className])}>
     <BuildCardStatus status={status!} />
     <div className={cnBuildCard('Content')}>
       <div className={cnBuildCard('Info')}>
@@ -43,7 +43,7 @@ export const BuildCard: FC<IBuildCardProps> = ({
         <div className={cnBuildCard('Row')}>
           <div className={cnBuildCard('Branch')}>
             <Icon type="branch" />
-            <span className={cnBuildCard('Branc0hName')}>{branchName}</span>
+            <span className={cnBuildCard('BranchName')}>{branchName}</span>
             <span className={cnBuildCard('CommitHash')}>{commitHash}</span>
           </div>
           <div className={cnBuildCard('Author')}>

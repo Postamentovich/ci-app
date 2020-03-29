@@ -5,13 +5,13 @@ import { Header } from 'containers/Header/Header';
 import { Footer } from 'containers/Footer/Footer';
 import { Button as ButtonPresenter } from 'components/Button/Button';
 import { withButtonViewDefault } from 'components/Button/_view/Button_view_default';
-import { withIconTypeLogo } from 'components/Icon/_type/Icon_type_logo';
-import { Icon as IconPresenter } from 'components/Icon/Icon';
-import { withIconTypeGear } from 'components/Icon/_type/Icon_type_gear';
 import { withButtonSizeS } from 'components/Button/_size/Button_size_s';
 import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
+import { Icon as IconPresenter } from 'components/Icon/Icon';
+import { withIconTypeLogo } from 'components/Icon/_type/Icon_type_logo';
+import { withIconTypeGear } from 'components/Icon/_type/Icon_type_gear';
 import './HomePage.scss';
 
 const cnHome = cn('HomePage');
@@ -24,7 +24,7 @@ const Button = compose(
   withButtonTypeLink,
 )(ButtonPresenter);
 
-const Home = () => (
+export const HomePage = () => (
   <div className={cnHome()}>
     <Header className="Layout" title="School CI Server">
       <Button view="default" type="link" to="/settings" size="s" iconLeft={<Icon type="gear" />}>
@@ -45,5 +45,3 @@ const Home = () => (
     <Footer className="Layout" />
   </div>
 );
-
-export default Home;

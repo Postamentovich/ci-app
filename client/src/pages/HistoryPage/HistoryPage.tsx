@@ -31,7 +31,7 @@ const Button = compose(
   withButtonTypeLink,
 )(ButtonPresenter);
 
-const BuildHistory = () => {
+export const HistoryPage = () => {
   const dispatch = useDispatch();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -104,5 +104,3 @@ const BuildHistory = () => {
     </div>
   );
 };
-
-export default BuildHistory;

@@ -1,6 +1,4 @@
-import * as React from 'react';
 import { withBemMod } from '@bem-react/core';
-import { Link } from 'react-router-dom';
 import { IBuildCardProps, cnBuildCard } from '../index';
 
 export interface IBuildCardViewDetailsProps {

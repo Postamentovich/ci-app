@@ -35,7 +35,7 @@ const Button = compose(
 
 const BuildCard = compose(withBuildCardViewDetail)(BuildCardPresenter);
 
-const BuildDetails = () => {
+export const DetailsPage = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -92,5 +92,3 @@ const BuildDetails = () => {
     </div>
   );
 };
-
-export default BuildDetails;

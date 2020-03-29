@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type SettingsState = {
-  repoName: string | null;
-  buildCommand: string | null;
-  mainBranch: string | null;
-  period: number | null;
+  repoName: string;
+  buildCommand: string;
+  mainBranch: string;
+  period: number;
   isSaving: boolean;
 };
 
 const initialState: SettingsState = {
-  repoName: null,
-  buildCommand: null,
-  mainBranch: null,
-  period: null,
+  repoName: '',
+  buildCommand: '',
+  mainBranch: 'master',
+  period: 10,
   isSaving: false,
 };
 

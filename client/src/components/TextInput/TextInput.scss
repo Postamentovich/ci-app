@@ -78,4 +78,10 @@
     display: flex;
     cursor: pointer;
   }
+
+  &_notValid {
+    .TextInput-Input {
+      border-color: var(--color-text-required);
+    }
+  }
 }

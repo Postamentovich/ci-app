@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/rootReducer';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import Home from './HomePage/HomePage';
-import Settings from './SettingsPage/SettingsPage';
-import BuildHistory from './HistoryPage/HistoryPage';
-import BuildDetails from './DetailsPage/DetailsPage';
+import { HomePage } from './HomePage/HomePage';
+import { SettingsPage } from './SettingsPage/SettingsPage';
+import { HistoryPage } from './HistoryPage/HistoryPage';
+import { DetailsPage } from './DetailsPage/DetailsPage';
 
 const AppRoutes = () => {
   const { repoName } = useSelector((state: RootState) => ({
@@ -15,8 +15,8 @@ const AppRoutes = () => {
   if (!repoName) {
     return (
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/settings" exact component={Settings} />
+        <Route path="/" exact component={HomePage} />
+        <Route path="/settings" exact component={SettingsPage} />
         <Redirect to="/" />
       </Switch>
     );
@@ -24,9 +24,9 @@ const AppRoutes = () => {
 
   return (
     <Switch>
-      <Route exact path="/" component={BuildHistory} />
-      <Route exact path="/build/:id" component={BuildDetails} />
-      <Route exact path="/settings" component={Settings} />
+      <Route exact path="/" component={HistoryPage} />
+      <Route exact path="/build/:id" component={DetailsPage} />
+      <Route exact path="/settings" component={SettingsPage} />
       <Redirect to="/" />
     </Switch>
   );

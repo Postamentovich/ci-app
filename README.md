@@ -4,6 +4,21 @@
 Добавить обработку ошибок
 Обработку кликов на кнопки добавления билда и rebuild
 
+## Установка и запуск
+
+### Переменные окружения
+
+API_TOKEN - токен https://hw.shri.yandex/ нужен для работы сервера<br>
+
+``` shell
+$ git checkout react
+$ npm install
+$ cd client && npm install
+$ npm run build
+$ cd ..
+$ npm run dev
+```
+
 ## Используемые технологии 
 
 - Typescript <br>

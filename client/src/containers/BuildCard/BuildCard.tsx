@@ -40,8 +40,8 @@ export const BuildCard: FC<IBuildCardProps> = ({
       </div>
       <span className={cnBuildCard('Separator')} />
       <div className={cnBuildCard('DateTime')}>
-        <BuildCardDate date={date!} />
-        <BuildCardDuration duration={duration!} />
+        {date && <BuildCardDate date={date!} />}
+        {duration && <BuildCardDuration duration={duration!} />}
       </div>
     </div>
   </Card>

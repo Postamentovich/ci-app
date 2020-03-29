@@ -82,6 +82,7 @@ export const HistoryPage = () => {
         />
       </Header>
       <div className={cnHistory('Content', ['Layout'])}>
+        {!list.length && <span>You don't have any builds</span>}
         {list.map(({ buildNumber, commitHash, commitMessage, branchName, authorName, start, id, status, duration }) => (
           <BuildCard
             taskId={`#${buildNumber}`}
@@ -89,7 +90,8 @@ export const HistoryPage = () => {
             commitHash={commitHash}
             branchName={branchName}
             authorName={authorName}
-            date={String(start)}
+            // @ts-ignore
+            date={start}
             duration={duration}
             status={status}
             key={id}

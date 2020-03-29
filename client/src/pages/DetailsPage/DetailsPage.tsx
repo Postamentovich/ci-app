@@ -75,7 +75,8 @@ export const DetailsPage = () => {
           message={build?.commitMessage}
           branchName={build?.branchName}
           authorName={build?.authorName}
-          date={String(build?.start)}
+          // @ts-ignore
+          date={build?.start}
           status={build?.status}
           key={build?.id}
           className={cnDetails('Card')}

@@ -16,10 +16,12 @@ export interface ButtonStatusProps {
 export const BuildCardStatus: React.SFC<ButtonStatusProps> = ({ status }) => {
   const getIcon = () => {
     switch (status) {
+      case BuildStatus.InProgress:
       case BuildStatus.Waiting:
         return <Icon type="waiting" />;
       case BuildStatus.Success:
         return <Icon type="success" />;
+      case BuildStatus.Canceled:
       case BuildStatus.Fail:
         return <Icon type="error" />;
       default:

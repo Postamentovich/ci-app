@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable class-methods-use-this */
 const util = require('util');
 const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
@@ -115,7 +117,7 @@ class GitRepo {
    * @param {boolean} onlyLast - Флаг, брать только последний коммит или все коммиты за период
    */
   async checkCommits(onlyLast) {
-    const commits = await this.getRecentCommits(onlyLast);
+    const commits = await this.getRecentCommits();
 
     for (let i = 0; i < commits.length; i++) {
       const commitHash = commits[i];
@@ -228,18 +230,16 @@ class GitRepo {
    *
    * @param {boolean} onlyLast - Флаг, брать только последний коммит или все коммиты за период
    */
-  async getRecentCommits(onlyLast) {
+  async getRecentCommits() {
     await this.run(`cd ${this.localFolderName} && git pull`);
 
     logger.debug('GitRepo - get recent commits');
 
-    const command = onlyLast
-      ? 'git log -1 --pretty=format:"%H{SPLIT}"'
-      : `git log --since="${this.lastCheckingCommitTime.toISOString()}" --pretty=format:"%H{SPLIT}"`;
+    const command = 'git log --pretty=format:"%H{SPLIT}"';
 
     const { stdout } = await this.run(`cd ${this.localFolderName} && ${command}`);
 
-    const listCommits = stdout.split('{SPLIT}');
+    const listCommits = await stdout.split('{SPLIT}');
 
     this.lastCheckingCommitTime = new Date();
 

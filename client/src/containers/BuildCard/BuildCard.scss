@@ -27,11 +27,13 @@
         color: #00b341;
       }
     }
+    &_InProgress,
     &_Waiting {
       .BuildCard-TaskId {
         color: #ff9a00;
       }
     }
+    &_Cancel,
     &_Error {
       .BuildCard-TaskId {
         color: #ff3333;

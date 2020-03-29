@@ -1,23 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type SettingsState = {
-  isLoading: boolean;
+
+type Notify = {
+  message: string;
+  id: number;
 };
 
-const initialState: SettingsState = {
+type GlobalState = {
+  isLoading: boolean;
+  notify: Array<Notify>;
+};
+
+const initialState: GlobalState = {
   isLoading: true,
+  notify: [{ message: 'message', id: 4 }],
 };
 
 const globalSlice = createSlice({
-  name: 'settings',
+  name: 'global',
   initialState,
   reducers: {
     setIsLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
+    addNotify(state, action: PayloadAction<Notify>) {
+      state.notify = [...state.notify, action.payload];
+    },
+    removeNotify(state, action: PayloadAction<number>) {
+      state.notify = state.notify.filter(el => el.id !== action.payload);
+    },
   },
 });
 
-export const { setIsLoading } = globalSlice.actions;
+export const { setIsLoading, addNotify, removeNotify } = globalSlice.actions;
 
 export default globalSlice.reducer;

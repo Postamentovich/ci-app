@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from 'pages/AppRouter';
 import { RootState } from 'store/rootReducer';
+import { getSettings } from 'store/settings/settingsActions';
 import { Spin } from 'components/Spin/Spin';
-import { getSettings } from './store/settings/settingsActions';
+import { Notify } from 'containers/Notify/Notify';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const App: FC = () => {
     <Router>
       <div className="App">
         <AppRoutes />
+        <Notify />
       </div>
     </Router>
   );

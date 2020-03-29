@@ -39,3 +39,15 @@
     margin-top: var(--space-s);
   }
 }
+
+@media (max-width: 470px) {
+  .SettingsPage {
+    &-Buttons {
+      flex-direction: column;
+    }
+    &-Button {
+      margin-top: var(--space-s);
+      margin-right: 0;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { ReactType, ChangeEvent, ReactNode } from 'react';
+import { ReactType, ChangeEvent, ReactNode, MouseEventHandler } from 'react';
 import { IClassNameProps } from '@bem-react/core';
 import { cn } from '@bem-react/classname';
 
@@ -33,13 +33,21 @@ export interface ITextInputProps extends IClassNameProps {
    */
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   /**
-   * Дополнительный контент после контрола
-   */
-  addonAfter?: ReactNode;
-  /**
    * Дополнительный контент перед контролом
    */
   addonBefore?: ReactNode;
+  /**
+   * Обязательное поле или нет
+   */
+  required?: boolean;
+  /**
+   * Наличие крестика для очистки текстового поля.
+   */
+  hasClear?: boolean;
+  /**
+   * Обработчик клика по крестику.
+   */
+  onClearClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const cnTextInput = cn('TextInput');

@@ -7,31 +7,38 @@
 
   max-width: 474px;
 
-  &_label-position {
-    &_both {
-      flex-direction: row;
-      align-items: center;
-
-      .TextInput-Input {
-        margin-right: var(--space-xxxxs);
-        margin-left: var(--space-xxxxs);
-      }
-    }
-
-    &_top {
-      .TextInput-Input {
-        margin-top: var(--space-xxxxxs);
-      }
+  &_hasAddon {
+    flex-direction: row;
+    align-items: center;
+    .TextInput-Input {
+      margin-right: var(--space-xxxxs);
+      margin-left: var(--space-xxxxs);
+      margin-top: 0;
+      width: 52px;
+      text-align: end;
     }
   }
 
   &-Label {
-    &_required {
+    &[aria-required="true"] {
       &:after {
         content: " *";
         color: var(--color-text-required);
       }
     }
+
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.06px;
+  }
+
+  &-Addon {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.06px;
+    color: #434445;
   }
 
   &-Input {
@@ -45,17 +52,7 @@
     padding-left: var(--space-xs);
     padding-bottom: var(--space-xxxxs);
 
-    &_width {
-      &_s {
-        width: 52px;
-      }
-    }
-
-    &_distribution {
-      &_right {
-        text-align: end;
-      }
-    }
+    margin-top: var(--space-xxxxxs);
 
     &:hover {
       border-color: var(--color-border-input-hovered);
@@ -67,7 +64,7 @@
     }
 
     &::-webkit-input-placeholder {
-      font-size: var(--color-text-second);
+      color: var(--color-text-second);
     }
   }
 
@@ -80,6 +77,5 @@
     background: transparent;
     display: flex;
     cursor: pointer;
-    // outline: 0; 
   }
 }

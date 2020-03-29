@@ -14,9 +14,9 @@ import { withButtonViewAction } from 'components/Button/_view/Button_view_action
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
 import './SettingsPage.scss';
 import { saveSettings } from 'store/settings/settingsActions';
-import { withTextInputHasClear } from 'components/TextInput/_hasClear/TextInput_hasClear';
 import { Title as TitlePresenter } from 'components/Title/Title';
 import { withTitleTypeH4 } from 'components/Title/_type/Title_type_h4';
+import { withTextInputHasAddon } from 'components/TextInput/_hasAddon/TexstInput_hasAddon';
 
 const cnSettings = cn('SettingsPage');
 
@@ -26,9 +26,9 @@ const Button = compose(
   withButtonTypeLink,
 )(ButtonPresenter);
 
-const TextInput = compose(withTextInputHasClear)(TextInputPresenter);
-
 const Title = compose(withTitleTypeH4)(TitlePresenter);
+
+const TextInput = compose(withTextInputHasAddon)(TextInputPresenter);
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -56,7 +56,8 @@ const Settings = () => {
           id="repoName"
           className={cnSettings('Input')}
           hasClear={!!repoName?.length}
-          onClearClick={e => dispatch(changeRepoName(''))}
+          onClearClick={() => dispatch(changeRepoName(''))}
+          required
         />
         <TextInput
           label="Build command"
@@ -66,7 +67,8 @@ const Settings = () => {
           id="buildComand"
           className={cnSettings('Input')}
           hasClear={!!buildComand?.length}
-          onClearClick={e => dispatch(changeBuildCommand(''))}
+          onClearClick={() => dispatch(changeBuildCommand(''))}
+          required
         />
         <TextInput
           label="Main branch"
@@ -76,10 +78,12 @@ const Settings = () => {
           id="mainBranch"
           className={cnSettings('Input')}
           hasClear={!!mainBranch?.length}
-          onClearClick={e => dispatch(changeMainBranch(''))}
+          onClearClick={() => dispatch(changeMainBranch(''))}
         />
         <TextInput
           label="Synchronize every"
+          hasAddon
+          addonAfter="minutes"
           placeholder="10"
           value={period || 10}
           onChange={e => dispatch(changePeriod(Number(e.target.value)))}

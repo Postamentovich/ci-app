@@ -107,26 +107,9 @@
           display: none;
         }
       }
-    }
 
-    &_type_icon-left {
-      &.Button_size_m {
-        padding: 0 var(--space-xxxxxs);
-      }
-    }
-    &_width {
-      &_mobile-full {
+      &_m {
         width: 100%;
-
-        &.Button_size_m {
-          line-height: var(--text-line-height-xl);
-          padding: 0 var(--space-xl);
-        }
-      }
-      &_mobile-shrink {
-        .Button-Label {
-          display: none;
-        }
       }
     }
   }

@@ -7,6 +7,8 @@ export interface IHeaderProps extends IClassNameProps {
   as?: ReactType;
   buttons?: JSX.Element;
   title?: string;
+  type?: 'link' | 'default';
+  to?: string;
 }
 
 export const cnHeader = cn('Header');

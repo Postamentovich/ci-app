@@ -62,7 +62,7 @@ const BuildHistory = () => {
 
   return (
     <div className={cnHistory()}>
-      <Header className="Layout" title={repoName || ''}>
+      <Header className="Layout" title={repoName || ''} type="link" to="/">
         <Button
           className={cnHeader('Button')}
           view="default"

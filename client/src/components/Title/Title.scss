@@ -14,9 +14,17 @@
   &_view {
     &_default {
       color: #7f8285;
-      font-style: normal;
       font-weight: 500;
     }
+    &_link {
+      font-weight: 500;
+      line-height: 30px;
+      color: #000000;
+    }
+  }
+  &-Link {
+    text-decoration: none;
+    color: inherit;
   }
 }
 

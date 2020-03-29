@@ -48,6 +48,10 @@ export interface ITextInputProps extends IClassNameProps {
    * Обработчик клика по крестику.
    */
   onClearClick?: MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Дополнительный контент после контрола
+   */
+  addonAfter?: React.ReactNode;
 }
 
 export const cnTextInput = cn('TextInput');

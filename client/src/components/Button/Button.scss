@@ -89,6 +89,10 @@
     }
   }
 
+  &-Text {
+    white-space: nowrap;
+  }
+
   &[aria-disabled="true"] {
     background-color: var(--color-bg-disabled);
 

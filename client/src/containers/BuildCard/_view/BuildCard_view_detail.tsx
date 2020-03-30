@@ -3,13 +3,13 @@ import { IBuildCardProps, cnBuildCard } from '../index';
 
 export interface IBuildCardViewDetailsProps {
   /**
-   * Тип карточки
+   * Вид карточки
    */
   view?: 'detail';
 }
 
 /**
- * Модификатор, отвечающий за тип карточки
+ * Модификатор, отвечающий за детальный вид карточки
  */
 export const withBuildCardViewDetail = withBemMod<IBuildCardViewDetailsProps, IBuildCardProps>(cnBuildCard(), {
   view: 'detail',

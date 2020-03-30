@@ -4,7 +4,7 @@
   min-height: 100vh;
 
   &-Card {
-    margin-top: var(--space-xxxxxxxs);
+    margin-top: var(--space-7xs);
   }
 
   &-Log {
@@ -22,7 +22,7 @@
 
 @media (max-width: 470px) {
   .DetailsPage {
-    padding-top: var(--space-xxxxxxxs);
+    padding-top: var(--space-7xs);
     padding-bottom: var(--space-l);
     &-Container {
       min-height: calc(100vh - 146px);

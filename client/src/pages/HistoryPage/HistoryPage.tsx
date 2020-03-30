@@ -85,8 +85,8 @@ export const HistoryPage = () => {
         {!list.length && <span>You don't have any builds</span>}
         {list.map(({ buildNumber, commitHash, commitMessage, branchName, authorName, start, id, status, duration }) => (
           <BuildCard
-            taskId={`#${buildNumber}`}
-            message={commitMessage}
+            buildNumber={`#${buildNumber}`}
+            commitMessage={commitMessage}
             commitHash={commitHash}
             branchName={branchName}
             authorName={authorName}

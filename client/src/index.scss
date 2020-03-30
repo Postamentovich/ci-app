@@ -45,10 +45,10 @@
   --color-button-disable: #b8b8b8;
   --color-bg-disabled: #f2f2f2;
 
-  --space-xxxxxxxs: 4px;
-  --space-xxxxxxs: 5px;
+  --space-7xs: 4px;
+  --space-6xs: 5px;
   --space-xxxxxs: 6px;
-  --space-xxxxs: 8px;
+  --space-4xs: 8px;
   --space-xxxs: 9px;
   --space-xxs: 10px;
   --space-xs: 11px;
@@ -109,13 +109,17 @@
   --color-border-input-hovered: #cecece;
   --color-border-action-focused: #b38f00;
   --color-border-control-focused: #b3b3b3;
-  --color-separator: var(--blue-grey-50);
+  --build-color-separator: var(--blue-grey-50);
   --color-bg-action: var(--yellow-500);
   --color-bg-action-hovered: #f2c200;
   --color-bg-control: #e6e6e6;
   --color-bg-control-hovered: #dbdbdb;
   --color-bg-footer: var(--blue-grey-50);
   --color-bg-second: #f2f2f2;
+
+  --build-color-success: #00b341;
+  --build-color-waiting: #ff9a00;
+  --build-color-error: #ff3333;
 }
 
 p,

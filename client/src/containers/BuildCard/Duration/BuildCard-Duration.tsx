@@ -7,6 +7,9 @@ import { cnBuildCard } from '../index';
 const Icon = compose(withIconTypeTime)(IconPresenter);
 
 interface BuildCardDurationProps {
+  /**
+   * Продолжительность сборки
+   */
   duration: number;
 }
 
@@ -19,6 +22,9 @@ export const BuildCardDuration: React.FC<BuildCardDurationProps> = ({ duration }
 
   const seconds = date.getSeconds();
 
+  /**
+   * Форматируем длительность под нужный формат
+   */
   const formatedDuration = hours ? `${hours} ч ${minutes} мин` : `${minutes} мин ${seconds} сек`;
 
   return (

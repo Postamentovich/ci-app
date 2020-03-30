@@ -7,6 +7,7 @@ import { cnBuildCard } from '../index';
 const Icon = compose(withIconTypeUser)(IconPresenter);
 
 interface BuildCardAuthorProps {
+  /** Имя автора */
   authorName: string;
 }
 

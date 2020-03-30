@@ -19,13 +19,13 @@
 
   &-Button {
     &:not(:first-child) {
-      margin-left: var(--space-xxxxs);
+      margin-left: var(--space-4xs);
     }
   }
 
-  padding-top: var(--space-xxxxs);
+  padding-top: var(--space-4xs);
 
-  padding-bottom: var(--space-xxxxs);
+  padding-bottom: var(--space-4xs);
 }
 
 @media (max-width: 470px) {

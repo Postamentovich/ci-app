@@ -71,8 +71,8 @@ export const DetailsPage = () => {
       </Header>
       <div className={cnDetails('Content', ['Layout'])}>
         <BuildCard
-          taskId={`#${build?.buildNumber}`}
-          message={build?.commitMessage}
+          buildNumber={`#${build?.buildNumber}`}
+          commitMessage={build?.commitMessage}
           branchName={build?.branchName}
           authorName={build?.authorName}
           // @ts-ignore

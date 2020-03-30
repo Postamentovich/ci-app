@@ -1,9 +1,9 @@
 .Footer {
   background-color: var(--color-bg-footer);
 
-  padding-top: var(--space-xxxxs);
+  padding-top: var(--space-4xs);
 
-  padding-bottom: var(--space-xxxxs);
+  padding-bottom: var(--space-4xs);
 
   display: flex;
 
@@ -36,7 +36,7 @@
     padding-bottom: var(--space-s);
 
     &-Copyright {
-      margin-top: var(--space-xxxxs);
+      margin-top: var(--space-4xs);
     }
   }
 }

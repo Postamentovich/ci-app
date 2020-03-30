@@ -13,7 +13,7 @@ type GlobalState = {
 
 const initialState: GlobalState = {
   isLoading: true,
-  notify: [{ message: 'message', id: 4 }],
+  notify: [],
 };
 
 const globalSlice = createSlice({

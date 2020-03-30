@@ -7,16 +7,20 @@ import { cnBuildCard } from '../index';
 const Icon = compose(withIconTypeBranch)(IconPresenter);
 
 interface BuildCardCommitProps {
+  /**
+   * Hash коммита
+   */
   commitHash: string;
+  /**
+   * Имя ветки
+   */
   branchName: string;
 }
 
-export const BuildCardCommit: React.FC<BuildCardCommitProps> = ({ branchName, commitHash }) => {
-  return (
-    <div className={cnBuildCard('Commit')}>
-      <Icon type="branch" />
-      <span className={cnBuildCard('BranchName')}>{branchName}</span>
-      <span className={cnBuildCard('CommitHash')}>{commitHash.substr(0, 7)}</span>
-    </div>
-  );
-};
+export const BuildCardCommit: React.FC<BuildCardCommitProps> = ({ branchName = '', commitHash = '' }) => (
+  <div className={cnBuildCard('Commit')}>
+    <Icon type="branch" />
+    <span className={cnBuildCard('BranchName')}>{branchName}</span>
+    <span className={cnBuildCard('CommitHash')}>{commitHash.substr(0, 7)}</span>
+  </div>
+);

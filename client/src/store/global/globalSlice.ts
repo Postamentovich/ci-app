@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-
 type Notify = {
   message: string;
   id: number;
@@ -16,7 +15,7 @@ const initialState: GlobalState = {
   notify: [],
 };
 
-const globalSlice = createSlice({
+export const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
@@ -31,7 +30,5 @@ const globalSlice = createSlice({
     },
   },
 });
-
-export const { setIsLoading, addNotify, removeNotify } = globalSlice.actions;
 
 export default globalSlice.reducer;

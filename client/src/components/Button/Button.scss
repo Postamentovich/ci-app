@@ -96,6 +96,8 @@
   &[aria-disabled="true"] {
     background-color: var(--color-bg-disabled);
 
+    cursor: default;
+
     .Button-Text {
       color: var(--color-button-disable);
     }

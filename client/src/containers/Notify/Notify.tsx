@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { RootState } from 'store/rootReducer';
-import { removeNotify } from 'store/global/globalSlice';
+import { globalSlice } from 'store/global/globalSlice';
 import { Toast } from 'components/Toast/Toast';
 import { INotifyProps, cnNotify } from './index';
 import './Notify.scss';
@@ -21,7 +21,7 @@ export const Notify: FC<INotifyProps> = () => {
           <CSSTransition key={id} timeout={500} className={cnNotify('Item')}>
             <Toast
               onClick={() => {
-                dispatch(removeNotify(id));
+                dispatch(globalSlice.actions.removeNotify(id));
               }}
             >
               {message}

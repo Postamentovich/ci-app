@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname';
 import { composeU, compose } from '@bem-react/core';
 import { RootState } from 'store/rootReducer';
 import { settingsSlice } from 'store/settings/settingsSlice';
-import { saveSettings } from 'store/settings/settingsActions';
+import { saveSettings, cancelChangedSettings } from 'store/settings/settingsActions';
 import { Header } from 'containers/Header/Header';
 import { Footer } from 'containers/Footer/Footer';
 import { TextInput as TextInputPresenter } from 'components/TextInput/TextInput';
@@ -34,15 +34,22 @@ const TextInput = compose(withTextInputHasAddon, withTextInputNotValid)(TextInpu
 export const SettingsPage = () => {
   const dispatch = useDispatch();
 
-  const { repoName, period, buildComand, mainBranch } = useSelector((state: RootState) => ({
+  const { repoName, period, buildComand, mainBranch, isSaving } = useSelector((state: RootState) => ({
     repoName: state.settingsSlice.repoName,
     period: state.settingsSlice.period,
     buildComand: state.settingsSlice.buildCommand,
     mainBranch: state.settingsSlice.mainBranch,
+    isSaving: state.settingsSlice.isSaving,
   }));
 
+  /**
+   * Состояние валидности поля repoName
+   */
   const [repoNameNotValid, setRepoNameNotValid] = useState(false);
 
+  /**
+   * Состояние валидности поля buildComand
+   */
   const [buildComandNotValid, setBuildComandNotValid] = useState(false);
 
   /**
@@ -118,8 +125,15 @@ export const SettingsPage = () => {
     /**
      * Если ошибок нет, отправляем данные
      */
-    if (!buildComandNotValid && !repoNameNotValid) dispatch(saveSettings());
-  }, [buildComand.length, buildComandNotValid, dispatch, repoName.length, repoNameNotValid]);
+    if (!buildComandNotValid && !repoNameNotValid && !isSaving) dispatch(saveSettings());
+  }, [buildComand.length, buildComandNotValid, dispatch, isSaving, repoName.length, repoNameNotValid]);
+
+  /**
+   * Обработчик клика на кнопку Cancel
+   */
+  const handleClickCancel = useCallback(() => {
+    if (!isSaving) dispatch(cancelChangedSettings());
+  }, [dispatch, isSaving]);
 
   return (
     <div className={cnSettings()}>
@@ -174,10 +188,16 @@ export const SettingsPage = () => {
           onChange={handleChangePeriod}
         />
         <div className={cnSettings('Buttons')}>
-          <Button size="m" view="action" className={cnSettings('Button')} onClick={handleClickSave}>
+          <Button size="m" view="action" className={cnSettings('Button')} onClick={handleClickSave} disabled={isSaving}>
             Save
           </Button>
-          <Button size="m" view="default" className={cnSettings('Button')} type="link" to="/">
+          <Button
+            size="m"
+            view="default"
+            className={cnSettings('Button')}
+            onClick={handleClickCancel}
+            disabled={isSaving}
+          >
             Cancel
           </Button>
         </div>

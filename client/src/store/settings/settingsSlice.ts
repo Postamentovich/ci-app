@@ -2,10 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ConfigurationModel } from 'api/models/models';
 
 type SettingsState = {
+  /** Имя репозитория */
   repoName: string;
+  /** Команда запуска билда */
   buildCommand: string;
+  /** Ветка */
   mainBranch: string;
+  /** Интервал проверки новых коммитов */
   period: number;
+  /** Флаг сохранения настроек */
   isSaving: boolean;
 };
 

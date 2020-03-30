@@ -1,26 +1,27 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { RootState } from 'store/rootReducer';
+import { getBuildList } from 'store/builds/buildsActions';
 import { Header } from 'containers/Header/Header';
+import { cnHeader } from 'containers/Header';
 import { Footer } from 'containers/Footer/Footer';
+import { NewBuildModal } from 'containers/NewBuildModal/NewBuildModal';
+import { BuildCard } from 'containers/BuildCard/BuildCard';
+import { Spin } from 'components/Spin/Spin';
 import { Button as ButtonPresenter } from 'components/Button/Button';
 import { withButtonViewDefault } from 'components/Button/_view/Button_view_default';
-import { Icon as IconPresenter } from 'components/Icon/Icon';
-import { withIconTypeGear } from 'components/Icon/_type/Icon_type_gear';
 import { withButtonSizeS } from 'components/Button/_size/Button_size_s';
 import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
-import './HistoryPage.scss';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { RootState } from 'store/rootReducer';
-import { cnHeader } from 'containers/Header';
+import { Icon as IconPresenter } from 'components/Icon/Icon';
+import { withIconTypeGear } from 'components/Icon/_type/Icon_type_gear';
 import { withIconTypePlay } from 'components/Icon/_type/Icon_type_play';
-import { getBuildList } from 'store/builds/buildsActions';
 import { withButtonViewPseudo } from 'components/Button/_view/Button_view_pseudo';
-import { NewBuildModal } from 'containers/NewBuildModal/NewBuildModal';
-import { BuildCard } from 'containers/BuildCard/BuildCard';
+import './HistoryPage.scss';
 
 const cnHistory = cn('HistoryPage');
 
@@ -32,38 +33,57 @@ const Button = compose(
   withButtonTypeLink,
 )(ButtonPresenter);
 
+/**
+ * Страница истории билдов
+ */
 export const HistoryPage = () => {
   const dispatch = useDispatch();
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const { repoName, list } = useSelector(
+  const { repoName, list, isLoading } = useSelector(
     (state: RootState) => ({
       repoName: state.settingsSlice.repoName,
       list: state.bulidsSlice.list,
+      isLoading: state.bulidsSlice.isLoading,
     }),
     shallowEqual,
   );
 
+  /**
+   * Состояние модального окна
+   */
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  /**
+   * Получение списка билдов
+   */
   useEffect(() => {
     dispatch(getBuildList());
   }, [dispatch]);
 
-  const handleClickRunBuild = (e: React.MouseEventHandler<HTMLButtonElement>) => {
+  /**
+   * Обработка клика на кнопку 'Run Build'
+   */
+  const handleClickRunBuild = useCallback((e: React.MouseEventHandler<HTMLButtonElement>) => {
     setModalIsOpen(true);
-  };
+  }, []);
 
-  const handleClickModalConfirm = (value: string) => {
+  /**
+   * Обработка клика на кнопку подтверждения в модальном окне
+   */
+  const handleClickModalConfirm = useCallback((value: string) => {
     setModalIsOpen(false);
-  };
+  }, []);
 
-  const handleClickModalCancel = () => {
+  /**
+   * Обработка клика на кнопку отмены в модальном окне
+   */
+  const handleClickModalCancel = useCallback(() => {
     setModalIsOpen(false);
-  };
+  }, []);
 
   return (
     <div className={cnHistory()}>
-      <Header className="Layout" title={repoName || ''} type="link" to="/">
+      <Header className="Layout" title={repoName} type="link" to="/">
         <Button
           className={cnHeader('Button')}
           view="default"
@@ -82,8 +102,12 @@ export const HistoryPage = () => {
           iconLeft={<Icon type="gear" />}
         />
       </Header>
+
       <div className={cnHistory('Content', ['Layout'])}>
-        {!list.length && <span>You don't have any builds</span>}
+        {isLoading && <Spin />}
+
+        {!list.length && !isLoading && <span>You don't have any builds</span>}
+
         {list.map(
           ({
             buildNumber,
@@ -113,7 +137,9 @@ export const HistoryPage = () => {
           ),
         )}
       </div>
+
       <Footer className="Layout" />
+
       {modalIsOpen && <NewBuildModal onCancel={handleClickModalCancel} onConfirm={handleClickModalConfirm} />}
     </div>
   );

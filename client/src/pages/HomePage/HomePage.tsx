@@ -24,6 +24,9 @@ const Button = compose(
   withButtonTypeLink,
 )(ButtonPresenter);
 
+/**
+ * Стартовая страница
+ */
 export const HomePage = () => (
   <div className={cnHome()}>
     <Header className="Layout" title="School CI Server">
@@ -31,17 +34,21 @@ export const HomePage = () => (
         Settings
       </Button>
     </Header>
+
     <div className={cnHome('Content', ['Layout'])}>
       <Icon type="logo" />
+
       <p className={cnHome('Description')}>
         Configure repository connection
         <br />
         and synchronization settings
       </p>
+
       <Button view="action" type="link" to="/settings" className={cnHome('Button')} size="m">
         Open settings
       </Button>
     </div>
+
     <Footer className="Layout" />
   </div>
 );

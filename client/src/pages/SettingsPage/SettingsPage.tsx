@@ -31,6 +31,9 @@ const Title = compose(withTitleTypeH4)(TitlePresenter);
 
 const TextInput = compose(withTextInputHasAddon, withTextInputNotValid)(TextInputPresenter);
 
+/**
+ * Страница настроек
+ */
 export const SettingsPage = () => {
   const dispatch = useDispatch();
 
@@ -92,8 +95,9 @@ export const SettingsPage = () => {
    * Обработчик поля mainBranch
    */
   const handleChangeMainBranch = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) =>
-      dispatch(settingsSlice.actions.changeMainBranch(e.target.value)),
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(settingsSlice.actions.changeMainBranch(e.target.value));
+    },
     [dispatch],
   );
 
@@ -145,13 +149,16 @@ export const SettingsPage = () => {
   return (
     <div className={cnSettings()}>
       <Header className="Layout" title="School CI Server" />
+
       <div className={cnSettings('Content', ['Layout'])}>
         <Title type="h4" className={cnSettings('Title')}>
           Settings
         </Title>
+
         <p className={cnSettings('Description')}>
           Configure repository connection and synchronization settings.
         </p>
+
         <TextInput
           label="GitHub repository"
           placeholder="user-name/repo-name"
@@ -196,6 +203,7 @@ export const SettingsPage = () => {
           className={cnSettings('Input')}
           onChange={handleChangePeriod}
         />
+
         <div className={cnSettings('Buttons')}>
           <Button
             size="m"
@@ -217,6 +225,7 @@ export const SettingsPage = () => {
           </Button>
         </div>
       </div>
+
       <Footer className="Layout" />
     </div>
   );

@@ -93,7 +93,7 @@
     white-space: nowrap;
   }
 
-  &[aria-disabled="true"] {
+  &[aria-disabled='true'] {
     background-color: var(--color-bg-disabled);
 
     cursor: default;

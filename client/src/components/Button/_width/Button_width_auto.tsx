@@ -11,4 +11,6 @@ export interface IButtonWidthAutoProps {
 /**
  * Модификатор, отвечающий за автоматическую ширину кнопки
  */
-export const withButtonWidthAuto = withBemMod<IButtonWidthAutoProps, IButtonProps>(cnButton(), { width: 'auto' });
+export const withButtonWidthAuto = withBemMod<IButtonWidthAutoProps, IButtonProps>(cnButton(), {
+  width: 'auto',
+});

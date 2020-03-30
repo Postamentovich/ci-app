@@ -127,7 +127,10 @@ class GitRepo {
 
     clearTimeout(this.periodTimeout);
 
-    this.periodTimeout = setTimeout(() => this.queue.push(this.checkCommits), this.settings.period * 60 * 1000);
+    this.periodTimeout = setTimeout(
+      () => this.queue.push(this.checkCommits),
+      this.settings.period * 60 * 1000,
+    );
   }
 
   /**

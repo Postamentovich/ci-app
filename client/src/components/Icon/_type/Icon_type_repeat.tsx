@@ -16,5 +16,5 @@ export interface IIconTypeRepeatProps {
 export const withIconTypeRepeat = withBemMod<IIconTypeRepeatProps, IIconProps>(
   cnIcon(),
   { type: 'repeat' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

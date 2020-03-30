@@ -16,5 +16,5 @@ export interface IIconTypeClearProps {
 export const withIconTypeClear = withBemMod<IIconTypeClearProps, IIconProps>(
   cnIcon(),
   { type: 'clear' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

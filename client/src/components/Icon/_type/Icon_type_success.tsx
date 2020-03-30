@@ -16,5 +16,5 @@ export interface IIconTypeSuccessProps {
 export const withIconTypeSuccess = withBemMod<IIconTypeSuccessProps, IIconProps>(
   cnIcon(),
   { type: 'success' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

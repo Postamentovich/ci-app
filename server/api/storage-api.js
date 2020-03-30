@@ -17,27 +17,27 @@ const storageAPI = {
     return api.get('build/list', { params });
   },
 
-  getBuildLog: buildId => {
+  getBuildLog: (buildId) => {
     const params = new URLSearchParams();
     if (buildId) params.set('buildId', buildId);
     return api.get('build/log', { params });
   },
 
-  getBuildDetails: buildId => {
+  getBuildDetails: (buildId) => {
     const params = new URLSearchParams();
     if (buildId) params.set('buildId', buildId);
     return api.get('build/details', { params });
   },
 
-  setBuildRequest: model => api.post('build/request', model),
+  setBuildRequest: (model) => api.post('build/request', model),
 
-  setBuildStart: model => api.post('build/start', model),
+  setBuildStart: (model) => api.post('build/start', model),
 
-  setBuildFinish: model => api.post('build/finish', model),
+  setBuildFinish: (model) => api.post('build/finish', model),
 
-  setBuildCancel: model => api.post('build/cancel', model),
+  setBuildCancel: (model) => api.post('build/cancel', model),
 
-  setConfig: model => api.post('conf', model),
+  setConfig: (model) => api.post('conf', model),
 
   getConfig: () => api.get('conf'),
 

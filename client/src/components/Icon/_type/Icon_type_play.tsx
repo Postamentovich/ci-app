@@ -16,5 +16,5 @@ export interface IIconTypePlayProps {
 export const withIconTypePlay = withBemMod<IIconTypePlayProps, IIconProps>(
   cnIcon(),
   { type: 'play' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

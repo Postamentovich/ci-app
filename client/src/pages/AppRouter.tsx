@@ -7,7 +7,7 @@ import { SettingsPage } from './SettingsPage/SettingsPage';
 import { HistoryPage } from './HistoryPage/HistoryPage';
 import { DetailsPage } from './DetailsPage/DetailsPage';
 
-const AppRoutes = () => {
+export const AppRoutes = () => {
   const { repoName } = useSelector((state: RootState) => ({
     repoName: state.settingsSlice.repoName,
   }));
@@ -31,5 +31,3 @@ const AppRoutes = () => {
     </Switch>
   );
 };
-
-export default AppRoutes;

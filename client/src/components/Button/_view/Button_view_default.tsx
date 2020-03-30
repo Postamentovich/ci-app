@@ -11,4 +11,6 @@ export interface IButtonViewDefaultProps {
 /**
  * Модификатор, отвечающий за внешний вид кнопки
  */
-export const withButtonViewDefault = withBemMod<IButtonViewDefaultProps, IButtonProps>(cnButton(), { view: 'default' });
+export const withButtonViewDefault = withBemMod<IButtonViewDefaultProps, IButtonProps>(cnButton(), {
+  view: 'default',
+});

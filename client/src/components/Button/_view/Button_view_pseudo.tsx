@@ -11,4 +11,6 @@ export interface IButtonViewPseudoProps {
 /**
  * Модификатор, отвечающий за внешний вид кнопки
  */
-export const withButtonViewPseudo = withBemMod<IButtonViewPseudoProps, IButtonProps>(cnButton(), { view: 'pseudo' });
+export const withButtonViewPseudo = withBemMod<IButtonViewPseudoProps, IButtonProps>(cnButton(), {
+  view: 'pseudo',
+});

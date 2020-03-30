@@ -66,7 +66,9 @@ export const SettingsPage = () => {
   /**
    * Очистка поля repoName
    */
-  const handleClearRepoName = useCallback(() => dispatch(settingsSlice.actions.changeRepoName('')), [dispatch]);
+  const handleClearRepoName = useCallback(() => dispatch(settingsSlice.actions.changeRepoName('')), [
+    dispatch,
+  ]);
 
   /**
    * Обработчик поля buildComand
@@ -82,20 +84,25 @@ export const SettingsPage = () => {
   /**
    * Очистка поля buildCommand
    */
-  const handleClearBuildCommand = useCallback(() => dispatch(settingsSlice.actions.changeBuildCommand('')), [dispatch]);
+  const handleClearBuildCommand = useCallback(() => dispatch(settingsSlice.actions.changeBuildCommand('')), [
+    dispatch,
+  ]);
 
   /**
    * Обработчик поля mainBranch
    */
   const handleChangeMainBranch = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => dispatch(settingsSlice.actions.changeMainBranch(e.target.value)),
+    (e: React.ChangeEvent<HTMLInputElement>) =>
+      dispatch(settingsSlice.actions.changeMainBranch(e.target.value)),
     [dispatch],
   );
 
   /**
    * Очистка поля mainBranch
    */
-  const handleClearMainBranch = useCallback(() => dispatch(settingsSlice.actions.changeMainBranch('')), [dispatch]);
+  const handleClearMainBranch = useCallback(() => dispatch(settingsSlice.actions.changeMainBranch('')), [
+    dispatch,
+  ]);
 
   /**
    * Обработчик поля period
@@ -142,7 +149,9 @@ export const SettingsPage = () => {
         <Title type="h4" className={cnSettings('Title')}>
           Settings
         </Title>
-        <p className={cnSettings('Description')}>Configure repository connection and synchronization settings.</p>
+        <p className={cnSettings('Description')}>
+          Configure repository connection and synchronization settings.
+        </p>
         <TextInput
           label="GitHub repository"
           placeholder="user-name/repo-name"
@@ -188,7 +197,13 @@ export const SettingsPage = () => {
           onChange={handleChangePeriod}
         />
         <div className={cnSettings('Buttons')}>
-          <Button size="m" view="action" className={cnSettings('Button')} onClick={handleClickSave} disabled={isSaving}>
+          <Button
+            size="m"
+            view="action"
+            className={cnSettings('Button')}
+            onClick={handleClickSave}
+            disabled={isSaving}
+          >
             Save
           </Button>
           <Button

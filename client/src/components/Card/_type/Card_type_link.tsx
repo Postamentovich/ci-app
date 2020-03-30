@@ -20,5 +20,5 @@ export interface IButtonTypeLinkProps {
 export const withCardTypeLink = withBemMod<IButtonTypeLinkProps, ICardProps>(
   cnCard(),
   { type: 'link' },
-  Card => props => <Card {...props} as={Link} />,
+  (Card) => (props) => <Card {...props} as={Link} />,
 );

@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import AppRoutes from 'pages/AppRouter';
+import { AppRoutes } from 'pages/AppRouter';
 import { RootState } from 'store/rootReducer';
 import { getSettings } from 'store/settings/settingsActions';
 import { Spin } from 'components/Spin/Spin';

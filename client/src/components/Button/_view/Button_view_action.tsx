@@ -11,4 +11,6 @@ export interface IButtonViewActionProps {
 /**
  * Модификатор, отвечающий за внешний вид кнопки
  */
-export const withButtonViewAction = withBemMod<IButtonViewActionProps, IButtonProps>(cnButton(), { view: 'action' });
+export const withButtonViewAction = withBemMod<IButtonViewActionProps, IButtonProps>(cnButton(), {
+  view: 'action',
+});

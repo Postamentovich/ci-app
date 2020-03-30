@@ -16,5 +16,5 @@ export interface IIconTypeErrorProps {
 export const withIconTypeError = withBemMod<IIconTypeErrorProps, IIconProps>(
   cnIcon(),
   { type: 'error' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

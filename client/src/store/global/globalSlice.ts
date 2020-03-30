@@ -26,7 +26,7 @@ export const globalSlice = createSlice({
       state.notify = [...state.notify, action.payload];
     },
     removeNotify(state, action: PayloadAction<number>) {
-      state.notify = state.notify.filter(el => el.id !== action.payload);
+      state.notify = state.notify.filter((el) => el.id !== action.payload);
     },
   },
 });

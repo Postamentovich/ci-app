@@ -27,7 +27,7 @@ function clearCache() {
   hashObj.forEach((value, key) => {
     if (now - value.time > minute5) hashObj.delete(key);
   });
-  console.log(hashObj.values(values => console.log(values)));
+  console.log(hashObj.values((values) => console.log(values)));
 }
 
 /**

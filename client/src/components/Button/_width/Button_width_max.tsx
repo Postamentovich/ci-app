@@ -11,4 +11,6 @@ export interface IButtonWidthMaxProps {
 /**
  * Модификатор, отвечающий за максимальную ширину кнопки
  */
-export const withButtonWidthMax = withBemMod<IButtonWidthMaxProps, IButtonProps>(cnButton(), { width: 'max' });
+export const withButtonWidthMax = withBemMod<IButtonWidthMaxProps, IButtonProps>(cnButton(), {
+  width: 'max',
+});

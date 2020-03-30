@@ -16,5 +16,5 @@ export interface IIconTypeLogoProps {
 export const withIconTypeLogo = withBemMod<IIconTypeLogoProps, IIconProps>(
   cnIcon(),
   { type: 'logo' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

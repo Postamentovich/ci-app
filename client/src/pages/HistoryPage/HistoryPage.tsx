@@ -84,22 +84,34 @@ export const HistoryPage = () => {
       </Header>
       <div className={cnHistory('Content', ['Layout'])}>
         {!list.length && <span>You don't have any builds</span>}
-        {list.map(({ buildNumber, commitHash, commitMessage, branchName, authorName, start, id, status, duration }) => (
-          <BuildCard
-            buildNumber={`#${buildNumber}`}
-            commitMessage={commitMessage}
-            commitHash={commitHash}
-            branchName={branchName}
-            authorName={authorName}
-            date={start}
-            duration={duration}
-            status={status}
-            key={id}
-            className={cnHistory('Card')}
-            type="link"
-            to={`/build/${id}`}
-          />
-        ))}
+        {list.map(
+          ({
+            buildNumber,
+            commitHash,
+            commitMessage,
+            branchName,
+            authorName,
+            start,
+            id,
+            status,
+            duration,
+          }) => (
+            <BuildCard
+              buildNumber={`#${buildNumber}`}
+              commitMessage={commitMessage}
+              commitHash={commitHash}
+              branchName={branchName}
+              authorName={authorName}
+              date={start}
+              duration={duration}
+              status={status}
+              key={id}
+              className={cnHistory('Card')}
+              type="link"
+              to={`/build/${id}`}
+            />
+          ),
+        )}
       </div>
       <Footer className="Layout" />
       {modalIsOpen && <NewBuildModal onCancel={handleClickModalCancel} onConfirm={handleClickModalConfirm} />}

@@ -20,9 +20,9 @@
   }
 
   &-Label {
-    &[aria-required="true"] {
+    &[aria-required='true'] {
       &:after {
-        content: " *";
+        content: ' *';
         color: var(--color-text-required);
       }
     }

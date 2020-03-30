@@ -1,17 +1,16 @@
 .Log {
-    border-radius: var(--radius-xl);
-    background-color: var(--color-bg-second);
-    padding: var(--space-4xs) var(--space-s);
-  
-    &-Container {
-      margin: 0;
-      overflow-y: auto;
-    }
+  border-radius: var(--radius-xl);
+  background-color: var(--color-bg-second);
+  padding: var(--space-4xs) var(--space-s);
+
+  &-Container {
+    margin: 0;
+    overflow-y: auto;
   }
-  
-  @media (max-width: 470px) {
-    .Log {
-      border-radius: 0;
-    }
+}
+
+@media (max-width: 470px) {
+  .Log {
+    border-radius: 0;
   }
-  
+}

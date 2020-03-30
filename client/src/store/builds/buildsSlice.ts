@@ -39,7 +39,7 @@ export const bulidsSlice = createSlice({
 });
 
 export const buildSelector = (state: RootState, id: string) => {
-  return state.bulidsSlice.list.find(build => build.id === id);
+  return state.bulidsSlice.list.find((build) => build.id === id);
 };
 
 export const logSelector = (state: RootState, id: string) => {

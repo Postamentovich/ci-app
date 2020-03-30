@@ -11,4 +11,6 @@ export interface ILinkViewDefaultProps {
 /**
  * Модификатор, отвечающий за вид ссылки
  */
-export const withLinkViewDefault = withBemMod<ILinkViewDefaultProps, ILinkProps>(cnLink(), { view: 'default' });
+export const withLinkViewDefault = withBemMod<ILinkViewDefaultProps, ILinkProps>(cnLink(), {
+  view: 'default',
+});

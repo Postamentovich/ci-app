@@ -16,5 +16,5 @@ export interface IIconTypeWaitingProps {
 export const withIconTypeWaiting = withBemMod<IIconTypeWaitingProps, IIconProps>(
   cnIcon(),
   { type: 'waiting' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

@@ -16,5 +16,5 @@ export interface IIconTypeUserProps {
 export const withIconTypeUser = withBemMod<IIconTypeUserProps, IIconProps>(
   cnIcon(),
   { type: 'user' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

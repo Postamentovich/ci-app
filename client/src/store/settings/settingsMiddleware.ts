@@ -9,7 +9,7 @@ import { settingsSlice } from './settingsSlice';
 
 let currentSettings: ConfigurationModel;
 
-const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
+const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (action) => {
   next(action);
 
   /**
@@ -73,7 +73,10 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => ne
       dispatch(settingsSlice.actions.setIsSaving(false));
 
       dispatch(
-        globalSlice.actions.addNotify({ message: 'Some error with saving repository', id: Date.now().valueOf() }),
+        globalSlice.actions.addNotify({
+          message: 'Some error with saving repository',
+          id: Date.now().valueOf(),
+        }),
       );
     }
   }

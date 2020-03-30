@@ -1,6 +1,6 @@
 @keyframes rotate {
   100% {
-    transform: translate3d(-50%,-50%,0px) rotate(360deg);
+    transform: translate3d(-50%, -50%, 0px) rotate(360deg);
   }
 }
 
@@ -22,7 +22,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate3d(-50%,-50%,0px) rotate(0deg);
+  transform: translate3d(-50%, -50%, 0px) rotate(0deg);
   margin: auto;
   width: 32px;
   height: 32px;
@@ -38,7 +38,7 @@
     stroke-dasharray: 1 200;
     stroke-dashoffset: 0;
     stroke-width: 2px;
-    stroke: #FFCC00;
+    stroke: #ffcc00;
     animation: dash 3.5s ease-out infinite;
   }
 }

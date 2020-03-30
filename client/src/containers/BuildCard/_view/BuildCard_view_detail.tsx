@@ -11,6 +11,9 @@ export interface IBuildCardViewDetailsProps {
 /**
  * Модификатор, отвечающий за детальный вид карточки
  */
-export const withBuildCardViewDetail = withBemMod<IBuildCardViewDetailsProps, IBuildCardProps>(cnBuildCard(), {
-  view: 'detail',
-});
+export const withBuildCardViewDetail = withBemMod<IBuildCardViewDetailsProps, IBuildCardProps>(
+  cnBuildCard(),
+  {
+    view: 'detail',
+  },
+);

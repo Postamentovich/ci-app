@@ -11,4 +11,6 @@ export interface ITitleViewDefaultProps {
 /**
  * Модификатор, отвечающий за вид заголовка
  */
-export const withTitleViewDefault = withBemMod<ITitleViewDefaultProps, ITitleProps>(cnTitle(), { view: 'default' });
+export const withTitleViewDefault = withBemMod<ITitleViewDefaultProps, ITitleProps>(cnTitle(), {
+  view: 'default',
+});

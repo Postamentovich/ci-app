@@ -20,5 +20,5 @@ export interface IButtonTypeLinkProps {
 export const withButtonTypeLink = withBemMod<IButtonTypeLinkProps, IButtonProps>(
   cnButton(),
   { type: 'link' },
-  Button => props => <Button {...props} as={Link} />,
+  (Button) => (props) => <Button {...props} as={Link} />,
 );

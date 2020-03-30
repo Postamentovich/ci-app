@@ -16,5 +16,5 @@ export interface IIconTypeTimeProps {
 export const withIconTypeTime = withBemMod<IIconTypeTimeProps, IIconProps>(
   cnIcon(),
   { type: 'time' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

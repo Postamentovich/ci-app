@@ -7,7 +7,12 @@ import globalSlice from './global/globalSlice';
 
 export const history = createBrowserHistory();
 
-const rootReducer = combineReducers({ router: connectRouter(history), settingsSlice, globalSlice, bulidsSlice });
+const rootReducer = combineReducers({
+  router: connectRouter(history),
+  settingsSlice,
+  globalSlice,
+  bulidsSlice,
+});
 
 export type RootState = ReturnType<typeof rootReducer>;
 

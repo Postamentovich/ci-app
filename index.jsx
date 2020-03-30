@@ -13,22 +13,20 @@
 const Title = ({ children }) => <h1>{children}</h1>;
 
 const Buttons = () => {
-    return (
-      <>
-        <Button />
-        <Button />
-      </>
-    );
-  };
+  return (
+    <>
+      <Button />
+      <Button />
+    </>
+  );
+};
 
 const cnHeader = cn('Header');
 
 const Header = ({ title, buttons }) => {
   <>
     <Title className={cnHeader('Title')}>{title}</Title>
-    <div className={cnHeader('Buttons')}>
-        {buttons}
-    </div>
+    <div className={cnHeader('Buttons')}>{buttons}</div>
   </>;
 };
 

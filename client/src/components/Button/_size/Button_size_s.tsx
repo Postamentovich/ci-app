@@ -11,4 +11,6 @@ export interface IButtonSizeSProps {
 /**
  * Модификатор, отвечающий за размер кнопки
  */
-export const withButtonSizeS = withBemMod<IButtonSizeSProps, IButtonProps>(cnButton(), { size: 's' });
+export const withButtonSizeS = withBemMod<IButtonSizeSProps, IButtonProps>(cnButton(), {
+  size: 's',
+});

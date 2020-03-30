@@ -1,75 +1,75 @@
 paths:
-  "/api/builds":
+  '/api/builds':
     get:
       tags:
-      - Builds
+        - Builds
       summary: Получение списка сборок
       parameters:
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          format: int32
-          default: 25
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+            default: 25
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                "$ref": "#/components/schemas/BuildModelArrayHomeworkApiResponse"
+                '$ref': '#/components/schemas/BuildModelArrayHomeworkApiResponse'
             application/json:
               schema:
-                "$ref": "#/components/schemas/BuildModelArrayHomeworkApiResponse"
+                '$ref': '#/components/schemas/BuildModelArrayHomeworkApiResponse'
             text/json:
               schema:
-                "$ref": "#/components/schemas/BuildModelArrayHomeworkApiResponse"
-  "/api/builds/{buildId}/logs":
+                '$ref': '#/components/schemas/BuildModelArrayHomeworkApiResponse'
+  '/api/builds/{buildId}/logs':
     get:
       tags:
-      - Builds
+        - Builds
       summary: Получение логов билда (сплошной текст)
       parameters:
-      - name: buildId
-        in: path
-        schema:
-          type: string
+        - name: buildId
+          in: path
+          schema:
+            type: string
       responses:
         '200':
           description: Success
-  "/api/builds/{buildId}":
+  '/api/builds/{buildId}':
     get:
       tags:
-      - Builds
+        - Builds
       summary: Получение информации о конкретной сборке
       parameters:
-      - name: buildId
-        in: path
-        schema:
-          type: string
+        - name: buildId
+          in: path
+          schema:
+            type: string
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                "$ref": "#/components/schemas/BuildModelHomeworkApiResponse"
+                '$ref': '#/components/schemas/BuildModelHomeworkApiResponse'
             application/json:
               schema:
-                "$ref": "#/components/schemas/BuildModelHomeworkApiResponse"
+                '$ref': '#/components/schemas/BuildModelHomeworkApiResponse'
             text/json:
               schema:
-                "$ref": "#/components/schemas/BuildModelHomeworkApiResponse"
-  "/api/builds/{commitHash}":
+                '$ref': '#/components/schemas/BuildModelHomeworkApiResponse'
+  '/api/builds/{commitHash}':
     post:
       tags:
-      - Builds
+        - Builds
       summary: Добавление сборки в очередь
       parameters:
         - name: commitHash
@@ -79,10 +79,10 @@ paths:
       responses:
         '200':
           description: Success
-  "/api/settings":
+  '/api/settings':
     get:
       tags:
-      - Settings
+        - Settings
       summary: Получение настроек пользователя
       responses:
         '200':
@@ -90,28 +90,28 @@ paths:
           content:
             text/plain:
               schema:
-                "$ref": "#/components/schemas/ConfigurationModelHomeworkApiResponse"
+                '$ref': '#/components/schemas/ConfigurationModelHomeworkApiResponse'
             application/json:
               schema:
-                "$ref": "#/components/schemas/ConfigurationModelHomeworkApiResponse"
+                '$ref': '#/components/schemas/ConfigurationModelHomeworkApiResponse'
             text/json:
               schema:
-                "$ref": "#/components/schemas/ConfigurationModelHomeworkApiResponse"
+                '$ref': '#/components/schemas/ConfigurationModelHomeworkApiResponse'
     post:
       tags:
-      - Settings
-      summary: Обновление настроек пользователя 
+        - Settings
+      summary: Обновление настроек пользователя
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ConfigurationInput"
+              '$ref': '#/components/schemas/ConfigurationInput'
           text/json:
             schema:
-              "$ref": "#/components/schemas/ConfigurationInput"
+              '$ref': '#/components/schemas/ConfigurationInput'
           application/*+json:
             schema:
-              "$ref": "#/components/schemas/ConfigurationInput"
+              '$ref': '#/components/schemas/ConfigurationInput'
       responses:
         '200':
           description: Success
@@ -119,22 +119,22 @@ components:
   schemas:
     BuildStatus:
       enum:
-      - Waiting
-      - InProgress
-      - Success
-      - Fail
-      - Canceled
+        - Waiting
+        - InProgress
+        - Success
+        - Fail
+        - Canceled
       type: string
     BuildModel:
       required:
-      - authorName
-      - branchName
-      - buildNumber
-      - commitHash
-      - commitMessage
-      - configurationId
-      - id
-      - status
+        - authorName
+        - branchName
+        - buildNumber
+        - commitHash
+        - commitMessage
+        - configurationId
+        - id
+        - status
       type: object
       properties:
         id:
@@ -156,7 +156,7 @@ components:
           type: string
         status:
           allOf:
-          - "$ref": "#/components/schemas/BuildStatus"
+            - '$ref': '#/components/schemas/BuildStatus'
         start:
           type: string
           format: date-time
@@ -172,7 +172,7 @@ components:
         data:
           type: array
           items:
-            "$ref": "#/components/schemas/BuildModel"
+            '$ref': '#/components/schemas/BuildModel'
           nullable: true
       additionalProperties: false
     BuildModelHomeworkApiResponse:
@@ -180,15 +180,15 @@ components:
       properties:
         data:
           allOf:
-          - "$ref": "#/components/schemas/BuildModel"
+            - '$ref': '#/components/schemas/BuildModel'
           nullable: true
       additionalProperties: false
     QueueBuildInput:
       required:
-      - authorName
-      - branchName
-      - commitHash
-      - commitMessage
+        - authorName
+        - branchName
+        - commitHash
+        - commitMessage
       type: object
       properties:
         commitMessage:
@@ -202,11 +202,11 @@ components:
       additionalProperties: false
     ConfigurationModel:
       required:
-      - buildCommand
-      - id
-      - mainBranch
-      - period
-      - repoName
+        - buildCommand
+        - id
+        - mainBranch
+        - period
+        - repoName
       type: object
       properties:
         id:
@@ -221,21 +221,21 @@ components:
         period:
           type: integer
           format: int32
-      additionalProperties: false  
+      additionalProperties: false
     ConfigurationModelHomeworkApiResponse:
       type: object
       properties:
         data:
           allOf:
-          - "$ref": "#/components/schemas/ConfigurationModel"
+            - '$ref': '#/components/schemas/ConfigurationModel'
           nullable: true
       additionalProperties: false
     ConfigurationInput:
       required:
-      - buildCommand
-      - mainBranch
-      - period
-      - repoName
+        - buildCommand
+        - mainBranch
+        - period
+        - repoName
       type: object
       properties:
         repoName:

@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 const githubAPI = {
-  checkRepo: repoName => api.get(repoName),
+  checkRepo: (repoName) => api.get(repoName),
 };
 
 module.exports = githubAPI;

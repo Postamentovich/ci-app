@@ -52,7 +52,7 @@ class BuildAgent {
         dateTime: new Date().toISOString(),
       });
 
-      return new Promise(res => {
+      return new Promise((res) => {
         setTimeout(async () => {
           const endBuilding = new Date().valueOf();
 
@@ -217,7 +217,7 @@ class BuildAgent {
       data: { data },
     } = await storageAPI.getBuildList();
 
-    const item = data.find(el => el.commitHash === commitHash);
+    const item = data.find((el) => el.commitHash === commitHash);
 
     if (!item) {
       logger.debug(`BuildAgent - add to queue ${commitMessage} ${commitHash} ${authorName}`);
@@ -235,9 +235,9 @@ class BuildAgent {
 
       const list = await storageAPI.getBuildList();
 
-      const build = list.data.data.find(el => el.commitHash === commitHash);
+      const build = list.data.data.find((el) => el.commitHash === commitHash);
 
-      if (!this.queue.find(el => el.commitHash === commitHash)) {
+      if (!this.queue.find((el) => el.commitHash === commitHash)) {
         this.queue.push(build);
       }
     }

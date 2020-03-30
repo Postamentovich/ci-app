@@ -20,7 +20,7 @@ export interface ITitleViewLinkProps {
 export const withTitleViewLink = withBemMod<ITitleViewLinkProps, ITitleProps>(
   cnTitle(),
   { view: 'link' },
-  Title => props => (
+  (Title) => (props) => (
     <Title {...props}>
       <Link className={cnTitle('Link')} to={props.to!}>
         {props.children}

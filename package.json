@@ -45,6 +45,7 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-pino-logger": "^4.0.0",
+    "g": "^2.0.1",
     "http-errors": "^1.7.3",
     "pino": "^5.17.0",
     "pino-pretty": "^3.6.1",

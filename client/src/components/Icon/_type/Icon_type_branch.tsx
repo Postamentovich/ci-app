@@ -16,5 +16,5 @@ export interface IIconTypeBranchProps {
 export const withIconTypeBranch = withBemMod<IIconTypeBranchProps, IIconProps>(
   cnIcon(),
   { type: 'branch' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

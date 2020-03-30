@@ -16,5 +16,5 @@ export interface IIconTypeGearProps {
 export const withIconTypeGear = withBemMod<IIconTypeGearProps, IIconProps>(
   cnIcon(),
   { type: 'gear' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

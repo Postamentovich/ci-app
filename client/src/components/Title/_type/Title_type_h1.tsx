@@ -12,6 +12,8 @@ export interface ITitleTypeH1Props {
 /**
  * Модификатор, отвечающий за тип заголовка
  */
-export const withTitleTypeH1 = withBemMod<ITitleTypeH1Props, ITitleProps>(cnTitle(), { type: 'h1' }, Title => props => (
-  <Title {...props} as="h1" />
-));
+export const withTitleTypeH1 = withBemMod<ITitleTypeH1Props, ITitleProps>(
+  cnTitle(),
+  { type: 'h1' },
+  (Title) => (props) => <Title {...props} as="h1" />,
+);

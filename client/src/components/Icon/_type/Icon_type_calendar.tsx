@@ -16,5 +16,5 @@ export interface IIconTypeCalendarProps {
 export const withIconTypeCalendar = withBemMod<IIconTypeCalendarProps, IIconProps>(
   cnIcon(),
   { type: 'calendar' },
-  Icon => props => <IconSvg />,
+  (Icon) => (props) => <IconSvg />,
 );

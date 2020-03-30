@@ -75,7 +75,6 @@ export const DetailsPage = () => {
           commitMessage={build?.commitMessage}
           branchName={build?.branchName}
           authorName={build?.authorName}
-          // @ts-ignore
           date={build?.start}
           status={build?.status}
           key={build?.id}

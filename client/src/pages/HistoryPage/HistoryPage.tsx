@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from 'store/rootReducer';
-import { getBuildList } from 'store/builds/buildsActions';
+import { getBuildList, addBuildToQueue } from 'store/builds/buildsActions';
 import { Header } from 'containers/Header/Header';
 import { cnHeader } from 'containers/Header';
 import { Footer } from 'containers/Footer/Footer';
@@ -71,8 +71,10 @@ export const HistoryPage = () => {
    * Обработка клика на кнопку подтверждения в модальном окне
    */
   const handleClickModalConfirm = useCallback((value: string) => {
+    dispatch(addBuildToQueue(value));
+
     setModalIsOpen(false);
-  }, []);
+  }, [dispatch]);
 
   /**
    * Обработка клика на кнопку отмены в модальном окне

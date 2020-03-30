@@ -4,11 +4,14 @@ import settingsApi from 'api/settingsApi';
 import { setIsLoading } from 'store/global/globalSlice';
 import { ConfigurationInput } from 'api/models/models';
 import { getSettings, saveSettings } from './settingsActions';
-import { changeRepoName, changeBuildCommand, changePeriod, changeMainBranch, setIsSaving } from './settingsSlice';
+import { settingsSlice } from './settingsSlice';
 
 const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
   next(action);
 
+  /**
+   * Получение настроек пользователя
+   */
   if (getSettings.match(action)) {
     try {
       dispatch(setIsLoading(true));
@@ -17,36 +20,48 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => ne
 
       dispatch(setIsLoading(false));
 
-      if (data?.repoName) dispatch(changeRepoName(data.repoName));
+      if (data) dispatch(settingsSlice.actions.setInitialSettings(data));
 
-      if (data?.buildCommand) dispatch(changeBuildCommand(data.buildCommand));
+      // if (data?.repoName) dispatch(settingsSlice.actions.changeRepoName(data.repoName));
 
-      if (data?.period) dispatch(changePeriod(data.period));
+      // if (data?.buildCommand) dispatch(settingsSlice.actions.changeBuildCommand(data.buildCommand));
 
-      if (data?.mainBranch) dispatch(changeMainBranch(data.mainBranch));
+      // if (data?.period) dispatch(settingsSlice.actions.changePeriod(data.period));
+
+      // if (data?.mainBranch) dispatch(settingsSlice.actions.changeMainBranch(data.mainBranch));
     } catch (error) {
-      dispatch(setIsSaving(false));
+      dispatch(settingsSlice.actions.setIsSaving(false));
     }
   }
-
+  /**
+   * Сохранение настроек пользователя
+   */
   if (saveSettings.match(action)) {
     try {
-      dispatch(setIsSaving(true));
+      dispatch(settingsSlice.actions.setIsSaving(true));
 
-      const state: RootState = getState();
+      const {
+        settingsSlice: { repoName, buildCommand, mainBranch, period },
+      }: RootState = getState();
 
+      /**
+       * Выставляем дефолтные значения, если они не были заняты.
+       * Поля repoName и buildCommand валидируются при отправке формы.
+       */
       const model: ConfigurationInput = {
-        repoName: state.settingsSlice.repoName || '',
-        buildCommand: state.settingsSlice.buildCommand || '',
-        mainBranch: state.settingsSlice.mainBranch || '',
-        period: state.settingsSlice.period || 10,
+        repoName,
+        buildCommand,
+        mainBranch: mainBranch.length > 0 ? mainBranch : 'master',
+        period: period > 0 ? period : 10,
       };
 
       await settingsApi.saveSettings(model);
 
-      dispatch(setIsSaving(false));
+      window.location.replace('/');
+
+      dispatch(settingsSlice.actions.setIsSaving(false));
     } catch (error) {
-      dispatch(setIsSaving(false));
+      dispatch(settingsSlice.actions.setIsSaving(false));
     }
   }
 };

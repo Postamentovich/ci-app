@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ConfigurationModel } from 'api/models/models';
 
 type SettingsState = {
   repoName: string;
@@ -16,7 +17,7 @@ const initialState: SettingsState = {
   isSaving: false,
 };
 
-const settingsSlice = createSlice({
+export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
@@ -32,18 +33,21 @@ const settingsSlice = createSlice({
     changePeriod(state, action: PayloadAction<number>) {
       state.period = action.payload;
     },
+    setInitialSettings(state, action: PayloadAction<ConfigurationModel>) {
+      const { repoName, mainBranch, buildCommand, period } = action.payload;
+
+      state.repoName = repoName;
+
+      state.mainBranch = mainBranch;
+
+      state.buildCommand = buildCommand;
+
+      state.period = period;
+    },
     setIsSaving(state, action: PayloadAction<boolean>) {
       state.isSaving = action.payload;
     },
   },
 });
-
-export const {
-  changeRepoName,
-  changeBuildCommand,
-  changeMainBranch,
-  changePeriod,
-  setIsSaving,
-} = settingsSlice.actions;
 
 export default settingsSlice.reducer;

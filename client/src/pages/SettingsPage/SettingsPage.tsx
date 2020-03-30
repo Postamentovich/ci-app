@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { cn } from '@bem-react/classname';
 import { composeU, compose } from '@bem-react/core';
 import { RootState } from 'store/rootReducer';
-import { changeRepoName, changeBuildCommand, changeMainBranch, changePeriod } from 'store/settings/settingsSlice';
+import { settingsSlice } from 'store/settings/settingsSlice';
 import { saveSettings } from 'store/settings/settingsActions';
 import { Header } from 'containers/Header/Header';
 import { Footer } from 'containers/Footer/Footer';
@@ -51,7 +51,7 @@ export const SettingsPage = () => {
   const handleChangeRepoName = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setRepoNameNotValid(false);
-      dispatch(changeRepoName(e.target.value));
+      dispatch(settingsSlice.actions.changeRepoName(e.target.value));
     },
     [dispatch],
   );
@@ -59,7 +59,7 @@ export const SettingsPage = () => {
   /**
    * Очистка поля repoName
    */
-  const handleClearRepoName = useCallback(() => dispatch(changeRepoName('')), [dispatch]);
+  const handleClearRepoName = useCallback(() => dispatch(settingsSlice.actions.changeRepoName('')), [dispatch]);
 
   /**
    * Обработчик поля buildComand
@@ -67,7 +67,7 @@ export const SettingsPage = () => {
   const handleChangeBuildCommand = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setBuildComandNotValid(false);
-      dispatch(changeBuildCommand(e.target.value));
+      dispatch(settingsSlice.actions.changeBuildCommand(e.target.value));
     },
     [dispatch],
   );
@@ -75,20 +75,20 @@ export const SettingsPage = () => {
   /**
    * Очистка поля buildCommand
    */
-  const handleClearBuildCommand = useCallback(() => dispatch(changeBuildCommand('')), [dispatch]);
+  const handleClearBuildCommand = useCallback(() => dispatch(settingsSlice.actions.changeBuildCommand('')), [dispatch]);
 
   /**
    * Обработчик поля mainBranch
    */
   const handleChangeMainBranch = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => dispatch(changeMainBranch(e.target.value)),
+    (e: React.ChangeEvent<HTMLInputElement>) => dispatch(settingsSlice.actions.changeMainBranch(e.target.value)),
     [dispatch],
   );
 
   /**
    * Очистка поля mainBranch
    */
-  const handleClearMainBranch = useCallback(() => dispatch(changeMainBranch('')), [dispatch]);
+  const handleClearMainBranch = useCallback(() => dispatch(settingsSlice.actions.changeMainBranch('')), [dispatch]);
 
   /**
    * Обработчик поля period
@@ -97,7 +97,7 @@ export const SettingsPage = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       // Проверяем введеное значение на число
       // @ts-ignore
-      if (/\d+/.test(Number(e.target.value))) dispatch(changePeriod(e.target.value));
+      if (/\d+/.test(Number(e.target.value))) dispatch(settingsSlice.actions.changePeriod(e.target.value));
     },
     [dispatch],
   );

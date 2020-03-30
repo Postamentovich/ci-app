@@ -3,7 +3,7 @@ import { RootState } from 'store/rootReducer';
 import buildApi from 'api/buildApi';
 import { getBuildList, getBuildLog } from './buildsActions';
 import { bulidsSlice } from './buildsSlice';
-import { logString } from './log-util';
+// import { logString } from './log-util';
 
 const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
   next(action);

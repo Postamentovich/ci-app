@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
@@ -90,7 +91,6 @@ export const HistoryPage = () => {
             commitHash={commitHash}
             branchName={branchName}
             authorName={authorName}
-            // @ts-ignore
             date={start}
             duration={duration}
             status={status}

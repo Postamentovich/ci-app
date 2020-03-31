@@ -31,9 +31,15 @@ router.post(
 
     if (typeof commitHash !== 'string') throw createError(400, 'Error in commitHash');
 
-    await gitRepo.getInfoByHash(commitHash);
+    const info = await gitRepo.getInfoByHash(commitHash);
 
-    res.sendStatus(200);
+    await storageAPI.setBuildRequest(info);
+
+    const list = await storageAPI.getBuildList();
+
+    const build = list.data.data.find(el => el.commitHash === info.commitHash);
+
+    res.send({ build });
   }),
 );
 

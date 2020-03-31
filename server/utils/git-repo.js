@@ -210,12 +210,19 @@ class GitRepo {
 
     logger.debug(`GitRepo - get info by hash ${commitHash}`);
 
-    await buildAgent.addToQueue({
+    // await buildAgent.addToQueue({
+    //   commitHash,
+    //   commitMessage,
+    //   branchName: this.settings.mainBranch,
+    //   authorName,
+    // });
+
+    return {
       commitHash,
       commitMessage,
       branchName: this.settings.mainBranch,
       authorName,
-    });
+    }
   }
 
   /**

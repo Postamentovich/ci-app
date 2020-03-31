@@ -1,7 +1,7 @@
 import { Middleware } from '@reduxjs/toolkit';
 import { push } from 'connected-react-router';
 import { RootState } from 'store/rootReducer';
-import settingsApi from 'api/settingsApi';
+import { settingsApi } from 'api/settingsApi';
 import { globalSlice } from 'store/global/globalSlice';
 import { ConfigurationInput, ConfigurationModel } from 'api/models/models';
 import { getSettings, saveSettings, cancelChangedSettings } from './settingsActions';
@@ -9,7 +9,7 @@ import { settingsSlice } from './settingsSlice';
 
 let currentSettings: ConfigurationModel;
 
-const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (action) => {
+const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
   next(action);
 
   /**
@@ -30,6 +30,14 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (n
       }
     } catch (error) {
       dispatch(settingsSlice.actions.setIsSaving(false));
+
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Error while getting user settings',
+          id: Date.now().valueOf(),
+          type: 'error',
+        }),
+      );
     }
   }
 
@@ -69,6 +77,14 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (n
       dispatch(settingsSlice.actions.setIsSaving(false));
 
       dispatch(push('/'));
+
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Settings saved successfully',
+          id: Date.now().valueOf(),
+          type: 'success',
+        }),
+      );
     } catch (error) {
       dispatch(settingsSlice.actions.setIsSaving(false));
 
@@ -76,6 +92,7 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (n
         globalSlice.actions.addNotify({
           message: 'Some error with saving repository',
           id: Date.now().valueOf(),
+          type: 'error',
         }),
       );
     }

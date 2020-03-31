@@ -1,10 +1,10 @@
 import { Middleware } from '@reduxjs/toolkit';
+import { push } from 'connected-react-router';
 import { RootState } from 'store/rootReducer';
-import buildApi from 'api/buildApi';
+import { globalSlice } from 'store/global/globalSlice';
+import { buildApi } from 'api/buildApi';
 import { getBuildList, getBuildLog, addBuildToQueue } from './buildsActions';
 import { bulidsSlice } from './buildsSlice';
-import { globalSlice } from 'store/global/globalSlice';
-import { push } from 'connected-react-router';
 
 const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
   next(action);
@@ -23,6 +23,14 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next
       dispatch(bulidsSlice.actions.setIsLoading(false));
     } catch (error) {
       dispatch(bulidsSlice.actions.setIsLoading(false));
+
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Error getting list of builds',
+          id: Date.now().valueOf(),
+          type: 'error',
+        }),
+      );
     }
   }
 
@@ -40,17 +48,40 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next
       dispatch(bulidsSlice.actions.setIsLogLoading(false));
     } catch (error) {
       dispatch(bulidsSlice.actions.setIsLogLoading(false));
+
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Error getting log',
+          id: Date.now().valueOf(),
+          type: 'error',
+        }),
+      );
     }
   }
 
+  /**
+   * Добавление билда в очередь
+   */
   if (addBuildToQueue.match(action)) {
     try {
       await buildApi.addBuild(action.payload);
 
-      dispatch(push('/'));
+      dispatch(push('/build/'));
+
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Build successfully added',
+          id: Date.now().valueOf(),
+          type: 'success',
+        }),
+      );
     } catch (error) {
       dispatch(
-        globalSlice.actions.addNotify({ id: Date.now().valueOf(), message: 'Something went wrong...' }),
+        globalSlice.actions.addNotify({
+          message: 'Error adding build to queue',
+          id: Date.now().valueOf(),
+          type: 'error',
+        }),
       );
     }
   }

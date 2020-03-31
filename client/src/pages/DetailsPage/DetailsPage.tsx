@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
+import { RootState } from 'store/rootReducer';
+import { buildSelector } from 'store/builds/buildsSlice';
+import { getBuildLog, addBuildToQueue } from 'store/builds/buildsActions';
 import { Header } from 'containers/Header/Header';
+import { cnHeader } from 'containers/Header';
 import { Footer } from 'containers/Footer/Footer';
 import { Button as ButtonPresenter } from 'components/Button/Button';
 import { withButtonViewDefault } from 'components/Button/_view/Button_view_default';
-import { Icon as IconPresenter } from 'components/Icon/Icon';
-import { withIconTypeGear } from 'components/Icon/_type/Icon_type_gear';
 import { withButtonSizeS } from 'components/Button/_size/Button_size_s';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { RootState } from 'store/rootReducer';
-import { cnHeader } from 'containers/Header';
-import { buildSelector } from 'store/builds/buildsSlice';
-import { useParams } from 'react-router-dom';
-import { getBuildLog } from 'store/builds/buildsActions';
+import { Icon as IconPresenter } from 'components/Icon/Icon';
+import { withIconTypeRepeat } from 'components/Icon/_type/Icon_type_repeat';
+import { withIconTypeGear } from 'components/Icon/_type/Icon_type_gear';
 import { Spin } from 'components/Spin/Spin';
 import { Log } from 'components/Log/Log';
-import './DetailsPage.scss';
-import { withIconTypeRepeat } from 'components/Icon/_type/Icon_type_repeat';
 import { BuildCard as BuildCardPresenter } from 'containers/BuildCard/BuildCard';
 import { withBuildCardViewDetail } from 'containers/BuildCard/_view/BuildCard_view_detail';
+import './DetailsPage.scss';
 
 const cnDetails = cn('DetailsPage');
 
@@ -35,6 +35,9 @@ const Button = compose(
 
 const BuildCard = compose(withBuildCardViewDetail)(BuildCardPresenter);
 
+/**
+ * Страница деталей билда
+ */
 export const DetailsPage = () => {
   const { id } = useParams();
 
@@ -52,12 +55,25 @@ export const DetailsPage = () => {
 
   useEffect(() => {
     if (!log[id!] && !isLogLoading) dispatch(getBuildLog(id!));
-  }, [dispatch, id, isLogLoading, log]);
+  }, []);
+
+  /**
+   * Обработка клика на кнопку Rebuild
+   */
+  const handleClickRebuild = useCallback(() => {
+    dispatch(addBuildToQueue(build?.commitHash!));
+  }, [build, dispatch]);
 
   return (
     <div className={cnDetails()}>
-      <Header className="Layout" title={repoName || ''} type="link" to="/">
-        <Button className={cnHeader('Button')} view="default" size="s" iconLeft={<Icon type="repeat" />}>
+      <Header className="Layout" title={repoName} type="link" to="/">
+        <Button
+          className={cnHeader('Button')}
+          view="default"
+          size="s"
+          iconLeft={<Icon type="repeat" />}
+          onClick={handleClickRebuild}
+        >
           Rebuild
         </Button>
         <Button
@@ -69,6 +85,7 @@ export const DetailsPage = () => {
           iconLeft={<Icon type="gear" />}
         />
       </Header>
+
       <div className={cnDetails('Content', ['Layout'])}>
         <BuildCard
           buildNumber={`#${build?.buildNumber}`}
@@ -83,11 +100,14 @@ export const DetailsPage = () => {
           commitHash={build?.commitHash}
           view="detail"
         />
+
         <div className={cnDetails('Log')}>
           {isLogLoading && <Spin />}
-          <Log>{log[id!]}</Log>
+
+          {!isLogLoading && log[id!] && <Log>{log[id!]}</Log>}
         </div>
       </div>
+
       <Footer className="Layout" />
     </div>
   );

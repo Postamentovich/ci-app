@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Notify = {
+  /** Текст сообщения */
   message: string;
+  /** id сообщения */
   id: number;
+  /** Тип уведомления */
+  type?: 'success' | 'error';
 };
 
 type GlobalState = {
@@ -11,7 +15,9 @@ type GlobalState = {
 };
 
 const initialState: GlobalState = {
+  /** Загрузка настроек пользователя */
   isLoading: true,
+  /** Массив уведомлений */
   notify: [],
 };
 
@@ -26,7 +32,7 @@ export const globalSlice = createSlice({
       state.notify = [...state.notify, action.payload];
     },
     removeNotify(state, action: PayloadAction<number>) {
-      state.notify = state.notify.filter((el) => el.id !== action.payload);
+      state.notify = state.notify.filter(el => el.id !== action.payload);
     },
   },
 });

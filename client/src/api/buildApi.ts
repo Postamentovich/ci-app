@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BuildModelHomeworkApiResponse, BuildModel } from './models/models';
 
-const buildApi = {
+export const buildApi = {
   /** Get builds list */
   getList: async (): Promise<Array<BuildModel>> => {
     const { data } = await axios.get('/api/builds');
@@ -22,5 +22,3 @@ const buildApi = {
     await axios.post(`/api/builds/${commitHash}`);
   },
 };
-
-export default buildApi;

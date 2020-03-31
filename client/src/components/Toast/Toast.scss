@@ -1,10 +1,20 @@
 .Toast {
-  background: rgba(154, 14, 14, 0.85);
+  background-color: var(--toast-color-default);
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
   border-radius: 7px;
   color: white;
   padding: 10px 30px 10px 10px;
   position: relative;
+
+  &_type {
+    &_error {
+      background-color: var(--toast-color-error);
+    }
+
+    &_success {
+      background-color: var(--toast-color-success);
+    }
+  }
 
   &-Close {
     border: none;

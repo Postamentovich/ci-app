@@ -9,7 +9,10 @@ export interface IToastProps extends IClassNameProps {
    */
   as?: ReactType;
 
-  onClick?: any;
+  /**
+   * Обработчик клика на кнопку
+   */
+  onClick?: () => void;
 }
 
 export const cnToast = cn('Toast');

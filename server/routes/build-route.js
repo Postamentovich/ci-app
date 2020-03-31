@@ -39,7 +39,7 @@ router.post(
 
     const build = list.data.data.find(el => el.commitHash === info.commitHash);
 
-    res.send({ build });
+    res.send(build);
   }),
 );
 

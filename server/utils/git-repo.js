@@ -222,7 +222,7 @@ class GitRepo {
       commitMessage,
       branchName: this.settings.mainBranch,
       authorName,
-    }
+    };
   }
 
   /**

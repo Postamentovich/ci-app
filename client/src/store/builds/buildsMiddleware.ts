@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 import { RootState } from 'store/rootReducer';
 import { globalSlice } from 'store/global/globalSlice';
 import { buildApi } from 'api/buildApi';
-import { getBuildList, getBuildLog, addBuildToQueue } from './buildsActions';
+import { getBuildList, getBuildLog, addBuildToQueue, getBuildDetails } from './buildsActions';
 import { bulidsSlice } from './buildsSlice';
 
 const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
@@ -64,9 +64,10 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next
    */
   if (addBuildToQueue.match(action)) {
     try {
-      await buildApi.addBuild(action.payload);
+      const build = await buildApi.addBuild(action.payload);
+      dispatch(bulidsSlice.actions.addBuildToList(build));
 
-      dispatch(push('/build/'));
+      dispatch(push(`/build/${build.id}`));
 
       dispatch(
         globalSlice.actions.addNotify({
@@ -79,6 +80,22 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next
       dispatch(
         globalSlice.actions.addNotify({
           message: 'Error adding build to queue',
+          id: Date.now().valueOf(),
+          type: 'error',
+        }),
+      );
+    }
+  }
+
+  if (getBuildDetails.match(action)) {
+    try {
+      const build = await buildApi.getDetails(action.payload);
+
+      dispatch(bulidsSlice.actions.addBuildToList(build));
+    } catch (error) {
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Error getting build details',
           id: Date.now().valueOf(),
           type: 'error',
         }),

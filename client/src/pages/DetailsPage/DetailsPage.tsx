@@ -5,7 +5,7 @@ import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
 import { RootState } from 'store/rootReducer';
 import { buildSelector } from 'store/builds/buildsSlice';
-import { getBuildLog, addBuildToQueue } from 'store/builds/buildsActions';
+import { getBuildLog, addBuildToQueue, getBuildDetails } from 'store/builds/buildsActions';
 import { Header } from 'containers/Header/Header';
 import { cnHeader } from 'containers/Header';
 import { Footer } from 'containers/Footer/Footer';
@@ -55,6 +55,8 @@ export const DetailsPage = () => {
 
   useEffect(() => {
     if (!log[id!] && !isLogLoading) dispatch(getBuildLog(id!));
+
+    if (!build) dispatch(getBuildDetails(id!));
   }, []);
 
   /**

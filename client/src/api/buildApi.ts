@@ -13,12 +13,13 @@ export const buildApi = {
     return data;
   },
   /** Get build details */
-  getDetails: async (buildId: string): Promise<BuildModelHomeworkApiResponse> => {
+  getDetails: async (buildId: string): Promise<BuildModel> => {
     const { data } = await axios.get(`/api/builds/${buildId}`);
     return data;
   },
   /** Add build to queue */
-  addBuild: async (commitHash: string) => {
-    await axios.post(`/api/builds/${commitHash}`);
+  addBuild: async (commitHash: string): Promise<BuildModel> => {
+    const { data } = await axios.post(`/api/builds/${commitHash}`);
+    return data;
   },
 };

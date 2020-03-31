@@ -25,6 +25,9 @@ export const bulidsSlice = createSlice({
     setList(state, action: PayloadAction<Array<BuildModel>>) {
       state.list = action.payload;
     },
+    addBuildToList(state, action: PayloadAction<BuildModel>) {
+      state.list = [...state.list, action.payload];
+    },
     setLog(state, action: PayloadAction<{ id: string; log: string }>) {
       const { id, log } = action.payload;
       state.log[id] = log;
@@ -39,7 +42,7 @@ export const bulidsSlice = createSlice({
 });
 
 export const buildSelector = (state: RootState, id: string) => {
-  return state.bulidsSlice.list.find((build) => build.id === id);
+  return state.bulidsSlice.list.find(build => build.id === id);
 };
 
 export const logSelector = (state: RootState, id: string) => {

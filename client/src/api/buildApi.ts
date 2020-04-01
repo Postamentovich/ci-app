@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BuildModelHomeworkApiResponse, BuildModel } from './models/models';
+import { BuildModel } from './models/models';
 
 export const buildApi = {
   /** Get builds list */
@@ -14,7 +14,9 @@ export const buildApi = {
   },
   /** Get build details */
   getDetails: async (buildId: string): Promise<BuildModel> => {
-    const { data } = await axios.get(`/api/builds/${buildId}`);
+    const {
+      data: { data },
+    } = await axios.get(`/api/builds/${buildId}`);
     return data;
   },
   /** Add build to queue */

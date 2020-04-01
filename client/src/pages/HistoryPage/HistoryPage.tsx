@@ -106,7 +106,7 @@ export const HistoryPage = () => {
       </Header>
 
       <div className={cnHistory('Content', ['Layout'])}>
-        {isLoading && <Spin />}
+        {!list.length && isLoading && <Spin />}
 
         {!list.length && !isLoading && <span>You don't have any builds</span>}
 

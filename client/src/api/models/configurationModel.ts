@@ -11,7 +11,7 @@
  */
 
 export interface ConfigurationModel {
-  id: string;
+  id?: string;
   repoName: string;
   buildCommand: string;
   mainBranch: string;

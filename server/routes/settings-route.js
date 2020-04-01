@@ -46,7 +46,9 @@ router.post(
     hashObj.clear();
 
     /** Обновление локального репозитория */
-    gitRepo.addSettingsToQueue(req.body);
+    await gitRepo.updateSettings(req.body);
+
+
 
     res.sendStatus(200);
   }),

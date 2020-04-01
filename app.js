@@ -47,7 +47,7 @@ app.use('/api/builds', require('./server/routes/build-route'));
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'client', 'build')));
   app.get('*', (req, res) => {
-    res.send(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
 }
 

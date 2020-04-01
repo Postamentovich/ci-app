@@ -21,10 +21,10 @@ class GitRepo {
     this.localFolderName = 'repo';
 
     /** Настройки пользователя */
-    this.settings = {};
+    this.settings = { period: 10 };
 
     /** Время последний проверки коммитов */
-    this.lastCheckingCommitTime = null;
+    // this.lastCheckingCommitTime = null;
 
     /** Timeout для проверки коммитов */
     this.periodTimeout = null;
@@ -79,7 +79,7 @@ class GitRepo {
           await this.checkout(data.mainBranch);
         }
 
-        await this.checkCommits(true);
+        await this.checkCommits();
       } else {
         logger.debug('GitRepo - user settings not found');
       }
@@ -108,29 +108,25 @@ class GitRepo {
 
     this.settings = settings;
 
-    await this.checkCommits(true);
+    await this.checkCommits();
   }
 
   /**
    * Проверка новых коммитов
    *
-   * @param {boolean} onlyLast - Флаг, брать только последний коммит или все коммиты за период
    */
-  async checkCommits(onlyLast) {
+  async checkCommits() {
+    clearTimeout(this.periodTimeout);
+
     const commits = await this.getRecentCommits();
 
     for (let i = 0; i < commits.length; i++) {
       const commitHash = commits[i];
 
-      if (commitHash) await this.getInfoByHash(commitHash);
+      if (commitHash && commitHash.length > 0) await this.getInfoByHash(commitHash);
     }
 
-    clearTimeout(this.periodTimeout);
-
-    this.periodTimeout = setTimeout(
-      () => this.queue.push(this.checkCommits),
-      this.settings.period * 60 * 1000,
-    );
+    this.periodTimeout = setTimeout(() => this.checkCommits, this.settings.period * 60 * 1000);
   }
 
   /**
@@ -154,7 +150,11 @@ class GitRepo {
    * @param {string} command
    */
   async run(command) {
-    return exec(command);
+    try {
+      return exec(command);
+    } catch (error) {
+      return false;
+    }
   }
 
   /**
@@ -180,8 +180,9 @@ class GitRepo {
 
       const command = `rm -rf ${this.localFolderName}`;
 
-      return this.run(command);
+      await this.run(command);
     }
+
     return null;
   }
 
@@ -203,26 +204,42 @@ class GitRepo {
    * @param {string} commitHash
    */
   async getInfoByHash(commitHash) {
-    const { stdout } = await this.run(
-      `cd ${this.localFolderName} && git show ${commitHash} --pretty=format:"%s{SPLIT}%an{END}"`,
-    );
-    const [commitMessage, authorName] = stdout.split('{END}')[0].split('{SPLIT}');
+    if (commitHash) {
+      logger.debug(`GitRepo - get info by hash ${commitHash}`);
 
-    logger.debug(`GitRepo - get info by hash ${commitHash}`);
+      const { stdout } = await this.run(
+        `cd ${this.localFolderName} && git log -1 --format="%s{SPLIT}%an{SPLIT}" ${commitHash}`,
+      );
 
-    // await buildAgent.addToQueue({
-    //   commitHash,
-    //   commitMessage,
-    //   branchName: this.settings.mainBranch,
-    //   authorName,
-    // });
+      const out = stdout.split('{SPLIT}');
 
-    return {
-      commitHash,
-      commitMessage,
-      branchName: this.settings.mainBranch,
-      authorName,
-    };
+      const [commitMessage, authorName] = out;
+
+      try {
+        await storageAPI.setBuildRequest({
+          commitHash: String(commitHash),
+          commitMessage: String(commitMessage),
+          branchName: String(this.settings.mainBranch),
+          authorName: String(authorName),
+        });
+
+        logger.debug(`GitRepo - add to queue ${commitHash}`);
+
+        return {
+          commitHash: String(commitHash),
+          commitMessage: String(commitMessage),
+          branchName: String(this.settings.mainBranch),
+          authorName: String(authorName),
+        };
+      } catch (error) {
+        logger.error(error);
+        logger.error(
+          `error in setrequest commitHash: ${commitHash} commitMessage: ${commitMessage} authorName: ${authorName} mainBranch: ${this.settings.mainBranch}`,
+        );
+      }
+    }
+
+    return null;
   }
 
   /**
@@ -231,9 +248,9 @@ class GitRepo {
    *
    * @param {Object} settings
    */
-  addSettingsToQueue(settings) {
-    this.queue.push(async () => this.updateSettings(settings));
-  }
+  // addSettingsToQueue(settings) {
+  //   this.queue.push(async () => this.updateSettings(settings));
+  // }
 
   /**
    * Получение последних коммитов
@@ -241,19 +258,31 @@ class GitRepo {
    * @param {boolean} onlyLast - Флаг, брать только последний коммит или все коммиты за период
    */
   async getRecentCommits() {
-    await this.run(`cd ${this.localFolderName} && git pull`);
+    await this.run(`cd ${this.localFolderName} && git pull origin ${this.settings.mainBranch}`);
 
     logger.debug('GitRepo - get recent commits');
 
-    const command = 'git log --pretty=format:"%H{SPLIT}"';
+    const command = 'git log -10 --pretty=format:"%H{SPLIT}"';
 
     const { stdout } = await this.run(`cd ${this.localFolderName} && ${command}`);
 
     const listCommits = await stdout.split('{SPLIT}');
 
-    this.lastCheckingCommitTime = new Date();
+    const {
+      data: { data },
+    } = await storageAPI.getBuildList();
 
-    return listCommits;
+    const filteredCommits = listCommits.filter(hash => {
+      const item = data.find(el => el.commitHash === hash);
+
+      if (item) return false;
+
+      return true;
+    });
+
+    logger.debug(`GitRepo - recent commits: ${filteredCommits}`);
+
+    return filteredCommits;
   }
 }
 

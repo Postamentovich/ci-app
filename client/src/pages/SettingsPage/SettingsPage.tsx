@@ -136,8 +136,8 @@ export const SettingsPage = () => {
     /**
      * Если ошибок нет, отправляем данные
      */
-    if (!buildComandNotValid && !repoNameNotValid && !isSaving) dispatch(saveSettings());
-  }, [buildComand.length, buildComandNotValid, dispatch, isSaving, repoName.length, repoNameNotValid]);
+    if (buildComand.length && repoName.length && !isSaving) dispatch(saveSettings());
+  }, [buildComand.length, dispatch, isSaving, repoName.length]);
 
   /**
    * Обработчик клика на кнопку Cancel

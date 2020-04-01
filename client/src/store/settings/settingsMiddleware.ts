@@ -21,13 +21,13 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => ne
 
       const { data } = await settingsApi.getSettings();
 
-      dispatch(globalSlice.actions.setIsLoading(false));
-
       if (data) {
         currentSettings = data;
 
         dispatch(settingsSlice.actions.setInitialSettings(data));
       }
+
+      dispatch(globalSlice.actions.setIsLoading(false));
     } catch (error) {
       dispatch(settingsSlice.actions.setIsSaving(false));
 
@@ -73,6 +73,8 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => ne
       };
 
       await settingsApi.saveSettings(model);
+
+      currentSettings = model;
 
       dispatch(settingsSlice.actions.setIsSaving(false));
 

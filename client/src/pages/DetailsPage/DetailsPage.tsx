@@ -57,7 +57,8 @@ export const DetailsPage = () => {
     if (!log[id!] && !isLogLoading) dispatch(getBuildLog(id!));
 
     if (!build) dispatch(getBuildDetails(id!));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   /**
    * Обработка клика на кнопку Rebuild
@@ -89,20 +90,21 @@ export const DetailsPage = () => {
       </Header>
 
       <div className={cnDetails('Content', ['Layout'])}>
-        <BuildCard
-          buildNumber={`#${build?.buildNumber}`}
-          commitMessage={build?.commitMessage}
-          branchName={build?.branchName}
-          authorName={build?.authorName}
-          date={build?.start}
-          status={build?.status}
-          key={build?.id}
-          className={cnDetails('Card')}
-          duration={build?.duration}
-          commitHash={build?.commitHash}
-          view="detail"
-        />
-
+        {build && (
+          <BuildCard
+            buildNumber={`#${build?.buildNumber}`}
+            commitMessage={build?.commitMessage}
+            branchName={build?.branchName}
+            authorName={build?.authorName}
+            date={build?.start}
+            status={build?.status}
+            key={build?.id}
+            className={cnDetails('Card')}
+            duration={build?.duration}
+            commitHash={build?.commitHash}
+            view="detail"
+          />
+        )}
         <div className={cnDetails('Log')}>
           {isLogLoading && <Spin />}
 

@@ -18,6 +18,8 @@ class BuildAgent {
     this.processQueue = this.processQueue.bind(this);
 
     this.processQueue();
+
+    this.getItems();
   }
 
   /**
@@ -52,7 +54,7 @@ class BuildAgent {
         dateTime: new Date().toISOString(),
       });
 
-      return new Promise((res) => {
+      return new Promise(res => {
         setTimeout(async () => {
           const endBuilding = new Date().valueOf();
 
@@ -212,35 +214,27 @@ class BuildAgent {
   /**
    * Добавление билда в очередь
    */
-  async addToQueue({ commitMessage, commitHash, branchName, authorName }) {
-    const {
-      data: { data },
-    } = await storageAPI.getBuildList();
+  async getItems() {
+    try {
+      const {
+        data: { data },
+      } = await storageAPI.getBuildList();
 
-    const item = data.find((el) => el.commitHash === commitHash);
+      const waitingItems = data.filter(
+        el => el.status === 'Waiting' && !this.queue.find(item => item.id === el.id),
+      );
 
-    if (!item) {
-      logger.debug(`BuildAgent - add to queue ${commitMessage} ${commitHash} ${authorName}`);
-
-      try {
-        await storageAPI.setBuildRequest({
-          commitMessage,
-          commitHash,
-          branchName,
-          authorName,
-        });
-      } catch (error) {
-        throw new Error(error);
-      }
-
-      const list = await storageAPI.getBuildList();
-
-      const build = list.data.data.find((el) => el.commitHash === commitHash);
-
-      if (!this.queue.find((el) => el.commitHash === commitHash)) {
+      waitingItems.forEach(build => {
+        logger.debug(
+          `BuildAgent - add to queue ${build.commitMessage} ${build.commitHash} ${build.authorName}`,
+        );
         this.queue.push(build);
-      }
-    }
+      });
+    } catch (error) {}
+
+    setTimeout(() => {
+      this.getItems();
+    }, 3000);
   }
 }
 

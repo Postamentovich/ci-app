@@ -33,8 +33,6 @@ router.post(
 
     const info = await gitRepo.getInfoByHash(commitHash);
 
-    await storageAPI.setBuildRequest(info);
-
     const list = await storageAPI.getBuildList();
 
     const build = list.data.data.find(el => el.commitHash === info.commitHash);

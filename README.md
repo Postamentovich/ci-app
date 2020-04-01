@@ -29,7 +29,7 @@ $ npm install
 $ cd client && npm install
 $ npm run build
 $ cd ..
-$ npm run dev
+$ npm run start
 ```
 
 ## Используемые технологии

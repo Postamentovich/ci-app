@@ -123,7 +123,7 @@ class GitRepo {
     for (let i = 0; i < commits.length; i++) {
       const commitHash = commits[i];
 
-      if (commitHash && commitHash.length > 0) await this.getInfoByHash(commitHash);
+      if (commitHash && commitHash.length > 0) await this.getInfoByHash(commitHash.replace(/\s/g, ''));
     }
 
     this.periodTimeout = setTimeout(() => this.checkCommits, this.settings.period * 60 * 1000);
@@ -251,6 +251,14 @@ class GitRepo {
   // addSettingsToQueue(settings) {
   //   this.queue.push(async () => this.updateSettings(settings));
   // }
+
+  async timeout() {
+    return new Promise(res =>
+      setTimeout(() => {
+        res();
+      }, 300),
+    );
+  }
 
   /**
    * Получение последних коммитов

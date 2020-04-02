@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState, useCallback } from 'react';
 import { cn } from '@bem-react/classname';
@@ -70,11 +71,14 @@ export const HistoryPage = () => {
   /**
    * Обработка клика на кнопку подтверждения в модальном окне
    */
-  const handleClickModalConfirm = useCallback((value: string) => {
-    dispatch(addBuildToQueue(value));
+  const handleClickModalConfirm = useCallback(
+    (value: string) => {
+      dispatch(addBuildToQueue(value));
 
-    setModalIsOpen(false);
-  }, [dispatch]);
+      setModalIsOpen(false);
+    },
+    [dispatch],
+  );
 
   /**
    * Обработка клика на кнопку отмены в модальном окне
@@ -111,17 +115,10 @@ export const HistoryPage = () => {
         {!list.length && !isLoading && <span>You don't have any builds</span>}
 
         {list.map(
-          ({
-            buildNumber,
-            commitHash,
-            commitMessage,
-            branchName,
-            authorName,
-            start,
-            id,
-            status,
-            duration,
-          }) => (
+          (
+            { buildNumber, commitHash, commitMessage, branchName, authorName, start, id, status, duration },
+            index,
+          ) => (
             <BuildCard
               buildNumber={`#${buildNumber}`}
               commitMessage={commitMessage}
@@ -131,7 +128,7 @@ export const HistoryPage = () => {
               date={start}
               duration={duration}
               status={status}
-              key={id}
+              key={index}
               className={cnHistory('Card')}
               type="link"
               to={`/build/${id}`}

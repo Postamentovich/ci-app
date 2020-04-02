@@ -128,10 +128,14 @@ class GitRepo {
     for (let i = 0; i < commits.length; i++) {
       const commitHash = commits[i];
 
-      if (commitHash && commitHash.length > 0) await this.getInfoByHash(commitHash.replace(/\s/g, ''));
+      if (commitHash && commitHash.length > 0) await this.getInfoByHash(commitHash);
     }
 
-    this.periodTimeout = setTimeout(() => this.checkCommits, this.settings.period * 60 * 1000);
+    const period = Number(this.settings.period) || 10;
+
+    logger.debug(`Next check commits after ${period} minutes`);
+
+    this.periodTimeout = setTimeout(() => this.checkCommits, period * 60 * 1000);
   }
 
   /**
@@ -261,7 +265,7 @@ class GitRepo {
 
     const { stdout } = await this.run(`cd ${this.localFolderName} && ${command}`);
 
-    const listCommits = await stdout.split('{SPLIT}');
+    const listCommits = await stdout.split('{SPLIT}').map(el => el.replace(/\s/g, ''));
 
     try {
       const {
@@ -276,7 +280,7 @@ class GitRepo {
         return true;
       });
 
-      logger.debug(`GitRepo - recent commits: ${filteredCommits}`);
+      logger.debug(`GitRepo - filtered recent commits: ${filteredCommits}`);
 
       return filteredCommits;
     } catch (error) {

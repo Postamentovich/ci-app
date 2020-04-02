@@ -36,7 +36,7 @@ export const settingsSlice = createSlice({
       state.mainBranch = action.payload;
     },
     changePeriod(state, action: PayloadAction<number>) {
-      state.period = action.payload;
+      state.period = Number(action.payload);
     },
     setInitialSettings(state, action: PayloadAction<ConfigurationModel>) {
       const { repoName, mainBranch, buildCommand, period } = action.payload;

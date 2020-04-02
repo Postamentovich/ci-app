@@ -21,6 +21,10 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next
       dispatch(bulidsSlice.actions.setList(list));
 
       dispatch(bulidsSlice.actions.setIsLoading(false));
+
+      const itewWithWaitingStatus = list.find(el => el.status === 'Waiting' || el.status === 'InProgress');
+
+      if (itewWithWaitingStatus) setTimeout(() => dispatch(getBuildList()), 5000);
     } catch (error) {
       dispatch(bulidsSlice.actions.setIsLoading(false));
 
@@ -92,6 +96,26 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next
       const build = await buildApi.getDetails(action.payload);
 
       dispatch(bulidsSlice.actions.addBuildToList(build));
+
+      if (build.status === 'InProgress') {
+        dispatch(
+          globalSlice.actions.addNotify({
+            message: 'Build in progress',
+            id: Date.now().valueOf(),
+            type: 'warning',
+          }),
+        );
+      } else if (build.status === 'Waiting') {
+        dispatch(
+          globalSlice.actions.addNotify({
+            message: 'Build is waiting',
+            id: Date.now().valueOf(),
+            type: 'warning',
+          }),
+        );
+      } else {
+        dispatch(getBuildLog(build.id));
+      }
     } catch (error) {
       dispatch(
         globalSlice.actions.addNotify({

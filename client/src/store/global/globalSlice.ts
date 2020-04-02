@@ -6,7 +6,7 @@ type Notify = {
   /** id сообщения */
   id: number;
   /** Тип уведомления */
-  type?: 'success' | 'error';
+  type?: 'success' | 'error' | 'warning';
 };
 
 type GlobalState = {

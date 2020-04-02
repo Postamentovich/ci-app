@@ -14,6 +14,10 @@
     &_success {
       background-color: var(--toast-color-success);
     }
+
+    &_warning {
+      background-color: var(--toast-color-warning);
+    }
   }
 
   &-Close {

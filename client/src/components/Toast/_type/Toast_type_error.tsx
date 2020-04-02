@@ -9,7 +9,7 @@ export interface IToastTypeErrorProps {
 }
 
 /**
- * Модификатор, отвечающий за тип кнопки
+ * Модификатор, отвечающий за тип уведомления
  */
 export const withToastTypeError = withBemMod<IToastTypeErrorProps, IToastProps>(cnToast(), {
   type: 'error',

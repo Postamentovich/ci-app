@@ -34,10 +34,8 @@ router.post(
 
     if (typeof mainBranch !== 'string') throw createError(400, 'Error in mainBranch');
 
-    if (typeof period !== 'number') throw createError(400, 'Error in period');
-
     /** Проверка существует репозиторий или нет */
-    await githubAPI.checkRepo(repoName);
+    // await githubAPI.checkRepo(repoName);
 
     /** Очистка закэшированных значений */
     hashObj.clear();

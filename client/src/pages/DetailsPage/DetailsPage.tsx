@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
 import { RootState } from 'store/rootReducer';
-import { buildSelector } from 'store/builds/buildsSlice';
-import { getBuildLog, addBuildToQueue, getBuildDetails } from 'store/builds/buildsActions';
+import { buildSelector, logSelector } from 'store/builds/buildsSlice';
+import { addBuildToQueue, getBuildDetails } from 'store/builds/buildsActions';
 import { Header } from 'containers/Header/Header';
 import { cnHeader } from 'containers/Header';
 import { Footer } from 'containers/Footer/Footer';
@@ -43,22 +43,18 @@ export const DetailsPage = () => {
 
   const dispatch = useDispatch();
 
-  const { repoName, build, log, isLogLoading } = useSelector(
+  const { repoName, build, log } = useSelector(
     (state: RootState) => ({
       repoName: state.settingsSlice.repoName,
-      log: state.bulidsSlice.log,
+      log: logSelector(state, id!),
       build: buildSelector(state, id!),
-      isLogLoading: state.bulidsSlice.isLogLoading,
     }),
     shallowEqual,
   );
 
   useEffect(() => {
-    if (!log[id!] && !isLogLoading) dispatch(getBuildLog(id!));
-
-    if (!build) dispatch(getBuildDetails(id!));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    dispatch(getBuildDetails(id!));
+  }, [dispatch, id]);
 
   /**
    * Обработка клика на кнопку Rebuild
@@ -106,9 +102,9 @@ export const DetailsPage = () => {
           />
         )}
         <div className={cnDetails('Log')}>
-          {isLogLoading && <Spin />}
+          {!log && <Spin />}
 
-          {!isLogLoading && log[id!] && <Log>{log[id!]}</Log>}
+          {log && <Log>{log}</Log>}
         </div>
       </div>
 

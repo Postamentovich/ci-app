@@ -1,16 +1,16 @@
 import { withBemMod } from '@bem-react/core';
 import { IToastProps, cnToast } from '../index';
 
-export interface IToastTypeSuccessProps {
+export interface IToastTypeWarningProps {
   /**
    * Тип уведомления
    */
-  type?: 'success';
+  type?: 'warning';
 }
 
 /**
  * Модификатор, отвечающий за тип уведомления
  */
-export const withToastTypeSuccess = withBemMod<IToastTypeSuccessProps, IToastProps>(cnToast(), {
-  type: 'success',
+export const withToastTypeWarning = withBemMod<IToastTypeWarningProps, IToastProps>(cnToast(), {
+  type: 'warning',
 });

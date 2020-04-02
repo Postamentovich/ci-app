@@ -15,6 +15,7 @@ import { withButtonViewDefault } from 'components/Button/_view/Button_view_defau
 import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
+import { withButtonProgress } from 'components/Button/_progress/Button_progress';
 import { Title as TitlePresenter } from 'components/Title/Title';
 import { withTitleTypeH4 } from 'components/Title/_type/Title_type_h4';
 import './SettingsPage.scss';
@@ -25,6 +26,7 @@ const Button = compose(
   composeU(withButtonViewDefault, withButtonViewAction),
   withButtonSizeM,
   withButtonTypeLink,
+  withButtonProgress,
 )(ButtonPresenter);
 
 const Title = compose(withTitleTypeH4)(TitlePresenter);
@@ -211,6 +213,7 @@ export const SettingsPage = () => {
             className={cnSettings('Button')}
             onClick={handleClickSave}
             disabled={isSaving}
+            progress={isSaving}
           >
             Save
           </Button>

@@ -73,6 +73,17 @@
       &:focus {
         border-color: var(--color-border-control-focused);
       }
+
+      &.Button_progress {
+        background-color: #ffd426;
+        background-image: repeating-linear-gradient(-45deg, #ffd426, #ffd426 4px, #f7c600 4px, #f7c600 8px);
+        background-size: 34px 34px;
+        opacity: 0.5;
+        animation-name: button-progress;
+        animation-duration: 0.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
     }
 
     &_pseudo {
@@ -93,14 +104,26 @@
     white-space: nowrap;
   }
 
-  &[aria-disabled='true'] {
+  &[aria-disabled="true"] {
     background-color: var(--color-bg-disabled);
+
+    border-color: transparent;
 
     cursor: default;
 
     .Button-Text {
       color: var(--color-button-disable);
     }
+  }
+}
+
+@keyframes button-progress {
+  0% {
+    background-position: -12px 0;
+  }
+
+  100% {
+    background-position: 0 0;
   }
 }
 

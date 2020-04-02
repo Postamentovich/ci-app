@@ -21,6 +21,11 @@
     "url": "https://github.com/Postamentovich/shri-homework-1/issues"
   },
   "homepage": "https://github.com/Postamentovich/shri-homework-1#readme",
+  "nodemonConfig": {
+    "ignore": [
+      "repo/*"
+    ]
+  },
   "devDependencies": {
     "@bem-react/eslint-plugin": "^1.1.2",
     "@typescript-eslint/eslint-plugin": "^2.24.0",

@@ -39,16 +39,11 @@ router.post(
     /** Проверка существует репозиторий или нет */
     await githubAPI.checkRepo(repoName);
 
-    /** Обновление значений в базе */
-    await storageAPI.setConfig(req.body);
-
     /** Очистка закэшированных значений */
     hashObj.clear();
 
     /** Обновление локального репозитория */
     await gitRepo.updateSettings(req.body);
-
-
 
     res.sendStatus(200);
   }),

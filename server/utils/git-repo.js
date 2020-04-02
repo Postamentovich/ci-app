@@ -102,9 +102,14 @@ class GitRepo {
       await this.clone(repoName);
 
       await this.checkout(mainBranch);
+
+      await storageAPI.deleteConfig();
     } else if (mainBranch !== this.settings.mainBranch) {
       await this.checkout(mainBranch);
     }
+
+    /** Обновление значений в базе */
+    await storageAPI.setConfig(settings);
 
     this.settings = settings;
 
@@ -276,21 +281,29 @@ class GitRepo {
 
     const listCommits = await stdout.split('{SPLIT}');
 
-    const {
-      data: { data },
-    } = await storageAPI.getBuildList();
+    try {
+      const {
+        data: { data },
+      } = await storageAPI.getBuildList();
 
-    const filteredCommits = listCommits.filter(hash => {
-      const item = data.find(el => el.commitHash === hash);
+      const filteredCommits = listCommits.filter(hash => {
+        const item = data.find(el => el.commitHash === hash);
 
-      if (item) return false;
+        if (item) return false;
 
-      return true;
-    });
+        return true;
+      });
 
-    logger.debug(`GitRepo - recent commits: ${filteredCommits}`);
+      logger.debug(`GitRepo - recent commits: ${filteredCommits}`);
 
-    return filteredCommits;
+      return filteredCommits;
+    } catch (error) {
+      logger.error(error);
+
+      logger.debug(`GitRepo - recent commits: ${listCommits}`);
+
+      return listCommits;
+    }
   }
 }
 

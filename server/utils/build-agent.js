@@ -48,12 +48,18 @@ class BuildAgent {
 
     logger.debug(`BuildAgent - start build ${id}`);
 
+    const date = new Date().valueOf() + 3 * 60 * 60 * 1000;
+
     try {
       await storageAPI.setBuildStart({
         buildId: id,
-        dateTime: new Date().toISOString(),
+        dateTime: new Date(date).toISOString(),
       });
-
+    } catch (error) {
+      logger.error(`Error in add build ${error}`);
+      throw new Error(error);
+    }
+    try {
       return new Promise(res => {
         setTimeout(async () => {
           const endBuilding = new Date().valueOf();
@@ -207,6 +213,7 @@ class BuildAgent {
         }, 3000);
       });
     } catch (error) {
+      logger.error(`Error in add finish ${error}`);
       throw new Error(error);
     }
   }
@@ -230,11 +237,12 @@ class BuildAgent {
         );
         this.queue.push(build);
       });
-    } catch (error) {}
-
-    setTimeout(() => {
-      this.getItems();
-    }, 3000);
+    } catch (error) {
+    } finally {
+      setTimeout(() => {
+        this.getItems();
+      }, 3000);
+    }
   }
 }
 

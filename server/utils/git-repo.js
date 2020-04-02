@@ -248,24 +248,6 @@ class GitRepo {
   }
 
   /**
-   * Добавление обновления настроек в очередь задач
-   * Сделано для того, что бы работа с репозиторием происходила последовательно,
-   *
-   * @param {Object} settings
-   */
-  // addSettingsToQueue(settings) {
-  //   this.queue.push(async () => this.updateSettings(settings));
-  // }
-
-  async timeout() {
-    return new Promise(res =>
-      setTimeout(() => {
-        res();
-      }, 300),
-    );
-  }
-
-  /**
    * Получение последних коммитов
    *
    * @param {boolean} onlyLast - Флаг, брать только последний коммит или все коммиты за период

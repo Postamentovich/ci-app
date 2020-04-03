@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { compose, composeU } from '@bem-react/core';
 import { RootState } from 'store/rootReducer';
@@ -21,21 +21,19 @@ const Toast = compose(composeU(withToastTypeError, withToastTypeSuccess, withToa
 export const Notify: FC<INotifyProps> = () => {
   const dispatch = useDispatch();
 
-  const { notify } = useSelector((state: RootState) => ({
-    notify: state.globalSlice.notify,
-  }));
+  const { notify } = useSelector(
+    (state: RootState) => ({
+      notify: state.globalSlice.notify,
+    }),
+    shallowEqual,
+  );
 
   return (
     <div className={cnNotify()}>
       <TransitionGroup className={cnNotify('List')}>
         {notify.map(({ message, id, type }) => (
           <CSSTransition key={id} timeout={500} className={cnNotify('Item')}>
-            <Toast
-              onClick={() => {
-                dispatch(globalSlice.actions.removeNotify(id));
-              }}
-              type={type}
-            >
+            <Toast onClick={() => dispatch(globalSlice.actions.removeNotify(id))} type={type}>
               {message}
             </Toast>
           </CSSTransition>

@@ -4,6 +4,7 @@ import { cn } from '@bem-react/classname';
 import { composeU, compose } from '@bem-react/core';
 import { RootState } from 'store/rootReducer';
 import { settingsSlice } from 'store/settings/settingsSlice';
+import { globalSlice } from 'store/global/globalSlice';
 import { saveSettings, cancelChangedSettings } from 'store/settings/settingsActions';
 import { Header } from 'containers/Header/Header';
 import { Footer } from 'containers/Footer/Footer';
@@ -130,11 +131,29 @@ export const SettingsPage = () => {
     /**
      * Проверка наличия имя репозитория
      */
-    if (!repoName.length) setRepoNameNotValid(true);
+    if (!repoName.length) {
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Please enter GitHub repository',
+          type: 'error',
+          id: Date.now().valueOf(),
+        }),
+      );
+      setRepoNameNotValid(true);
+    }
     /**
      * Проверка наличия команды билда
      */
-    if (!buildComand.length) setBuildComandNotValid(true);
+    if (!buildComand.length) {
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Please enter Build command',
+          type: 'error',
+          id: Date.now().valueOf(),
+        }),
+      );
+      setBuildComandNotValid(true);
+    }
     /**
      * Если ошибок нет, отправляем данные
      */

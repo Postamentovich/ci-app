@@ -1,15 +1,16 @@
 import { Middleware } from '@reduxjs/toolkit';
 import { push } from 'connected-react-router';
 import { RootState } from 'store/rootReducer';
-import { settingsApi } from 'api/settingsApi';
 import { globalSlice } from 'store/global/globalSlice';
+import { bulidsSlice } from 'store/builds/buildsSlice';
+import { settingsApi } from 'api/settingsApi';
 import { ConfigurationInput, ConfigurationModel } from 'api/models/models';
 import { getSettings, saveSettings, cancelChangedSettings } from './settingsActions';
 import { settingsSlice } from './settingsSlice';
 
 let currentSettings: ConfigurationModel;
 
-const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
+const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (action) => {
   next(action);
 
   /**
@@ -73,6 +74,8 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => ne
       };
 
       await settingsApi.saveSettings(model);
+
+      dispatch(bulidsSlice.actions.setList([]));
 
       currentSettings = model;
 

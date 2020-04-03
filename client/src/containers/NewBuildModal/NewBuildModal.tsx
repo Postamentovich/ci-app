@@ -79,7 +79,7 @@ export const NewBuildModal: React.SFC<NewBuildModalProps> = ({ onConfirm, onCanc
     <Modal className={cnNewBuildModal()}>
       <h3 className={cnNewBuildModal('Title')}>New build</h3>
 
-      <p className={cnNewBuildModal('Description')}>Enter the commit hash which you want to buid</p>
+      <p className={cnNewBuildModal('Description')}>Enter the commit hash which you want to build</p>
 
       <TextInput
         id="commitHash"

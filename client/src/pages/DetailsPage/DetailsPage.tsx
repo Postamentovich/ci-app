@@ -104,7 +104,7 @@ const DetailsPage = () => {
         <div className={cnDetails('Log')}>
           {!log && <Spin />}
 
-          {log && <Log>{log}</Log>}
+          {log && <Log ansi={log} />}
         </div>
       </div>
 

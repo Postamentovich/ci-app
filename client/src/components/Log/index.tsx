@@ -8,6 +8,10 @@ export interface ILogProps extends IClassNameProps {
    * @default 'div'
    */
   as?: ReactType;
+  /**
+   * Текст лога в ansi формате
+   */
+  ansi?: string;
 }
 
 export const cnLog = cn('Log');

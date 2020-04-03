@@ -5,10 +5,12 @@
 
   &-Card {
     margin-top: var(--space-7xs);
+    flex-grow: 1;
   }
 
   &-Log {
     margin-top: var(--space-s);
+    flex-grow: 999;
   }
 
   &-Content {

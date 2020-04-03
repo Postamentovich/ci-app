@@ -5,7 +5,7 @@ import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from 'store/rootReducer';
-import { getBuildList, addBuildToQueue } from 'store/builds/buildsActions';
+import { getBuildList, addBuildToQueue, cancelPollingBuildList } from 'store/builds/buildsActions';
 import { Header } from 'containers/Header/Header';
 import { cnHeader } from 'containers/Header';
 import { Footer } from 'containers/Footer/Footer';
@@ -44,7 +44,7 @@ export const HistoryPage = () => {
     (state: RootState) => ({
       repoName: state.settingsSlice.repoName,
       list: state.bulidsSlice.list,
-      isLoading: state.bulidsSlice.isLoading,
+      isLoading: state.bulidsSlice.isBuildListLoading,
     }),
     shallowEqual,
   );
@@ -59,6 +59,10 @@ export const HistoryPage = () => {
    */
   useEffect(() => {
     dispatch(getBuildList());
+
+    return () => {
+      dispatch(cancelPollingBuildList());
+    };
   }, [dispatch]);
 
   /**
@@ -115,10 +119,17 @@ export const HistoryPage = () => {
         {!list.length && !isLoading && <span>You don't have any builds</span>}
 
         {list.map(
-          (
-            { buildNumber, commitHash, commitMessage, branchName, authorName, start, id, status, duration },
-            index,
-          ) => (
+          ({
+            buildNumber,
+            commitHash,
+            commitMessage,
+            branchName,
+            authorName,
+            start,
+            id,
+            status,
+            duration,
+          }) => (
             <BuildCard
               buildNumber={`#${buildNumber}`}
               commitMessage={commitMessage}
@@ -128,7 +139,7 @@ export const HistoryPage = () => {
               date={start}
               duration={duration}
               status={status}
-              key={index}
+              key={id}
               className={cnHistory('Card')}
               type="link"
               to={`/build/${id}`}

@@ -25,3 +25,8 @@ export const addBuildToQueue = createAction<string>('ADD_BUILD_TO_QUEUE');
  * @param buildId - хэш коммита
  */
 export const getBuildDetails = createAction<string>('GET_BUILD_DETAILS');
+
+/**
+ * Отмена поллинга списка билдов
+ */
+export const cancelPollingBuildList = createAction('CANCEL_POLLING_BUILD_LIST');

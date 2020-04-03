@@ -4,17 +4,26 @@ import { RootState } from 'store/rootReducer';
 import { globalSlice } from 'store/global/globalSlice';
 import { buildApi } from 'api/buildApi';
 import { BuildStatus } from 'api/models/models';
-import { getBuildList, getBuildLog, addBuildToQueue, getBuildDetails } from './buildsActions';
+import * as BUILD_ACTIONS from './buildsActions';
 import { bulidsSlice } from './buildsSlice';
+
+let pollingBuildListTimeout: NodeJS.Timeout;
 
 // eslint-disable-next-line consistent-return
 const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (action) => {
   next(action);
 
   /**
+   * Отмена поллинга списка билдов
+   */
+  if (BUILD_ACTIONS.cancelPollingBuildList.match(action)) {
+    clearTimeout(pollingBuildListTimeout);
+  }
+
+  /**
    * Получение списка билдов
    */
-  if (getBuildList.match(action)) {
+  if (BUILD_ACTIONS.getBuildList.match(action)) {
     try {
       dispatch(bulidsSlice.actions.setIsLoading(true));
 
@@ -24,11 +33,21 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
 
       dispatch(bulidsSlice.actions.setIsLoading(false));
 
-      const itewWithWaitingStatus = list.find(
+      const itemWithWaitingStatus = list.find(
         (el) => el.status === BuildStatus.Waiting || el.status === BuildStatus.InProgress,
       );
 
-      if (itewWithWaitingStatus) setTimeout(() => dispatch(getBuildList()), 10000);
+      /**
+       * Если есть билды для которых сборка еще не завершена,
+       * запрашиваем список листов повторно
+       */
+      if (itemWithWaitingStatus) {
+        clearTimeout(pollingBuildListTimeout);
+
+        pollingBuildListTimeout = setTimeout(() => {
+          dispatch(BUILD_ACTIONS.getBuildList());
+        }, 10000);
+      }
     } catch (error) {
       dispatch(bulidsSlice.actions.setIsLoading(false));
 
@@ -45,7 +64,7 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
   /**
    * Получение лога
    */
-  if (getBuildLog.match(action)) {
+  if (BUILD_ACTIONS.getBuildLog.match(action)) {
     try {
       dispatch(bulidsSlice.actions.setIsLogLoading(true));
 
@@ -70,7 +89,7 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
   /**
    * Добавление билда в очередь
    */
-  if (addBuildToQueue.match(action)) {
+  if (BUILD_ACTIONS.addBuildToQueue.match(action)) {
     try {
       const build = await buildApi.addBuild(action.payload);
       dispatch(bulidsSlice.actions.addBuildToList(build));
@@ -98,7 +117,7 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
   /**
    * Получение детальной информации о билде
    */
-  if (getBuildDetails.match(action)) {
+  if (BUILD_ACTIONS.getBuildDetails.match(action)) {
     try {
       const build = await buildApi.getDetails(action.payload);
 
@@ -124,7 +143,7 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
           );
 
         default:
-          dispatch(getBuildLog(build.id));
+          dispatch(BUILD_ACTIONS.getBuildLog(build.id));
       }
     } catch (error) {
       dispatch(

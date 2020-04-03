@@ -3,9 +3,13 @@ import { BuildModel } from 'api/models/models';
 import { RootState } from 'store/rootReducer';
 
 type BuildState = {
+  /** Список билдов */
   list: Array<BuildModel>;
-  isLoading: boolean;
+  /** Флаг загрузки списка билдов */
+  isBuildListLoading: boolean;
+  /** Флаг загрузки лога билда  */
   isLogLoading: boolean;
+  /** Логи для билдов */
   log: {
     [key: string]: string;
   };
@@ -14,7 +18,7 @@ type BuildState = {
 const initialState: BuildState = {
   list: [],
   log: {},
-  isLoading: false,
+  isBuildListLoading: false,
   isLogLoading: false,
 };
 
@@ -26,14 +30,21 @@ export const bulidsSlice = createSlice({
       state.list = action.payload;
     },
     addBuildToList(state, action: PayloadAction<BuildModel>) {
-      state.list = [...state.list, action.payload];
+      if (state.list.find((el) => el.id === action.payload.id)) {
+        state.list = state.list.map((build) => {
+          if (build.id === action.payload.id) build = action.payload;
+          return build;
+        });
+      } else {
+        state.list = [...state.list, action.payload];
+      }
     },
     setLog(state, action: PayloadAction<{ id: string; log: string }>) {
       const { id, log } = action.payload;
       state.log[id] = log;
     },
     setIsLoading(state, action: PayloadAction<boolean>) {
-      state.isLoading = action.payload;
+      state.isBuildListLoading = action.payload;
     },
     setIsLogLoading(state, action: PayloadAction<boolean>) {
       state.isLogLoading = action.payload;
@@ -42,7 +53,7 @@ export const bulidsSlice = createSlice({
 });
 
 export const buildSelector = (state: RootState, id: string) => {
-  return state.bulidsSlice.list.find(build => build.id === id);
+  return state.bulidsSlice.list.find((build) => build.id === id);
 };
 
 export const logSelector = (state: RootState, id: string) => {

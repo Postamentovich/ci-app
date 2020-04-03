@@ -1,4 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
+
 /**
  * Получение списка билдов
  */

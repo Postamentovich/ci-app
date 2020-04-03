@@ -7,6 +7,7 @@ import { BuildStatus } from 'api/models/models';
 import { getBuildList, getBuildLog, addBuildToQueue, getBuildDetails } from './buildsActions';
 import { bulidsSlice } from './buildsSlice';
 
+// eslint-disable-next-line consistent-return
 const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (action) => {
   next(action);
 
@@ -103,24 +104,27 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
 
       dispatch(bulidsSlice.actions.addBuildToList(build));
 
-      if (build.status === 'InProgress') {
-        dispatch(
-          globalSlice.actions.addNotify({
-            message: 'Build in progress',
-            id: Date.now().valueOf(),
-            type: 'warning',
-          }),
-        );
-      } else if (build.status === 'Waiting') {
-        dispatch(
-          globalSlice.actions.addNotify({
-            message: 'Build is waiting',
-            id: Date.now().valueOf(),
-            type: 'warning',
-          }),
-        );
-      } else {
-        dispatch(getBuildLog(build.id));
+      switch (build.status) {
+        case BuildStatus.InProgress:
+          return dispatch(
+            globalSlice.actions.addNotify({
+              message: 'Build in progress',
+              id: Date.now().valueOf(),
+              type: 'warning',
+            }),
+          );
+
+        case BuildStatus.Waiting:
+          return dispatch(
+            globalSlice.actions.addNotify({
+              message: 'Build is waiting',
+              id: Date.now().valueOf(),
+              type: 'warning',
+            }),
+          );
+
+        default:
+          dispatch(getBuildLog(build.id));
       }
     } catch (error) {
       dispatch(

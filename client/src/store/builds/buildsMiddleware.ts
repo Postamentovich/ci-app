@@ -3,10 +3,11 @@ import { push } from 'connected-react-router';
 import { RootState } from 'store/rootReducer';
 import { globalSlice } from 'store/global/globalSlice';
 import { buildApi } from 'api/buildApi';
+import { BuildStatus } from 'api/models/models';
 import { getBuildList, getBuildLog, addBuildToQueue, getBuildDetails } from './buildsActions';
 import { bulidsSlice } from './buildsSlice';
 
-const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next => async action => {
+const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (action) => {
   next(action);
 
   /**
@@ -22,9 +23,11 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next
 
       dispatch(bulidsSlice.actions.setIsLoading(false));
 
-      const itewWithWaitingStatus = list.find(el => el.status === 'Waiting' || el.status === 'InProgress');
+      const itewWithWaitingStatus = list.find(
+        (el) => el.status === BuildStatus.Waiting || el.status === BuildStatus.InProgress,
+      );
 
-      if (itewWithWaitingStatus) setTimeout(() => dispatch(getBuildList()), 5000);
+      if (itewWithWaitingStatus) setTimeout(() => dispatch(getBuildList()), 10000);
     } catch (error) {
       dispatch(bulidsSlice.actions.setIsLoading(false));
 
@@ -91,6 +94,9 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => next
     }
   }
 
+  /**
+   * Получение детальной информации о билде
+   */
   if (getBuildDetails.match(action)) {
     try {
       const build = await buildApi.getDetails(action.payload);

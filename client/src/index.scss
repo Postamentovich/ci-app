@@ -145,6 +145,11 @@ body {
   min-width: 320px;
 }
 
+.body-no-scroll {
+  overflow: hidden;
+  margin-right: 17px;
+}
+
 .Layout {
   padding-left: 100px;
   padding-right: 100px;

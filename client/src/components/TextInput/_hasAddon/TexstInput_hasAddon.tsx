@@ -6,7 +6,7 @@ export interface ITextInputHasAddonProps {
 }
 
 /**
- * Модификатор, отвечающий за тип кнопки
+ * Модификатор, отвечающий за тип инпута
  */
 export const withTextInputHasAddon = withBemMod<ITextInputHasAddonProps, ITextInputProps>(cnTextInput(), {
   hasAddon: true,

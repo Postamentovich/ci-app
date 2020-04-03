@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { cn } from '@bem-react/classname';
 import { composeU, compose } from '@bem-react/core';
@@ -159,6 +159,21 @@ export const SettingsPage = () => {
      */
     if (buildComand.length && repoName.length && !isSaving) dispatch(saveSettings());
   }, [buildComand.length, dispatch, isSaving, repoName.length]);
+
+  /**
+   * Сохранение настроек по нажатию на клавишу enter
+   */
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') handleClickSave();
+    };
+
+    document.addEventListener('keydown', listener);
+
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [handleClickSave]);
 
   /**
    * Обработчик клика на кнопку Cancel

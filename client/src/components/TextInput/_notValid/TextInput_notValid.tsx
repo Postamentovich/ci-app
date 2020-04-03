@@ -9,7 +9,7 @@ export interface ITextInputnotValidProps {
 }
 
 /**
- * Модификатор, отвечающий за тип кнопки
+ * Модификатор, отвечающий за вид инпута
  */
 export const withTextInputNotValid = withBemMod<ITextInputnotValidProps, ITextInputProps>(cnTextInput(), {
   notValid: true,

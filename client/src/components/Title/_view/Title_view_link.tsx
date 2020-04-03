@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withBemMod } from '@bem-react/core';
-import { ITitleProps, cnTitle } from '../index';
 import { Link } from 'react-router-dom';
+import { ITitleProps, cnTitle } from '../index';
 
 export interface ITitleViewLinkProps {
   /**

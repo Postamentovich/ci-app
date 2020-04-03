@@ -40,6 +40,8 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "@loadable/component": "^5.12.0",
+    "@types/loadable__component": "^5.10.0",
     "@types/react-transition-group": "^4.2.4",
     "ansi-to-html": "^0.6.14",
     "axios": "^0.19.2",

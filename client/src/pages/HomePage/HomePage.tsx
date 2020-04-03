@@ -27,7 +27,7 @@ const Button = compose(
 /**
  * Стартовая страница
  */
-export const HomePage = () => (
+const HomePage = () => (
   <div className={cnHome()}>
     <Header className="Layout" title="School CI Server">
       <Button view="default" type="link" to="/settings" size="s" iconLeft={<Icon type="gear" />}>
@@ -52,3 +52,5 @@ export const HomePage = () => (
     <Footer className="Layout" />
   </div>
 );
+
+export default HomePage;

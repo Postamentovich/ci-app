@@ -38,7 +38,7 @@ const BuildCard = compose(withBuildCardViewDetail)(BuildCardPresenter);
 /**
  * Страница деталей билда
  */
-export const DetailsPage = () => {
+const DetailsPage = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -112,3 +112,5 @@ export const DetailsPage = () => {
     </div>
   );
 };
+
+export default DetailsPage;

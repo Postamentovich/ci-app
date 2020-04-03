@@ -37,7 +37,7 @@ const TextInput = compose(withTextInputHasAddon, withTextInputNotValid)(TextInpu
 /**
  * Страница настроек
  */
-export const SettingsPage = () => {
+const SettingsPage = () => {
   const dispatch = useDispatch();
 
   const { repoName, period, buildComand, mainBranch, isSaving } = useSelector((state: RootState) => ({
@@ -267,3 +267,5 @@ export const SettingsPage = () => {
     </div>
   );
 };
+
+export default SettingsPage;

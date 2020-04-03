@@ -2,10 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/rootReducer';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { HomePage } from './HomePage/HomePage';
-import { SettingsPage } from './SettingsPage/SettingsPage';
-import { HistoryPage } from './HistoryPage/HistoryPage';
-import { DetailsPage } from './DetailsPage/DetailsPage';
+import { Spin } from 'components/Spin/Spin';
+import loadable from '@loadable/component';
+
+const SettingsPage = loadable(() => import('./SettingsPage/SettingsPage'), { fallback: <Spin /> });
+const HistoryPage = loadable(() => import('./HistoryPage/HistoryPage'), { fallback: <Spin /> });
+const DetailsPage = loadable(() => import('./DetailsPage/DetailsPage'), { fallback: <Spin /> });
+const HomePage = loadable(() => import('./HomePage/HomePage'), { fallback: <Spin /> });
 
 export const AppRoutes = () => {
   const { repoName } = useSelector((state: RootState) => ({

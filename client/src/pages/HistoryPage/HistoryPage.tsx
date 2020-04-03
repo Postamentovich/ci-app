@@ -37,7 +37,7 @@ const Button = compose(
 /**
  * Страница истории билдов
  */
-export const HistoryPage = () => {
+const HistoryPage = () => {
   const dispatch = useDispatch();
 
   const { repoName, list, isLoading } = useSelector(
@@ -154,3 +154,5 @@ export const HistoryPage = () => {
     </div>
   );
 };
+
+export default HistoryPage;

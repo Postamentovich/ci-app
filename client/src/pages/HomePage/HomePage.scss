@@ -14,14 +14,14 @@
   }
 
   &-Description {
-    margin-top: var(--space-xxxxl);
+    margin-top: var(--space-4xl);
     text-align: center;
     font-weight: normal;
-    font-size: 13px;
-    line-height: 125%;
+    font-size: var(--text-size-s);
+    line-height: var(--text-line-height-4xs);
   }
 
   &-Button {
-    margin-top: var(--space-xxxl);
+    margin-top: var(--space-3xl);
   }
 }

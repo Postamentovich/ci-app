@@ -1,5 +1,7 @@
+@import 'index.scss';
+
 .Card {
-  padding: var(--space-s) var(--space-xxxl);
+  padding: var(--space-s) var(--space-3xl);
 
   box-shadow: var(--card-shadow);
 
@@ -19,7 +21,7 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: $breakpoint-tablet) {
   .Card {
     padding: var(--space-l) var(--space-s);
   }

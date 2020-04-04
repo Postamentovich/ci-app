@@ -1,3 +1,5 @@
+@import "index.scss";
+
 .BuildCard {
   width: 100%;
 
@@ -24,29 +26,29 @@
   &_status {
     &_Success {
       .BuildCard-BuildNumber {
-        color: var(--build-color-success);
+        color: var(--color-typo-success);
       }
     }
 
     &_InProgress,
     &_Waiting {
       .BuildCard-BuildNumber {
-        color: var(--build-color-waiting);
+        color: var(--color-typo-waiting);
       }
     }
 
     &_Cancel,
     &_Error {
       .BuildCard-BuildNumber {
-        color: var(--build-color-error);
+        color: var(--color-typo-error);
       }
     }
   }
 
   &-BuildNumber {
     font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: var(--text-size-xl);
+    line-height: var(--text-line-height-xs);
   }
 
   &-DateTime {
@@ -70,17 +72,16 @@
   &-DateTimeItem {
     margin-left: var(--space-6xs);
     white-space: nowrap;
-    color: #595959;
-    font-size: 13px;
-    line-height: 16px;
-    letter-spacing: 0.06px;
+    color: var(--color-typo-secondary);
+    font-size: var(--text-size-s);
+    line-height: var(--text-line-height-3xs);
   }
 
   &-Content {
-    margin-left: var(--space-xxs);
+    margin-left: var(--space-2xs);
     display: flex;
     justify-content: space-between;
-    width: calc(100% - 32px);
+    width: calc(100% - var(--space-4xl));
   }
 
   &-Row {
@@ -98,13 +99,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
-    font-size: 15px;
-    line-height: 20px;
-    color: #000000;
+    font-size: var(--text-size-m);
+    line-height: var(--text-line-height-xs);
+    color: var(--color-typo-primary);
   }
 
   &-Author {
-    margin-left: var(--space-xxs);
+    margin-left: var(--space-2xs);
   }
 
   &-Status {
@@ -118,29 +119,25 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-left: 4px;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 16px;
-    letter-spacing: 0.06px;
-    color: #000000;
+    margin-left: var(--space-7xs);
+    font-size: var(--text-size-s);
+    line-height: var(--text-line-height-3xs);
+    color: var(--color-typo-primary);
   }
 
   &-AuthorName {
     font-weight: normal;
-    font-size: 13px;
-    line-height: 16px;
-    letter-spacing: 0.06px;
-    color: #000000;
-    margin-left: 4px;
+    font-size: var(--text-size-s);
+    line-height: var(--text-line-height-3xs);
+    color: var(--color-typo-primary);
+    margin-left: var(--space-7xs);
   }
 
   &-CommitHash {
-    margin-left: 4px;
-    color: #595959;
-    font-size: 13px;
-    line-height: 16px;
-    letter-spacing: 0.06px;
+    margin-left: var(--space-7xs);
+    color: var(--color-typo-secondary);
+    font-size: var(--text-size-s);
+    line-height: var(--text-line-height-3xs);
   }
 
   &-Separator {
@@ -154,7 +151,7 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: $breakpoint-tablet) {
   .BuildCard {
     &-Status {
       height: 14px;
@@ -191,7 +188,7 @@
 
     &-Duration {
       margin-top: 0;
-      margin-left: var(--space-xxs);
+      margin-left: var(--space-2xs);
     }
 
     &-Info {

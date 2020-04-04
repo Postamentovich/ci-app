@@ -1,3 +1,5 @@
+@import "index.scss";
+
 .SettingsPage {
   display: flex;
   flex-direction: column;
@@ -14,10 +16,9 @@
   &-Description {
     margin-top: var(--space-4xs);
     margin-bottom: var(--space-4xs);
-    font-size: 13px;
-    line-height: 18px;
-    letter-spacing: 0.06px;
-    color: #7f8285;
+    font-size: var(--text-size-s);
+    line-height: var(--text-line-height-2xs);
+    color: var(--color-typo-secondary);
   }
 
   &-Input {
@@ -31,7 +32,7 @@
 
   &-Buttons {
     display: flex;
-    margin-bottom: var(--space-xxl);
+    margin-bottom: var(--space-2xl);
   }
 
   &-Button {
@@ -40,7 +41,7 @@
   }
 }
 
-@media (max-width: 470px) {
+@media (max-width: $breakpoint-mobile) {
   .SettingsPage {
     &-Buttons {
       flex-direction: column;

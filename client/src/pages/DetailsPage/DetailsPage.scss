@@ -1,3 +1,5 @@
+@import "index.scss";
+
 .DetailsPage {
   display: flex;
   flex-direction: column;
@@ -22,12 +24,9 @@
   }
 }
 
-@media (max-width: 470px) {
+@media (max-width: $breakpoint-mobile) {
   .DetailsPage {
     padding-top: var(--space-7xs);
     padding-bottom: var(--space-l);
-    &-Container {
-      min-height: calc(100vh - 146px);
-    }
   }
 }

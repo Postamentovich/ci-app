@@ -20,39 +20,35 @@
   }
 
   &-Label {
-    &[aria-required='true'] {
+    &[aria-required="true"] {
       &:after {
-        content: ' *';
-        color: var(--color-text-required);
+        content: " *";
+        color: var(--color-base-required);
       }
     }
 
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 18px;
-    letter-spacing: 0.06px;
+    font-size: var(--text-size-s);
+    line-height: var(--text-line-height-2xs);
   }
 
   &-Addon {
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 18px;
-    letter-spacing: 0.06px;
+    font-size: var(--text-size-s);
+    line-height: var(--text-line-height-2xs);
     color: #434445;
   }
 
   &-Input {
     border-width: var(--border-width-l);
     border-style: solid;
-    border-color: var(--color-border-main);
+    border-color: var(--color-border-input-default);
     border-radius: var(--radius-l);
 
-    padding-top: var(--space-xxxs);
+    padding-top: var(--space-3xs);
     padding-right: var(--space-xs);
     padding-left: var(--space-xs);
     padding-bottom: var(--space-4xs);
 
-    margin-top: var(--space-xxxxxs);
+    margin-top: var(--space-5xs);
 
     &:hover {
       border-color: var(--color-border-input-hovered);
@@ -64,7 +60,7 @@
     }
 
     &::-webkit-input-placeholder {
-      color: var(--color-text-second);
+      color: var(--color-typo-secondary);
     }
   }
 
@@ -72,8 +68,8 @@
     border: none;
     padding: 0;
     position: absolute;
-    bottom: var(--space-xxs);
-    right: var(--space-xxs);
+    bottom: var(--space-2xs);
+    right: var(--space-2xs);
     background: transparent;
     display: flex;
     cursor: pointer;
@@ -81,7 +77,7 @@
 
   &_notValid {
     .TextInput-Input {
-      border-color: var(--color-text-required);
+      border-color: var(--color-border-input-error);
     }
   }
 }

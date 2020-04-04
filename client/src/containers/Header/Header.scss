@@ -1,3 +1,5 @@
+@import "index.scss";
+
 .Header {
   display: flex;
   flex-grow: 1;
@@ -28,7 +30,7 @@
   padding-bottom: var(--space-4xs);
 }
 
-@media (max-width: 470px) {
+@media (max-width: $breakpoint-tablet) {
   .Header {
     &_space-v_l {
       padding-top: var(--space-s);

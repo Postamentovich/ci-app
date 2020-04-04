@@ -38,7 +38,7 @@
     stroke-dasharray: 1 200;
     stroke-dashoffset: 0;
     stroke-width: 2px;
-    stroke: #ffcc00;
+    stroke: var(--color-bg-action);
     animation: dash 3.5s ease-out infinite;
   }
 }

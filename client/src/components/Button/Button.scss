@@ -1,3 +1,5 @@
+@import "index.scss";
+
 .Button {
   border-radius: var(--radius-xl);
 
@@ -26,6 +28,7 @@
   &_size {
     &_s {
       height: var(--button-size-s-height);
+      min-width: var(--button-size-s-height);
       font-size: var(--button-size-s-font);
       line-height: var(--button-size-s-lineHeight);
       padding-right: var(--space-xs);
@@ -39,10 +42,11 @@
 
     &_m {
       height: var(--button-size-m-height);
+      min-width: var(--button-size-m-height);
       font-size: var(--button-size-m-font);
       line-height: var(--button-size-m-lineHeight);
-      padding-right: var(--space-xxl);
-      padding-left: var(--space-xxl);
+      padding-right: var(--space-2xl);
+      padding-left: var(--space-2xl);
     }
   }
 
@@ -52,24 +56,24 @@
 
   &_view {
     &_default {
-      background-color: var(--color-bg-control);
+      background-color: var(--color-bg-button-default);
 
       &:hover {
-        background-color: var(--color-bg-control-hovered);
+        background-color: var(--color-bg-button-control-hover);
       }
 
       &:focus {
-        border-color: var(--color-border-control-focused);
+        border-color: var(--color-border-button-default-focused);
       }
 
       &.Button_progress {
-        background-color: var(--color-bg-control);
+        background-color: var(--color-bg-button-default);
         background-image: repeating-linear-gradient(
           -45deg,
-          var(--color-border-control-focused),
-          var(--color-border-control-focused) 4px,
-          var(--color-bg-control-hovered) 4px,
-          var(--color-bg-control-hovered) 8px
+          var(--color-border-button-default-focused),
+          var(--color-border-button-default-focused) 4px,
+          var(--color-bg-button-control-hover) 4px,
+          var(--color-bg-button-control-hover) 8px
         );
         background-size: 34px 34px;
         opacity: 0.5;
@@ -81,14 +85,14 @@
     }
 
     &_action {
-      background-color: var(--color-bg-action);
+      background-color: var(--color-bg-button-action);
 
       &:hover {
-        background-color: var(--color-bg-action-hovered);
+        background-color: var(--color-bg-button-action-hover);
       }
 
       &:focus {
-        border-color: var(--color-border-control-focused);
+        border-color: var(--color-border-button-action-focused);
       }
 
       &.Button_progress {
@@ -104,15 +108,15 @@
     }
 
     &_pseudo {
-      background-color: transparent;
-      border: 1px solid rgb(204, 204, 204);
+      background-color: var(--color-bg-button-pseudo);
+      border: 1px solid var(--color-border-button-pseudo);
 
       &:hover {
-        background-color: rgb(247, 247, 247);
+        background-color: var(--color-bg-button-pseudo-hover);
       }
 
       &:focus {
-        border-color: var(--color-border-control-focused);
+        border-color: var(--color-border-button-pseudo-focused);
       }
     }
   }
@@ -122,14 +126,14 @@
   }
 
   &[aria-disabled="true"] {
-    background-color: var(--color-bg-disabled);
+    background-color: var(--color-bg-button-disabled);
 
     border-color: transparent;
 
     cursor: default;
 
     .Button-Text {
-      color: var(--color-button-disable);
+      color: var(--color-typo-disabled);
     }
   }
 }
@@ -144,11 +148,11 @@
   }
 }
 
-@media (max-width: 470px) {
+@media (max-width: $breakpoint-mobile) {
   .Button {
     &_size {
       &_s {
-        padding: 6px;
+        padding: var(--space-5xs);
         .Button-Text {
           display: none;
         }

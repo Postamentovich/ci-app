@@ -25,57 +25,12 @@
   font-style: normal;
 }
 
+/** Брейкпоинты */
+$breakpoint-mobile: 470px;
+$breakpoint-tablet: 768px;
+
 :root {
-  --blue-grey-500: #7f8285;
-  --red-600: #e00000;
-
-  --color-link-default: var(--blue-grey-500);
-  --color-link-hover: var(--red-600);
-
-  --modal-bg-color: rgba(0, 0, 0, 0.4);
-
-  --button-size-s-height: 28px;
-  --button-size-s-font: 13px;
-  --button-size-s-lineHeight: 24px;
-
-  --button-size-m-height: 36px;
-  --button-size-m-font: 13px;
-  --button-size-m-lineHeight: 32px;
-
-  --color-button-disable: #b8b8b8;
-  --color-bg-disabled: #f2f2f2;
-
-  --space-7xs: 4px;
-  --space-6xs: 5px;
-  --space-xxxxxs: 6px;
-  --space-4xs: 8px;
-  --space-xxxs: 9px;
-  --space-xxs: 10px;
-  --space-xs: 11px;
-  --space-s: 12px;
-  --space-m: 14px;
-  --space-l: 16px;
-  --space-xl: 18px;
-  --space-xxl: 20px;
-  --space-xxxl: 24px;
-  --space-xxxxl: 32px;
-  --space-xxxxxl: 100px;
-
-  --text-size-xs: 10px;
-  --text-size-s: 13px;
-  --text-size-m: 15px;
-  --text-size-l: 16px;
-  --text-size-xl: 18px;
-  --text-size-xxl: 24px;
-  --text-line-height-xxxxs: 15px;
-  --text-line-height-xxxs: 16px;
-  --text-line-height-xxs: 18px;
-  --text-line-height-xs: 20px;
-  --text-line-height-s: 22px;
-  --text-line-height-m: 24px;
-  --text-line-height-l: 28px;
-  --text-line-height-xl: 32px;
-
+  /** Базовые цвета */
   --blue-grey-50: #f0f2f3;
   --blue-grey-500: #7f8285;
   --blue-grey-600: #434445;
@@ -86,59 +41,134 @@
   --orange-500: #ff9a00;
   --white-500: #ffffff;
   --yellow-500: #ffcc00;
+  --yellow-600: #f2c200;
 
+  /** Статусные цвета */
+  --color-base-success: var(--green-500);
+  --color-base-error: var(--red-500);
+  --color-base-waiting: var(--orange-500);
+  --color-base-warning: var(--orange-500);
+  --color-base-required: var(--red-500);
+
+  /** Цвета фонов */
+  --color-bg-ghost: rgba(0, 0, 0, 0.4);
+  --color-bg-action: var(--yellow-500);
+  --color-bg-error: var(--color-base-error);
+  --color-bg-warning: var(--color-base-warning);
+  --color-bg-success: var(--color-base-success);
+  --color-bg-system: rgba(0, 0, 0, 0.85);
+  --color-bg-secondary: #f2f2f2;
+
+  /** Цвета текста */
+  --color-typo-primary: var(--black-500);
+  --color-typo-secondary: var(--blue-grey-500);
+  --color-typo-ghost: var(--blue-grey-50);
+  --color-typo-success: var(--green-500);
+  --color-typo-waiting: var(--orange-500);
+  --color-typo-error: var(--red-500);
+  --color-typo-disabled: #b8b8b8;
+
+  /** Цвета ссылок */
+  --color-link-default: var(--blue-grey-500);
+  --color-link-hover: var(--red-600);
+
+  /** Тени */
   --card-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
   --card-shadow-hover: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
   --modal-shadow: 0px 6px 16px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
-  --button-size-m: 28px;
-  --button-size-l: 36px;
+  --toast-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+
+  /** Отступы */
+  --space-7xs: 4px;
+  --space-6xs: 5px;
+  --space-5xs: 6px;
+  --space-4xs: 8px;
+  --space-3xs: 9px;
+  --space-2xs: 10px;
+  --space-xs: 11px;
+  --space-s: 12px;
+  --space-m: 14px;
+  --space-l: 16px;
+  --space-xl: 18px;
+  --space-2xl: 20px;
+  --space-3xl: 24px;
+  --space-4xl: 32px;
+  --space-5xl: 100px;
+
+  /** Заругления */
   --radius-l: 4px;
   --radius-xl: 6px;
   --border-width-l: 2px;
-  --color-text-default: var(--black-500);
-  --color-text-primary: var(--blue-grey-500);
-  --color-text-input-label: var(--blue-grey-600);
-  --color-text-second: #ccc;
-  --color-text-success: var(--green-500);
-  --color-text-error: var(--red-500);
-  --color-text-required: var(--red-500);
-  --color-text-waiting: var(--orange-500);
-  --color-text-hash: #595959;
-  --color-border-main: #d9d9d9;
+
+  /** Типографика */
+  --text-size-xs: 10px;
+  --text-size-s: 13px;
+  --text-size-m: 15px;
+  --text-size-l: 16px;
+  --text-size-xl: 18px;
+  --text-size-xxl: 24px;
+
+  --text-line-height-4xs: 15px;
+  --text-line-height-3xs: 16px;
+  --text-line-height-2xs: 18px;
+  --text-line-height-xs: 20px;
+  --text-line-height-s: 22px;
+  --text-line-height-m: 24px;
+  --text-line-height-l: 28px;
+  --text-line-height-xl: 32px;
+
+  /**
+   * Блоки
+   */
+
+  /** Footer */
+  --color-bg-footer: var(--blue-grey-50);
+
+  /** Button */
+  --color-bg-button-action: var(--yellow-500);
+  --color-bg-button-action-hover: var(--yellow-600);
+  --color-bg-button-default: #e6e6e6;
+  --color-bg-button-control-hover: #dbdbdb;
+  --color-bg-button-pseudo: transparent;
+  --color-bg-button-pseudo-hover: rgb(247, 247, 247);
+  --color-bg-button-disabled: #f2f2f2;
+
+  --color-border-button-action-focused: #b38f00;
+  --color-border-button-default-focused: #b3b3b3;
+  --color-border-button-pseudo: rgb(204, 204, 204);
+  --color-border-button-pseudo-focused: #b3b3b3;
+
+  --button-size-s-height: 28px;
+  --button-size-s-font: 13px;
+  --button-size-s-lineHeight: 24px;
+
+  --button-size-m-height: 36px;
+  --button-size-m-font: 13px;
+  --button-size-m-lineHeight: 32px;
+
+  /** TextInput */
+  --color-border-input-default: #d9d9d9;
   --color-border-input-focused: #b3b3b3;
   --color-border-input-hovered: #cecece;
-  --color-border-action-focused: #b38f00;
-  --color-border-control-focused: #b3b3b3;
+  --color-border-input-error: var(--color-base-error);
+
+  /** BuiilCard */
   --build-color-separator: var(--blue-grey-50);
-  --color-bg-action: var(--yellow-500);
-  --color-bg-action-hovered: #f2c200;
-  --color-bg-control: #e6e6e6;
-  --color-bg-control-hovered: #dbdbdb;
-  --color-bg-footer: var(--blue-grey-50);
-  --color-bg-second: #f2f2f2;
-
-  --build-color-success: #00b341;
-  --build-color-waiting: #ff9a00;
-  --build-color-error: #ff3333;
-
-  --toast-color-success: #00b341;
-  --toast-color-default: rgba(0, 0, 0, 0.85);
-  --toast-color-error: #ff3333;
-  --toast-color-warning: #ff9a00;
-}
-
-p,
-h1,
-h2,
-h4,
-h3 {
-  margin: 0;
 }
 
 body {
   margin: 0;
   font-family: "YS Text", Arial, Helvetica, sans-serif;
   font-style: normal;
+
+  p,
+  h1,
+  h2,
+  h4,
+  h3 {
+    margin: 0;
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -151,18 +181,18 @@ body {
 }
 
 .Layout {
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: var(--space-5xl);
+  padding-right: var(--space-5xl);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-tablet) {
   .Layout {
-    padding-right: var(--space-xxxxl);
-    padding-left: var(--space-xxxxl);
+    padding-right: var(--space-4xl);
+    padding-left: var(--space-4xl);
   }
 }
 
-@media (max-width: 470px) {
+@media (max-width: $breakpoint-mobile) {
   .Layout {
     padding-right: var(--space-l);
     padding-left: var(--space-l);

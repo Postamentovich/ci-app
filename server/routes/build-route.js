@@ -4,6 +4,7 @@ const createError = require('http-errors');
 const storageAPI = require('../api/storage-api');
 const gitRepo = require('../utils/git-repo');
 const { hashString, hashObj } = require('../utils/hash');
+const buiildAgent = require('../utils/build-agent');
 
 const router = Router();
 
@@ -33,13 +34,9 @@ router.post(
 
     if (typeof commitHash !== 'string') throw createError(400, 'Error in commitHash');
 
-    const info = await gitRepo.getInfoByHash(commitHash);
+    const info = await gitRepo.addBuildToQueue(commitHash);
 
-    const list = await storageAPI.getBuildList();
-
-    const build = list.data.data.find((el) => el.commitHash === info.commitHash);
-
-    res.send(build);
+    res.send(info);
   }),
 );
 
@@ -76,11 +73,9 @@ router.get(
     /** Получение детальной информации о билде */
     const {
       data: {
-        data: { commitHash, status },
+        data: { commitHash },
       },
     } = await storageAPI.getBuildDetails(buildId);
-
-    if (status !== 'Success') throw createError(400, 'Build status not success');
 
     const hashKey = hashString(buildId, commitHash);
 

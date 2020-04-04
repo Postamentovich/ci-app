@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable class-methods-use-this */
 const util = require('util');
@@ -5,7 +6,6 @@ const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
 const pino = require('pino');
 const storageAPI = require('../api/storage-api');
-const buildAgent = require('./build-agent');
 
 const logger = pino({
   level: process.env.LOG_LEVEL || 'debug',
@@ -23,9 +23,6 @@ class GitRepo {
     /** Настройки пользователя */
     this.settings = { period: 10 };
 
-    /** Время последний проверки коммитов */
-    // this.lastCheckingCommitTime = null;
-
     /** Timeout для проверки коммитов */
     this.periodTimeout = null;
 
@@ -34,27 +31,7 @@ class GitRepo {
     this.getRecentCommits = this.getRecentCommits.bind(this);
     this.checkCommits = this.checkCommits.bind(this);
 
-    /** Очередь выполнения задач */
-    this.queue = [this.getInitialSettings];
-
-    this.processQueue();
-  }
-
-  /**
-   * Обработка очереди задач
-   */
-  async processQueue() {
-    if (this.queue[0]) {
-      const action = this.queue.shift();
-
-      await action();
-
-      this.processQueue();
-    } else {
-      setTimeout(() => {
-        this.processQueue();
-      }, 1000);
-    }
+    this.getInitialSettings();
   }
 
   /**
@@ -73,7 +50,7 @@ class GitRepo {
 
         this.settings = data;
 
-        if (!this.localRepoIsExist) {
+        if (!this.localRepoIsExist()) {
           await this.clone(data.repoName);
 
           await this.checkout(data.mainBranch);
@@ -84,7 +61,7 @@ class GitRepo {
         logger.debug('GitRepo - user settings not found');
       }
     } catch (error) {
-      throw new Error(error);
+      logger.error('GitRepo - error in getting initial settings');
     }
   }
 
@@ -98,12 +75,16 @@ class GitRepo {
 
     const { repoName, mainBranch } = settings;
 
-    if (repoName !== this.settings.repoName) {
+    const updateLocalRepo = async () => {
       await this.clone(repoName);
 
       await this.checkout(mainBranch);
 
       await storageAPI.deleteConfig();
+    };
+
+    if (repoName !== this.settings.repoName || !this.localRepoIsExist()) {
+      await updateLocalRepo();
     } else if (mainBranch !== this.settings.mainBranch) {
       await this.checkout(mainBranch);
     }
@@ -128,12 +109,12 @@ class GitRepo {
     for (let i = 0; i < commits.length; i++) {
       const commitHash = commits[i];
 
-      if (commitHash && commitHash.length > 0) await this.getInfoByHash(commitHash);
+      if (commitHash && commitHash.length > 0) await this.addBuildToQueue(commitHash);
     }
 
     const period = Number(this.settings.period) || 10;
 
-    logger.debug(`Next check commits after ${period} minutes`);
+    logger.debug(`GitRepo - next check commits after ${period} minutes`);
 
     this.periodTimeout = setTimeout(() => this.checkCommits, period * 60 * 1000);
   }
@@ -141,9 +122,11 @@ class GitRepo {
   /**
    * Проверка существует репозиторий локально или нет
    */
-  get localRepoIsExist() {
+  async localRepoIsExist() {
     try {
-      const stat = fs.statSync(`${this.localFolderName}`);
+      const stat = await fs.statSync(`${this.localFolderName}`);
+
+      await this.run('git rev-parse --verify master');
 
       logger.debug('GitRepo - local repo found');
 
@@ -184,7 +167,7 @@ class GitRepo {
    * Удаляет локальный репозиторий
    */
   async removeLocalRepo() {
-    if (this.localRepoIsExist) {
+    if (this.localRepoIsExist()) {
       logger.debug('GitRepo - remove local repo');
 
       const command = `rm -rf ${this.localFolderName}`;
@@ -212,7 +195,7 @@ class GitRepo {
    *
    * @param {string} commitHash
    */
-  async getInfoByHash(commitHash) {
+  async addBuildToQueue(commitHash) {
     if (commitHash) {
       logger.debug(`GitRepo - get info by hash ${commitHash}`);
 
@@ -225,7 +208,7 @@ class GitRepo {
       const [commitMessage, authorName] = out;
 
       try {
-        await storageAPI.setBuildRequest({
+        const { data } = await storageAPI.setBuildRequest({
           commitHash: String(commitHash),
           commitMessage: String(commitMessage),
           branchName: String(this.settings.mainBranch),
@@ -234,12 +217,7 @@ class GitRepo {
 
         logger.debug(`GitRepo - add to queue ${commitHash}`);
 
-        return {
-          commitHash: String(commitHash),
-          commitMessage: String(commitMessage),
-          branchName: String(this.settings.mainBranch),
-          authorName: String(authorName),
-        };
+        return data;
       } catch (error) {
         logger.error(error);
         logger.error(
@@ -254,7 +232,6 @@ class GitRepo {
   /**
    * Получение последних коммитов
    *
-   * @param {boolean} onlyLast - Флаг, брать только последний коммит или все коммиты за период
    */
   async getRecentCommits() {
     await this.run(`cd ${this.localFolderName} && git pull origin ${this.settings.mainBranch}`);
@@ -265,15 +242,15 @@ class GitRepo {
 
     const { stdout } = await this.run(`cd ${this.localFolderName} && ${command}`);
 
-    const listCommits = await stdout.split('{SPLIT}').map(el => el.replace(/\s/g, ''));
+    const listCommits = await stdout.split('{SPLIT}').map((el) => el.replace(/\s/g, ''));
 
     try {
       const {
         data: { data },
       } = await storageAPI.getBuildList();
 
-      const filteredCommits = listCommits.filter(hash => {
-        const item = data.find(el => el.commitHash === hash);
+      const filteredCommits = listCommits.filter((hash) => {
+        const item = data.find((el) => el.commitHash === hash);
 
         if (item) return false;
 

@@ -56,11 +56,7 @@ class BuildAgent {
         buildId: id,
         dateTime: new Date(date).toISOString(),
       });
-    } catch (error) {
-      logger.error(`Error in add build ${error}`);
-      throw new Error(error);
-    }
-    try {
+
       return new Promise((res) => {
         setTimeout(async () => {
           const endBuilding = new Date().valueOf();
@@ -78,8 +74,8 @@ class BuildAgent {
         }, 3000);
       });
     } catch (error) {
-      logger.error(`Error in add finish ${error}`);
-      throw new Error(error);
+      logger.error(`BuildAgent - Error in building ${id}`);
+      return null;
     }
   }
 
@@ -87,6 +83,8 @@ class BuildAgent {
    * Добавление билда в очередь
    */
   async getItems() {
+    logger.debug('BuildAgent - getting items');
+
     try {
       const {
         data: { data },
@@ -103,10 +101,11 @@ class BuildAgent {
         this.queue.push(build);
       });
     } catch (error) {
+      logger.error('BuildAgent - Error when getting builds items');
     } finally {
       setTimeout(() => {
         this.getItems();
-      }, 3000);
+      }, 5000);
     }
   }
 }

@@ -75,7 +75,9 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (n
 
       await settingsApi.saveSettings(model);
 
-      dispatch(bulidsSlice.actions.setList([]));
+      dispatch(bulidsSlice.actions.resetList());
+
+      dispatch(bulidsSlice.actions.setPage(1));
 
       currentSettings = model;
 

@@ -147,6 +147,7 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
   if (BUILD_ACTIONS.addBuildToQueue.match(action)) {
     try {
       const build = await buildApi.addBuild(action.payload);
+
       dispatch(bulidsSlice.actions.addBuildToList(build));
 
       dispatch(push(`/build/${build.id}`));

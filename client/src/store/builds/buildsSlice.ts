@@ -66,13 +66,18 @@ export const bulidsSlice = createSlice({
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
     },
+    resetList(state) {
+      state.list = [];
+    },
   },
 });
 
+// eslint-disable-next-line arrow-body-style
 export const buildSelector = (state: RootState, id: string) => {
   return state.bulidsSlice.list.find((build) => build.id === id);
 };
 
+// eslint-disable-next-line arrow-body-style
 export const logSelector = (state: RootState, id: string) => {
   return state.bulidsSlice.log[id];
 };

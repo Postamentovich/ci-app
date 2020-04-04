@@ -2,7 +2,6 @@ const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 const createError = require('http-errors');
 const storageAPI = require('../api/storage-api');
-const githubAPI = require('../api/github-api');
 const gitRepo = require('../utils/git-repo');
 const { hashObj } = require('../utils/hash');
 

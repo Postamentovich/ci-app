@@ -22,6 +22,6 @@ export const buildApi = {
   /** Add build to queue */
   addBuild: async (commitHash: string): Promise<BuildModel> => {
     const { data } = await axios.post(`/api/builds/${commitHash}`);
-    return data;
+    return data.data;
   },
 };

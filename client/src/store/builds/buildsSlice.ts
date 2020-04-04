@@ -17,6 +17,8 @@ type BuildState = {
   page: number;
   /** Флаг загрузки дополнительных билдов */
   isMoreBuildsLoading: boolean;
+  /** Флаг выполнения запроса добавления билда в очередь */
+  isBuildAdding: boolean;
 };
 
 const initialState: BuildState = {
@@ -26,6 +28,7 @@ const initialState: BuildState = {
   isLogLoading: false,
   page: 1,
   isMoreBuildsLoading: false,
+  isBuildAdding: false,
 };
 
 export const bulidsSlice = createSlice({
@@ -67,6 +70,9 @@ export const bulidsSlice = createSlice({
     },
     setIsMoreBuildsLoading(state, action: PayloadAction<boolean>) {
       state.isMoreBuildsLoading = action.payload;
+    },
+    setIsBuildAdding(state, action: PayloadAction<boolean>) {
+      state.isBuildAdding = action.payload;
     },
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;

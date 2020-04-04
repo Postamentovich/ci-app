@@ -43,11 +43,12 @@ const DetailsPage = () => {
 
   const dispatch = useDispatch();
 
-  const { repoName, build, log } = useSelector(
+  const { repoName, build, log, isBuildAdding } = useSelector(
     (state: RootState) => ({
       repoName: state.settingsSlice.repoName,
       log: logSelector(state, id!),
       build: buildSelector(state, id!),
+      isBuildAdding: state.bulidsSlice.isBuildAdding,
     }),
     shallowEqual,
   );
@@ -60,8 +61,8 @@ const DetailsPage = () => {
    * Обработка клика на кнопку Rebuild
    */
   const handleClickRebuild = useCallback(() => {
-    dispatch(addBuildToQueue(build?.commitHash!));
-  }, [build, dispatch]);
+    if (!isBuildAdding) dispatch(addBuildToQueue(build?.commitHash!));
+  }, [build, dispatch, isBuildAdding]);
 
   return (
     <div className={cnDetails()}>
@@ -72,6 +73,7 @@ const DetailsPage = () => {
           size="s"
           iconLeft={<Icon type="repeat" />}
           onClick={handleClickRebuild}
+          disabled={isBuildAdding}
         >
           Rebuild
         </Button>
@@ -82,6 +84,7 @@ const DetailsPage = () => {
           to="/settings"
           size="s"
           iconLeft={<Icon type="gear" />}
+          disabled={isBuildAdding}
         />
       </Header>
 

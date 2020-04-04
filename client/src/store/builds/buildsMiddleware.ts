@@ -146,9 +146,13 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
    */
   if (BUILD_ACTIONS.addBuildToQueue.match(action)) {
     try {
+      dispatch(bulidsSlice.actions.setIsBuildAdding(true));
+
       const build = await buildApi.addBuild(action.payload);
 
       dispatch(bulidsSlice.actions.addBuildToList(build));
+
+      dispatch(bulidsSlice.actions.setIsBuildAdding(false));
 
       dispatch(push(`/build/${build.id}`));
 
@@ -160,6 +164,8 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
         }),
       );
     } catch (error) {
+      dispatch(bulidsSlice.actions.setIsBuildAdding(false));
+
       dispatch(
         globalSlice.actions.addNotify({
           message: 'Error adding build to queue',

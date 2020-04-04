@@ -160,7 +160,7 @@ const HistoryPage = () => {
             ),
           )}
 
-        {list.length > 0 && !isLoading && (
+        {list.length > 0 && (
           <Button
             progress={isMoreBuildsLoading}
             disabled={isMoreBuildsLoading}

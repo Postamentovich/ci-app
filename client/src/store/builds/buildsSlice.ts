@@ -33,12 +33,17 @@ export const bulidsSlice = createSlice({
   initialState,
   reducers: {
     setList(state, action: PayloadAction<Array<BuildModel>>) {
+      const newList = [...state.list];
+
       action.payload.forEach((el) => {
-        const oldBuild = state.list.find((item) => item.id === el.id);
-        if (oldBuild) el = oldBuild;
-        else state.list.push(el);
+        const index = newList.findIndex((item) => item.id === el.id);
+
+        if (index > -1) {
+          newList[index] = el;
+        } else newList.push(el);
       });
-      state.list = state.list.sort((a, b) => b.buildNumber - a.buildNumber);
+
+      state.list = newList.sort((a, b) => b.buildNumber - a.buildNumber);
     },
     addBuildToList(state, action: PayloadAction<BuildModel>) {
       if (state.list.find((el) => el.id === action.payload.id)) {

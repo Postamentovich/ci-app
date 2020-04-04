@@ -7,6 +7,9 @@ import './Modal.scss';
  * Компонент для создания модальных окон
  */
 export const Modal: FC<IModalProps> = ({ children, className, as: Component = 'div', ...props }) => {
+  /**
+   * Убираем скролл для body, при открытом модальном окне
+   */
   useEffect(() => {
     document.body.classList.add('body-no-scroll');
 
@@ -14,6 +17,7 @@ export const Modal: FC<IModalProps> = ({ children, className, as: Component = 'd
       document.body.classList.remove('body-no-scroll');
     };
   }, []);
+
   return ReactDOM.createPortal(
     <div className={cnModal()}>
       <Component className={cnModal('Content', [className])} {...props}>

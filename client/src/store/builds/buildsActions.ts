@@ -30,3 +30,8 @@ export const getBuildDetails = createAction<string>('GET_BUILD_DETAILS');
  * Отмена поллинга списка билдов
  */
 export const cancelPollingBuildList = createAction('CANCEL_POLLING_BUILD_LIST');
+
+/**
+ * Получение дополнительного списка билдов
+ */
+export const getMoreBuilds = createAction('GET_MORE_BUILDS');

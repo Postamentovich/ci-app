@@ -61,6 +61,23 @@
       &:focus {
         border-color: var(--color-border-control-focused);
       }
+
+      &.Button_progress {
+        background-color: var(--color-bg-control);
+        background-image: repeating-linear-gradient(
+          -45deg,
+          var(--color-border-control-focused),
+          var(--color-border-control-focused) 4px,
+          var(--color-bg-control-hovered) 4px,
+          var(--color-bg-control-hovered) 8px
+        );
+        background-size: 34px 34px;
+        opacity: 0.5;
+        animation-name: button-progress;
+        animation-duration: 0.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
     }
 
     &_action {

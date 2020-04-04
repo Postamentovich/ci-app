@@ -13,6 +13,10 @@ type BuildState = {
   log: {
     [key: string]: string;
   };
+  /** Загружаемая страницы для билдов */
+  page: number;
+  /** Флаг загрузки дополнительных билдов */
+  isMoreBuildsLoading: boolean;
 };
 
 const initialState: BuildState = {
@@ -20,6 +24,8 @@ const initialState: BuildState = {
   log: {},
   isBuildListLoading: false,
   isLogLoading: false,
+  page: 1,
+  isMoreBuildsLoading: false,
 };
 
 export const bulidsSlice = createSlice({
@@ -27,7 +33,12 @@ export const bulidsSlice = createSlice({
   initialState,
   reducers: {
     setList(state, action: PayloadAction<Array<BuildModel>>) {
-      state.list = action.payload;
+      action.payload.forEach((el) => {
+        const oldBuild = state.list.find((item) => item.id === el.id);
+        if (oldBuild) el = oldBuild;
+        else state.list.push(el);
+      });
+      state.list = state.list.sort((a, b) => b.buildNumber - a.buildNumber);
     },
     addBuildToList(state, action: PayloadAction<BuildModel>) {
       if (state.list.find((el) => el.id === action.payload.id)) {
@@ -48,6 +59,12 @@ export const bulidsSlice = createSlice({
     },
     setIsLogLoading(state, action: PayloadAction<boolean>) {
       state.isLogLoading = action.payload;
+    },
+    setIsMoreBuildsLoading(state, action: PayloadAction<boolean>) {
+      state.isMoreBuildsLoading = action.payload;
+    },
+    setPage(state, action: PayloadAction<number>) {
+      state.page = action.payload;
     },
   },
 });

@@ -13,7 +13,9 @@ const router = Router();
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const { data } = await storageAPI.getBuildList();
+    const { offset, limit } = req.query;
+
+    const { data } = await storageAPI.getBuildList(offset, limit);
 
     res.send(data);
   }),
@@ -35,7 +37,7 @@ router.post(
 
     const list = await storageAPI.getBuildList();
 
-    const build = list.data.data.find(el => el.commitHash === info.commitHash);
+    const build = list.data.data.find((el) => el.commitHash === info.commitHash);
 
     res.send(build);
   }),

@@ -3,11 +3,13 @@ import { push } from 'connected-react-router';
 import { RootState } from 'store/rootReducer';
 import { globalSlice } from 'store/global/globalSlice';
 import { buildApi } from 'api/buildApi';
-import { BuildStatus } from 'api/models/models';
+import { BuildStatus, BuildModel } from 'api/models/models';
 import * as BUILD_ACTIONS from './buildsActions';
 import { bulidsSlice } from './buildsSlice';
 
 let pollingBuildListTimeout: NodeJS.Timeout;
+
+const pageSize = 10;
 
 // eslint-disable-next-line consistent-return
 const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (action) => {
@@ -20,40 +22,93 @@ const buildsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (nex
     clearTimeout(pollingBuildListTimeout);
   }
 
+  const startPollingBuilds = (list: Array<BuildModel>) => {
+    const itemWithWaitingStatus = list.find(
+      (el) => el.status === BuildStatus.Waiting || el.status === BuildStatus.InProgress,
+    );
+
+    /**
+     * Если есть билды для которых сборка еще не завершена,
+     * запрашиваем список листов повторно
+     */
+    if (itemWithWaitingStatus) {
+      clearTimeout(pollingBuildListTimeout);
+
+      pollingBuildListTimeout = setTimeout(() => {
+        dispatch(BUILD_ACTIONS.getBuildList());
+      }, 10000);
+    }
+  };
+
   /**
    * Получение списка билдов
    */
   if (BUILD_ACTIONS.getBuildList.match(action)) {
     try {
+      const {
+        bulidsSlice: { page },
+      }: RootState = getState();
+
       dispatch(bulidsSlice.actions.setIsLoading(true));
 
-      const list = await buildApi.getList();
+      const list = await buildApi.getList(0, page * pageSize);
 
       dispatch(bulidsSlice.actions.setList(list));
 
       dispatch(bulidsSlice.actions.setIsLoading(false));
 
-      const itemWithWaitingStatus = list.find(
-        (el) => el.status === BuildStatus.Waiting || el.status === BuildStatus.InProgress,
-      );
-
-      /**
-       * Если есть билды для которых сборка еще не завершена,
-       * запрашиваем список листов повторно
-       */
-      if (itemWithWaitingStatus) {
-        clearTimeout(pollingBuildListTimeout);
-
-        pollingBuildListTimeout = setTimeout(() => {
-          dispatch(BUILD_ACTIONS.getBuildList());
-        }, 10000);
-      }
+      startPollingBuilds(list);
     } catch (error) {
       dispatch(bulidsSlice.actions.setIsLoading(false));
 
       dispatch(
         globalSlice.actions.addNotify({
           message: 'Error getting list of builds',
+          id: Date.now().valueOf(),
+          type: 'error',
+        }),
+      );
+    }
+  }
+
+  /**
+   * Получение дополнительных билдов
+   */
+  if (BUILD_ACTIONS.getMoreBuilds.match(action)) {
+    try {
+      const {
+        bulidsSlice: { page },
+      }: RootState = getState();
+
+      dispatch(bulidsSlice.actions.setIsMoreBuildsLoading(true));
+
+      const newPage = page + 1;
+
+      const list = await buildApi.getList(page * pageSize, pageSize);
+
+      dispatch(bulidsSlice.actions.setIsMoreBuildsLoading(false));
+
+      if (list.length) {
+        dispatch(bulidsSlice.actions.setList(list));
+
+        dispatch(bulidsSlice.actions.setPage(newPage));
+
+        startPollingBuilds(list);
+      } else {
+        dispatch(
+          globalSlice.actions.addNotify({
+            message: 'No more builds',
+            id: Date.now().valueOf(),
+            type: 'warning',
+          }),
+        );
+      }
+    } catch (error) {
+      dispatch(bulidsSlice.actions.setIsMoreBuildsLoading(false));
+
+      dispatch(
+        globalSlice.actions.addNotify({
+          message: 'Error getting builds',
           id: Date.now().valueOf(),
           type: 'error',
         }),

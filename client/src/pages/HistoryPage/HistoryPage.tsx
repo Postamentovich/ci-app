@@ -5,7 +5,12 @@ import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from 'store/rootReducer';
-import { getBuildList, addBuildToQueue, cancelPollingBuildList } from 'store/builds/buildsActions';
+import {
+  getBuildList,
+  addBuildToQueue,
+  cancelPollingBuildList,
+  getMoreBuilds,
+} from 'store/builds/buildsActions';
 import { Header } from 'containers/Header/Header';
 import { cnHeader } from 'containers/Header';
 import { Footer } from 'containers/Footer/Footer';
@@ -18,10 +23,11 @@ import { withButtonSizeS } from 'components/Button/_size/Button_size_s';
 import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
 import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
 import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
+import { withButtonProgress } from 'components/Button/_progress/Button_progress';
+import { withButtonViewPseudo } from 'components/Button/_view/Button_view_pseudo';
 import { Icon as IconPresenter } from 'components/Icon/Icon';
 import { withIconTypeGear } from 'components/Icon/_type/Icon_type_gear';
 import { withIconTypePlay } from 'components/Icon/_type/Icon_type_play';
-import { withButtonViewPseudo } from 'components/Button/_view/Button_view_pseudo';
 import './HistoryPage.scss';
 
 const cnHistory = cn('HistoryPage');
@@ -32,6 +38,7 @@ const Button = compose(
   composeU(withButtonViewDefault, withButtonViewAction, withButtonViewPseudo),
   composeU(withButtonSizeS, withButtonSizeM),
   withButtonTypeLink,
+  withButtonProgress,
 )(ButtonPresenter);
 
 /**
@@ -40,11 +47,12 @@ const Button = compose(
 const HistoryPage = () => {
   const dispatch = useDispatch();
 
-  const { repoName, list, isLoading } = useSelector(
+  const { repoName, list, isLoading, isMoreBuildsLoading } = useSelector(
     (state: RootState) => ({
       repoName: state.settingsSlice.repoName,
       list: state.bulidsSlice.list,
       isLoading: state.bulidsSlice.isBuildListLoading,
+      isMoreBuildsLoading: state.bulidsSlice.isMoreBuildsLoading,
     }),
     shallowEqual,
   );
@@ -85,11 +93,15 @@ const HistoryPage = () => {
   );
 
   /**
-   * Обработка клика на кнопку отмены в модальном окне
+   * Обработка клика на кнопку отмеsны в модальном окне
    */
   const handleClickModalCancel = useCallback(() => {
     setModalIsOpen(false);
   }, []);
+
+  const handleClickShowMore = useCallback(() => {
+    if (!isMoreBuildsLoading) dispatch(getMoreBuilds());
+  }, [dispatch, isMoreBuildsLoading]);
 
   return (
     <div className={cnHistory()}>
@@ -118,33 +130,47 @@ const HistoryPage = () => {
 
         {!list.length && !isLoading && <span>You don't have any builds</span>}
 
-        {list.map(
-          ({
-            buildNumber,
-            commitHash,
-            commitMessage,
-            branchName,
-            authorName,
-            start,
-            id,
-            status,
-            duration,
-          }) => (
-            <BuildCard
-              buildNumber={`#${buildNumber}`}
-              commitMessage={commitMessage}
-              commitHash={commitHash}
-              branchName={branchName}
-              authorName={authorName}
-              date={start}
-              duration={duration}
-              status={status}
-              key={id}
-              className={cnHistory('Card')}
-              type="link"
-              to={`/build/${id}`}
-            />
-          ),
+        {list.length > 0 &&
+          list.map(
+            ({
+              buildNumber,
+              commitHash,
+              commitMessage,
+              branchName,
+              authorName,
+              start,
+              id,
+              status,
+              duration,
+            }) => (
+              <BuildCard
+                buildNumber={`#${buildNumber}`}
+                commitMessage={commitMessage}
+                commitHash={commitHash}
+                branchName={branchName}
+                authorName={authorName}
+                date={start}
+                duration={duration}
+                status={status}
+                key={id}
+                className={cnHistory('Card')}
+                type="link"
+                to={`/build/${id}`}
+              />
+            ),
+          )}
+
+        {list.length > 0 && !isLoading && (
+          <Button
+            progress={isMoreBuildsLoading}
+            disabled={isMoreBuildsLoading}
+            onClick={handleClickShowMore}
+            className={cnHistory('Button')}
+            view="default"
+            size="m"
+          >
+            Show more
+          </Button>
         )}
       </div>
 

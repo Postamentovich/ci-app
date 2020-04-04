@@ -79,6 +79,16 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            text/plain:
+              schema:
+                '$ref': '#/components/schemas/BuildQueueResponse'
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/BuildQueueResponse'
+            text/json:
+              schema:
+                '$ref': '#/components/schemas/BuildQueueResponse'
   '/api/settings':
     get:
       tags:
@@ -247,4 +257,21 @@ components:
         period:
           type: integer
           format: int32
+      additionalProperties: false
+    BuildQueueResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            buildNumber:
+              type: integer
+              format: int32
+            status:
+              allOf:
+                - '$ref': '#/components/schemas/BuildStatus'
+          nullable: true
       additionalProperties: false

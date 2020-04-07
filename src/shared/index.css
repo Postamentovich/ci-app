@@ -1,0 +1,177 @@
+@charset "UTF-8";
+@font-face {
+    font-display: swap;
+    font-family: "YS Text";
+    src: url("//yastatic.net/islands/_/PyVcRbwHetz0gOVWLonWH7Od8zM.woff2") format("woff2"), url("//yastatic.net/islands/_/bIx8jOfCEfR-mECoDUEZywDBuHA.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "YS Text";
+    src: url("//yastatic.net/islands/_/7_GKBdKFbUPzKlghJRv55xgz0FQ.woff2") format("woff2"), url("//yastatic.net/islands/_/SmqPmIMEXrW4lOY8QrhTUVDbrro.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "YS Text";
+    src: url("//yastatic.net/islands/_/6Roy0LCd05cK4nNCipgzheYcNVU.woff2") format("woff2"), url("//yastatic.net/islands/_/KtHQR1erf3spayoIM4M4ngg0e2E.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/** Брейкпоинты */
+:root {
+    /** Базовые цвета */
+    --blue-grey-50: #f0f2f3;
+    --blue-grey-500: #7f8285;
+    --blue-grey-600: #434445;
+    --red-500: #ff3333;
+    --red-600: #e00000;
+    --black-500: #000000;
+    --green-500: #00b341;
+    --orange-500: #ff9a00;
+    --white-500: #ffffff;
+    --yellow-500: #ffcc00;
+    --yellow-600: #f2c200;
+    /** Статусные цвета */
+    --color-base-success: var(--green-500);
+    --color-base-error: var(--red-500);
+    --color-base-waiting: var(--orange-500);
+    --color-base-warning: var(--orange-500);
+    --color-base-required: var(--red-500);
+    /** Цвета фонов */
+    --color-bg-ghost: rgba(0, 0, 0, 0.4);
+    --color-bg-action: var(--yellow-500);
+    --color-bg-error: var(--color-base-error);
+    --color-bg-warning: var(--color-base-warning);
+    --color-bg-success: var(--color-base-success);
+    --color-bg-system: rgba(0, 0, 0, 0.85);
+    --color-bg-secondary: #f2f2f2;
+    /** Цвета текста */
+    --color-typo-primary: var(--black-500);
+    --color-typo-secondary: var(--blue-grey-500);
+    --color-typo-ghost: var(--blue-grey-50);
+    --color-typo-success: var(--green-500);
+    --color-typo-waiting: var(--orange-500);
+    --color-typo-error: var(--red-500);
+    --color-typo-disabled: #b8b8b8;
+    /** Цвета ссылок */
+    --color-link-default: var(--blue-grey-500);
+    --color-link-hover: var(--red-600);
+    /** Тени */
+    --card-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+    --card-shadow-hover: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+    --modal-shadow: 0px 6px 16px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+    --toast-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+    /** Отступы */
+    --space-7xs: 4px;
+    --space-6xs: 5px;
+    --space-5xs: 6px;
+    --space-4xs: 8px;
+    --space-3xs: 9px;
+    --space-2xs: 10px;
+    --space-xs: 11px;
+    --space-s: 12px;
+    --space-m: 14px;
+    --space-l: 16px;
+    --space-xl: 18px;
+    --space-2xl: 20px;
+    --space-3xl: 24px;
+    --space-4xl: 32px;
+    --space-5xl: 100px;
+    /** Заругления */
+    --radius-l: 4px;
+    --radius-xl: 6px;
+    --border-width-l: 2px;
+    /** Типографика */
+    --text-size-xs: 10px;
+    --text-size-s: 13px;
+    --text-size-m: 15px;
+    --text-size-l: 16px;
+    --text-size-xl: 18px;
+    --text-size-xxl: 24px;
+    --text-line-height-4xs: 15px;
+    --text-line-height-3xs: 16px;
+    --text-line-height-2xs: 18px;
+    --text-line-height-xs: 20px;
+    --text-line-height-s: 22px;
+    --text-line-height-m: 24px;
+    --text-line-height-l: 28px;
+    --text-line-height-xl: 32px;
+    /**
+     * Блоки
+     */
+    /** Footer */
+    --color-bg-footer: var(--blue-grey-50);
+    /** Button */
+    --color-bg-button-action: var(--yellow-500);
+    --color-bg-button-action-hover: var(--yellow-600);
+    --color-bg-button-default: #e6e6e6;
+    --color-bg-button-control-hover: #dbdbdb;
+    --color-bg-button-pseudo: transparent;
+    --color-bg-button-pseudo-hover: rgb(247, 247, 247);
+    --color-bg-button-disabled: #f2f2f2;
+    --color-border-button-action-focused: #b38f00;
+    --color-border-button-default-focused: #b3b3b3;
+    --color-border-button-pseudo: rgb(204, 204, 204);
+    --color-border-button-pseudo-focused: #b3b3b3;
+    --button-size-s-height: 28px;
+    --button-size-s-font: 13px;
+    --button-size-s-lineHeight: 24px;
+    --button-size-m-height: 36px;
+    --button-size-m-font: 13px;
+    --button-size-m-lineHeight: 32px;
+    /** TextInput */
+    --color-border-input-default: #d9d9d9;
+    --color-border-input-focused: #b3b3b3;
+    --color-border-input-hovered: #cecece;
+    --color-border-input-error: var(--color-base-error);
+    /** BuiilCard */
+    --build-color-separator: var(--blue-grey-50);
+}
+
+body {
+    margin: 0;
+    font-family: "YS Text", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    min-width: 320px;
+}
+
+body p,
+body h1,
+body h2,
+body h4,
+body h3 {
+    margin: 0;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+.body-no-scroll {
+    overflow: hidden;
+}
+
+.Layout {
+    padding-left: var(--space-5xl);
+    padding-right: var(--space-5xl);
+}
+
+@media (max-width: 768px) {
+    .Layout {
+        padding-right: var(--space-4xl);
+        padding-left: var(--space-4xl);
+    }
+}
+
+@media (max-width: 470px) {
+    .Layout {
+        padding-right: var(--space-l);
+        padding-left: var(--space-l);
+    }
+}

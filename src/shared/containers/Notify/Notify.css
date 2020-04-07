@@ -1,0 +1,27 @@
+.Notify {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+.Notify-Item:not(:first-child) {
+  margin-top: 10px;
+}
+
+.Notify .enter {
+  opacity: 0;
+}
+
+.Notify .enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.Notify .exit {
+  opacity: 1;
+}
+
+.Notify .exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}

@@ -1,0 +1,21 @@
+.Card {
+  padding: var(--space-s) var(--space-3xl);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--radius-xl);
+  display: flex;
+}
+
+.Card_type_link {
+  text-decoration: none;
+}
+
+.Card_type_link:hover {
+  box-shadow: var(--card-shadow-hover);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .Card {
+    padding: var(--space-l) var(--space-s);
+  }
+}

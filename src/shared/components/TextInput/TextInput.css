@@ -1,0 +1,75 @@
+.TextInput {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 474px;
+}
+
+.TextInput_hasAddon {
+  flex-direction: row;
+  align-items: center;
+}
+
+.TextInput_hasAddon .TextInput-Input {
+  margin-right: var(--space-4xs);
+  margin-left: var(--space-4xs);
+  margin-top: 0;
+  width: 52px;
+  text-align: end;
+}
+
+.TextInput-Label {
+  font-size: var(--text-size-s);
+  line-height: var(--text-line-height-2xs);
+}
+
+.TextInput-Label[aria-required="true"]:after {
+  content: " *";
+  color: var(--color-base-required);
+}
+
+.TextInput-Addon {
+  font-size: var(--text-size-s);
+  line-height: var(--text-line-height-2xs);
+  color: #434445;
+}
+
+.TextInput-Input {
+  border-width: var(--border-width-l);
+  border-style: solid;
+  border-color: var(--color-border-input-default);
+  border-radius: var(--radius-l);
+  padding-top: var(--space-3xs);
+  padding-right: var(--space-xs);
+  padding-left: var(--space-xs);
+  padding-bottom: var(--space-4xs);
+  margin-top: var(--space-5xs);
+}
+
+.TextInput-Input:hover {
+  border-color: var(--color-border-input-hovered);
+}
+
+.TextInput-Input:focus {
+  border-color: var(--color-border-input-focused);
+  outline: none;
+}
+
+.TextInput-Input::-webkit-input-placeholder {
+  color: var(--color-typo-secondary);
+}
+
+.TextInput-Clear {
+  border: none;
+  padding: 0;
+  position: absolute;
+  bottom: var(--space-2xs);
+  right: var(--space-2xs);
+  background: transparent;
+  display: flex;
+  cursor: pointer;
+}
+
+.TextInput_notValid .TextInput-Input {
+  border-color: var(--color-border-input-error);
+}

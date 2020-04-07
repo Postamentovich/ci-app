@@ -1,0 +1,27 @@
+.NewBuildModal {
+  width: 485px;
+}
+
+.NewBuildModal-Description {
+  margin-top: var(--space-s);
+  margin-bottom: var(--space-s);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-typo-primary);
+}
+
+.NewBuildModal-Title {
+  font-weight: 500;
+  font-size: var(--text-size-xl);
+  line-height: var(--text-line-height-s);
+  color: var(--color-typo-primary);
+}
+
+.NewBuildModal-Buttons {
+  display: flex;
+  margin-top: var(--space-s);
+}
+
+.NewBuildModal-Button:not(:first-child) {
+  margin-left: var(--space-2xs);
+}

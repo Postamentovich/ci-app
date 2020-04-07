@@ -25,7 +25,6 @@ const generateStaticHTML = async () => {
 
     script.on('start', async () => {
         try {
-            // TODO: add try/wait/retry here instead of just generally waiting for 2000 ms
             await sleep(2000);
             const browser = await puppeteer.launch({
                 args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -80,7 +79,6 @@ const build = async () => {
         console.error(chalk.red(stats.compilation.errors));
     });
 
-    // wait until client and server is compiled
     try {
         await serverPromise;
         await clientPromise;

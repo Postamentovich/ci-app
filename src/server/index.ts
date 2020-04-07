@@ -44,6 +44,10 @@ app.use(
     })
 );
 
+app.use('/api/settings', require('./routes/settings-route'));
+
+app.use('/api/builds', require('./routes/build-route'));
+
 app.use(serverRenderer());
 
 app.use(errorHandler);

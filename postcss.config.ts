@@ -12,8 +12,6 @@ export default {
         require('postcss-assets')({
             basePath: './assets',
         }),
-        // This is broken.
-        // require('postcss-normalize')(),
     ],
     sourceMap: true,
 };

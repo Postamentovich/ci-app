@@ -1,4 +1,3 @@
-// TODO: convert to TypeScript
 const paths = require('./config/paths');
 
 module.exports = {

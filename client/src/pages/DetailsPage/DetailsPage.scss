@@ -1,0 +1,32 @@
+@import "index.scss";
+
+.DetailsPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &-Card {
+    margin-top: var(--space-7xs);
+    flex-grow: 1;
+  }
+
+  &-Log {
+    margin-top: var(--space-s);
+    flex-grow: 999;
+  }
+
+  &-Content {
+    display: flex;
+    flex-grow: 999;
+    flex-direction: column;
+    margin-top: var(--space-l);
+    margin-bottom: var(--space-l);
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .DetailsPage {
+    padding-top: var(--space-7xs);
+    padding-bottom: var(--space-l);
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "short_name": "CI Server",
+  "name": "School CI Server",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

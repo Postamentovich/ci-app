@@ -1,0 +1,18 @@
+@import 'index.scss';
+
+.Log {
+  border-radius: var(--radius-xl);
+  background-color: var(--color-bg-secondary);
+  padding: var(--space-4xs) var(--space-s);
+
+  &-Container {
+    margin: 0;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .Log {
+    border-radius: 0;
+  }
+}

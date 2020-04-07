@@ -1,0 +1,28 @@
+@import 'index.scss';
+
+.Card {
+  padding: var(--space-s) var(--space-3xl);
+
+  box-shadow: var(--card-shadow);
+
+  border-radius: var(--radius-xl);
+
+  display: flex;
+
+  &_type {
+    &_link {
+      text-decoration: none;
+
+      &:hover {
+        box-shadow: var(--card-shadow-hover);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .Card {
+    padding: var(--space-l) var(--space-s);
+  }
+}

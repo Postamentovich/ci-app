@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable class-methods-use-this */
 const pino = require('pino');
 const storageAPI = require('../api/storage-api');

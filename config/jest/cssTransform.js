@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /*! © CREATE-REACT-APP */
 
 'use strict';

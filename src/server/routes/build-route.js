@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 const createError = require('http-errors');

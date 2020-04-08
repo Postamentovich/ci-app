@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 const createError = require('http-errors');
@@ -25,7 +26,7 @@ router.get(
 router.post(
   '/',
   asyncHandler(async (req, res) => {
-    const { repoName, buildCommand, mainBranch, period } = req.body;
+    const { repoName, buildCommand, mainBranch } = req.body;
 
     if (typeof repoName !== 'string') throw createError(400, 'Error in repoName');
 

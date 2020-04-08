@@ -1,0 +1,174 @@
+.BuildCard {
+  width: 100%;
+}
+
+.BuildCard_view_detail:hover {
+  box-shadow: var(--card-shadow);
+  cursor: default;
+}
+
+.BuildCard_view_detail .BuildCard-Content {
+  flex-direction: column;
+}
+
+.BuildCard_view_detail .BuildCard-DateTime {
+  flex-direction: row;
+}
+
+.BuildCard_view_detail .BuildCard-Duration {
+  margin-top: 0;
+  margin-left: var(--space-4xs);
+}
+
+.BuildCard_status_Success .BuildCard-BuildNumber {
+  color: var(--color-typo-success);
+}
+
+.BuildCard_status_InProgress .BuildCard-BuildNumber, .BuildCard_status_Waiting .BuildCard-BuildNumber {
+  color: var(--color-typo-waiting);
+}
+
+.BuildCard_status_Cancel .BuildCard-BuildNumber, .BuildCard_status_Error .BuildCard-BuildNumber {
+  color: var(--color-typo-error);
+}
+
+.BuildCard-BuildNumber {
+  font-weight: 500;
+  font-size: var(--text-size-xl);
+  line-height: var(--text-line-height-xs);
+}
+
+.BuildCard-DateTime {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.BuildCard-Duration {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-s);
+}
+
+.BuildCard-Date {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.BuildCard-DateTimeItem {
+  margin-left: var(--space-6xs);
+  white-space: nowrap;
+  color: var(--color-typo-secondary);
+  font-size: var(--text-size-s);
+  line-height: var(--text-line-height-3xs);
+}
+
+.BuildCard-Content {
+  margin-left: var(--space-2xs);
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - var(--space-4xl));
+}
+
+.BuildCard-Row {
+  display: flex;
+  align-items: center;
+}
+
+.BuildCard-Row:not(:first-child) {
+  margin-top: var(--space-4xs);
+}
+
+.BuildCard-Message {
+  margin-left: var(--space-7xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-size: var(--text-size-m);
+  line-height: var(--text-line-height-xs);
+  color: var(--color-typo-primary);
+}
+
+.BuildCard-Author {
+  margin-left: var(--space-2xs);
+}
+
+.BuildCard-Status {
+  height: 22px;
+  width: 22px;
+  min-width: 22px;
+}
+
+.BuildCard-BranchName {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: var(--space-7xs);
+  font-size: var(--text-size-s);
+  line-height: var(--text-line-height-3xs);
+  color: var(--color-typo-primary);
+}
+
+.BuildCard-AuthorName {
+  font-weight: normal;
+  font-size: var(--text-size-s);
+  line-height: var(--text-line-height-3xs);
+  color: var(--color-typo-primary);
+  margin-left: var(--space-7xs);
+}
+
+.BuildCard-CommitHash {
+  margin-left: var(--space-7xs);
+  color: var(--color-typo-secondary);
+  font-size: var(--text-size-s);
+  line-height: var(--text-line-height-3xs);
+}
+
+.BuildCard-Separator {
+  border-bottom: 1px solid var(--build-color-separator);
+  margin-top: var(--space-4xs);
+  margin-bottom: var(--space-4xs);
+}
+
+.BuildCard-Info {
+  max-width: calc(100% - 132px);
+}
+
+@media (max-width: 768px) {
+  .BuildCard-Status {
+      height: 14px;
+      width: 14px;
+  }
+  .BuildCard-Content {
+      flex-direction: column;
+  }
+  .BuildCard-Row {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .BuildCard-Message {
+      margin-left: 0;
+      margin-top: var(--space-4xs);
+  }
+  .BuildCard-Author {
+      margin-left: 0;
+      margin-top: var(--space-4xs);
+  }
+  .BuildCard-Separator {
+      display: block;
+      border-bottom: 1px solid var(--build-color-separator);
+  }
+  .BuildCard-DateTime {
+      flex-direction: row;
+  }
+  .BuildCard-Duration {
+      margin-top: 0;
+      margin-left: var(--space-2xs);
+  }
+  .BuildCard-Info {
+      max-width: calc(100% - 10px);
+  }
+}

@@ -1,0 +1,39 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import * as React from "react";
+import * as express from "express";
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import { Store } from "redux";
+import { Provider } from "react-redux";
+import App from "../../shared/App";
+import Html from "../components/HTML";
+
+const serverRenderer: any = () => async (
+    req: express.Request & { store: Store },
+    res: express.Response
+) => {
+    const content = renderToString(
+        <Provider store={res.locals.store}>
+            <StaticRouter location={req.url}>
+                <App />
+            </StaticRouter>
+        </Provider>
+    );
+
+    const state = JSON.stringify(res.locals.store.getState());
+
+    return res.send(
+        "<!doctype html>" +
+            renderToString(
+                <Html
+                    css={[res.locals.assetPath("bundle.css"), res.locals.assetPath("vendor.css")]}
+                    scripts={[res.locals.assetPath("bundle.js"), res.locals.assetPath("vendor.js")]}
+                    state={state}
+                >
+                    {content}
+                </Html>
+            )
+    );
+};
+
+export default serverRenderer;

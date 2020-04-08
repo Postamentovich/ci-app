@@ -1,0 +1,33 @@
+.Title_type_h1 {
+  font-size: var(--text-size-xxl);
+  line-height: var(--text-line-height-l);
+  letter-spacing: 0.25px;
+}
+
+.Title_type_h4 {
+  font-size: var(--text-size-m);
+  line-height: var(--text-line-height-xs);
+}
+
+.Title_view_default {
+  color: var(--color-typo-secondary);
+  font-weight: 500;
+}
+
+.Title_view_link {
+  font-weight: 500;
+  line-height: 30px;
+  color: var(--color-typo-primary);
+}
+
+.Title-Link {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 470px) {
+  .Title_type_h1 {
+      font-size: var(--text-size-xl);
+      line-height: var(--text-line-height-s);
+  }
+}

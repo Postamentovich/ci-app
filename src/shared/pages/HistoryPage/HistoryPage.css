@@ -1,0 +1,21 @@
+.HistoryPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.HistoryPage-Card {
+  margin-top: var(--space-4xs);
+}
+
+.HistoryPage-Button {
+  margin-top: var(--space-4xs);
+}
+
+.HistoryPage-Content {
+  display: flex;
+  flex-grow: 999;
+  flex-direction: column;
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-l);
+}

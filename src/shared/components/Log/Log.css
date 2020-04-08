@@ -1,0 +1,16 @@
+.Log {
+  border-radius: var(--radius-xl);
+  background-color: var(--color-bg-secondary);
+  padding: var(--space-4xs) var(--space-s);
+}
+
+.Log-Container {
+  margin: 0;
+  overflow-y: auto;
+}
+
+@media (max-width: 470px) {
+  .Log {
+      border-radius: 0;
+  }
+}

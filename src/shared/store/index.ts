@@ -3,17 +3,19 @@ import { routerMiddleware } from "connected-react-router";
 import rootReducer from "./rootReducer";
 import settingsMiddleware from "./settings/settingsMiddleware";
 import buildsMiddleware from "./builds/buildsMiddleware";
-import { history } from "../../client";
-// , routerMiddleware(history)
+import createUniversalHistory from "./history";
+
 type StoreParams = {
     preloadedState?: { [key: string]: any };
 };
+
+const history = createUniversalHistory();
 
 export const createStore = ({ preloadedState }: StoreParams) => {
     const store = configureStore({
         reducer: rootReducer,
         preloadedState,
-        middleware: [settingsMiddleware, buildsMiddleware],
+        middleware: [settingsMiddleware, buildsMiddleware, routerMiddleware(history)],
     });
 
     if (process.env.NODE_ENV !== "production") {

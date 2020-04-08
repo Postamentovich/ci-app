@@ -1,13 +1,10 @@
 import React from "react";
 import { hydrate } from "react-dom";
 import { Provider } from "react-redux";
-// import { ConnectedRouter } from "connected-react-router";
-import { Router } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
-// import { history } from "../shared/store/rootReducer";
+import { ConnectedRouter } from "connected-react-router";
 import { createStore } from "../shared/store";
-import App from "../shared/App";
 import createHistory from "../shared/store/history";
+import App from "../shared/App";
 
 export const history = createHistory();
 
@@ -19,11 +16,9 @@ const store =
 
 hydrate(
     <Provider store={store}>
-        <Router history={history}>
-            <HelmetProvider>
-                <App />
-            </HelmetProvider>
-        </Router>
+        <ConnectedRouter history={history}>
+            <App />
+        </ConnectedRouter>
     </Provider>,
     document.getElementById("app")
 );

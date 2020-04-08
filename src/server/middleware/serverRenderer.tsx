@@ -1,15 +1,11 @@
 import * as React from "react";
 import * as express from "express";
 import { renderToString } from "react-dom/server";
-import { StaticRouter as Router } from "react-router-dom";
+import { StaticRouter } from "react-router-dom";
 import { Store } from "redux";
 import { Provider } from "react-redux";
-import { HelmetProvider } from "react-helmet-async";
 import App from "../../shared/App";
 import Html from "../components/HTML";
-
-const helmetContext = {};
-const routerContext = {};
 
 const serverRenderer: any = () => (
     req: express.Request & { store: Store },
@@ -17,11 +13,9 @@ const serverRenderer: any = () => (
 ) => {
     const content = renderToString(
         <Provider store={res.locals.store}>
-            <Router location={req.url} context={routerContext}>
-                <HelmetProvider context={helmetContext}>
-                    <App />
-                </HelmetProvider>
-            </Router>
+            <StaticRouter location={req.url}>
+                <App />
+            </StaticRouter>
         </Provider>
     );
 
@@ -32,7 +26,6 @@ const serverRenderer: any = () => (
             renderToString(
                 <Html
                     css={[res.locals.assetPath("bundle.css"), res.locals.assetPath("vendor.css")]}
-                    helmetContext={helmetContext}
                     scripts={[res.locals.assetPath("bundle.js"), res.locals.assetPath("vendor.js")]}
                     state={state}
                 >

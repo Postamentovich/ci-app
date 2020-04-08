@@ -16,6 +16,8 @@ app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publ
 
 const manifestPath = path.join(paths.clientBuild, paths.publicPath);
 
+app.use(express.json());
+
 app.use(addStore);
 
 app.use(

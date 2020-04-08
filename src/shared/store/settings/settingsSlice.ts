@@ -14,7 +14,7 @@ type SettingsState = {
   isSaving: boolean;
 };
 
-const initialState: SettingsState = {
+export const initialState: SettingsState = {
   repoName: '',
   buildCommand: '',
   mainBranch: 'master',

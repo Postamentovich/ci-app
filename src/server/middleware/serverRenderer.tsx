@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
 import * as express from "express";
 import { renderToString } from "react-dom/server";
@@ -7,7 +8,7 @@ import { Provider } from "react-redux";
 import App from "../../shared/App";
 import Html from "../components/HTML";
 
-const serverRenderer: any = () => (
+const serverRenderer: any = () => async (
     req: express.Request & { store: Store },
     res: express.Response
 ) => {

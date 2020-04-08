@@ -1,14 +1,12 @@
 // import React from 'react';
 import path from "path";
 import express from "express";
-import cors from "cors";
 import chalk from "chalk";
 import manifestHelpers from "express-manifest-helpers";
-import bodyParser from "body-parser";
 import paths from "../../config/paths";
 import errorHandler from "./middleware/error-handler";
 import serverRenderer from "./middleware/serverRenderer";
-import addStore from "./middleware/addStore";
+import addStore from "middleware/addStore";
 
 require("dotenv").config();
 
@@ -16,15 +14,9 @@ const app = express();
 
 app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)));
 
-app.use(cors());
-
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({ extended: true }));
+const manifestPath = path.join(paths.clientBuild, paths.publicPath);
 
 app.use(addStore);
-
-const manifestPath = path.join(paths.clientBuild, paths.publicPath);
 
 app.use(
     manifestHelpers({

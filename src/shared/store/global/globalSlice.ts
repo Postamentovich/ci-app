@@ -14,7 +14,7 @@ type GlobalState = {
   notify: Array<Notify>;
 };
 
-const initialState: GlobalState = {
+export const initialState: GlobalState = {
   /** Загрузка настроек пользователя */
   isLoading: true,
   /** Массив уведомлений */

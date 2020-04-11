@@ -6,7 +6,7 @@ import manifestHelpers from "express-manifest-helpers";
 import paths from "../../config/paths";
 import errorHandler from "./middleware/error-handler";
 import serverRenderer from "./middleware/serverRenderer";
-import addStore from "middleware/addStore";
+import addStore from "./middleware/addStore";
 
 require("dotenv").config();
 

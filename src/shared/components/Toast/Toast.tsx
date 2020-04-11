@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useCallback } from 'react';
 import { compose } from '@bem-react/core';
-import { Icon as IconPresenter } from 'components/Icon/Icon';
-import { withIconTypeClear } from 'components/Icon/_type/Icon_type_clear';
+import { Icon as IconPresenter } from '../../components/Icon/Icon';
+import { withIconTypeClear } from '../../components/Icon/_type/Icon_type_clear';
 import { IToastProps, cnToast } from './index';
 import './Toast.css';
 

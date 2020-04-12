@@ -32,8 +32,6 @@ router.post(
             params: { commitHash },
         } = req;
 
-        console.log("commitHash", commitHash);
-
         if (typeof commitHash !== "string") throw createError(400, "Error in commitHash");
 
         const info = await gitRepo.addBuildToQueue(commitHash);
@@ -72,14 +70,7 @@ router.get(
 
         if (typeof buildId !== "string") throw createError(400, "Error in buildId");
 
-        /** Получение детальной информации о билде */
-        const {
-            data: {
-                data: { commitHash },
-            },
-        } = await storageAPI.getBuildDetails(buildId);
-
-        const hashKey = hashString(buildId, commitHash);
+        const hashKey = hashString(buildId);
 
         /** Проверка есть ли в кэше значение */
         if (hashObj.has(hashKey)) return res.json(hashObj.get(hashKey).data);

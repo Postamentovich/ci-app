@@ -188,7 +188,7 @@ class GitRepo {
     }
 
     /**
-     * Получение информации о коммите по хэшу
+     * Добавление билда в очередь
      *
      * @param {string} commitHash
      */
@@ -239,7 +239,7 @@ class GitRepo {
 
         const { stdout } = await this.run(`cd ${this.localFolderName} && ${command}`);
 
-        const listCommits = await stdout.split("{SPLIT}").map((el) => el.replace(/\s/g, ""));
+        const listCommits = stdout.split("{SPLIT}").map((el) => el.replace(/\s/g, ""));
 
         try {
             const {
@@ -249,7 +249,7 @@ class GitRepo {
             const filteredCommits = listCommits.filter((hash) => {
                 const item = data.find((el) => el.commitHash === hash);
 
-                if (item) return false;
+                if (item || hash.length === 0) return false;
 
                 return true;
             });

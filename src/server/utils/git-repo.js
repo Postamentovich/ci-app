@@ -1,16 +1,13 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-plusplus */
-/* eslint-disable no-await-in-loop */
-/* eslint-disable class-methods-use-this */
 const util = require("util");
 const fs = require("fs");
 const exec = util.promisify(require("child_process").exec);
 const pino = require("pino");
-const storageAPI = require("../api/storage-api");
+const { storageAPI } = require("../api/storage-api");
+
+const level = process.env.NODE_ENV === "test" ? "silent" : process.env.LOG_LEVEL || "info";
 
 const logger = pino({
-    level: process.env.LOG_LEVEL || "debug",
+    level,
     prettyPrint: true,
 });
 
@@ -127,10 +124,6 @@ class GitRepo {
     get localRepoIsExist() {
         try {
             const stat = fs.statSync(`${this.localFolderName}`);
-
-            // if (stat.isDirectory()) {
-            //     await this.run("git rev-parse --verify master");
-            // }
 
             logger.debug("GitRepo - local repo found");
 

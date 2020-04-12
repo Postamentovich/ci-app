@@ -35,7 +35,7 @@ gitRepo.getInitialSettings = jest.fn(() => true);
 
 buildAgent.getItems = jest.fn(() => true);
 
-describe("Тестирование эндпоинтов", () => {
+describe("Эндпоинты", () => {
     describe("/api/builds/:buildId - GET", () => {
         test("Возвращается правильное значение", async () => {
             gitRepo.addBuildToQueue = jest.fn(() => mockAddBuildResponse);

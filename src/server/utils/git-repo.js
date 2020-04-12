@@ -177,6 +177,7 @@ class GitRepo {
 
     /**
      * Переключает на нужную ветку
+     *
      * @param {string} mainBranch
      */
     checkout(mainBranch) {
@@ -228,7 +229,6 @@ class GitRepo {
 
     /**
      * Получение последних коммитов
-     *
      */
     async getRecentCommits() {
         await this.run(`cd ${this.localFolderName} && git pull origin ${this.settings.mainBranch}`);

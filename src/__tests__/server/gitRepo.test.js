@@ -2,7 +2,7 @@ const gitRepo = require("../../server/utils/git-repo");
 const { storageAPI } = require("../../server/api/storage-api");
 import { mockAddBuildResponse } from "./mocks";
 
-describe("Тестирование взаимодействия с локальным репозиторием", () => {
+describe("Взаимодействие с локальным репозиторием", () => {
     test("Получение последних коммитов", async () => {
         const buildList = {
             data: [
@@ -33,5 +33,15 @@ describe("Тестирование взаимодействия с локаль�
         const info = await gitRepo.addBuildToQueue("123");
 
         expect(info).toEqual(mockAddBuildResponse);
+    });
+
+    test("Переключение ветки репозитория", async () => {
+        gitRepo.run = jest.fn();
+
+        gitRepo.localFolderName = "folderName";
+
+        gitRepo.checkout("branchName");
+
+        expect(gitRepo.run).toHaveBeenLastCalledWith(`cd folderName && git checkout branchName`);
     });
 });

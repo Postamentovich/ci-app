@@ -42,6 +42,21 @@ describe("Взаимодействие с локальным репозитор�
 
         gitRepo.checkout("branchName");
 
-        expect(gitRepo.run).toHaveBeenLastCalledWith(`cd folderName && git checkout branchName`);
+        expect(gitRepo.run).toHaveBeenCalledWith(`cd folderName && git checkout branchName`);
+    });
+
+    test("Клонирование репозитория", async() => {
+        
+        gitRepo.removeLocalRepo = jest.fn(() => true);
+        
+        gitRepo.localFolderName = "folderName";
+        
+        gitRepo.run = jest.fn();
+
+        await gitRepo.clone("repoName");
+
+        expect(gitRepo.run).toHaveBeenCalledWith(
+            `git clone https://github.com/repoName folderName`
+        );
     });
 });

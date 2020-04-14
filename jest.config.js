@@ -9,9 +9,7 @@ module.exports = {
         "<rootDir>/config/polyfills.js",
     ],
     setupFilesAfterEnv: ["<rootDir>config/jest/setup.js"],
-    testMatch: [
-        "<rootDir>/src/**/*.(spec|test).{js,jsx,mjs,ts,tsx}",
-    ],
+    testMatch: ["<rootDir>/src/**/*.(spec|test).{js,jsx,mjs,ts,tsx}"],
     testEnvironment: "node",
     testURL: "http://localhost",
     transform: {
@@ -22,6 +20,9 @@ module.exports = {
     transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx|mjs)$"],
     moduleDirectories: paths.resolveModules,
     moduleFileExtensions: ["js", "json", "jsx", "mjs", "ts", "tsx"],
+    moduleNameMapper: {
+        "\\.svg": "<rootDir>/src/__mocks__/fileMock.ts",
+    },
     globals: {
         __BROWSER__: false,
     },

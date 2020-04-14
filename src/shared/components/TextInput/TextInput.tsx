@@ -36,7 +36,7 @@ export const TextInput: FC<ITextInputProps> = ({
     {addonAfter && <span className={cnTextInput('Addon')}>{addonAfter}</span>}
     {hasClear && (
       <button type="button" className={cnTextInput('Clear')} onClick={onClearClick}>
-        {/* <Icon type="clear" /> */}
+        <Icon type="clear" />
       </button>
     )}
   </Component>

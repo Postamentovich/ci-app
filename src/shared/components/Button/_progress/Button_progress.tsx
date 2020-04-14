@@ -5,12 +5,12 @@ export interface IButtonProgressProps {
     /**
      * Добавлен прогресс или нет
      */
-    "data-progress"?: boolean;
+    progress?: boolean;
 }
 
 /**
  * Модификатор, отвечающий за добавления прогресса на кнопку
  */
 export const withButtonProgress = withBemMod<IButtonProgressProps, IButtonProps>(cnButton(), {
-    "data-progress": true,
+    progress: true,
 });

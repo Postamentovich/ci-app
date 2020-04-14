@@ -1,6 +1,6 @@
 const gitRepo = require("../../server/utils/git-repo");
 const { storageAPI } = require("../../server/api/storage-api");
-import { mockAddBuildResponse } from "../mocks/mocks-routes";
+import { mockAddBuildResponse } from "../../__mocks__/mocks-routes";
 
 describe("Взаимодействие с локальным репозиторием", () => {
     test("Получение последних коммитов", async () => {

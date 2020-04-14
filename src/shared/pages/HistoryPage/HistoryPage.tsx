@@ -162,7 +162,7 @@ const HistoryPage = () => {
 
         {list.length > 0 && (
           <Button
-            progress={isMoreBuildsLoading}
+            data-progress={isMoreBuildsLoading}
             disabled={isMoreBuildsLoading}
             onClick={handleClickShowMore}
             className={cnHistory('Button')}

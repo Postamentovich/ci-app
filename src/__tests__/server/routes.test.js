@@ -13,7 +13,7 @@ import {
     mockConfigResponse,
     mockBuildDetailsResponse,
     mockLogResponse,
-} from "./mocks";
+} from "../mocks/mocks-routes";
 
 const mock = new MockAdapter(api);
 

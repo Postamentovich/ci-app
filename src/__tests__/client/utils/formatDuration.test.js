@@ -1,4 +1,4 @@
-import { formatDuration } from "../../shared/utils/formatDuration";
+import { formatDuration } from "../../../shared/utils/formatDuration";
 
 describe("Форматирование длительности", () => {
     test("Длительность меньше часа", () => {

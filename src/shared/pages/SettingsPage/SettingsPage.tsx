@@ -158,7 +158,7 @@ const SettingsPage = () => {
      * Если ошибок нет, отправляем данные
      */
     if (buildComand.length && repoName.length && !isSaving) dispatch(saveSettings());
-  }, [buildComand.length, dispatch, isSaving, repoName.length]);
+  }, [buildComand?.length, dispatch, isSaving, repoName?.length]);
 
   /**
    * Сохранение настроек по нажатию на клавишу enter
@@ -214,7 +214,7 @@ const SettingsPage = () => {
           required
           id="buildComand"
           className={cnSettings('Input')}
-          hasClear={!!buildComand.length}
+          hasClear={!!buildComand?.length}
           onChange={handleChangeBuildCommand}
           onClearClick={handleClearBuildCommand}
           notValid={buildComandNotValid}
@@ -247,7 +247,7 @@ const SettingsPage = () => {
             className={cnSettings('Button')}
             onClick={handleClickSave}
             disabled={isSaving}
-            progress={isSaving}
+            data-progress={isSaving}
           >
             Save
           </Button>

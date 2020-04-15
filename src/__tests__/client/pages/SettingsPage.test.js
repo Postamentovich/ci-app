@@ -1,12 +1,17 @@
 import React from "react";
-import { render, fireEvent, waitFor, screen } from "@testing-library/react";
+import { fireEvent, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import axiosMock from "axios";
 import SettingsPage from "../../../shared/pages/SettingsPage/SettingsPage";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
+import * as ReactReduxHooks from "../../../__mocks__/react-redux-hooks";
+import { shallow, render, mount } from "enzyme";
+import { configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import { compose } from "@bem-react/core";
 
-jest.mock("axios");
+configure({ adapter: new Adapter() });
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);
@@ -17,6 +22,14 @@ const testBuildComand = "testBuildComand";
 const testMainBranch = "testMainBranch";
 
 describe("Страница настроек", () => {
+    let container;
+    let inputRepoName;
+    let inputBuildComand;
+    let inputMainBrach;
+    let inputPeriod;
+    let saveButton;
+    let cancelButton;
+
     const initialState = {
         settingsSlice: {
             repoName: testRepoName,
@@ -27,28 +40,33 @@ describe("Страница настроек", () => {
         },
     };
 
-    const store = mockStore(initialState);
+    describe("Проверка обработки данных", () => {
+        const store = mockStore(initialState);
 
-    const container = render(
-        <Provider store={store}>
-            <SettingsPage />
-        </Provider>
-    );
+        beforeEach(() => {
+            container = render(
+                <Provider store={store}>
+                    <SettingsPage />
+                </Provider>
+            );
+            inputRepoName = container.find("#repoName");
+            inputBuildComand = container.find("#buildComand");
+            inputMainBrach = container.find("#mainBranch");
+            inputPeriod = container.find("#period");
+            saveButton = container.find("#buttonSave");
+            cancelButton = container.find("#buttonCancel");
+        });
 
-    test("В input Repo Name попадают правильные данные из store", () => {
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
 
-        // expect(container.getByText(/Change/i).textContent).toBe("Change: ")
+        test("Поле repoName должно присутствовать", () => {
+            expect(inputRepoName.length).toEqual(1);
+        });
 
-        
-        // expect(container.getByText(/Change/i).textContent).not.toBe("Change: ")
-        
-        const inputNode = container.getByLabelText('GitHub repository');
-
-        expect(inputNode.textContent).toBe(testRepoName)
-        
-        // fireEvent.change(container.getByLabelText("Input Text:"), {target: {value: 'Text' } } )
-
-        console.log(inputNode)
-        // expect(container.)
+        test("В инпут repoName попадают правильные данные из store", () => {
+            expect(inputRepoName.prop("value")).toEqual(testRepoName);
+        });
     });
 });

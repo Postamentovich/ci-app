@@ -25,8 +25,14 @@ export interface IButtonProps extends IClassNameProps {
      * Обработчик клика на кнопку
      */
     onClick?: (event: MouseEventHandler<ContainerElement>) => void;
-
+    /**
+     * Индикатор прогресса
+     */
     progress?: boolean;
+    /**
+     * html id
+     */
+    id?: string;
 }
 
 export const cnButton = cn("Button");

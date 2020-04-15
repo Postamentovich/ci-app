@@ -212,7 +212,6 @@ const SettingsPage = () => {
                     onChange={handleChangeRepoName}
                     onClearClick={handleClearRepoName}
                     notValid={repoNameNotValid}
-                    data-testid="repoName"
                 />
                 <TextInput
                     label="Build command"
@@ -255,6 +254,7 @@ const SettingsPage = () => {
                         onClick={handleClickSave}
                         disabled={isSaving}
                         progress={isSaving}
+                        id="buttonSave"
                     >
                         Save
                     </Button>
@@ -264,6 +264,7 @@ const SettingsPage = () => {
                         className={cnSettings("Button")}
                         onClick={handleClickCancel}
                         disabled={isSaving}
+                        id="buttonCancel"
                     >
                         Cancel
                     </Button>

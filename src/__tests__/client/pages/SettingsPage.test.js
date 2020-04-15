@@ -10,6 +10,11 @@ import Adapter from "enzyme-adapter-react-16";
 import SettingsPage from "../../../shared/pages/SettingsPage/SettingsPage";
 import "@testing-library/jest-dom/extend-expect";
 import { settingsSlice } from "../../../shared/store/settings/settingsSlice";
+import {
+    saveSettings,
+    cancelChangedSettings,
+} from "../../../shared/store/settings/settingsActions";
+import { globalSlice } from "../../../shared/store/global/globalSlice";
 
 configure({ adapter: new Adapter() });
 
@@ -29,6 +34,10 @@ describe("Страница настроек", () => {
     let inputPeriod;
     let saveButton;
     let cancelButton;
+
+    const realDateNow = Date.now.bind(global.Date);
+    const dateNowStub = jest.fn(() => 111);
+    global.Date.now = dateNowStub;
 
     const initialState = {
         settingsSlice: {
@@ -125,13 +134,95 @@ describe("Страница настроек", () => {
     });
 
     test("Поле period изменяется", () => {
-        inputPeriod
-            .at(3)
-            .simulate("change", { target: { name: "mainBranch", value: 15 } });
+        inputPeriod.at(3).simulate("change", { target: { name: "mainBranch", value: 15 } });
 
         expect(store.dispatch).toHaveBeenCalledWith({
             type: settingsSlice.actions.changePeriod.type,
             payload: 15,
+        });
+    });
+
+    test("Кнопка сохранения нажимается", () => {
+        saveButton.at(0).simulate("click");
+
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: saveSettings.type,
+        });
+    });
+
+    test("Кнопка отмены нажимается", () => {
+        cancelButton.at(0).simulate("click");
+
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: cancelChangedSettings.type,
+        });
+    });
+
+    test("Валидация поля repoName", () => {
+        const initialState = {
+            settingsSlice: {
+                repoName: "",
+                period: testPeriod,
+                buildCommand: testBuildComand,
+                mainBranch: testMainBranch,
+                isSaving: false,
+            },
+        };
+
+        const store = mockStore(initialState);
+        store.dispatch = jest.fn(() => {});
+
+        const container = mount(
+            <Provider store={store}>
+                <SettingsPage />
+            </Provider>
+        );
+
+        const saveButton = container.find("#buttonSave");
+
+        saveButton.at(0).simulate("click");
+
+        expect(store.dispatch).toHaveBeenCalledWith({
+            payload: {
+                id: 111,
+                message: "Please enter GitHub repository",
+                type: "error",
+            },
+            type: globalSlice.actions.addNotify.type,
+        });
+    });
+
+    test("Валидация поля repoName", () => {
+        const initialState = {
+            settingsSlice: {
+                repoName: testRepoName,
+                period: testPeriod,
+                buildCommand: '',
+                mainBranch: testMainBranch,
+                isSaving: false,
+            },
+        };
+
+        const store = mockStore(initialState);
+        store.dispatch = jest.fn(() => {});
+
+        const container = mount(
+            <Provider store={store}>
+                <SettingsPage />
+            </Provider>
+        );
+
+        const saveButton = container.find("#buttonSave");
+
+        saveButton.at(0).simulate("click");
+
+        expect(store.dispatch).toHaveBeenCalledWith({
+            payload: {
+                id: 111,
+                message: "Please enter Build command",
+                type: "error",
+            },
+            type: globalSlice.actions.addNotify.type,
         });
     });
 });

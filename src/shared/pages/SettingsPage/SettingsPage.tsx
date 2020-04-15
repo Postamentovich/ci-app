@@ -142,7 +142,7 @@ const SettingsPage = () => {
                 globalSlice.actions.addNotify({
                     message: "Please enter GitHub repository",
                     type: "error",
-                    id: Date.now().valueOf(),
+                    id: Date.now(),
                 })
             );
             setRepoNameNotValid(true);
@@ -155,7 +155,7 @@ const SettingsPage = () => {
                 globalSlice.actions.addNotify({
                     message: "Please enter Build command",
                     type: "error",
-                    id: Date.now().valueOf(),
+                    id: Date.now(),
                 })
             );
             setBuildComandNotValid(true);

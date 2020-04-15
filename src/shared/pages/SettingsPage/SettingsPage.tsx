@@ -123,7 +123,8 @@ const SettingsPage = () => {
         (e: React.ChangeEvent<HTMLInputElement>) => {
             // Проверяем введеное значение на число
             // @ts-ignore
-            if (/\d+/.test(Number(e.target.value))) dispatch(settingsSlice.actions.changePeriod(e.target.value));
+            if (/\d+/.test(Number(e.target.value)))
+                dispatch(settingsSlice.actions.changePeriod(e.target.value));
         },
         [dispatch]
     );

@@ -3,8 +3,7 @@ import axiosMock from "axios";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { compose } from "@bem-react/core";
-import { render } from "enzyme";
-import { fireEvent, cleanup } from "@testing-library/react";
+import { render, mount, shallow } from "enzyme";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import SettingsPage from "../../../shared/pages/SettingsPage/SettingsPage";
@@ -45,7 +44,7 @@ describe("Страница настроек", () => {
         const store = mockStore(initialState);
 
         beforeEach(() => {
-            container = render(
+            container = mount(
                 <Provider store={store}>
                     <SettingsPage />
                 </Provider>
@@ -58,14 +57,21 @@ describe("Страница настроек", () => {
             cancelButton = container.find("#buttonCancel");
         });
 
-        afterEach(cleanup);
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
 
         it("Поле repoName изменяется", () => {
-            fireEvent.change(inputRepoName, { target: { value: "James" } });
+            inputRepoName
+                .at(0)
+                .simulate("change", { target: { name: "repoName", value: "testRepo" } });
+            // // fireEvent.change(inputRepoName, { target: { value: "James" } });
 
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: "test",
-            });
+            // store.dispatch = jest.fn(() => {});
+
+            // expect(store.dispatch).toHaveBeenCalledWith({
+            //     type: "test",
+            // });
         });
     });
 });

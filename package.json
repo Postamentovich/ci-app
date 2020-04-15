@@ -13,7 +13,7 @@
     "build:with-stats": "cross-env NODE_ENV=production TS_NODE_PROJECT=tsconfig.tooling.json webpack --config config/webpack.config.ts/client.prod.ts --json > build/client/static/bundle-stats.json",
     "start": "cross-env NODE_ENV=development TS_NODE_PROJECT=tsconfig.tooling.json ts-node scripts/start",
     "start:analyzer": "webpack-bundle-analyzer build/client/static/bundle-stats.json",
-    "test": "cross-env TS_NODE_PROJECT=tsconfig.tooling.json NODE_TLS_REJECT_UNAUTHORIZED=0 ts-node scripts/test --env=node "
+    "test": "cross-env TS_NODE_PROJECT=tsconfig.tooling.json NODE_TLS_REJECT_UNAUTHORIZED=0 ts-node scripts/test --env=jsdom "
   },
   "dependencies": {
     "@bem-react/classname": "^1.5.8",

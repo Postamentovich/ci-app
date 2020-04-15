@@ -3,7 +3,7 @@ import axiosMock from "axios";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { compose } from "@bem-react/core";
-import { render } from "enzyme";
+import { render, mount } from "enzyme";
 import { fireEvent, cleanup } from "@testing-library/react";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
@@ -42,7 +42,7 @@ describe("Страница настроек", () => {
     const store = mockStore(initialState);
 
     beforeEach(() => {
-        container = render(
+        container = mount(
             <Provider store={store}>
                 <SettingsPage />
             </Provider>
@@ -60,34 +60,34 @@ describe("Страница настроек", () => {
     });
 
     test("Поле repoName должно присутствовать", () => {
-        expect(inputRepoName.length).toEqual(1);
+        expect(inputRepoName.at(0).length).toEqual(1);
     });
 
     test("В инпут repoName попадают правильные данные из store", () => {
-        expect(inputRepoName.prop("value")).toEqual(testRepoName);
+        expect(inputRepoName.at(0).prop("value")).toEqual(testRepoName);
     });
 
     test("Поле buildComand должно присутствовать", () => {
-        expect(inputBuildComand.length).toEqual(1);
+        expect(inputBuildComand.at(0).length).toEqual(1);
     });
 
     test("В инпут buildComand попадают правильные данные из store", () => {
-        expect(inputBuildComand.prop("value")).toEqual(testBuildComand);
+        expect(inputBuildComand.at(0).prop("value")).toEqual(testBuildComand);
     });
 
     test("Поле mainBranch должно присутствовать", () => {
-        expect(inputMainBrach.length).toEqual(1);
+        expect(inputMainBrach.at(0).length).toEqual(1);
     });
 
     test("В инпут mainBranch попадают правильные данные из store", () => {
-        expect(inputMainBrach.prop("value")).toEqual(testMainBranch);
+        expect(inputMainBrach.at(0).prop("value")).toEqual(testMainBranch);
     });
 
     test("Поле period должно присутствовать", () => {
-        expect(inputPeriod.length).toEqual(1);
+        expect(inputPeriod.at(0).length).toEqual(1);
     });
 
     test("В инпут period попадают правильные данные из store", () => {
-        expect(inputPeriod.prop("value")).toEqual(testPeriod);
+        expect(inputPeriod.at(0).prop("value")).toEqual(testPeriod);
     });
 });

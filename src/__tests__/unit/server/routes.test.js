@@ -2,10 +2,10 @@ const axios = require("axios");
 const MockAdapter = require("axios-mock-adapter");
 const request = require("supertest");
 const https = require("https");
-const gitRepo = require("../../server/utils/git-repo");
-const buildAgent = require("../../server/utils/build-agent");
-import app from "../../server";
-const { api } = require("../../server/api/storage-api");
+const gitRepo = require("../../../server/utils/git-repo");
+const buildAgent = require("../../../server/utils/build-agent");
+import app from "../../../server";
+const { api } = require("../../../server/api/storage-api");
 import {
     mockBuildListResponse,
     mockAddBuildResponse,
@@ -13,7 +13,7 @@ import {
     mockConfigResponse,
     mockBuildDetailsResponse,
     mockLogResponse,
-} from "../../__mocks__/mocks-routes";
+} from "../../../__mocks__/mocks-routes";
 
 const mock = new MockAdapter(api);
 

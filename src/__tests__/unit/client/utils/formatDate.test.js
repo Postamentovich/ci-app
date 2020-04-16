@@ -1,4 +1,4 @@
-import { formatDate } from "../../../shared/utils/formatDate";
+import { formatDate } from "../../../../shared/utils/formatDate";
 
 test("Форматирование времени", () => {
     const date = "2020-04-09T01:41:25.898";

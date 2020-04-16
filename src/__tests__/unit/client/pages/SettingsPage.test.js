@@ -7,14 +7,14 @@ import { render, mount } from "enzyme";
 import { fireEvent, cleanup } from "@testing-library/react";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import SettingsPage from "../../../shared/pages/SettingsPage/SettingsPage";
+import SettingsPage from "../../../../shared/pages/SettingsPage/SettingsPage";
 import "@testing-library/jest-dom/extend-expect";
-import { settingsSlice } from "../../../shared/store/settings/settingsSlice";
+import { settingsSlice } from "../../../../shared/store/settings/settingsSlice";
 import {
     saveSettings,
     cancelChangedSettings,
-} from "../../../shared/store/settings/settingsActions";
-import { globalSlice } from "../../../shared/store/global/globalSlice";
+} from "../../../../shared/store/settings/settingsActions";
+import { globalSlice } from "../../../../shared/store/global/globalSlice";
 
 configure({ adapter: new Adapter() });
 

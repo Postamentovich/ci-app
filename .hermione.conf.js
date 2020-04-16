@@ -15,4 +15,12 @@ module.exports = {
             },
         },
     },
+    plugins: {
+        "html-reporter/hermione": {
+            enabled: true,
+            path: "src/__tests__/hermione-reports",
+            defaultView: "all",
+            baseHost: "http://localhost:8500",
+        },
+    },
 };

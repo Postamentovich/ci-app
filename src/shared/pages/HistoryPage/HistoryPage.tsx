@@ -112,6 +112,7 @@ const HistoryPage = () => {
                     size="s"
                     iconLeft={<Icon type="play" />}
                     onClick={handleClickRunBuild}
+                    id="RunBuildButton"
                 >
                     Run build
                 </Button>

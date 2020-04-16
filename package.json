@@ -17,7 +17,7 @@
     "selenium-install": "./node_modules/.bin/selenium-standalone install",
     "selenium-start": "./node_modules/.bin/selenium-standalone start",
     "hermione": "hermione",
-    "e2e": "  npm run selenium-install && concurrently \"npm run selenium-start\" \"npm run hermione\""
+    "e2e": "concurrently \"npm run selenium-start\" \"npm run hermione\""
   },
   "dependencies": {
     "@bem-react/classname": "^1.5.8",

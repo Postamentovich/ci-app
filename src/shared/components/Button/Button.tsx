@@ -9,8 +9,9 @@ export const Button: FC<IButtonProps> = ({
   disabled,
   children,
   className,
-  as: Component = 'button',
+  as: Component = 'div',
   iconLeft,
+  progress,
   ...props
 }) => (
   <Component aria-disabled={disabled} {...props} className={cnButton({}, [className])}>

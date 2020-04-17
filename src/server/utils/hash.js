@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-bitwise */
 

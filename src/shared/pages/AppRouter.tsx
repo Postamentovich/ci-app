@@ -3,7 +3,7 @@ import loadable from '@loadable/component';
 import { useSelector } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { RootState } from '../store/rootReducer';
-import { Spin } from 'components/Spin/Spin';
+import { Spin } from '../components/Spin/Spin';
 
 const SettingsPage = loadable(() => import('./SettingsPage/SettingsPage'), { fallback: <Spin /> });
 const HistoryPage = loadable(() => import('./HistoryPage/HistoryPage'), { fallback: <Spin /> });

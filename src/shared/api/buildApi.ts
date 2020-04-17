@@ -3,7 +3,7 @@ import { BuildModel } from './models/models';
 
 export const buildApi = {
   /** Get builds list */
-  getList: async (offset: number = 0, limit: number = 25): Promise<Array<BuildModel>> => {
+  getList: async (offset = 0, limit = 25): Promise<Array<BuildModel>> => {
     const { data } = await axios.get(`/api/builds?offset=${offset}&limit=${limit}`);
     return data.data;
   },

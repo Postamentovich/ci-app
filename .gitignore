@@ -8,6 +8,7 @@ npm-debug.log
 node_modules_*
 react-codemod
 coverage
+.env
 .env.local
 stuff
 build/*
@@ -16,3 +17,4 @@ tmp
 bundle-stats.json
 .vscode
 /dependency-graph.svg
+repo/

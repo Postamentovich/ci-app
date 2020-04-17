@@ -1,17 +1,17 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
-import { Header } from 'containers/Header/Header';
-import { Footer } from 'containers/Footer/Footer';
-import { Button as ButtonPresenter } from 'components/Button/Button';
-import { withButtonViewDefault } from 'components/Button/_view/Button_view_default';
-import { withButtonSizeS } from 'components/Button/_size/Button_size_s';
-import { withButtonSizeM } from 'components/Button/_size/Button_size_m';
-import { withButtonViewAction } from 'components/Button/_view/Button_view_action';
-import { withButtonTypeLink } from 'components/Button/_type/Button_type_link';
-import { Icon as IconPresenter } from 'components/Icon/Icon';
-import { withIconTypeLogo } from 'components/Icon/_type/Icon_type_logo';
-import { withIconTypeGear } from 'components/Icon/_type/Icon_type_gear';
+import { Header } from '../../containers/Header/Header';
+import { Footer } from '../../containers/Footer/Footer';
+import { Button as ButtonPresenter } from '../../components/Button/Button';
+import { withButtonViewDefault } from '../../components/Button/_view/Button_view_default';
+import { withButtonSizeS } from '../../components/Button/_size/Button_size_s';
+import { withButtonSizeM } from '../../components/Button/_size/Button_size_m';
+import { withButtonViewAction } from '../../components/Button/_view/Button_view_action';
+import { withButtonTypeLink } from '../../components/Button/_type/Button_type_link';
+import { Icon as IconPresenter } from '../../components/Icon/Icon';
+import { withIconTypeLogo } from '../../components/Icon/_type/Icon_type_logo';
+import { withIconTypeGear } from '../../components/Icon/_type/Icon_type_gear';
 import './HomePage.css';
 
 const cnHome = cn('HomePage');

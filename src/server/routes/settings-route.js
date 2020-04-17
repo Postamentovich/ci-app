@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 const createError = require('http-errors');
-const storageAPI = require('../api/storage-api');
+const {storageAPI} = require('../api/storage-api');
 const gitRepo = require('../utils/git-repo');
 const { hashObj } = require('../utils/hash');
 
@@ -27,7 +27,7 @@ router.post(
   '/',
   asyncHandler(async (req, res) => {
     const { repoName, buildCommand, mainBranch } = req.body;
-
+    
     if (typeof repoName !== 'string') throw createError(400, 'Error in repoName');
 
     if (typeof buildCommand !== 'string') throw createError(400, 'Error in buildCommand');

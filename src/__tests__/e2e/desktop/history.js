@@ -8,8 +8,19 @@ describe("Страница истории билдов", () => {
     it("запуск билда", function () {
         return this.browser
             .url("/")
+            .waitForExist(".Header-Buttons")
             .click("#RunBuildButton")
             .setValue("#commitHash", "123")
             .click(".NewBuildModal #RunBuildButton");
+    });
+
+    it("Переход на страницу настроек ", function () {
+        return this.browser
+            .url("/")
+            .waitForExist(".Header-Buttons")
+            .click("#SettingsButton")
+            .waitForVisible(".SettingsPage", 3000)
+            .getUrl()
+            .then((res) => assert.equal(res, "http://localhost:8500/settings"));
     });
 });

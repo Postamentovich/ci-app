@@ -2,7 +2,7 @@ const assert = require("chai").assert;
 
 describe("Страница настроек", () => {
     it("Страница открывается", function () {
-        return this.browser.url("/settings").isExisting(".SettingsPage").then(assert.isTrue);
+        return this.browser.url("/settings").isExisting(".SettingsPage");
     });
 
     it("На странице присутствует заголовок", function () {
@@ -12,5 +12,14 @@ describe("Страница настроек", () => {
             .then((title) => {
                 assert.equal(title, "Settings");
             });
+    });
+
+    it("Отмена настроек", function () {
+        return this.browser
+            .url("/settings")
+            .click("#buttonCancel")
+            .waitForVisible(".HistoryPage", 3000)
+            .getUrl()
+            .then((res) => assert.equal(res, "http://localhost:8500/"));
     });
 });

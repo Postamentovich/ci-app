@@ -123,6 +123,7 @@ const HistoryPage = () => {
                     to="/settings"
                     size="s"
                     iconLeft={<Icon type="gear" />}
+                    id="SettingsButton"
                 />
             </Header>
 

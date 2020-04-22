@@ -1,5 +1,7 @@
 # School CI Server
 
+Build Server и Build Agent находятся в репозитории https://github.com/Postamentovich/shri-ci-build
+
 ## ДЗ по тестированию
 
 Проект тестами покрыт не полностью, времени хватило только на то что-бы попробовать различные виды тестирования.<br>

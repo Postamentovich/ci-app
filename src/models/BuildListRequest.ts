@@ -1,4 +1,4 @@
 export interface BuildListRequest {
   limit?: string;
-  offset: string;
+  offset?: string;
 }

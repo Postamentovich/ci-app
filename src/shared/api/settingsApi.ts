@@ -1,14 +1,15 @@
 import axios from 'axios';
-import { ConfigurationModelHomeworkApiResponse, ConfigurationInput } from './models/models';
+import { UserSettings } from 'models/UserSettings';
+import { UserSettingsResponse } from 'models/UserSettingsResponse';
 
 export const settingsApi = {
   /** Get user settings */
-  getSettings: async (): Promise<ConfigurationModelHomeworkApiResponse> => {
+  getSettings: async (): Promise<UserSettingsResponse> => {
     const { data } = await axios.get('/api/settings');
     return data;
   },
   /** Set user settings */
-  saveSettings: async (model: ConfigurationInput) => {
+  saveSettings: async (model: UserSettings) => {
     await axios.post('/api/settings', model);
   },
 };

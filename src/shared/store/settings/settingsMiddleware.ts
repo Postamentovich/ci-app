@@ -4,13 +4,15 @@ import { RootState } from '../rootReducer';
 import { globalSlice } from '../global/globalSlice';
 import { bulidsSlice } from '../builds/buildsSlice';
 import { settingsApi } from '../../api/settingsApi';
-import { ConfigurationInput, ConfigurationModel } from '../../api/models/models';
 import { getSettings, saveSettings, cancelChangedSettings } from './settingsActions';
 import { settingsSlice } from './settingsSlice';
+import { UserSettings } from 'models/UserSettings';
 
-let currentSettings: ConfigurationModel;
+let currentSettings: UserSettings;
 
-const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (action) => {
+const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (next) => async (
+  action,
+) => {
   next(action);
 
   /**
@@ -66,7 +68,7 @@ const settingsMiddleware: Middleware<RootState> = ({ dispatch, getState }) => (n
        * Выставляем дефолтные значения, если они не были указаны.
        * Поля repoName и buildCommand валидируются при отправке формы.
        */
-      const model: ConfigurationInput = {
+      const model: UserSettings = {
         repoName,
         buildCommand,
         mainBranch: mainBranch.length > 0 ? mainBranch : 'master',

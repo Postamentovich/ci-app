@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { compose, composeU } from '@bem-react/core';
-import { BuildStatus } from '../../../api/models/buildStatus';
+import { BuildStatus } from 'models/BuildStatus';
 import { Icon as IconPresenter } from '../../../components/Icon/Icon';
 import { withIconTypeSuccess } from '../../../components/Icon/_type/Icon_type_success';
 import { withIconTypeError } from '../../../components/Icon/_type/Icon_type_error';

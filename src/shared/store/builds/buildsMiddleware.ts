@@ -3,9 +3,10 @@ import { push } from "connected-react-router";
 import { RootState } from "../rootReducer";
 import { globalSlice } from "../global/globalSlice";
 import { buildApi } from "../../api/buildApi";
-import { BuildStatus, BuildModel } from "../../api/models/models";
 import * as BUILD_ACTIONS from "./buildsActions";
 import { bulidsSlice } from "./buildsSlice";
+import { BuildModel } from "models/BuildModel";
+import { BuildStatus } from "models/BuildStatus";
 
 let pollingBuildListTimeout: NodeJS.Timeout;
 

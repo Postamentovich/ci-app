@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { cn } from '@bem-react/classname';
+import { useTranslation } from 'react-i18next';
 import { composeU, compose } from '@bem-react/core';
 import { RootState } from '../../store/rootReducer';
 import { settingsSlice } from '../../store/settings/settingsSlice';
@@ -39,6 +40,8 @@ const TextInput = compose(withTextInputHasAddon, withTextInputNotValid)(TextInpu
  */
 const SettingsPage = () => {
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const { repoName, period, buildComand, mainBranch, isSaving } = useSelector(
     (state: RootState) => ({
@@ -192,6 +195,8 @@ const SettingsPage = () => {
   return (
     <div className={cnSettings()}>
       <Header className="Layout" title="School CI Server" />
+
+      <h2>{t('test2')}</h2>
 
       <div className={cnSettings('Content', ['Layout'])}>
         <Title type="h4" className={cnSettings('Title')}>

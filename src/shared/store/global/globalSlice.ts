@@ -9,7 +9,7 @@ type Notify = {
   type?: 'success' | 'error' | 'warning';
 };
 
-export type Locale = 'en_US' | 'de_DE';
+export type Locale = 'en_US' | 'ru_RU';
 
 type GlobalState = {
   isLoading: boolean;
@@ -22,7 +22,7 @@ export const initialState: GlobalState = {
   isLoading: true,
   /** Массив уведомлений */
   notify: [],
-  locale: 'en_US',
+  locale: 'ru_RU',
 };
 
 export const globalSlice = createSlice({

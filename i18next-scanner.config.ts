@@ -12,7 +12,7 @@ export default {
         trans: {
             extensions: ['.js'],
         },
-        lngs: ['en_US', 'de_DE'],
+        lngs: ['en_US', 'ru_RU'],
         ns: ['translation'],
         fallbackLng: 'en_US',
         defaultLng: 'en_US',

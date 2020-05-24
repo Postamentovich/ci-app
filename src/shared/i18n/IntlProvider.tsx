@@ -4,7 +4,7 @@ import i18nextXHRBackend from 'i18next-xhr-backend';
 import { I18nextProvider } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import deDE from './locales/de_DE/translation.json';
+import ruRU from './locales/ru_RU/translation.json';
 import enUS from './locales/en_US/translation.json';
 import { RootState } from 'store/rootReducer';
 
@@ -30,7 +30,7 @@ i18next.init({
   // i18next-xhr-backend, otherwise no calls will be made if resources are defined.
   partialBundledLanguages: true,
   resources: {
-    de_DE: { translation: deDE },
+    ru_RU: { translation: ruRU },
     en_US: { translation: enUS },
   },
   parseMissingKeyHandler: (missing: any) => {
@@ -41,7 +41,7 @@ i18next.init({
   },
 });
 
-i18next.languages = ['de_DE', 'en_US'];
+i18next.languages = ['ru_RU', 'en_US'];
 
 const I18N: React.FC<any> = ({ children }) => {
   const { locale } = useSelector((state: RootState) => ({ locale: state.globalSlice.locale }));

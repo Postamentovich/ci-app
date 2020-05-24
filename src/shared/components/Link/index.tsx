@@ -25,6 +25,10 @@ export interface ILinkProps extends IClassNameProps {
    * HTML-атрибут `title`
    */
   title?: string;
+  /**
+   * Обработка клика
+   */
+  onClick?: Function;
 }
 
 export const cnLink = cn('Link');

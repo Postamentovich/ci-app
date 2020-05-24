@@ -1,3 +1,24 @@
 {
-    "test": "test"
+    "support": "Support",
+    "learning": "Learning",
+    "enVersion": "English version",
+    "ruVersion": "Русская версия",
+    "settings": "Settings",
+    "description": "Configure repository connection and synchronization settings",
+    "openSettings": "Open settings",
+    "validationRepoName": "Please enter GitHub repository",
+    "validationBuildCommand": "Please enter Build command",
+    "repoName": "GitHub repository",
+    "buildCommand": "Build command",
+    "mainBranch": "Main branch",
+    "synchronizeEvery": "Synchronize every",
+    "minutes": "minutes",
+    "save": "Save",
+    "cancel": "Cancel",
+    "newBuild": "New build",
+    "modalDescription": "Enter the commit hash which you want to build",
+    "commitHash": "Commit hash",
+    "runBuild": "Run build",
+    "showMore": "Show more",
+    "rebuild": "Rebuild"
 }

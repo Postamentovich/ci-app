@@ -1,117 +1,118 @@
-import React, { useState, useCallback } from "react";
-import { cn } from "@bem-react/classname";
-import { compose, composeU } from "@bem-react/core";
-import { Button as ButtonPresenter } from "../../components/Button/Button";
-import { withButtonSizeM } from "../../components/Button/_size/Button_size_m";
-import { withButtonViewAction } from "../../components/Button/_view/Button_view_action";
-import { withButtonTypeLink } from "../../components/Button/_type/Button_type_link";
-import { withButtonViewPseudo } from "../../components/Button/_view/Button_view_pseudo";
-import { Modal } from "../../components/Modal/Modal";
-import { TextInput as TextInputPresenter } from "../../components/TextInput/TextInput";
-import { withTextInputNotValid } from "../../components/TextInput/_notValid/TextInput_notValid";
-import "./NewBuildModal.css";
+import React, { useState, useCallback } from 'react';
+import { cn } from '@bem-react/classname';
+import { compose, composeU } from '@bem-react/core';
+import { useTranslation } from 'react-i18next';
+import { Button as ButtonPresenter } from '../../components/Button/Button';
+import { withButtonSizeM } from '../../components/Button/_size/Button_size_m';
+import { withButtonViewAction } from '../../components/Button/_view/Button_view_action';
+import { withButtonTypeLink } from '../../components/Button/_type/Button_type_link';
+import { withButtonViewPseudo } from '../../components/Button/_view/Button_view_pseudo';
+import { Modal } from '../../components/Modal/Modal';
+import { TextInput as TextInputPresenter } from '../../components/TextInput/TextInput';
+import { withTextInputNotValid } from '../../components/TextInput/_notValid/TextInput_notValid';
+import './NewBuildModal.css';
 
-const cnNewBuildModal = cn("NewBuildModal");
+const cnNewBuildModal = cn('NewBuildModal');
 
 const Button = compose(
-    composeU(withButtonViewAction, withButtonViewPseudo),
-    withButtonSizeM,
-    withButtonTypeLink
+  composeU(withButtonViewAction, withButtonViewPseudo),
+  withButtonSizeM,
+  withButtonTypeLink,
 )(ButtonPresenter);
 
 const TextInput = compose(withTextInputNotValid)(TextInputPresenter);
 
 export interface NewBuildModalProps {
-    onConfirm: (commitHash: string) => void;
-    onCancel: () => void;
+  onConfirm: (commitHash: string) => void;
+  onCancel: () => void;
 }
 
 /**
  * Модальное окно с добавлением нового билда
  */
 export const NewBuildModal: React.SFC<NewBuildModalProps> = ({ onConfirm, onCancel }) => {
-    const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
-    /**
-     * Состояние валидности поля repoName
-     */
-    const [commitHashNotValid, setCommitHashNotValid] = useState(false);
+  const { t } = useTranslation();
 
-    /**
-     * Обработка поля commitHash
-     */
-    const handleChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setCommitHashNotValid(false);
-        setValue(e.target.value);
-    }, []);
+  /**
+   * Состояние валидности поля repoName
+   */
+  const [commitHashNotValid, setCommitHashNotValid] = useState(false);
 
-    /**
-     * Очистка поля commitHash
-     */
-    const handleClickClear = useCallback(() => {
-        setCommitHashNotValid(false);
-        setValue("");
-    }, []);
+  /**
+   * Обработка поля commitHash
+   */
+  const handleChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommitHashNotValid(false);
+    setValue(e.target.value);
+  }, []);
 
-    /**
-     * Обработка клика на кнопку подтверждения
-     */
-    const handleClickConfirm = useCallback(
-        (e: React.MouseEventHandler<HTMLButtonElement>) => {
-            if (!value.length) return setCommitHashNotValid(true);
+  /**
+   * Очистка поля commitHash
+   */
+  const handleClickClear = useCallback(() => {
+    setCommitHashNotValid(false);
+    setValue('');
+  }, []);
 
-            onConfirm(value);
-        },
-        [onConfirm, value]
-    );
+  /**
+   * Обработка клика на кнопку подтверждения
+   */
+  const handleClickConfirm = useCallback(
+    (e: React.MouseEventHandler<HTMLButtonElement>) => {
+      if (!value.length) return setCommitHashNotValid(true);
 
-    /**
-     * Обработка клика на кнопку отмены
-     */
-    const handleClickCancel = useCallback(
-        (e: React.MouseEventHandler<HTMLButtonElement>) => {
-            onCancel();
-        },
-        [onCancel]
-    );
+      onConfirm(value);
+    },
+    [onConfirm, value],
+  );
 
-    return (
-        <Modal className={cnNewBuildModal()}>
-            <h3 className={cnNewBuildModal("Title")}>New build</h3>
+  /**
+   * Обработка клика на кнопку отмены
+   */
+  const handleClickCancel = useCallback(
+    (e: React.MouseEventHandler<HTMLButtonElement>) => {
+      onCancel();
+    },
+    [onCancel],
+  );
 
-            <p className={cnNewBuildModal("Description")}>
-                Enter the commit hash which you want to build
-            </p>
+  return (
+    <Modal className={cnNewBuildModal()}>
+      <h3 className={cnNewBuildModal('Title')}>{t('newBuild')}</h3>
 
-            <TextInput
-                id="commitHash"
-                placeholder="Commit hash"
-                value={value}
-                onChange={handleChangeInput}
-                hasClear={value.length > 0}
-                onClearClick={handleClickClear}
-                notValid={commitHashNotValid}
-            />
+      <p className={cnNewBuildModal('Description')}>{t('modalDescription')}</p>
 
-            <div className={cnNewBuildModal("Buttons")}>
-                <Button
-                    view="action"
-                    size="m"
-                    className={cnNewBuildModal("Button")}
-                    onClick={handleClickConfirm}
-                    id="RunBuildButton"
-                >
-                    Run build
-                </Button>
-                <Button
-                    size="m"
-                    view="pseudo"
-                    className={cnNewBuildModal("Button")}
-                    onClick={handleClickCancel}
-                >
-                    Cancel
-                </Button>
-            </div>
-        </Modal>
-    );
+      <TextInput
+        id="commitHash"
+        placeholder={t('commitHash')}
+        value={value}
+        onChange={handleChangeInput}
+        hasClear={value.length > 0}
+        onClearClick={handleClickClear}
+        notValid={commitHashNotValid}
+      />
+
+      <div className={cnNewBuildModal('Buttons')}>
+        <Button
+          view="action"
+          size="m"
+          className={cnNewBuildModal('Button')}
+          onClick={handleClickConfirm}
+          id="RunBuildButton"
+        >
+          {t('runBuild')}
+        </Button>
+        <Button
+          size="m"
+          view="pseudo"
+          className={cnNewBuildModal('Button')}
+          onClick={handleClickCancel}
+        >
+          {t('cancel')}
+        </Button>
+      </div>
+    </Modal>
+  );
 };

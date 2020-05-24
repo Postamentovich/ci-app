@@ -45,6 +45,7 @@ i18next.languages = ['ru_RU', 'en_US'];
 
 const I18N: React.FC<any> = ({ children }) => {
   const { locale } = useSelector((state: RootState) => ({ locale: state.globalSlice.locale }));
+
   useEffect(() => {
     i18next.changeLanguage(locale);
   }, [locale]);

@@ -9,9 +9,12 @@ type Notify = {
   type?: 'success' | 'error' | 'warning';
 };
 
+export type Locale = 'en_US' | 'de_DE';
+
 type GlobalState = {
   isLoading: boolean;
   notify: Array<Notify>;
+  locale: Locale;
 };
 
 export const initialState: GlobalState = {
@@ -19,6 +22,7 @@ export const initialState: GlobalState = {
   isLoading: true,
   /** Массив уведомлений */
   notify: [],
+  locale: 'en_US',
 };
 
 export const globalSlice = createSlice({
@@ -32,7 +36,10 @@ export const globalSlice = createSlice({
       state.notify = [...state.notify, action.payload];
     },
     removeNotify(state, action: PayloadAction<number>) {
-      state.notify = state.notify.filter(el => el.id !== action.payload);
+      state.notify = state.notify.filter((el) => el.id !== action.payload);
+    },
+    setLocale(state, action: PayloadAction<Locale>) {
+      state.locale = action.payload;
     },
   },
 });

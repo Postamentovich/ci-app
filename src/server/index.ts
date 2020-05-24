@@ -7,6 +7,8 @@ import { errorHandler } from './middleware/error-handler';
 import serverRenderer from './middleware/server-renderer';
 import settingsRoute from './routes/settings-route';
 import buildRoute from './routes/build-route';
+import webhookVerification from './middleware/webhookVerification';
+import { i18nextXhr, refreshTranslations } from './middleware/i18n';
 
 require('dotenv').config();
 
@@ -23,6 +25,10 @@ app.use(
     manifestPath: `${manifestPath}/manifest.json`,
   }),
 );
+
+app.get('/locales/refresh', webhookVerification, refreshTranslations);
+
+app.get('/locales/:locale/:ns.json', i18nextXhr);
 
 app.use('/api/settings', settingsRoute);
 

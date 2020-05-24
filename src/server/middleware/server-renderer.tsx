@@ -11,6 +11,7 @@ import { storageAPI } from '../api/storage-api';
 import { createStore } from '../../shared/store';
 import { initialState as initialGlobalSlice } from '../../shared/store/global/globalSlice';
 import { initialState as initialSettingsSlice } from '../../shared/store/settings/settingsSlice';
+import IntlProvider from '../../shared/i18n/IntlProvider';
 
 const serverRenderer: any = () => async (
   req: express.Request & { store: Store },
@@ -45,7 +46,9 @@ const serverRenderer: any = () => async (
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url}>
-        <App />
+        <IntlProvider>
+          <App />
+        </IntlProvider>
       </StaticRouter>
     </Provider>,
   );

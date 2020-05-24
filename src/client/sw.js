@@ -1,6 +1,7 @@
 const CACHE = 'cache';
 const requstToApiPattern = /\/api\//;
 const requestToWebpackPattern = /webpack/;
+const requestToLocalePattern = /\/locales\//
 
 const isNotRequestToApi = (event) => !event.request.url.match(requstToApiPattern);
 const isNotRequestToWebpack = (event) => !event.request.url.match(requestToWebpackPattern);

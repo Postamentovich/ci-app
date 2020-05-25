@@ -22,7 +22,7 @@ export const initialState: GlobalState = {
   isLoading: true,
   /** Массив уведомлений */
   notify: [],
-  locale: 'ru_RU',
+  locale: 'en_US',
 };
 
 export const globalSlice = createSlice({

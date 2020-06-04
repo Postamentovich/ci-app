@@ -28,6 +28,10 @@ app.use('/api/settings', settingsRoute);
 
 app.use('/api/builds', buildRoute);
 
+app.get('/sw.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../src/client/sw.js'));
+});
+
 app.use(serverRenderer());
 
 app.use(errorHandler);

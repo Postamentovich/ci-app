@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BuildModel } from 'api/models/models';
 import { RootState } from 'store/rootReducer';
+import { BuildModel } from 'models/BuildModel';
+import { QueueBuildResponse } from 'models/QueueBuildResponse';
 
 type BuildState = {
   /** Список билдов */

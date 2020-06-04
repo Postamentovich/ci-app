@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { Router } = require('express');
-const asyncHandler = require('express-async-handler');
-const createError = require('http-errors');
-const {storageAPI} = require('../api/storage-api');
-const gitRepo = require('../utils/git-repo');
-const { hashObj } = require('../utils/hash');
+import { Router } from 'express';
+import asyncHandler from 'express-async-handler';
+import createError from 'http-errors';
+import { storageAPI } from '../api/storage-api';
+import gitRepo from '../utils/git-repo';
+import { hashObj } from '../utils/hash';
+import { UserSettingsResponse } from 'models/UserSettingsResponse';
+import { UserSettings } from 'models/UserSettings';
 
 const router = Router();
 
 /**
  * Получение настроек пользователя
  */
-router.get(
+router.get<{}, UserSettingsResponse>(
   '/',
   asyncHandler(async (req, res) => {
     const { data } = await storageAPI.getConfig();
@@ -23,11 +25,11 @@ router.get(
 /**
  * Сохранение настроек пользователя
  */
-router.post(
+router.post<{}, any, UserSettings>(
   '/',
   asyncHandler(async (req, res) => {
     const { repoName, buildCommand, mainBranch } = req.body;
-    
+
     if (typeof repoName !== 'string') throw createError(400, 'Error in repoName');
 
     if (typeof buildCommand !== 'string') throw createError(400, 'Error in buildCommand');
@@ -44,4 +46,4 @@ router.post(
   }),
 );
 
-module.exports = router;
+export default router;

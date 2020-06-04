@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { BuildModel } from './models/models';
+import { BuildModel } from 'models/BuildModel';
+import { QueueBuildResponse } from 'models/QueueBuildResponse';
 
 export const buildApi = {
   /** Get builds list */
@@ -22,6 +23,6 @@ export const buildApi = {
   /** Add build to queue */
   addBuild: async (commitHash: string): Promise<BuildModel> => {
     const { data } = await axios.post(`/api/builds/${commitHash}`);
-    return data.data;
+    return data;
   },
 };

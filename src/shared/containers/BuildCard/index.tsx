@@ -1,6 +1,6 @@
 import { IClassNameProps } from '@bem-react/core';
 import { cn } from '@bem-react/classname';
-import { BuildStatus } from '../../api/models/models';
+import { BuildStatus } from 'models/BuildStatus';
 
 export interface IBuildCardProps extends IClassNameProps {
   /**

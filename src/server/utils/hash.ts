@@ -8,26 +8,31 @@
  *
  * @returns {string} - hash key
  */
-function hashString(s1, s2) {
-  return `${s1}${s2}`.split('').reduce((a, b) => {
+export function hashString(s1: string, s2 = '') {
+  const hash = `${s1}${s2}`.split('').reduce((a, b) => {
     a = (a << 5) - a + b.charCodeAt(0);
     return a & a;
   }, 0);
+  return String(hash);
+}
+
+export interface LogHash {
+  data: string;
+  time: number;
 }
 
 /**
  * Хранилище значений
  */
-const hashObj = new Map();
+export const hashObj = new Map<string, LogHash>();
 
 const minute5 = 5 * 60 * 1000;
 
-function clearCache() {
+export function clearCache() {
   const now = Date.now().valueOf();
   hashObj.forEach((value, key) => {
     if (now - value.time > minute5) hashObj.delete(key);
   });
-  console.log(hashObj.values((values) => console.log(values)));
 }
 
 /**
@@ -36,5 +41,3 @@ function clearCache() {
 setInterval(() => {
   clearCache();
 }, minute5);
-
-module.exports = { hashObj, hashString };

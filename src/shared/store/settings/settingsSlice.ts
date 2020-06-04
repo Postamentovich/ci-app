@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ConfigurationModel } from 'api/models/models';
+import { UserSettings } from 'models/UserSettings';
 
 type SettingsState = {
   /** Имя репозитория */
@@ -38,7 +38,7 @@ export const settingsSlice = createSlice({
     changePeriod(state, action: PayloadAction<number>) {
       state.period = Number(action.payload);
     },
-    setInitialSettings(state, action: PayloadAction<ConfigurationModel>) {
+    setInitialSettings(state, action: PayloadAction<UserSettings>) {
       const { repoName, mainBranch, buildCommand, period } = action.payload;
 
       state.repoName = repoName;

@@ -2,8 +2,6 @@
 
 Build Server и Build Agent находятся в репозитории https://github.com/Postamentovich/shri-ci-build
 
----
-
 ## Описание проекта
 
 ## Установка и запуск

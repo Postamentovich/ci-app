@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
+import { useTranslation } from 'react-i18next';
 import { compose, composeU } from '@bem-react/core';
 import { RootState } from '../../store/rootReducer';
 import { buildSelector, logSelector } from '../../store/builds/buildsSlice';
@@ -41,6 +42,8 @@ const BuildCard = compose(withBuildCardViewDetail)(BuildCardPresenter);
 const DetailsPage = () => {
   const { id } = useParams();
 
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
   const { repoName, build, log, isBuildAdding } = useSelector(
@@ -75,7 +78,7 @@ const DetailsPage = () => {
           onClick={handleClickRebuild}
           disabled={isBuildAdding}
         >
-          Rebuild
+          {t('rebuild')}
         </Button>
         <Button
           className={cnHeader('Button')}

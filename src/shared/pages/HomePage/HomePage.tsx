@@ -1,6 +1,7 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
 import { compose, composeU } from '@bem-react/core';
+import { useTranslation } from 'react-i18next';
 import { Header } from '../../containers/Header/Header';
 import { Footer } from '../../containers/Footer/Footer';
 import { Button as ButtonPresenter } from '../../components/Button/Button';
@@ -27,30 +28,30 @@ const Button = compose(
 /**
  * Стартовая страница
  */
-const HomePage = () => (
-  <div className={cnHome()}>
-    <Header className="Layout" title="School CI Server">
-      <Button view="default" type="link" to="/settings" size="s" iconLeft={<Icon type="gear" />}>
-        Settings
-      </Button>
-    </Header>
+const HomePage = () => {
+  const { t } = useTranslation();
 
-    <div className={cnHome('Content', ['Layout'])}>
-      <Icon type="logo" />
+  return (
+    <div className={cnHome()}>
+      <Header className="Layout" title="School CI Server">
+        <Button view="default" type="link" to="/settings" size="s" iconLeft={<Icon type="gear" />}>
+          {t('settings')}
+        </Button>
+      </Header>
 
-      <p className={cnHome('Description')}>
-        Configure repository connection
-        <br />
-        and synchronization settings
-      </p>
+      <div className={cnHome('Content', ['Layout'])}>
+        <Icon type="logo" />
 
-      <Button view="action" type="link" to="/settings" className={cnHome('Button')} size="m">
-        Open settings
-      </Button>
+        <p className={cnHome('Description')}>{t('description')}</p>
+
+        <Button view="action" type="link" to="/settings" className={cnHome('Button')} size="m">
+          {t('openSettings')}
+        </Button>
+      </div>
+
+      <Footer className="Layout" />
     </div>
-
-    <Footer className="Layout" />
-  </div>
-);
+  );
+};
 
 export default HomePage;

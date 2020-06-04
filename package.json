@@ -17,7 +17,14 @@
     "selenium-install": "./node_modules/.bin/selenium-standalone install",
     "selenium-start": "./node_modules/.bin/selenium-standalone start",
     "hermione": "hermione",
-    "e2e": "concurrently \"npm run selenium-start\" \"npm run hermione\""
+    "e2e": "concurrently \"npm run selenium-start\" \"npm run hermione\"",
+    "i18n:pull": "cross-env TS_NODE_PROJECT=tsconfig.tooling.json ts-node -r dotenv/config scripts/i18n-pull",
+    "i18n:push": "cross-env TS_NODE_PROJECT=tsconfig.tooling.json ts-node -r dotenv/config scripts/i18n-push",
+    "i18n:scan": "cross-env NODE_ENV=i18n yarn-or-npm transpile && yarn-or-npm i18next-scanner './build/transpiled/**/*.js' && yarn clean:transpiled",
+    "transpile": "yarn-or-npm babel -d build/transpiled ./src --extensions .es6,.js,.es,.jsx,.mjs,.ts,.tsx --ignore **/*.d.ts",
+    "clean:transpiled": "rimraf build/transpiled",
+    "depgraph": "depcruise -c .dependency-cruiser.js --exclude \"node_modules/*\" --output-type dot src | dot -T svg > dependency-graph.svg",
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
     "@bem-react/classname": "^1.5.8",
@@ -46,6 +53,8 @@
     "history": "^4.10.1",
     "html-reporter": "^5.15.2",
     "i": "^0.3.6",
+    "i18next": "^19.4.4",
+    "i18next-xhr-backend": "^3.2.2",
     "immer": "^6.0.2",
     "install": "^0.13.0",
     "mkdirp": "^1.0.3",
@@ -55,6 +64,7 @@
     "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.5.0",
     "react-redux": "^7.2.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",

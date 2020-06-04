@@ -20,6 +20,7 @@
   font-weight: normal;
   font-size: var(--text-size-s);
   line-height: var(--text-line-height-4xs);
+  max-width: 200px;
 }
 
 .HomePage-Button {

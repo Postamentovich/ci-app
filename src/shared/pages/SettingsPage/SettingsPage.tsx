@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { cn } from '@bem-react/classname';
+import { useTranslation } from 'react-i18next';
 import { composeU, compose } from '@bem-react/core';
 import { RootState } from '../../store/rootReducer';
 import { settingsSlice } from '../../store/settings/settingsSlice';
@@ -39,6 +40,8 @@ const TextInput = compose(withTextInputHasAddon, withTextInputNotValid)(TextInpu
  */
 const SettingsPage = () => {
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const { repoName, period, buildComand, mainBranch, isSaving } = useSelector(
     (state: RootState) => ({
@@ -141,7 +144,7 @@ const SettingsPage = () => {
     if (!repoName.length) {
       dispatch(
         globalSlice.actions.addNotify({
-          message: 'Please enter GitHub repository',
+          message: t('validationRepoName'),
           type: 'error',
           id: Date.now(),
         }),
@@ -154,7 +157,7 @@ const SettingsPage = () => {
     if (!buildComand.length) {
       dispatch(
         globalSlice.actions.addNotify({
-          message: 'Please enter Build command',
+          message: t('validationBuildCommand'),
           type: 'error',
           id: Date.now(),
         }),
@@ -195,15 +198,13 @@ const SettingsPage = () => {
 
       <div className={cnSettings('Content', ['Layout'])}>
         <Title type="h4" className={cnSettings('Title')}>
-          Settings
+          {t('settings')}
         </Title>
 
-        <p className={cnSettings('Description')}>
-          Configure repository connection and synchronization settings.
-        </p>
+        <p className={cnSettings('Description')}>{t('description')}</p>
 
         <TextInput
-          label="GitHub repository"
+          label={t('repoName')}
           placeholder="user-name/repo-name"
           value={repoName}
           required
@@ -215,19 +216,19 @@ const SettingsPage = () => {
           notValid={repoNameNotValid}
         />
         <TextInput
-          label="Build command"
+          label={t('buildCommand')}
           placeholder="npm run build"
           value={buildComand}
           required
           id="buildComand"
           className={cnSettings('Input')}
-          hasClear={!!buildComand?.length}
+          hasClear={!!buildComand.length}
           onChange={handleChangeBuildCommand}
           onClearClick={handleClearBuildCommand}
           notValid={buildComandNotValid}
         />
         <TextInput
-          label="Main branch"
+          label={t('mainBranch')}
           placeholder="master"
           value={mainBranch}
           id="mainBranch"
@@ -237,9 +238,9 @@ const SettingsPage = () => {
           onClearClick={handleClearMainBranch}
         />
         <TextInput
-          label="Synchronize every"
+          label={t('synchronizeEvery')}
           placeholder="10"
-          addonAfter="minutes"
+          addonAfter={t('minutes')}
           value={period}
           id="period"
           hasAddon
@@ -257,7 +258,7 @@ const SettingsPage = () => {
             progress={isSaving}
             id="buttonSave"
           >
-            Save
+            {t('save')}
           </Button>
           <Button
             size="m"
@@ -267,7 +268,7 @@ const SettingsPage = () => {
             disabled={isSaving}
             id="buttonCancel"
           >
-            Cancel
+            {t('cancel')}
           </Button>
         </div>
       </div>

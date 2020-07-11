@@ -1,4 +1,4 @@
-# CI/CD Application
+# CI Application
 
 Build Server и Build Agent находятся в репозитории https://github.com/Postamentovich/shri-ci-build
 

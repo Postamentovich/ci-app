@@ -1,4 +1,4 @@
-# School CI Server
+# CI/CD Application
 
 Build Server и Build Agent находятся в репозитории https://github.com/Postamentovich/shri-ci-build
 

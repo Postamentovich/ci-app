@@ -1,45 +1,43 @@
 # CI Application
 
-Build Server и Build Agent находятся в репозитории https://github.com/Postamentovich/shri-ci-build
+Build Server and Build Agent on repo https://github.com/Postamentovich/shri-ci-build
 
-## Описание проекта
-
-## Установка и запуск
+## Start 
 
 ```shell
 $ npm install
 $ npm run start
 ```
 
-#### NPM скрипты
+#### NPM scripts
 
-`npm run start` - запуск проекта <br>
-`npm run test` - запуск юнит тестов <br>
-`npm run build` - сборка проекта <br>
-`npm run analyze` - анализ собранного бандла <br>
-`npm run e2e` - запуск интеграционных тестов <br>
+`npm run start` - start project <br>
+`npm run test` - start unit tests <br>
+`npm run build` - build project <br>
+`npm run analyze` - analyze bundle <br>
+`npm run e2e` - start e2e tests <br>
 
-## Описание проекта
+## Description
 
-### Серверная часть
+### Server
 
-#### Переменные окружения
+#### Env variables
 
-В корне проекта в файл .env нужно добавить токен авторизации https://hw.shri.yandex/
+At the root of the project, add an authorization token to the .env file https://hw.shri.yandex/
 
 API_TOKEN=YOUR_API_TOKEN
 
 #### Node.js
 
-Версия Node.js - 13.5
+Version Node.js - 13.5
 
-#### Документация
+#### Documentation
 
-Swagger доступен по ссылке /swagger
+Swagger is available here /swagger
 
-### Клиентская часть
+### Client
 
-#### Используемые технологии
+#### Technologies used
 
 - Typescript
 - @bem/react
@@ -47,16 +45,16 @@ Swagger доступен по ссылке /swagger
 - Jest
 - Hermione
 
-#### Структура проекта
+#### Project structure
 
 ```
-├── config/               # Конфигурационные файлы для webpack, jest
-├── scripts/              # NPM скрипты
-└── src/                  # Исходные файлы
-    ├── __test__/         # Тесты
-    ├── __mocks__/        # Моки для тестов
-    ├── client/           # Клиентская часть
-    ├── server/           # Серверная часть
-    └── shared/           # Общая часть
+├── config/               # configs for webpack, jest
+├── scripts/              # NPM scripts
+└── src/                  # source files
+    ├── __test__/         # tests
+    ├── __mocks__/        # mocks for tests
+    ├── client/           # client
+    ├── server/           # server
+    └── shared/           # components
 
 ```
